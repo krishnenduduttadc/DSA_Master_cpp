@@ -1,91 +1,80 @@
 #include <iostream>
-#include <vector>
-#include <queue>
 #include <map>
-
+#include <queue>
+#include <vector>
 using namespace std;
 
-// Definition of a Node in the Binary Tree
-struct Node {
+// Definition for a binary tree node.
+struct TreeNode {
     int val;
-    Node* left;
-    Node* right;
-
-    Node(int item) : val(item), left(nullptr), right(nullptr) {}
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
 };
 
-// Structure to hold vertical level and corresponding node
-struct vPair {
-    Node* node;
-    int h1;
+vector<int> bottomView(TreeNode* root) {
+    vector<int> bottomViewNodes;
+    if (!root) {
+        return bottomViewNodes;
+    }
 
-    vPair(Node* node, int h1) : node(node), h1(h1) {}
-};
+    // TreeMap equivalent in C++ is std::map
+    map<int, int> map;
+    queue<pair<TreeNode*, int>> q;
+    q.push({root, 0});
 
-// Function to calculate width of the tree in terms of horizontal distances
-void width(Node* node, int h1, pair<int, int>& minMax) {
-    if (node == nullptr) return;
+    while (!q.empty()) {
+        auto front = q.front();
+        q.pop();
+        TreeNode* node = front.first;
+        int hd = front.second;
 
-    minMax.first = min(minMax.first, h1);
-    minMax.second = max(minMax.second, h1);
+        // Update the map with current node's value at its horizontal distance
+        map[hd] = node->val;
 
-    width(node->left, h1 - 1, minMax);
-    width(node->right, h1 + 1, minMax);
-}
+        // Enqueue left child with horizontal distance hd - 1
+        if (node->left) {
+            q.push({node->left, hd - 1});
+        }
 
-// Function to find the bottom view of the binary tree
-vector<int> bottomView(Node* root) {
-    vector<int> ans;
-    if (root == nullptr) return ans;
-
-    // Finding the horizontal width of the tree
-    pair<int, int> minMax = {0, 0};
-    width(root, 0, minMax);
-
-    int len = minMax.second - minMax.first + 1;
-    ans.resize(len);
-
-    queue<vPair> que;
-    que.push(vPair(root, abs(minMax.first)));
-
-    while (!que.empty()) {
-        int size = que.size();
-        while (size-- > 0) {
-            vPair rp = que.front();
-            que.pop();
-
-            Node* node = rp.node;
-            int h1 = rp.h1;
-
-            ans[h1] = node->val;
-
-            if (node->left != nullptr) que.push(vPair(node->left, h1 - 1));
-            if (node->right != nullptr) que.push(vPair(node->right, h1 + 1));
+        // Enqueue right child with horizontal distance hd + 1
+        if (node->right) {
+            q.push({node->right, hd + 1});
         }
     }
 
-    return ans;
+    // Populate bottomViewNodes with values from map
+    for (const auto& pair : map) {
+        bottomViewNodes.push_back(pair.second);
+    }
+
+    return bottomViewNodes;
+}
+
+// Utility function to create a new node
+TreeNode* newNode(int key) {
+    TreeNode* node = new TreeNode(key);
+    return node;
 }
 
 int main() {
-    // Constructing the example binary tree
-    Node* root = new Node(1);
-    root->left = new Node(2);
-    root->right = new Node(3);
-    root->left->left = new Node(4);
-    root->left->right = new Node(5);
-    root->right->left = new Node(6);
-    root->right->right = new Node(7);
+    TreeNode* root = newNode(1);
+    root->left = newNode(2);
+    root->right = newNode(3);
+    root->left->left = newNode(4);
+    root->left->right = newNode(5);
+    root->right->left = newNode(6);
+    root->right->right = newNode(7);
 
-    // Finding the bottom view of the binary tree
-    vector<int> ans = bottomView(root);
+    vector<int> result = bottomView(root);
 
-    // Printing the bottom view
-    cout << "Bottom View of Binary Tree: ";
-    for (int num : ans) {
-        cout << num << " ";
+    // Print the result
+    for (int value : result) {
+        cout << value << " ";
     }
     cout << endl;
 
+    // Memory cleanup (optional in this example)
+    // You may need to delete nodes if not using smart pointers
     return 0;
 }
