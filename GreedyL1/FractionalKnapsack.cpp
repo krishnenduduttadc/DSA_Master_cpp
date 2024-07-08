@@ -1,28 +1,28 @@
 #include <iostream>
-#include <vector>
 #include <algorithm>
+using namespace std;
 
 class Item {
 public:
     int wt, val;
 
     Item(int w, int v) : wt(w), val(v) {}
+
+    bool operator<(const Item& i) const {
+        return (double)val / wt > (double)i.val / i.wt;
+    }
 };
 
-bool compareItems(const Item& i1, const Item& i2) {
-    return (double)i1.val / i1.wt > (double)i2.val / i2.wt;
-}
-
-double fracKnapsack(std::vector<Item>& arr, int W) {
-    std::sort(arr.begin(), arr.end(), compareItems);
+double fracKnapsack(Item arr[], int n, int W) {
+    sort(arr, arr + n);
     double res = 0.0;
-    
-    for (const auto& item : arr) {
-        if (item.wt <= W) {
-            res += item.val;
-            W -= item.wt;
+
+    for (int i = 0; i < n; i++) {
+        if (arr[i].wt <= W) {
+            res += arr[i].val;
+            W -= arr[i].wt;
         } else {
-            res += ((double)item.val * W) / item.wt;
+            res += (arr[i].val * (double)W) / arr[i].wt;
             break;
         }
     }
@@ -30,13 +30,9 @@ double fracKnapsack(std::vector<Item>& arr, int W) {
 }
 
 int main() {
-    std::vector<Item> arr = {
-        Item(10, 60),
-        Item(40, 40),
-        Item(20, 100),
-        Item(30, 120)
-    };
+    Item arr[] = {Item(10, 60), Item(40, 40), Item(20, 100), Item(30, 120)};
+    int n = sizeof(arr) / sizeof(arr[0]);
     int W = 50;
-    std::cout << fracKnapsack(arr, W) << std::endl;
+    cout << fracKnapsack(arr, n, W) << endl;
     return 0;
 }
