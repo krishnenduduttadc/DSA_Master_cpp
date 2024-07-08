@@ -1,0 +1,75 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+class Node {
+public:
+    int data;
+    vector<Node*> children;
+
+    Node(int data) {
+        this->data = data;
+    }
+};
+
+void display(Node* node) {
+    cout << node->data << " -> ";
+    for (Node* child : node->children) {
+        cout << child->data << ", ";
+    }
+    cout << "." << endl;
+
+    for (Node* child : node->children) {
+        display(child);
+    }
+}
+
+Node* construct(int arr[], int n) {
+    Node* root = nullptr;
+    vector<Node*> st;
+
+    for (int i = 0; i < n; i++) {
+        if (arr[i] == -1) {
+            st.pop_back();
+        } else {
+            Node* t = new Node(arr[i]);
+
+            if (!st.empty()) {
+                st.back()->children.push_back(t);
+            } else {
+                root = t;
+            }
+
+            st.push_back(t);
+        }
+    }
+
+    return root;
+}
+
+void removeLeaves(Node* node) {
+    // Iterate over the children in reverse order to safely remove elements
+    for (int i = node->children.size() - 1; i >= 0; i--) {
+        Node* child = node->children[i];
+        if (child->children.empty()) {
+            node->children.erase(node->children.begin() + i); // Remove the leaf node
+            delete child; // Free memory of removed node
+        }
+    }
+
+    // Recursively remove leaves from all children
+    for (Node* child : node->children) {
+        removeLeaves(child);
+    }
+}
+
+int main() {
+    int arr[] = {10, 20, 50, -1, 60, -1, -1, 30, 70, -1, 80, 110, -1, 120, -1, -1, 90, -1, -1, 40, 100, -1, -1, -1};
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    Node* root = construct(arr, n);
+    removeLeaves(root);
+    display(root);
+
+    return 0;
+}
