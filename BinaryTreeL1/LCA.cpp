@@ -6,7 +6,11 @@ struct Node {
     int data;
     Node *left, *right;
 
-    Node(int data) : data(data), left(nullptr), right(nullptr) {}
+    Node(int item) {
+        data = item;
+        left = nullptr;
+        right = nullptr;
+    }
 };
 
 // Function to find the Lowest Common Ancestor (LCA) of two nodes

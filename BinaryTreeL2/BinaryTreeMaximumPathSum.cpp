@@ -10,7 +10,11 @@ struct Node {
     Node* left;
     Node* right;
 
-    Node(int x) : val(x), left(nullptr), right(nullptr) {}
+    Node(int x) {
+        val = x;
+        left = nullptr;
+        right = nullptr;
+    }
 };
 
 // Class for calculating maximum path sum

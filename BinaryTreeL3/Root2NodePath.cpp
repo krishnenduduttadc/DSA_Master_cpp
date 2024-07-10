@@ -1,16 +1,20 @@
 #include <iostream>
 #include <vector>
-
+using namespace std;
 // TreeNode structure definition
 struct TreeNode {
     int key;
     TreeNode* left;
     TreeNode* right;
-    TreeNode(int x) : key(x), left(nullptr), right(nullptr) {}
+   TreeNode(int x) {
+        key = x;
+        left = nullptr;
+        right = nullptr;
+    }
 };
 
 // Function to get the path from root to a node with value x
-bool getPath(TreeNode* root, std::vector<int>& arr, int x) {
+bool getPath(TreeNode* root, vector<int>& arr, int x) {
     // If root is NULL, there is no path
     if (root == nullptr)
         return false;
@@ -42,18 +46,18 @@ int main() {
     root->left->right->right = new TreeNode(7);
     root->right = new TreeNode(3);
 
-    std::vector<int> arr;
+    vector<int> arr;
 
     bool res = getPath(root, arr, 7);
 
     if (res) {
-        std::cout << "The path is: ";
+        cout << "The path is: ";
         for (int it : arr) {
-            std::cout << it << " ";
+            cout << it << " ";
         }
-        std::cout << std::endl;
+        cout << endl;
     } else {
-        std::cout << "Node not found in the tree." << std::endl;
+        cout << "Node not found in the tree." << endl;
     }
 
     // Deallocating memory

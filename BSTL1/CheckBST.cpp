@@ -2,37 +2,51 @@
 #include <climits> // For INT_MIN and INT_MAX
 using namespace std;
 
-class CheckBST {
+class CheckBST
+{
 public:
-    struct Node {
+    struct Node
+    {
         int key;
-        Node* left;
-        Node* right;
+        Node *left;
+        Node *right;
 
-        Node(int k) : key(k), left(nullptr), right(nullptr) {}
+        Node(int item)
+        {
+            key = item;
+            left = nullptr;
+            right = nullptr;
+        }
     };
 
-    static int max(Node* root) {
-        if (root == nullptr) {
+    static int max(Node *root)
+    {
+        if (root == nullptr)
+        {
             return INT_MIN;
         }
         return std::max(root->key, std::max(max(root->left), max(root->right)));
     }
 
-    static int min(Node* root) {
-        if (root == nullptr) {
+    static int min(Node *root)
+    {
+        if (root == nullptr)
+        {
             return INT_MAX;
         }
         return std::min(root->key, std::min(min(root->left), min(root->right)));
     }
 
-    static bool isBST(Node* root) {
-        if (root == nullptr) {
+    static bool isBST(Node *root)
+    {
+        if (root == nullptr)
+        {
             return true;
         }
         int lmax = max(root->left);
         int rmin = min(root->right);
-        if (root->key < lmax || root->key > rmin) {
+        if (root->key < lmax || root->key > rmin)
+        {
             return false;
         }
         bool isLeftBST = isBST(root->left);
@@ -41,8 +55,9 @@ public:
     }
 };
 
-int main() {
-    CheckBST::Node* root = new CheckBST::Node(6);
+int main()
+{
+    CheckBST::Node *root = new CheckBST::Node(6);
     root->left = new CheckBST::Node(3);
     root->right = new CheckBST::Node(8);
     root->right->left = new CheckBST::Node(7);

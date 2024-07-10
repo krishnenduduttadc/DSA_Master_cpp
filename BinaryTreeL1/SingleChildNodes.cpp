@@ -7,8 +7,11 @@ struct Node {
     Node* left;
     Node* right;
 
-    Node(int data, Node* left = nullptr, Node* right = nullptr)
-        : data(data), left(left), right(right) {}
+    Node(int data, Node* left = nullptr, Node* right = nullptr) {
+        this->data = data;
+        this->left = left;
+        this->right = right;
+    }
 };
 
 // Function to display the binary tree (inorder traversal)

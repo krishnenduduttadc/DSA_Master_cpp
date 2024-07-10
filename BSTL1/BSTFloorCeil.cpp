@@ -1,27 +1,40 @@
 #include <iostream>
 using namespace std;
 
-class BSTFloorCeil {
+class BSTFloorCeil
+{
 public:
-    struct Node {
+    struct Node
+    {
         int data;
-        Node* left;
-        Node* right;
+        Node *left;
+        Node *right;
 
-        Node(int d) : data(d), left(nullptr), right(nullptr) {}
+        Node(int item)
+        {
+            data = item;
+            left = nullptr;
+            right = nullptr;
+        }
     };
 
-    Node* root;
+    Node *root;
 
-    Node* Floor(Node* node, int x) {
-        Node* res = nullptr;
-        while (node != nullptr) {
-            if (node->data == x) {
+    Node *Floor(Node *node, int x)
+    {
+        Node *res = nullptr;
+        while (node != nullptr)
+        {
+            if (node->data == x)
+            {
                 return node;
             }
-            if (node->data > x) {
+            if (node->data > x)
+            {
                 node = node->left;
-            } else {
+            }
+            else
+            {
                 res = node;
                 node = node->right;
             }
@@ -29,14 +42,18 @@ public:
         return res;
     }
 
-    int Ceil(Node* node, int x) {
-        if (node == nullptr) {
+    int Ceil(Node *node, int x)
+    {
+        if (node == nullptr)
+        {
             return -1;
         }
-        if (node->data == x) {
+        if (node->data == x)
+        {
             return node->data;
         }
-        if (node->data < x) {
+        if (node->data < x)
+        {
             return Ceil(node->right, x);
         }
         int ceil = Ceil(node->left, x);
@@ -44,7 +61,8 @@ public:
     }
 };
 
-int main() {
+int main()
+{
     BSTFloorCeil tree;
 
     // Construct the BST
@@ -57,7 +75,7 @@ int main() {
     tree.root->right->right = new BSTFloorCeil::Node(14);
 
     // Find floor and ceiling
-    BSTFloorCeil::Node* floorNode = tree.Floor(tree.root, 7);
+    BSTFloorCeil::Node *floorNode = tree.Floor(tree.root, 7);
     int floorValue = (floorNode != nullptr) ? floorNode->data : -1;
     cout << "The floor is: " << floorValue << endl;
 

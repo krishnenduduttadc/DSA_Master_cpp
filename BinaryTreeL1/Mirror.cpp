@@ -8,7 +8,11 @@ struct Node {
     Node* left;
     Node* right;
 
-    Node(int data) : data(data), left(nullptr), right(nullptr) {}
+    Node(int item) {
+        data = item;
+        left = nullptr;
+        right = nullptr;
+    }
 };
 
 // Function to perform mirror transformation of a binary tree

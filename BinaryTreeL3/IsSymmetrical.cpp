@@ -1,12 +1,16 @@
 #include <iostream>
-#include <queue> // for std::queue
-
+#include <queue> // for queue
+using namespace std;
 // Node structure definition
 struct TreeNode {
     int key;
     TreeNode* left;
     TreeNode* right;
-    TreeNode(int x) : key(x), left(nullptr), right(nullptr) {}
+    TreeNode(int x) {
+        key = x;
+        left = nullptr;
+        right = nullptr;
+    }
 };
 
 // Function to check if the tree is symmetric
@@ -42,9 +46,9 @@ int main() {
     // Checking if the tree is symmetric
     bool isSym = isSymmetric(root);
     if (isSym)
-        std::cout << "The tree is symmetric." << std::endl;
+        cout << "The tree is symmetric." << endl;
     else
-        std::cout << "The tree is not symmetric." << std::endl;
+        cout << "The tree is not symmetric." << endl;
 
     return 0;
 }

@@ -6,8 +6,11 @@ using namespace std;
 struct Node {
     int data;
     Node *left, *right;
-
-    Node(int data, Node* left = nullptr, Node* right = nullptr) : data(data), left(left), right(right) {}
+    Node(int data) {
+        data = data;
+        left = nullptr;
+        right = nullptr;
+    }
 };
 
 // Class to store results of isBST function

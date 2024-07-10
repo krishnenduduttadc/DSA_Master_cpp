@@ -2,95 +2,132 @@
 #include <climits>
 #include <unordered_set>
 
-class BST {
+class BST
+{
 private:
-    struct Node {
+    struct Node
+    {
         int key, lcount;
         Node *left, *right;
 
-        Node(int item) : key(item), left(nullptr), right(nullptr), lcount(0) {}
+        Node(int item)
+        {
+            key = item;
+            left = nullptr;
+            right = nullptr;
+            lcount = 0;
+        }
     };
 
-    Node* root;
+    Node *root;
 
-    Node* insertRec(Node* root, int key) {
-        if (root == nullptr) {
+    Node *insertRec(Node *root, int key)
+    {
+        if (root == nullptr)
+        {
             return new Node(key);
         }
-        if (key < root->key) {
+        if (key < root->key)
+        {
             root->left = insertRec(root->left, key);
             root->lcount++;
         }
-        if (key > root->key) {
+        if (key > root->key)
+        {
             root->right = insertRec(root->right, key);
         }
         return root;
     }
 
-    static void Inorder(Node* root) {
-        if (root == nullptr) {
+    static void Inorder(Node *root)
+    {
+        if (root == nullptr)
+        {
             return;
-        } else {
+        }
+        else
+        {
             Inorder(root->left);
             std::cout << root->key << " ";
             Inorder(root->right);
         }
     }
 
-    static bool searchRec(Node* root, int x) {
-        if (root == nullptr) {
+    static bool searchRec(Node *root, int x)
+    {
+        if (root == nullptr)
+        {
             return false;
         }
-        if (x == root->key) {
+        if (x == root->key)
+        {
             return true;
         }
-        if (x < root->key) {
+        if (x < root->key)
+        {
             return searchRec(root->left, x);
         }
-        if (x > root->key) {
+        if (x > root->key)
+        {
             return searchRec(root->right, x);
         }
         return false;
     }
 
-    static bool searchI(Node* root, int x) {
-        Node* curr = root;
-        while (curr != nullptr) {
-            if (x == curr->key) {
+    static bool searchI(Node *root, int x)
+    {
+        Node *curr = root;
+        while (curr != nullptr)
+        {
+            if (x == curr->key)
+            {
                 return true;
             }
-            if (x < curr->key) {
+            if (x < curr->key)
+            {
                 curr = curr->left;
             }
-            if (x > curr->key) {
+            if (x > curr->key)
+            {
                 curr = curr->right;
             }
         }
         return false;
     }
 
-    static Node* kthSmallest(Node* root, int k) {
-        if (root == nullptr) {
+    static Node *kthSmallest(Node *root, int k)
+    {
+        if (root == nullptr)
+        {
             return nullptr;
         }
         int count = root->lcount + 1;
-        if (count == k) {
+        if (count == k)
+        {
             return root;
         }
-        if (count > k) {
+        if (count > k)
+        {
             return kthSmallest(root->left, k);
         }
         return kthSmallest(root->right, k - count);
     }
 
-    static Node* floor(Node* root, int x) {
-        Node* res = nullptr;
-        while (root != nullptr) {
-            if (x == root->key) {
+    static Node *floor(Node *root, int x)
+    {
+        Node *res = nullptr;
+        while (root != nullptr)
+        {
+            if (x == root->key)
+            {
                 return root;
-            } else if (x < root->key) {
+            }
+            else if (x < root->key)
+            {
                 root = root->left;
-            } else {
+            }
+            else
+            {
                 res = root;
                 root = root->right;
             }
@@ -98,38 +135,51 @@ private:
         return res;
     }
 
-    static Node* ceiling(Node* root, int x) {
-        Node* res = nullptr;
-        while (root != nullptr) {
-            if (x == root->key) {
+    static Node *ceiling(Node *root, int x)
+    {
+        Node *res = nullptr;
+        while (root != nullptr)
+        {
+            if (x == root->key)
+            {
                 return root;
-            } else if (x < root->key) {
+            }
+            else if (x < root->key)
+            {
                 res = root;
                 root = root->left;
-            } else {
+            }
+            else
+            {
                 root = root->right;
             }
         }
         return res;
     }
 
-    static bool isBST(Node* root, int min, int max) {
-        if (root == nullptr) {
+    static bool isBST(Node *root, int min, int max)
+    {
+        if (root == nullptr)
+        {
             return true;
         }
-        return (root->key > min && root->key < max
-                && isBST(root->left, min, root->key)
-                && isBST(root->right, root->key, max));
+        return (root->key > min && root->key < max && isBST(root->left, min, root->key) && isBST(root->right, root->key, max));
     }
 
-    static bool isPairSum(Node* root, int sum, std::unordered_set<int>& s) {
-        if (root == nullptr) return false;
-        if (isPairSum(root->left, sum, s)) {
+    static bool isPairSum(Node *root, int sum, std::unordered_set<int> &s)
+    {
+        if (root == nullptr)
+            return false;
+        if (isPairSum(root->left, sum, s))
+        {
             return true;
         }
-        if (s.find(sum - root->key) != s.end()) {
+        if (s.find(sum - root->key) != s.end())
+        {
             return true;
-        } else {
+        }
+        else
+        {
             s.insert(root->key);
         }
         return isPairSum(root->right, sum, s);
@@ -138,53 +188,64 @@ private:
 public:
     BST() : root(nullptr) {}
 
-    void insert(int key) {
+    void insert(int key)
+    {
         root = insertRec(root, key);
     }
 
-    void inorder() {
+    void inorder()
+    {
         Inorder(root);
         std::cout << std::endl;
     }
 
-    bool search(int x) {
+    bool search(int x)
+    {
         return searchRec(root, x);
     }
 
-    bool searchIterative(int x) {
+    bool searchIterative(int x)
+    {
         return searchI(root, x);
     }
 
-    int kthSmallest(int k) {
-        Node* result = kthSmallest(root, k);
+    int kthSmallest(int k)
+    {
+        Node *result = kthSmallest(root, k);
         return result ? result->key : -1;
     }
 
-    int floorValue(int x) {
-        Node* result = floor(root, x);
+    int floorValue(int x)
+    {
+        Node *result = floor(root, x);
         return result ? result->key : -1;
     }
 
-    int ceilingValue(int x) {
-        Node* result = ceiling(root, x);
+    int ceilingValue(int x)
+    {
+        Node *result = ceiling(root, x);
         return result ? result->key : -1;
     }
 
-    bool isBST() {
+    bool isBST()
+    {
         return isBST(root, INT_MIN, INT_MAX);
     }
 
-    bool isPairSum(int sum) {
+    bool isPairSum(int sum)
+    {
         std::unordered_set<int> s;
         return isPairSum(root, sum, s);
     }
 };
 
-int main() {
+int main()
+{
     BST tree;
 
     int data[] = {50, 30, 20, 40, 70, 60, 80};
-    for (int i : data) {
+    for (int i : data)
+    {
         tree.insert(i);
     }
 

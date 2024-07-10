@@ -6,7 +6,11 @@ struct TreeNode {
     int key;
     TreeNode* left;
     TreeNode* right;
-    TreeNode(int x) : key(x), left(nullptr), right(nullptr) {}
+   TreeNode(int x) {
+        key = x;
+        left = nullptr;
+        right = nullptr;
+    }
 };
 
 // Function to find the left view of a binary tree

@@ -1,11 +1,15 @@
 #include <iostream>
-
+using namespace std;
 // TreeNode structure definition
 struct TreeNode {
     int key;
     TreeNode* left;
     TreeNode* right;
-    TreeNode(int x) : key(x), left(nullptr), right(nullptr) {}
+    TreeNode(int x) {
+        key = x;
+        left = nullptr;
+        right = nullptr;
+    }
 };
 
 // Function to find the Lowest Common Ancestor (LCA) of two nodes
@@ -42,7 +46,7 @@ int main() {
     TreeNode* lca = lowestCommonAncestor(root, root->left->right, root->left->left->left);
 
     // Output the key of the LCA
-    std::cout << "Lowest Common Ancestor (LCA) key: " << lca->key << std::endl;
+    cout << "Lowest Common Ancestor (LCA) key: " << lca->key << endl;
 
     return 0;
 }

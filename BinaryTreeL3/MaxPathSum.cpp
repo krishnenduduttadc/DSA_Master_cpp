@@ -1,13 +1,17 @@
 #include <iostream>
 #include <climits>   // For INT_MIN
 #include <algorithm> // For std::max
-
+using namespace std;
 // TreeNode structure definition
 struct TreeNode {
     int key;
     TreeNode* left;
     TreeNode* right;
-    TreeNode(int x) : key(x), left(nullptr), right(nullptr) {}
+    TreeNode(int x) {
+        key = x;
+        left = nullptr;
+        right = nullptr;
+    }
 };
 
 // Helper function to calculate the maximum path sum going down from a node

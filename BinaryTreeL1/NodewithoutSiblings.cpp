@@ -7,7 +7,11 @@ struct Node {
     Node* left;
     Node* right;
 
-    Node(int data) : data(data), left(nullptr), right(nullptr) {}
+   Node(int item) {
+        data = item;
+        left = nullptr;
+        right = nullptr;
+    }
 };
 
 // Function to print nodes without siblings in a binary tree

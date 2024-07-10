@@ -1,19 +1,23 @@
 #include <iostream>
 #include <vector>
 #include <stack>
-
+using namespace std;
 // TreeNode structure definition
 struct TreeNode {
     int key;
     TreeNode* left;
     TreeNode* right;
-    TreeNode(int x) : key(x), left(nullptr), right(nullptr) {}
+    TreeNode(int x) {
+        key = x;
+        left = nullptr;
+        right = nullptr;
+    }
 };
 
 // Function to perform iterative inorder traversal
-std::vector<int> inOrderTrav(TreeNode* root) {
-    std::vector<int> inOrder;
-    std::stack<TreeNode*> s;
+vector<int> inOrderTrav(TreeNode* root) {
+    vector<int> inOrder;
+    stack<TreeNode*> s;
     TreeNode* curr = root;
 
     while (true) {
@@ -45,14 +49,14 @@ int main() {
     root->right->right->right = new TreeNode(10);
 
     // Perform iterative inorder traversal
-    std::vector<int> inOrder = inOrderTrav(root);
+    vector<int> inOrder = inOrderTrav(root);
 
     // Print the result
-    std::cout << "The inorder traversal is : ";
+    cout << "The inorder traversal is : ";
     for (int i = 0; i < inOrder.size(); i++) {
-        std::cout << inOrder[i] << " ";
+        cout << inOrder[i] << " ";
     }
-    std::cout << std::endl;
+    cout << endl;
 
     return 0;
 }

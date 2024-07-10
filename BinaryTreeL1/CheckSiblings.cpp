@@ -6,7 +6,11 @@ struct Node {
     int data;
     Node *left, *right;
 
-    Node(int item) : data(item), left(nullptr), right(nullptr) {}
+    Node(int item) {
+        data = item;
+        left = nullptr;
+        right = nullptr;
+    }
 };
 
 // Function to determine the depth of a node with value `p`

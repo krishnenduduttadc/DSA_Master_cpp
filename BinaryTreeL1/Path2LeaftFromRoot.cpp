@@ -8,7 +8,11 @@ struct Node {
     Node* left;
     Node* right;
 
-    Node(int data, Node* left, Node* right) : data(data), left(left), right(right) {}
+    Node(int data, Node* left, Node* right) {
+        this->data = data;
+        this->left = left;
+        this->right = right;
+    }
 };
 
 // Function to print paths from root to leaf nodes with sum within range [lo, hi]

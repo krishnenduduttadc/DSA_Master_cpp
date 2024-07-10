@@ -6,7 +6,11 @@ struct Node {
     int data;
     Node *left, *right;
 
-    Node(int item) : data(item), left(nullptr), right(nullptr) {}
+    Node(int item) {
+        data = item;
+        left = nullptr;
+        right = nullptr;
+    }
 };
 
 // Function to check if a node with value `x` is present in the binary tree

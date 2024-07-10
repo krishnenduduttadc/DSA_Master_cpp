@@ -1,17 +1,21 @@
 #include <iostream>
 #include <vector>
-
+using namespace std;
 // TreeNode structure definition
 struct TreeNode {
     int key;
     TreeNode* left;
     TreeNode* right;
-    TreeNode(int x) : key(x), left(nullptr), right(nullptr) {}
+    TreeNode(int x) {
+        key = x;
+        left = nullptr;
+        right = nullptr;
+    }
 };
 
 // Function to perform Morris preorder traversal
-std::vector<int> preorderTraversal(TreeNode* root) {
-    std::vector<int> preorder;
+vector<int> preorderTraversal(TreeNode* root) {
+    vector<int> preorder;
     TreeNode* cur = root;
     
     while (cur != nullptr) {
@@ -48,14 +52,14 @@ int main() {
     root->left->right->right = new TreeNode(6);
 
     // Performing Morris preorder traversal
-    std::vector<int> preorder = preorderTraversal(root);
+    vector<int> preorder = preorderTraversal(root);
 
     // Printing the result
-    std::cout << "The Preorder Traversal is: ";
+    cout << "The Preorder Traversal is: ";
     for (int i = 0; i < preorder.size(); i++) {
-        std::cout << preorder[i] << " ";
+        cout << preorder[i] << " ";
     }
-    std::cout << std::endl;
+    cout << endl;
 
     // Deallocating memory
     delete root->left->right->right;

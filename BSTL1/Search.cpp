@@ -6,7 +6,11 @@ struct Node {
     int key;
     Node *left, *right;
     
-    Node(int k) : key(k), left(nullptr), right(nullptr) {}
+     Node(int item) {
+        key = item;
+        left = nullptr;
+        right = nullptr;
+    }
 };
 
 // Function to search for a node in BST

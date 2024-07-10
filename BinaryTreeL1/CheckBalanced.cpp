@@ -7,7 +7,11 @@ struct Node {
     int key;
     Node *left, *right;
 
-    Node(int item) : key(item), left(nullptr), right(nullptr) {}
+    Node(int item) {
+        key = item;
+        left = nullptr;
+        right = nullptr;
+    }
 };
 
 // Function to check if the tree is balanced and return its height

@@ -9,7 +9,11 @@ struct Node {
     Node* left;
     Node* right;
 
-    Node(int data) : data(data), left(nullptr), right(nullptr) {}
+    Node(int item) {
+        data = item;
+        left = nullptr;
+        right = nullptr;
+    }
 };
 
 // Function to print level-wise traversal of the binary tree

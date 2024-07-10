@@ -8,7 +8,11 @@ struct Node {
     int key;
     Node *left, *right;
 
-    Node(int item) : key(item), left(nullptr), right(nullptr) {}
+    Node(int item) {
+        key = item;
+        left = nullptr;
+        right = nullptr;
+    }
 };
 
 // Structure to hold the node and its horizontal distance from the root

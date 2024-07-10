@@ -9,7 +9,11 @@ struct TreeNode {
     int val;
     TreeNode *left;
     TreeNode *right;
-    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+   TreeNode(int x) {
+        val = x;
+        left = nullptr;
+        right = nullptr;
+    }
 };
 
 // Function to serialize a binary tree to a string

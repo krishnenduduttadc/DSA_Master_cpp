@@ -1,12 +1,16 @@
 #include <iostream>
-
+using namespace std;
 class Node {
 public:
     int key;
     Node* left;
     Node* right;
     
-    Node(int value) : key(value), left(nullptr), right(nullptr) {}
+    Node(int value) {
+        key = value;
+        left = nullptr;
+        right = nullptr;
+    }
 };
 
 class BinTree2LL {
@@ -27,10 +31,10 @@ public:
 
     static void printList(Node* root) {
         while (root->right != nullptr) {
-            std::cout << root->key << "->";
+            cout << root->key << "->";
             root = root->right;
         }
-        std::cout << root->key;
+        cout << root->key;
     }
 };
 

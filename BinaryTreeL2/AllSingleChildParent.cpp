@@ -9,7 +9,11 @@ struct Node {
     Node* left;
     Node* right;
 
-    Node(int item) : val(item), left(nullptr), right(nullptr) {}
+    Node(int item) {
+        val = item;
+        left = nullptr;
+        right = nullptr;
+    }
 };
 
 // Function to find all nodes with exactly one child

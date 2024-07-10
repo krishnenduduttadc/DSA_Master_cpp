@@ -10,7 +10,11 @@ public:
     int key;
     Node *left, *right;
 
-    Node(int item) : key(item), left(nullptr), right(nullptr) {}
+     Node(int item) {
+        key = item;
+        left = nullptr;
+        right = nullptr;    
+    }
 };
 
 class BST {

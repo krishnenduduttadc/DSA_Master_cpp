@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 #include <stdexcept>
-
+using namespace std;
 void replace(char* str, int trueLength) {
     int spaceCount = 0, index, i = 0;
 
@@ -29,22 +29,22 @@ void replace(char* str, int trueLength) {
     }
 
     // Print the modified string
-    std::cout << str << std::endl;
+    cout << str << endl;
 }
 
 int main() {
-    std::string s = "Mr John Smith"; // original string without extra spaces
+    string s = "Mr John Smith"; // original string without extra spaces
     int trueLength = s.length(); // the true length of the string
     int newLength = trueLength + 3 * 2; // allocate space for additional characters
 
     char* str = new char[newLength + 1]; // +1 for null terminator
-    std::copy(s.begin(), s.end(), str);
+    copy(s.begin(), s.end(), str);
     str[trueLength] = '\0'; // Null-terminate the string
 
     try {
         replace(str, trueLength);
-    } catch (const std::invalid_argument& e) {
-        std::cerr << "Error: " << e.what() << std::endl;
+    } catch (const invalid_argument& e) {
+        cerr << "Error: " << e.what() << endl;
     }
 
     delete[] str; // Free the dynamically allocated memory
