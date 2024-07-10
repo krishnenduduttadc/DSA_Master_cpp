@@ -9,7 +9,11 @@ struct Edge {
     int nbr;
     int wt;
 
-    Edge(int s, int n, int w) : src(s), nbr(n), wt(w) {}
+    Edge(int s, int n, int w) {
+        src = s;
+        nbr = n;
+        wt = w;
+    }
 };
 
 // Function prototypes

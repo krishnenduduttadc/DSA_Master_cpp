@@ -6,7 +6,10 @@ struct Edge {
     int d;
     int wt;
 
-    Edge(int d, int wt) : d(d), wt(wt) {}
+    Edge(int d, int wt) {
+        this->d = d;
+        this->wt = wt;
+    }
 };
 
 vector<vector<int>> convertToAdjacencyMatrix(vector<vector<Edge>>& adj, int V) {

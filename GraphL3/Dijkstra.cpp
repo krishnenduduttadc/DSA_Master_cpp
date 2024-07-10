@@ -5,37 +5,49 @@
 
 using namespace std;
 
-class Dijkstra {
+class Dijkstra
+{
 public:
-    struct Pair {
+    struct Pair
+    {
         int node;
         int distance;
 
-        Pair(int _distance, int _node) : distance(_distance), node(_node) {}
+        Pair(int _distance, int _node)
+        {
+            distance = _distance;
+            node = _node;
+        }
     };
 
-    struct compare {
-        bool operator()(Pair const& p1, Pair const& p2) {
+    struct compare
+    {
+        bool operator()(Pair const &p1, Pair const &p2)
+        {
             return p1.distance > p2.distance;
         }
     };
 
-    vector<int> dijkstra(int V, vector<vector<vector<int>>>& adj, int s) {
+    vector<int> dijkstra(int V, vector<vector<vector<int>>> &adj, int s)
+    {
         priority_queue<Pair, vector<Pair>, compare> pq;
         vector<int> dist(V, INT_MAX);
         dist[s] = 0;
         pq.push(Pair(0, s));
 
-        while (!pq.empty()) {
+        while (!pq.empty())
+        {
             int dis = pq.top().distance;
             int node = pq.top().node;
             pq.pop();
 
-            for (int i = 0; i < adj[node].size(); i++) {
+            for (int i = 0; i < adj[node].size(); i++)
+            {
                 int adjNode = adj[node][i][0];
                 int edgeWeight = adj[node][i][1];
 
-                if (dis + edgeWeight < dist[adjNode]) {
+                if (dis + edgeWeight < dist[adjNode])
+                {
                     dist[adjNode] = dis + edgeWeight;
                     pq.push(Pair(dist[adjNode], adjNode));
                 }
@@ -45,7 +57,8 @@ public:
     }
 };
 
-int main() {
+int main()
+{
     int V = 3, E = 3, S = 2;
 
     vector<vector<vector<int>>> adj(V);
@@ -62,7 +75,8 @@ int main() {
     Dijkstra dijkstraSolver;
     vector<int> res = dijkstraSolver.dijkstra(V, adj, S);
 
-    for (int i = 0; i < V; i++) {
+    for (int i = 0; i < V; i++)
+    {
         cout << res[i] << " ";
     }
     cout << endl;

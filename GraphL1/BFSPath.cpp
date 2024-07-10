@@ -9,7 +9,10 @@ struct Edge {
     int src;
     int nbr;
 
-    Edge(int src, int nbr) : src(src), nbr(nbr) {}
+    Edge(int src, int nbr) {
+        this->src = src;
+        this->nbr = nbr;
+    }
 };
 
 // Pair structure to store vertex and path so far

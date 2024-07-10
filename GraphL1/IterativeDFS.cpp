@@ -10,7 +10,10 @@ struct Edge {
     int src;
     int nbr;
 
-    Edge(int src, int nbr) : src(src), nbr(nbr) {}
+    Edge(int src, int nbr) {
+        this->src = src;
+        this->nbr = nbr;
+    }
 };
 
 // Structure to represent a pair of vertex and path so far
@@ -18,7 +21,10 @@ struct Pair {
     int v;
     string psf;
 
-    Pair(int v, string psf) : v(v), psf(psf) {}
+    Pair(int v, string psf) {
+        this->v = v;
+        this->psf = psf;
+    }
 };
 
 // Function to add an edge to the graph

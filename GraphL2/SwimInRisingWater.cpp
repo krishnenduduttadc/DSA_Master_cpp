@@ -8,8 +8,11 @@ using namespace std;
 class Pair {
 public:
     int row, col, msf;
-    Pair(int row, int col, int msf) : row(row), col(col), msf(msf) {}
-    
+    Pair(int row, int col, int msf) {
+        this->row = row;
+        this->col = col;
+        this->msf = msf;
+    }
     bool operator>(const Pair &other) const {
         return msf > other.msf;
     }

@@ -6,7 +6,10 @@ struct Edge {
     int dest;
     int weight;
 
-    Edge(int d, int wt) : dest(d), weight(wt) {}
+     Edge(int d, int wt) {
+        dest = d;
+        weight = wt;
+    }
 };
 
 vector<vector<Edge>> convertToWeightedAdjacencyList(int adjmat[][6], int V) {

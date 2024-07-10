@@ -9,7 +9,10 @@ public:
     int row;
     int col;
 
-    Pair(int r, int c) : row(r), col(c) {}
+    Pair(int r, int c) {
+        row = r;
+        col = c;
+    }
 };
 
 int orangesRotting(vector<vector<int>>& grid) {

@@ -10,7 +10,11 @@ struct Edge {
     int nbr;
     int wt;
 
-    Edge(int src, int nbr, int wt) : src(src), nbr(nbr), wt(wt) {}
+    Edge(int src, int nbr, int wt) {
+        this->src = src;
+        this->nbr = nbr;
+        this->wt = wt;
+    }
 };
 
 // Function to add an edge to the graph

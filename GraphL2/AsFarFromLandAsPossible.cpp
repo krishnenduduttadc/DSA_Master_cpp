@@ -7,7 +7,10 @@ using namespace std;
 struct Pair {
     int row;
     int col;
-    Pair(int r, int c) : row(r), col(c) {}
+     Pair(int r, int c) {
+        row = r;
+        col = c;
+    }
 };
 
 int maxDistance(vector<vector<int>>& grid) {

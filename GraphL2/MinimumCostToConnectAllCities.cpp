@@ -7,7 +7,10 @@ struct Edge {
     int v;
     int wt;
 
-    Edge(int nbr, int weight) : v(nbr), wt(weight) {}
+     Edge(int nbr, int weight) {
+        this->v = nbr;
+        this->wt = weight;
+    }
 };
 
 struct CompareEdge {
