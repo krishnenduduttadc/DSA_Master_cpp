@@ -8,7 +8,11 @@ struct Pair {
     int i;      // current row index
     int j;      // current column index
 
-    Pair(string psf, int i, int j) : psf(psf), i(i), j(j) {}
+     Pair(string psf, int i, int j) {
+        this->psf = psf;
+        this->i = i;
+        this->j = j;
+    }
 };
 
 void printAllPaths(vector<vector<int>>& arr) {

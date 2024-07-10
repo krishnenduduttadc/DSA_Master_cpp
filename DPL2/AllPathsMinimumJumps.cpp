@@ -9,7 +9,12 @@ public:
     int i, s, j;
     string psf;
 
-    Pair(int i, int s, int j, string psf) : i(i), s(s), j(j), psf(psf) {}
+    Pair(int i, int s, int j, string psf) {
+        this->i = i;
+        this->s = s;
+        this->j = j;
+        this->psf = psf;
+    }
 };
 
 void solution(const vector<int>& arr) {

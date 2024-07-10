@@ -9,7 +9,12 @@ struct Pair {
     int v;    // value at index i in the array
     string psf; // path so far
 
-    Pair(int l, int i, int v, string psf) : l(l), i(i), v(v), psf(psf) {}
+    Pair(int l, int i, int v, string psf) {
+        this->l = l;
+        this->i = i;
+        this->v = v;
+        this->psf = psf;
+    }
 };
 
 void printAllLIS(vector<int>& arr) {

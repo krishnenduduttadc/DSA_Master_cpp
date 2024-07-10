@@ -7,7 +7,10 @@ struct Bridge {
     int north;
     int south;
 
-    Bridge(int n, int s) : north(n), south(s) {}
+    Bridge(int n, int s) {
+        north = n;
+        south = s;
+    }
 
     bool operator<(const Bridge& other) const {
         if (north != other.north) {

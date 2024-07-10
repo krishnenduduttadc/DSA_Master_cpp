@@ -8,7 +8,11 @@ struct Pair {
     int j;
     string psf;
 
-    Pair(int i, int j, string psf) : i(i), j(j), psf(psf) {}
+    Pair(int i, int j, string psf) {
+        this->i = i;
+        this->j = j;
+        this->psf = psf;
+    }
 };
 
 void printPaths(vector<vector<int>>& dp, vector<int>& vals, vector<int>& wts, int i, int j, string psf, deque<Pair>& que) {

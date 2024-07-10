@@ -7,7 +7,11 @@ struct Pair {
     int i, j;
     string psf;
 
-    Pair(int i, int j, string psf) : i(i), j(j), psf(psf) {}
+   Pair(int i, int j, string psf) {
+        this->i = i;
+        this->j = j;
+        this->psf = psf;
+    }
 };
 
 void printMaxGoldPath(vector<vector<int>>& arr) {
