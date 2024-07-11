@@ -7,7 +7,11 @@ public:
     Node* prev;
     Node* next;
 
-    Node(int data) : data(data), prev(nullptr), next(nullptr) {}
+    Node(int data) {
+        this->data = data;
+        this->prev = nullptr;
+        this->next = nullptr;
+    }
 };
 
 class DeletenodeinDoublyLinkedList {

@@ -3,54 +3,70 @@
 #include <algorithm>
 using namespace std;
 
-class TwoSum {
+class TwoSum
+{
 public:
-    struct Pair {
+    struct Pair
+    {
         int num;
         int idx;
-        
-        Pair(int num, int idx) : num(num), idx(idx) {}
+
+        Pair(int num, int idx)
+        {
+            this->num = num;
+            this->idx = idx;
+        }
 
         // Define comparison operator for sorting
-        bool operator<(const Pair& other) const {
+        bool operator<(const Pair &other) const
+        {
             return num < other.num;
         }
     };
 
-    vector<int> twoSum(vector<int>& nums, int target) {
+    vector<int> twoSum(vector<int> &nums, int target)
+    {
         int n = nums.size();
         vector<Pair> arr;
-        
+
         // Populate arr with pairs (num, index)
-        for (int i = 0; i < n; ++i) {
+        for (int i = 0; i < n; ++i)
+        {
             arr.push_back(Pair(nums[i], i));
         }
-        
+
         // Sort arr based on num
         sort(arr.begin(), arr.end());
 
         int i = 0, j = n - 1;
-        while (i < j) {
+        while (i < j)
+        {
             int left = arr[i].num;
             int right = arr[j].num;
             int sum = left + right;
-            
-            if (sum == target) {
+
+            if (sum == target)
+            {
                 // Return indices in sorted order
                 return {arr[i].idx, arr[j].idx};
-            } else if (sum < target) {
+            }
+            else if (sum < target)
+            {
                 ++i;
-            } else {
+            }
+            else
+            {
                 --j;
             }
         }
-        
+
         // If no pair found, return empty vector
         return {};
     }
 };
 
-int main() {
+int main()
+{
     // Hardcoded input vector and target
     vector<int> nums = {2, 7, 11, 15};
     int target = 9;
@@ -62,9 +78,12 @@ int main() {
     vector<int> result = solution.twoSum(nums, target);
 
     // Print the indices
-    if (!result.empty()) {
+    if (!result.empty())
+    {
         cout << "Indices: " << result[0] << ", " << result[1] << endl;
-    } else {
+    }
+    else
+    {
         cout << "No valid indices found." << endl;
     }
 

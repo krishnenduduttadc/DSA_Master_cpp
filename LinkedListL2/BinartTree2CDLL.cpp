@@ -7,7 +7,11 @@ public:
     Node* left;
     Node* right;
 
-    Node(int data) : data(data), left(nullptr), right(nullptr) {}
+    Node(int data) {
+        this->data = data;
+        this->left = nullptr;
+        this->right = nullptr;
+    }
 };
 
 class BinartTree2CDLL {

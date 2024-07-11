@@ -7,7 +7,10 @@ struct Node {
     int data;
     Node* next;
 
-    Node(int data) : data(data), next(nullptr) {}
+     Node(int data) {
+        this->data = data;
+        this->next = nullptr;
+    }
 };
 
 // Intersect class to find the intersection point in Y-shaped Linked Lists

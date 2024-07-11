@@ -6,7 +6,10 @@ class Item {
 public:
     int wt, val;
 
-    Item(int w, int v) : wt(w), val(v) {}
+     Item(int w, int v) {
+        wt = w;
+        val = v;
+    }
 
     bool operator<(const Item& i) const {
         return (double)val / wt > (double)i.val / i.wt;

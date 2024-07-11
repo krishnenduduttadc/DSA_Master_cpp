@@ -7,7 +7,10 @@ public:
     int val;
     ListNode* next;
 
-    ListNode(int val) : val(val), next(nullptr) {}
+    ListNode(int val) {
+        this->val = val;
+        this->next = nullptr;
+    }
 };
 
 // Function to print the linked list

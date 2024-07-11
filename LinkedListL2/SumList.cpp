@@ -7,8 +7,18 @@ public:
     int data;
     Node* next;
 
-    Node() : data(0), next(nullptr) {}
-    Node(int data) : data(data), next(nullptr) {}
+    // Default constructor
+    Node() {
+        data = 0;
+        next = nullptr;
+    }
+
+    // Constructor with data parameter
+    Node(int data) {
+        this->data = data;
+        next = nullptr;
+    }
+    
     void setNext(Node* next) {
         this->next = next;
     }

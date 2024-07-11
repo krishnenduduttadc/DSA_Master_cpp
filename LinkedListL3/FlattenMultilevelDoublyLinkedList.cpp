@@ -7,7 +7,12 @@ struct Node {
     Node* next;
     Node* child;
 
-    Node(int _val) : val(_val), prev(nullptr), next(nullptr), child(nullptr) {}
+    Node(int _val) {
+        val = _val;
+        prev = nullptr;
+        next = nullptr;
+        child = nullptr;
+    }
 };
 
 class FlattenMultilevelDoublyLinkedList {

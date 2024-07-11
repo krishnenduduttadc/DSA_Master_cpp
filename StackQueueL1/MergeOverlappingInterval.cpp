@@ -9,7 +9,10 @@ struct Pair {
     int st;
     int et;
     
-    Pair(int s, int e) : st(s), et(e) {}
+    Pair(int s, int e) {
+        st = s;
+        et = e;
+    }
 };
 
 // Comparator function to sort pairs based on start time

@@ -8,7 +8,10 @@ public:
     int start;
     int finish;
     
-    Activity(int s, int f) : start(s), finish(f) {}
+    Activity(int s, int f) {
+        start = s;
+        finish = f;
+    }
 };
 
 struct MyCmp {

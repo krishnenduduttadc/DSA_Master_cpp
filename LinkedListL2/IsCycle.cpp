@@ -6,7 +6,10 @@ using namespace std;
 struct Node {
     int val;
     Node* next;
-    Node(int x) : val(x), next(nullptr) {}
+     Node(int x) {
+        val = x;        // Assigns the parameter x to the member variable val
+        next = nullptr; // Initializes the next pointer to nullptr
+    }
 };
 
 // Function to detect if there is a cycle in the linked list

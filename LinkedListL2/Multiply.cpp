@@ -7,7 +7,10 @@ public:
     int val;
     Node* next;
     
-    Node(int val) : val(val), next(nullptr) {}
+    Node(int val) {
+        this->val = val;
+        this->next = nullptr;
+    }
 };
 
 // Function to reverse a linked list

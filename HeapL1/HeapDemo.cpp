@@ -9,7 +9,9 @@ class MinHeap {
     int capacity;
 
 public:
-    MinHeap(int c) : size(0), capacity(c) {
+    MinHeap(int c) {
+        size = 0;
+        capacity = c;
         arr.resize(c);
     }
 

@@ -12,7 +12,11 @@ public:
     int math;
 
     // Constructor
-    Marks(int p, int c, int m) : phy(p), chem(c), math(m) {}
+     Marks(int p, int c, int m) {
+        phy = p;
+        chem = c;
+        math = m;
+    }
 
     // Method to compare for sorting
     bool operator<(const Marks& other) const {

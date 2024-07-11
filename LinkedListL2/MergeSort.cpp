@@ -7,7 +7,10 @@ struct ListNode {
     int data;
     ListNode* next;
 
-    ListNode(int x) : data(x), next(nullptr) {}
+    ListNode(int x) {
+        data = x;
+        next = nullptr;
+    }
 };
 
 // Function to merge two sorted linked lists

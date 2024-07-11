@@ -8,7 +8,11 @@ public:
     Node* next;
     Node* random;
 
-    Node(int x) : val(x), next(nullptr), random(nullptr) {}
+   Node(int x) {
+        val = x;
+        next = nullptr;
+        random = nullptr;
+    }
 };
 
 class CloneLinkedList {

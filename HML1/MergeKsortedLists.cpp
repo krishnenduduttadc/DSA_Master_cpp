@@ -8,7 +8,11 @@ struct Pair {
     int di;   // Data index (current index in the list)
     int val;  // Value at current index in the list
 
-    Pair(int li, int di, int val) : li(li), di(di), val(val) {}
+    Pair(int li, int di, int val) {
+        this->li = li;
+        this->di = di;
+        this->val = val;
+    }
 
     bool operator>(const Pair& other) const {
         return val > other.val;
