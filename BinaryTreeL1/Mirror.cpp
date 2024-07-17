@@ -27,6 +27,8 @@ void mirrorBinaryTree(Node* root) {
     Node* temp = root->left;
     root->left = root->right;
     root->right = temp;
+
+    //swap(root->left,root->right); //shortcut
 }
 
 // Function to print level-wise traversal of a binary tree

@@ -27,7 +27,7 @@ public:
     }
 };
 
-int main() {
-    SeiveofErastostenins::main();
-    return 0;
-}
+    int main() {
+        SeiveofErastostenins::main();
+        return 0;
+    }

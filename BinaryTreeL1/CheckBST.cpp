@@ -3,10 +3,12 @@
 using namespace std;
 
 // Definition of a binary tree node
-struct Node {
+struct Node
+{
     int data;
     Node *left, *right;
-    Node(int data) {
+    Node(int data)
+    {
         data = data;
         left = nullptr;
         right = nullptr;
@@ -14,18 +16,27 @@ struct Node {
 };
 
 // Class to store results of isBST function
-class BSTPair {
+class BSTPair
+{
 public:
     bool isBST;
     int min;
     int max;
+    BSTPair(bool isBST = true, int min = INT_MAX, int max = INT_MIN)
+    {
+        this->isBST = isBST;
+        this->min = min;
+        this->max = max;
+    }
 
-    BSTPair(bool isBST = true, int min = INT_MAX, int max = INT_MIN) : isBST(isBST), min(min), max(max) {}
+    // BSTPair(bool isBST = true, int min = INT_MAX, int max = INT_MIN) : isBST(isBST), min(min), max(max) {}
 };
 
 // Function to display the binary tree (preorder traversal)
-void display(Node* node) {
-    if (node == nullptr) {
+void display(Node *node)
+{
+    if (node == nullptr)
+    {
         return;
     }
 
@@ -39,8 +50,10 @@ void display(Node* node) {
 }
 
 // Function to calculate the height of the tree
-int height(Node* node) {
-    if (node == nullptr) {
+int height(Node *node)
+{
+    if (node == nullptr)
+    {
         return -1;
     }
 
@@ -51,8 +64,10 @@ int height(Node* node) {
 }
 
 // Function to check if a subtree rooted at 'node' is a BST
-BSTPair isBST(Node* node) {
-    if (node == nullptr) {
+BSTPair isBST(Node *node)
+{
+    if (node == nullptr)
+    {
         return BSTPair(true, INT_MAX, INT_MIN);
     }
 
@@ -67,9 +82,10 @@ BSTPair isBST(Node* node) {
     return mp;
 }
 
-int main() {
+int main()
+{
     // Hardcoded tree construction
-    Node* root = new Node(50);
+    Node *root = new Node(50);
     root->left = new Node(25);
     root->right = new Node(75);
 
