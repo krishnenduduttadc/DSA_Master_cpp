@@ -21,7 +21,10 @@ struct QueueObj {
     Node* node;
     int hd;
 
-    QueueObj(Node* node, int hd) : node(node), hd(hd) {}
+     QueueObj(Node* node, int hd) {
+        this->node = node;
+        this->hd = hd;
+    }
 };
 
 // Function to print the top view of the binary tree
