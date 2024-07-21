@@ -8,7 +8,7 @@ int main() {
     vector<int> arr = {0, 1, 2, 3, 1, 2, 3, 4, 2, 1, 2, 3};
     int n = arr.size();
     vector<int> dp(n + 1, INT_MAX); // dp array where dp[i] represents the minimum number of perfect squares summing up to i
-
+    //int dp[n+1]={INT_MAX};
     dp[0] = 0; // Base case: 0 requires 0 squares
     dp[1] = 1; // 1 requires 1 square (1)
 

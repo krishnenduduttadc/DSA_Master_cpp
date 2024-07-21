@@ -1,11 +1,10 @@
 #include <iostream>
 #include <string>
-#include <vector>
 using namespace std;
 
 int countPalindromicSubseq(const string& str) {
     int n = str.length();
-    vector<vector<int>> dp(n, vector<int>(n, 0));
+    int dp[n][n] = {0};  // Initialize the 2D array
 
     for (int g = 0; g < n; g++) {
         for (int i = 0, j = g; j < n; i++, j++) {

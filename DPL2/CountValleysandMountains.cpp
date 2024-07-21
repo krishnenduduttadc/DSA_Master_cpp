@@ -1,9 +1,8 @@
 #include <iostream>
-#include <vector>
 using namespace std;
 
 int countValleysAndMountains(int n) {
-    vector<int> dp(n + 1, 0);
+    int dp[n + 1] = {0}; // Initialize the array with zeros
     dp[0] = 1; // Base case: empty sequence
     dp[1] = 1; // Sequence of length 1: either V or M
 

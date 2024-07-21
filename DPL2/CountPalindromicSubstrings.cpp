@@ -1,11 +1,10 @@
 #include <iostream>
 #include <string>
-#include <vector>
 using namespace std;
 
 int countPalindromicSubstrings(const string& s) {
     int n = s.length();
-    vector<vector<bool>> dp(n, vector<bool>(n, false));
+    bool dp[n][n] = {false};  // Initialize the 2D array with false
     int count = 0;
 
     for (int g = 0; g < n; g++) {

@@ -1,11 +1,10 @@
 #include <iostream>
-#include <vector>
+#include <algorithm>
 using namespace std;
 
-int totalOfferings(vector<int>& height) {
-    int n = height.size();
-    vector<int> larr(n, 0); // Left offerings array
-    vector<int> rarr(n, 0); // Right offerings array
+int totalOfferings(int* height, int n) {
+    int* larr = new int[n]; // Left offerings array
+    int* rarr = new int[n]; // Right offerings array
 
     // Calculate left offerings
     larr[0] = 1;
@@ -32,11 +31,17 @@ int totalOfferings(vector<int>& height) {
     for (int i = 0; i < n; i++) {
         ans += max(larr[i], rarr[i]);
     }
+
+    // Free allocated memory
+    delete[] larr;
+    delete[] rarr;
+
     return ans;
 }
 
 int main() {
-    vector<int> height = {2, 3, 5, 6, 4, 8, 9};
-    cout << totalOfferings(height) << endl;
+    int height[] = {2, 3, 5, 6, 4, 8, 9};
+    int n = sizeof(height) / sizeof(height[0]);
+    cout << totalOfferings(height, n) << endl;
     return 0;
 }

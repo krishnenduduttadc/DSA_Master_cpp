@@ -1,13 +1,13 @@
 #include <iostream>
-#include <vector>
 using namespace std;
 
 long long noOfChords(int n) {
-    vector<long long> dp(n + 1, 0);
+    long long* dp = new long long[n + 1]; // Dynamically allocate the dp array
     dp[0] = 1;
     dp[1] = 1;
 
     for (int i = 2; i <= n; i++) {
+        dp[i] = 0; // Initialize dp[i] to 0
         int l = 0;
         int r = i - 1;
         while (l <= i - 1) {
@@ -17,7 +17,9 @@ long long noOfChords(int n) {
         }
     }
 
-    return dp[n];
+    long long result = dp[n]; // Store the result before deallocating memory
+    delete[] dp; // Deallocate memory to prevent memory leaks
+    return result;
 }
 
 int main() {

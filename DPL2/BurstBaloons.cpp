@@ -1,12 +1,16 @@
 #include <iostream>
-#include <vector>
-#include <algorithm>
 #include <climits>
 using namespace std;
 
-int sol(vector<int>& arr) {
-    int n = arr.size();
-    vector<vector<int>> dp(n, vector<int>(n, 0));
+int sol(int arr[], int n) {
+    int dp[n][n];
+
+    // Initialize the dp array with zeros
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            dp[i][j] = 0;
+        }
+    }
 
     for (int g = 0; g < n; g++) {
         for (int i = 0, j = g; j < n; i++, j++) {
@@ -25,7 +29,8 @@ int sol(vector<int>& arr) {
 }
 
 int main() {
-    vector<int> arr = {2, 3, 5};
-    cout << sol(arr) << endl;
+    int arr[] = {2, 3, 5};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    cout << sol(arr, n) << endl;
     return 0;
 }

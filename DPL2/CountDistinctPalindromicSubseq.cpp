@@ -1,37 +1,45 @@
 #include <iostream>
-#include <vector>
 #include <unordered_map>
 using namespace std;
 
 int solution(const string& str) {
     int n = str.size();
-    vector<vector<int>> dp(n, vector<int>(n, 0));
-    vector<int> prev(n, -1);
+    
+    // Dynamic programming table
+    int dp[n][n];
+    // Arrays to store previous and next occurrences
+    int prev[n];
+    int next[n];
+    
+    // Initialize prev and next arrays
+    for (int i = 0; i < n; i++) {
+        prev[i] = -1;
+        next[i] = -1;
+    }
+    
     unordered_map<char, int> map;
-
+    
+    // Fill the prev array
     for (int i = 0; i < n; i++) {
         char ch = str[i];
-
         if (map.find(ch) != map.end()) {
             prev[i] = map[ch];
         }
-
         map[ch] = i;
     }
-
-    vector<int> next(n, -1);
+    
     map.clear();
-
+    
+    // Fill the next array
     for (int i = n - 1; i >= 0; i--) {
         char ch = str[i];
-
         if (map.find(ch) != map.end()) {
             next[i] = map[ch];
         }
-
         map[ch] = i;
     }
-
+    
+    // Fill the dp array
     for (int g = 0; g < n; g++) {
         for (int i = 0, j = g; j < n; i++, j++) {
             if (g == 0) {
@@ -41,13 +49,13 @@ int solution(const string& str) {
             } else {
                 char sc = str[i];
                 char ec = str[j];
-
+                
                 if (sc != ec) {
                     dp[i][j] = dp[i + 1][j] + dp[i][j - 1] - dp[i + 1][j - 1];
                 } else {
                     int n = next[i];
                     int p = prev[j];
-
+                    
                     if (n > p) {
                         dp[i][j] = 2 * dp[i + 1][j - 1] + 2;
                     } else if (n == p) {
@@ -59,7 +67,7 @@ int solution(const string& str) {
             }
         }
     }
-
+    
     return dp[0][n - 1];
 }
 

@@ -5,7 +5,8 @@ using namespace std;
 
 int LongestPalindromicSubsequence(string str) {
     int n = str.length();
-    vector<vector<int>> dp(n, vector<int>(n, 0));
+    //vector<vector<int>> dp(n, vector<int>(n, 0));
+    int dp[n][n]={0};
 
     for (int g = 0; g < n; g++) {
         for (int i = 0, j = g; j < n; i++, j++) {

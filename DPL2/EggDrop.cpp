@@ -1,11 +1,10 @@
 #include <iostream>
-#include <vector>
 #include <climits>
 using namespace std;
 
 int eggDrop(int n, int k) {
-    // Create a 2D vector for DP table
-    vector<vector<int>> dp(n + 1, vector<int>(k + 1, 0));
+    // Initialize a 2D array for DP table
+    int dp[n + 1][k + 1] = {0}; // Array with (n + 1) rows and (k + 1) columns
 
     // Fill the DP table
     for (int i = 1; i <= n; i++) {
