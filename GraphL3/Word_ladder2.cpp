@@ -1,62 +1,125 @@
-#include <iostream>
-#include <vector>
-#include <queue>
-#include <unordered_set>
+#include <bits/stdc++.h>
 using namespace std;
 
-class WordLadder {
+class Solution
+{
 public:
-    int wordLadderLength(string startWord, string targetWord, vector<string>& wordList) {
-        queue<pair<string, int>> q;
-        q.push({startWord, 1});
+    vector<vector<string>> findSequences(string beginWord, string endWord,
+                                         vector<string> &wordList)
+    {
+        // Push all values of wordList into a set
+        // to make deletion from it easier and in less time complexity.
+        unordered_set<string> st(wordList.begin(), wordList.end());
+        
+        // Creating a queue ds which stores the words in a sequence which is
+        // required to reach the targetWord after successive transformations.
+        queue<vector<string>> q;
 
-        unordered_set<string> wordSet(wordList.begin(), wordList.end());
-        if (wordSet.find(startWord) != wordSet.end()) {
-            wordSet.erase(startWord);
-        }
+        // BFS traversal with pushing the new formed sequence in queue 
+        // when after a transformation, a word is found in wordList.
 
-        while (!q.empty()) {
-            string word = q.front().first;
-            int steps = q.front().second;
+        q.push({beginWord});
+
+        // A vector defined to store the words being currently used
+        // on a level during BFS.
+        vector<string> usedOnLevel;
+        usedOnLevel.push_back(beginWord);
+        int level = 0;
+       
+        // A vector to store the resultant transformation sequence.
+        vector<vector<string>> ans;
+        while (!q.empty())
+        {
+            vector<string> vec = q.front();
             q.pop();
 
-            if (word == targetWord) {
-                return steps;
+            // Now, erase all words that have been
+            // used in the previous levels to transform
+            if (vec.size() > level)
+            {
+                level++;
+                for (auto it : usedOnLevel)
+                {
+                    st.erase(it);
+                }
             }
 
-            for (int i = 0; i < word.length(); ++i) {
-                char originalChar = word[i];
-                for (char c = 'a'; c <= 'z'; ++c) {
-                    if (c == originalChar) continue;
+            string word = vec.back();
+
+            // store the answers if the end word matches with targetWord.
+            if (word == endWord)
+            {
+                // the first sequence where we reached end
+                if (ans.size() == 0)
+                {
+                    ans.push_back(vec);
+                }
+                else if (ans[0].size() == vec.size())
+                {
+                    ans.push_back(vec);
+                }
+            }
+            for (int i = 0; i < word.size(); i++)
+            {   
+                // Now, replace each character of ‘word’ with char
+                // from a-z then check if ‘word’ exists in wordList.
+                char original = word[i];
+                for (char c = 'a'; c <= 'z'; c++)
+                {
                     word[i] = c;
-                    if (wordSet.find(word) != wordSet.end()) {
-                        wordSet.erase(word);
-                        q.push({word, steps + 1});
+                    if (st.count(word) > 0)
+                    { 
+                        // Check if the word is present in the wordList and
+                        // push the word along with the new sequence in the queue.
+                        vec.push_back(word);
+                        q.push(vec);
+                        // mark as visited on the level
+                        usedOnLevel.push_back(word);
+                        vec.pop_back();
                     }
                 }
-                word[i] = originalChar;
+                word[i] = original;
             }
         }
-
-        return 0;
+        return ans;
     }
 };
 
-int main() {
-    string startWord = "der";
-    string targetWord = "dfs";
-    vector<string> wordList = {
-        "des",
-        "der",
-        "dfr",
-        "dgt",
-        "dfs"
-    };
+// A comparator function to sort the answer.
+bool comp(vector<string> a, vector<string> b)
+{
+    string x = "", y = "";
+    for (string i : a)
+        x += i;
+    for (string i : b)
+        y += i;
 
-    WordLadder obj;
-    int ans = obj.wordLadderLength(startWord, targetWord, wordList);
+    return x < y;
+}
 
-    cout << ans << endl;
+int main()
+{
+
+    vector<string> wordList = {"des", "der", "dfr", "dgt", "dfs"};
+    string startWord = "der", targetWord = "dfs";
+    Solution obj;
+    vector<vector<string>> ans = obj.findSequences(startWord, targetWord, wordList);
+    
+    // If no transformation sequence is possible.
+    if (ans.size() == 0)
+        cout << -1 << endl;
+    else
+    {
+        sort(ans.begin(), ans.end(), comp);
+        for (int i = 0; i < ans.size(); i++)
+        {
+            for (int j = 0; j < ans[i].size(); j++)
+            {
+                cout << ans[i][j] << " ";
+            }
+            cout << endl;
+        }
+    }
 
     return 0;
 }

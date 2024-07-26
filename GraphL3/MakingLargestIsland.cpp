@@ -1,125 +1,125 @@
-#include <iostream>
-#include <vector>
-#include <unordered_set>
+#include <bits/stdc++.h>
 using namespace std;
 
+// User function Template for C++
 class DisjointSet {
-private:
-    vector<int> parent;
-    vector<int> size;
 
 public:
+    vector<int> rank, parent, size;
     DisjointSet(int n) {
-        parent.resize(n);
-        size.resize(n, 1);
-        for (int i = 0; i < n; ++i) {
+        rank.resize(n + 1, 0);
+        parent.resize(n + 1);
+        size.resize(n + 1);
+        for (int i = 0; i <= n; i++) {
             parent[i] = i;
+            size[i] = 1;
         }
     }
 
-    int find(int node) {
-        if (parent[node] != node) {
-            parent[node] = find(parent[node]);
-        }
-        return parent[node];
+    int findUPar(int node) {
+        if (node == parent[node])
+            return node;
+        return parent[node] = findUPar(parent[node]);
     }
 
-    void unionSets(int u, int v) {
-        int root_u = find(u);
-        int root_v = find(v);
-        if (root_u != root_v) {
-            if (size[root_u] < size[root_v]) {
-                swap(root_u, root_v);
-            }
-            parent[root_v] = root_u;
-            size[root_u] += size[root_v];
+    void unionByRank(int u, int v) {
+        int ulp_u = findUPar(u);
+        int ulp_v = findUPar(v);
+        if (ulp_u == ulp_v) return;
+        if (rank[ulp_u] < rank[ulp_v]) {
+            parent[ulp_u] = ulp_v;
+        }
+        else if (rank[ulp_v] < rank[ulp_u]) {
+            parent[ulp_v] = ulp_u;
+        }
+        else {
+            parent[ulp_v] = ulp_u;
+            rank[ulp_u]++;
         }
     }
 
-    int getSize(int node) {
-        return size[find(node)];
+    void unionBySize(int u, int v) {
+        int ulp_u = findUPar(u);
+        int ulp_v = findUPar(v);
+        if (ulp_u == ulp_v) return;
+        if (size[ulp_u] < size[ulp_v]) {
+            parent[ulp_u] = ulp_v;
+            size[ulp_v] += size[ulp_u];
+        }
+        else {
+            parent[ulp_v] = ulp_u;
+            size[ulp_u] += size[ulp_v];
+        }
     }
 };
-
-class MakingaLargeIsland {
+class Solution {
 private:
     bool isValid(int newr, int newc, int n) {
         return newr >= 0 && newr < n && newc >= 0 && newc < n;
     }
-
 public:
     int MaxConnection(vector<vector<int>>& grid) {
         int n = grid.size();
         DisjointSet ds(n * n);
-
-        // Step 1: Union adjacent 1s in the grid
-        vector<int> dr = {-1, 0, 1, 0};
-        vector<int> dc = {0, -1, 0, 1};
-
-        for (int row = 0; row < n; ++row) {
-            for (int col = 0; col < n; ++col) {
-                if (grid[row][col] == 1) {
-                    for (int ind = 0; ind < 4; ++ind) {
-                        int newr = row + dr[ind];
-                        int newc = col + dc[ind];
-                        if (isValid(newr, newc, n) && grid[newr][newc] == 1) {
-                            int nodeNo = row * n + col;
-                            int adjNodeNo = newr * n + newc;
-                            ds.unionSets(nodeNo, adjNodeNo);
-                        }
+        // step - 1
+        for (int row = 0; row < n ; row++) {
+            for (int col = 0; col < n ; col++) {
+                if (grid[row][col] == 0) continue;
+                int dr[] = { -1, 0, 1, 0};
+                int dc[] = {0, -1, 0, 1};
+                for (int ind = 0; ind < 4; ind++) {
+                    int newr = row + dr[ind];
+                    int newc = col + dc[ind];
+                    if (isValid(newr, newc, n) && grid[newr][newc] == 1) {
+                        int nodeNo = row * n + col;
+                        int adjNodeNo = newr * n + newc;
+                        ds.unionBySize(nodeNo, adjNodeNo);
                     }
                 }
             }
         }
-
-        // Step 2: Calculate the largest group size
-        int max_size = 0;
-        unordered_set<int> components;
-
-        for (int row = 0; row < n; ++row) {
-            for (int col = 0; col < n; ++col) {
-                if (grid[row][col] == 0) {
-                    components.clear();
-                    for (int ind = 0; ind < 4; ++ind) {
-                        int newr = row + dr[ind];
-                        int newc = col + dc[ind];
-                        if (isValid(newr, newc, n) && grid[newr][newc] == 1) {
-                            components.insert(ds.find(newr * n + newc));
+        // step 2
+        int mx = 0;
+        for (int row = 0; row < n; row++) {
+            for (int col = 0; col < n; col++) {
+                if (grid[row][col] == 1) continue;
+                int dr[] = { -1, 0, 1, 0};
+                int dc[] = {0, -1, 0, 1};
+                set<int> components;
+                for (int ind = 0; ind < 4; ind++) {
+                    int newr = row + dr[ind];
+                    int newc = col + dc[ind];
+                    if (isValid(newr, newc, n)) {
+                        if (grid[newr][newc] == 1) {
+                            components.insert(ds.findUPar(newr * n + newc));
                         }
                     }
-                    int sizeTotal = 1; // Include the current cell as '1'
-                    for (int parent : components) {
-                        sizeTotal += ds.getSize(parent);
-                    }
-                    max_size = max(max_size, sizeTotal);
                 }
+                int sizeTotal = 0;
+                for (auto it : components) {
+                    sizeTotal += ds.size[it];
+                }
+                mx = max(mx, sizeTotal + 1);
             }
         }
-
-        // Step 3: Check the size of each individual set
-        for (int cellNo = 0; cellNo < n * n; ++cellNo) {
-            if (grid[cellNo / n][cellNo % n] == 1) {
-                max_size = max(max_size, ds.getSize(cellNo));
-            }
+        for (int cellNo = 0; cellNo < n * n; cellNo++) {
+            mx = max(mx, ds.size[ds.findUPar(cellNo)]);
         }
-
-        return max_size;
+        return mx;
     }
 };
 
+
 int main() {
+
     vector<vector<int>> grid = {
-        {1, 1, 0, 1, 1, 0},
-        {1, 1, 0, 1, 1, 0},
-        {1, 1, 0, 1, 1, 0},
-        {0, 0, 1, 0, 0, 0},
-        {0, 0, 1, 1, 1, 0},
-        {0, 0, 1, 1, 1, 0}
+        {1, 1, 0, 1, 1, 0}, {1, 1, 0, 1, 1, 0},
+        {1, 1, 0, 1, 1, 0}, {0, 0, 1, 0, 0, 0},
+        {0, 0, 1, 1, 1, 0}, {0, 0, 1, 1, 1, 0}
     };
 
-    MakingaLargeIsland obj;
+    Solution obj;
     int ans = obj.MaxConnection(grid);
     cout << "The largest group of connected 1s is of size: " << ans << endl;
-
     return 0;
 }

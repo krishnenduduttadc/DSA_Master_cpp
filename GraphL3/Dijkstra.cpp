@@ -1,85 +1,79 @@
-#include <iostream>
-#include <vector>
-#include <queue>
-#include <climits>
-
+#include <bits/stdc++.h>
 using namespace std;
 
-class Dijkstra
+class Solution
 {
 public:
-    struct Pair
+    // Function to find the shortest distance of all the vertices
+    // from the source vertex S.
+    vector<int> dijkstra(int V, vector<vector<int>> adj[], int S)
     {
-        int node;
-        int distance;
 
-        Pair(int _distance, int _node)
-        {
-            distance = _distance;
-            node = _node;
-        }
-    };
+        // Create a priority queue for storing the nodes as a pair {dist,node}
+        // where dist is the distance from source to the node. 
+        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
 
-    struct compare
-    {
-        bool operator()(Pair const &p1, Pair const &p2)
-        {
-            return p1.distance > p2.distance;
-        }
-    };
+        // Initialising distTo list with a large number to
+        // indicate the nodes are unvisited initially.
+        // This list contains distance from source to the nodes.
+        vector<int> distTo(V, INT_MAX);
 
-    vector<int> dijkstra(int V, vector<vector<vector<int>>> &adj, int s)
-    {
-        priority_queue<Pair, vector<Pair>, compare> pq;
-        vector<int> dist(V, INT_MAX);
-        dist[s] = 0;
-        pq.push(Pair(0, s));
+        // Source initialised with dist=0.
+        distTo[S] = 0;
+        pq.push({0, S});
 
+        // Now, pop the minimum distance node first from the min-heap
+        // and traverse for all its adjacent nodes.
         while (!pq.empty())
         {
-            int dis = pq.top().distance;
-            int node = pq.top().node;
+            int node = pq.top().second;
+            int dis = pq.top().first;
             pq.pop();
 
-            for (int i = 0; i < adj[node].size(); i++)
+            // Check for all adjacent nodes of the popped out
+            // element whether the prev dist is larger than current or not.
+            for (auto it : adj[node])
             {
-                int adjNode = adj[node][i][0];
-                int edgeWeight = adj[node][i][1];
-
-                if (dis + edgeWeight < dist[adjNode])
+                int v = it[0];
+                int w = it[1];
+                if (dis + w < distTo[v])
                 {
-                    dist[adjNode] = dis + edgeWeight;
-                    pq.push(Pair(dist[adjNode], adjNode));
+                    distTo[v] = dis + w;
+    
+                    // If current distance is smaller,
+                    // push it into the queue.
+                    pq.push({dis + w, v});
                 }
             }
         }
-        return dist;
+        // Return the list containing shortest distances
+        // from source to all the nodes.
+        return distTo;
     }
 };
 
 int main()
 {
+    // Driver code.
     int V = 3, E = 3, S = 2;
+    vector<vector<int>> adj[V];
+    vector<vector<int>> edges;
+    vector<int> v1{1, 1}, v2{2, 6}, v3{2, 3}, v4{0, 1}, v5{1, 3}, v6{0, 6};
+    int i = 0;
+    adj[0].push_back(v1);
+    adj[0].push_back(v2);
+    adj[1].push_back(v3);
+    adj[1].push_back(v4);
+    adj[2].push_back(v5);
+    adj[2].push_back(v6);
 
-    vector<vector<vector<int>>> adj(V);
-
-    adj[0].push_back({1, 1});
-    adj[0].push_back({2, 6});
-
-    adj[1].push_back({2, 3});
-    adj[1].push_back({0, 1});
-
-    adj[2].push_back({1, 3});
-    adj[2].push_back({0, 6});
-
-    Dijkstra dijkstraSolver;
-    vector<int> res = dijkstraSolver.dijkstra(V, adj, S);
+    Solution obj;
+    vector<int> res = obj.dijkstra(V, adj, S);
 
     for (int i = 0; i < V; i++)
     {
         cout << res[i] << " ";
     }
     cout << endl;
-
     return 0;
 }

@@ -1,111 +1,89 @@
-#include <iostream>
-#include <vector>
-#include <algorithm>
-
+#include <bits/stdc++.h>
 using namespace std;
 
-// Class representing an Edge
-class Edge {
+
+class DisjointSet {
+    vector<int> rank, parent, size;
 public:
-    int src, dest, weight;
-
-    Edge(int src, int dest, int wt) {
-        this->src = src;
-        this->dest = dest;
-        this->weight = wt;
-    }
-
-    // Comparator for sorting edges based on weight
-    bool operator<(const Edge& other) const {
-        return weight < other.weight;
-    }
-};
-
-class Kruskal {
-private:
-    vector<int> parent;
-    vector<int> rank;
-    vector<int> size;
-
-public:
-    Kruskal(int n) {
-        parent.resize(n + 1);
+    DisjointSet(int n) {
         rank.resize(n + 1, 0);
-        size.resize(n + 1, 1);
-
+        parent.resize(n + 1);
+        size.resize(n + 1);
         for (int i = 0; i <= n; i++) {
             parent[i] = i;
+            size[i] = 1;
         }
     }
 
-    // Find operation with path compression
     int findUPar(int node) {
-        if (node == parent[node]) {
+        if (node == parent[node])
             return node;
-        }
         return parent[node] = findUPar(parent[node]);
     }
 
-    // Union operation by rank
     void unionByRank(int u, int v) {
-        int uPar = findUPar(u);
-        int vPar = findUPar(v);
-
-        if (uPar != vPar) {
-            if (rank[uPar] < rank[vPar]) {
-                parent[uPar] = vPar;
-            } else if (rank[vPar] < rank[uPar]) {
-                parent[vPar] = uPar;
-            } else {
-                parent[vPar] = uPar;
-                rank[uPar]++;
-            }
+        int ulp_u = findUPar(u);
+        int ulp_v = findUPar(v);
+        if (ulp_u == ulp_v) return;
+        if (rank[ulp_u] < rank[ulp_v]) {
+            parent[ulp_u] = ulp_v;
+        }
+        else if (rank[ulp_v] < rank[ulp_u]) {
+            parent[ulp_v] = ulp_u;
+        }
+        else {
+            parent[ulp_v] = ulp_u;
+            rank[ulp_u]++;
         }
     }
 
-    // Union operation by size
     void unionBySize(int u, int v) {
-        int uPar = findUPar(u);
-        int vPar = findUPar(v);
-
-        if (uPar != vPar) {
-            if (size[uPar] < size[vPar]) {
-                parent[uPar] = vPar;
-                size[vPar] += size[uPar];
-            } else {
-                parent[vPar] = uPar;
-                size[uPar] += size[vPar];
-            }
+        int ulp_u = findUPar(u);
+        int ulp_v = findUPar(v);
+        if (ulp_u == ulp_v) return;
+        if (size[ulp_u] < size[ulp_v]) {
+            parent[ulp_u] = ulp_v;
+            size[ulp_v] += size[ulp_u];
+        }
+        else {
+            parent[ulp_v] = ulp_u;
+            size[ulp_u] += size[ulp_v];
         }
     }
+};
+class Solution
+{
+public:
+    //Function to find sum of weights of edges of the Minimum Spanning Tree.
+    int spanningTree(int V, vector<vector<int>> adj[])
+    {
+        // 1 - 2 wt = 5
+        /// 1 - > (2, 5)
+        // 2 -> (1, 5)
 
-    // Function to find MST using Kruskal's algorithm
-    int findMST(int V, vector<vector<pair<int, int>>>& adj) {
-        vector<Edge> edges;
-
-        // Convert adjacency list to edges with weights
+        // 5, 1, 2
+        // 5, 2, 1
+        vector<pair<int, pair<int, int>>> edges;
         for (int i = 0; i < V; i++) {
-            for (auto& neighbor : adj[i]) {
-                int adjNode = neighbor.first;
-                int wt = neighbor.second;
-                edges.push_back(Edge(i, adjNode, wt));
+            for (auto it : adj[i]) {
+                int adjNode = it[0];
+                int wt = it[1];
+                int node = i;
+
+                edges.push_back({wt, {node, adjNode}});
             }
         }
-
-        // Sort edges based on weight
+        DisjointSet ds(V);
         sort(edges.begin(), edges.end());
-
         int mstWt = 0;
+        for (auto it : edges) {
+            int wt = it.first;
+            int u = it.second.first;
+            int v = it.second.second;
 
-        // Iterate through sorted edges and add to MST
-        for (Edge& edge : edges) {
-            int u = edge.src;
-            int v = edge.dest;
-            int wt = edge.weight;
-
-            if (findUPar(u) != findUPar(v)) {
+            if (ds.findUPar(u) != ds.findUPar(v)) {
                 mstWt += wt;
-                unionBySize(u, v);
+                ds.unionBySize(u, v);
             }
         }
 
@@ -114,27 +92,23 @@ public:
 };
 
 int main() {
+
     int V = 5;
-    vector<vector<pair<int, int>>> adj(V);
+    vector<vector<int>> edges = {{0, 1, 2}, {0, 2, 1}, {1, 2, 1}, {2, 3, 2}, {3, 4, 1}, {4, 2, 2}};
+    vector<vector<int>> adj[V];
+    for (auto it : edges) {
+        vector<int> tmp(2);
+        tmp[0] = it[1];
+        tmp[1] = it[2];
+        adj[it[0]].push_back(tmp);
 
-    int edges[][3] = {{0, 1, 2}, {0, 2, 1}, {1, 2, 1}, {2, 3, 2}, {3, 4, 1}, {4, 2, 2}};
-
-    // Construct adjacency list
-    for (int i = 0; i < 6; i++) {
-        int u = edges[i][0];
-        int v = edges[i][1];
-        int w = edges[i][2];
-
-        adj[u].push_back({v, w});
-        adj[v].push_back({u, w});
+        tmp[0] = it[0];
+        tmp[1] = it[2];
+        adj[it[1]].push_back(tmp);
     }
 
-    // Create Kruskal's MST instance
-    Kruskal kruskal(V);
-    int mstWt = kruskal.findMST(V, adj);
-
-    // Print the sum of all edge weights in MST
+    Solution obj;
+    int mstWt = obj.spanningTree(V, adj);
     cout << "The sum of all the edge weights: " << mstWt << endl;
-
     return 0;
 }

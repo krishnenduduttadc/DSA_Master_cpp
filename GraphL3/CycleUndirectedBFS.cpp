@@ -1,77 +1,59 @@
-#include <iostream>
-#include <vector>
-#include <queue>
-#include <cstring>
-
+#include <bits/stdc++.h>
 using namespace std;
 
-class Node {
-public:
-    int first, second;
-    Node(int first, int second) {
-        this->first = first;
-        this->second = second;
-    }
-};
-
-class CycleUndirectedBFS {
-public:
-    bool checkForCycle(vector<vector<int>>& adj, int s, vector<bool>& vis, vector<int>& parent) {
-        queue<Node> q;  // BFS
-        q.push(Node(s, -1));
-        vis[s] = true;
-
-        // until the queue is empty
-        while (!q.empty()) {
-            // source node and its parent node
-            int node = q.front().first;
-            int par = q.front().second;
-            q.pop();
-
-            // go to all the adjacent nodes
-            for (int it : adj[node]) {
-                if (!vis[it]) {
-                    q.push(Node(it, node));
-                    vis[it] = true;
-                }
-                // if adjacent node is visited and is not its own parent node
-                else if (it != par) return true;
+class Solution {
+  private: 
+  bool detect(int src, vector<int> adj[], int vis[]) {
+      vis[src] = 1; 
+      // store <source node, parent node>
+      queue<pair<int,int>> q; 
+      q.push({src, -1}); 
+      // traverse until queue is not empty
+      while(!q.empty()) {
+          int node = q.front().first; 
+          int parent = q.front().second; 
+          q.pop(); 
+          
+          // go to all adjacent nodes
+          for(auto adjacentNode: adj[node]) {
+              // if adjacent node is unvisited
+              if(!vis[adjacentNode]) {
+                  vis[adjacentNode] = 1; 
+                  q.push({adjacentNode, node}); 
+              }
+              // if adjacent node is visited and is not it's own parent node
+              else if(parent != adjacentNode) {
+                  // yes it is a cycle
+                  return true; 
+              }
+          }
+      }
+      // there's no cycle
+      return false; 
+  }
+  public:
+    // Function to detect cycle in an undirected graph.
+    bool isCycle(int V, vector<int> adj[]) {
+        // initialise them as unvisited 
+        int vis[V] = {0};
+        for(int i = 0;i<V;i++) {
+            if(!vis[i]) {
+                if(detect(i, adj, vis)) return true; 
             }
         }
-
-        return false;
-    }
-
-    // function to detect cycle in an undirected graph
-    bool isCycle(int V, vector<vector<int>>& adj) {
-        vector<bool> vis(V, false);
-        vector<int> parent(V, -1);
-
-        for (int i = 0; i < V; i++)
-            if (!vis[i])
-                if (checkForCycle(adj, i, vis, parent))
-                    return true;
-
-        return false;
+        return false; 
     }
 };
 
 int main() {
-    vector<vector<int>> adj(4);
-    adj[1].push_back(2);
-    adj[2].push_back(1);
-    adj[1].push_back(3);
-    adj[3].push_back(1);
-    adj[2].push_back(3);
-    adj[3].push_back(2);
-
-    CycleUndirectedBFS obj;
+    
+    // V = 4, E = 2
+    vector<int> adj[4] = {{}, {2}, {1, 3}, {2}};
+    Solution obj;
     bool ans = obj.isCycle(4, adj);
-    if (ans) {
-        cout << "cycle exists" << endl;
-    } else {
-        cout << "cycle does not exist" << endl;
-    }
-
+    if (ans)
+        cout << "1\n";
+    else
+        cout << "0\n";
     return 0;
 }

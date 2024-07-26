@@ -1,62 +1,60 @@
-#include <iostream>
-#include <vector>
+#include<bits/stdc++.h>
 using namespace std;
 
-class BipartiteDFS {
-private:
-    bool dfs(int node, int col, vector<int>& color, vector<vector<int>>& adj) {
-        color[node] = col;
-
-        // Traverse adjacent nodes
-        for (int it : adj[node]) {
-            // If uncolored
-            if (color[it] == -1) {
-                if (!dfs(it, 1 - col, color, adj)) return false;
+class Solution {
+private: 
+    bool dfs(int node, int col, int color[], vector<int> adj[]) {
+        color[node] = col; 
+        
+        // traverse adjacent nodes
+        for(auto it : adj[node]) {
+            // if uncoloured
+            if(color[it] == -1) {
+                if(dfs(it, !col, color, adj) == false) return false; 
             }
-            // If previously colored and have the same color
-            else if (color[it] == col) {
-                return false;
+            // if previously coloured and have the same colour
+            else if(color[it] == col) {
+                return false; 
             }
         }
-
-        return true;
+        
+        return true; 
     }
-
 public:
-    bool isBipartite(int V, vector<vector<int>>& adj) {
-        vector<int> color(V, -1);
-
-        // For connected components
-        for (int i = 0; i < V; ++i) {
-            if (color[i] == -1) {
-                if (!dfs(i, 0, color, adj)) return false;
-            }
-        }
-        return true;
-    }
+	bool isBipartite(int V, vector<int>adj[]){
+	    int color[V];
+	    for(int i = 0;i<V;i++) color[i] = -1; 
+	    
+	    // for connected components
+	    for(int i = 0;i<V;i++) {
+	        if(color[i] == -1) {
+	            if(dfs(i, 0, color, adj) == false) 
+	                return false; 
+	        }
+	    }
+	    return true; 
+	}
 };
 
-int main() {
-    int V = 4;
-    vector<vector<int>> adj(V);
+void addEdge(vector <int> adj[], int u, int v) {
+    adj[u].push_back(v);
+    adj[v].push_back(u);
+}
 
-    adj[0].push_back(2);
-    adj[2].push_back(0);
-    adj[0].push_back(3);
-    adj[3].push_back(0);
-    adj[1].push_back(3);
-    adj[3].push_back(1);
-    adj[2].push_back(3);
-    adj[3].push_back(2);
+int main(){
+	
+	// V = 4, E = 4
+	vector<int>adj[4];
+	
+	addEdge(adj, 0, 2);
+   	addEdge(adj, 0, 3);
+	addEdge(adj, 2, 3);
+	addEdge(adj, 3, 1);
 
-    BipartiteDFS obj;
-    bool ans = obj.isBipartite(V, adj);
-
-    if (ans) {
-        cout << "1" << endl;
-    } else {
-        cout << "0" << endl;
-    }
-
-    return 0;
+	Solution obj;
+	bool ans = obj.isBipartite(4, adj);    
+	if(ans)cout << "1\n";
+	else cout << "0\n";  
+	
+	return 0;
 }

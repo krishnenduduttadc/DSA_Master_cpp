@@ -1,64 +1,71 @@
-#include <iostream>
-#include <vector>
-#include <queue>
+#include<bits/stdc++.h>
 using namespace std;
 
-class BipartiteBFS {
-public:
-    bool isBipartite(int V, vector<vector<int>>& adj) {
-        vector<int> color(V, -1); // Initialize color array, -1 means uncolored
-
-        for (int i = 0; i < V; ++i) {
-            if (color[i] == -1) { // If vertex i is uncolored
-                if (!check(i, V, adj, color)) { // Check if it's not bipartite
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
-private:
-    bool check(int s, int V, vector<vector<int>>& adj, vector<int>& color) {
+class Solution {
+    // colors a component 
+    private: 
+    bool check(int start, int V, vector<int>adj[], int color[]) {
         queue<int> q;
-        q.push(s);
-        color[s] = 0; // Color vertex s with 0 (first color)
-
-        while (!q.empty()) {
-            int node = q.front();
-            q.pop();
-
-            for (int it : adj[node]) {
-                if (color[it] == -1) { // If neighbor it is uncolored
-                    color[it] = 1 - color[node]; // Assign opposite color
-                    q.push(it);
-                } else if (color[it] == color[node]) { // If neighbor has same color
-                    return false; // Not bipartite
-                }
-            }
-        }
-        return true; // Bipartite
+	    q.push(start); 
+	    color[start] = 0; 
+	    while(!q.empty()) {
+	        int node = q.front();
+	        q.pop(); 
+	        
+	        for(auto it : adj[node]) {
+	            // if the adjacent node is yet not colored
+	            // you will give the opposite color of the node 
+	            if(color[it] == -1) {
+	                
+	                color[it] = !color[node]; 
+	                q.push(it); 
+	            }
+	            // is the adjacent guy having the same color 
+	            // someone did color it on some other path 
+	            else if(color[it] == color[node]) {
+	                return false; 
+	            }
+	        }
+	    }
+	    return true; 
     }
+public:
+	bool isBipartite(int V, vector<int>adj[]){
+	    int color[V]; 
+	    for(int i = 0;i<V;i++) color[i] = -1; 
+	    
+	    for(int i = 0;i<V;i++) {
+	        // if not coloured
+	        if(color[i] == -1) {
+	            if(check(i, V, adj, color) == false) {
+	                return false; 
+	            }
+	        }
+	    }
+	    return true; 
+	}
+
 };
 
-int main() {
-    int V = 6;
-    vector<vector<int>> adj(V);
-    adj[0] = {1, 2};
-    adj[1] = {0, 3};
-    adj[2] = {0, 4};
-    adj[3] = {1, 5};
-    adj[4] = {2, 5};
-    adj[5] = {3, 4};
+void addEdge(vector <int> adj[], int u, int v) {
+    adj[u].push_back(v);
+    adj[v].push_back(u);
+}
 
-    BipartiteBFS obj;
-    bool ans = obj.isBipartite(V, adj);
+int main(){
+	
+	// V = 4, E = 4
+	vector<int>adj[4];
+	
+	addEdge(adj, 0, 2);
+   	addEdge(adj, 0, 3);
+    	addEdge(adj, 2, 3);
+    	addEdge(adj, 3, 1);
 
-    if (ans) {
-        cout << "Bipartite" << endl;
-    } else {
-        cout << "Not Bipartite" << endl;
-    }
-
-    return 0;
+	Solution obj;
+	bool ans = obj.isBipartite(4, adj);    
+	if(ans)cout << "1\n";
+	else cout << "0\n";  
+	
+	return 0;
 }

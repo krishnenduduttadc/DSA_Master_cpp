@@ -1,108 +1,101 @@
-#include <iostream>
-#include <vector>
-#include <queue>
-#include <limits>
-#include <algorithm>
-
+#include <bits/stdc++.h>
 using namespace std;
 
-class PrintShortestPath {
+class Solution
+{
 public:
-    struct Pair {
-        int first;
-        int second;
-
-        Pair(int first, int second) : first(first), second(second) {}
-        
-        // Define operator< for Pair to be used in priority_queue
-        bool operator<(const Pair& other) const {
-            return first > other.first; // Min-heap based on 'first'
+    vector<int> shortestPath(int n, int m, vector<vector<int>> &edges)
+    {
+        // Create an adjacency list of pairs of the form node1 -> {node2, edge weight}
+        // where the edge weight is the weight of the edge from node1 to node2.
+        vector<pair<int, int>> adj[n + 1];
+        for (auto it : edges)
+        {
+            adj[it[0]].push_back({it[1], it[2]});
+            adj[it[1]].push_back({it[0], it[2]});
         }
-    };
+        // Create a priority queue for storing the nodes along with distances 
+        // in the form of a pair { dist, node }.
+        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int,int>>> pq;
 
-    vector<int> shortestPath(int n, int m, vector<vector<int>>& edges) {
-        // Create adjacency list representation of the graph
-        vector<vector<Pair>> adj(n + 1);
-        for (int i = 0; i <= n; ++i) {
-            adj[i] = vector<Pair>();
-        }
-        for (int i = 0; i < m; ++i) {
-            int u = edges[i][0];
-            int v = edges[i][1];
-            int w = edges[i][2];
-            adj[u].push_back(Pair(v, w));
-            adj[v].push_back(Pair(u, w));
-        }
-
-        // Priority queue for Dijkstra's algorithm
-        priority_queue<Pair> pq;
-
-        // Distance array to store shortest distance from source (1) to each vertex
-        vector<int> dist(n + 1, numeric_limits<int>::max());
-        // Parent array to reconstruct shortest path
-        vector<int> parent(n + 1);
-        // Initialize distances to infinity and parent pointers to self
-        for (int i = 1; i <= n; ++i) {
+        // Create a dist array for storing the updated distances and a parent array
+        //for storing the nodes from where the current nodes represented by indices of
+        // the parent array came from.
+        vector<int> dist(n + 1, 1e9), parent(n + 1);
+        for (int i = 1; i <= n; i++)
             parent[i] = i;
-        }
 
-        // Distance from source to itself is 0
         dist[1] = 0;
-        // Add source vertex (1) to priority queue
-        pq.push(Pair(0, 1));
 
-        // Dijkstra's algorithm to compute shortest paths
-        while (!pq.empty()) {
-            Pair it = pq.top();
+        // Push the source node to the queue.
+        pq.push({0, 1});
+        while (!pq.empty())
+        {
+            // Topmost element of the priority queue is with minimum distance value.
+            auto it = pq.top();
             pq.pop();
             int node = it.second;
             int dis = it.first;
 
-            // Iterate through all adjacent nodes of 'node'
-            for (Pair& iter : adj[node]) {
-                int adjNode = iter.first;
-                int edW = iter.second;
+            // Iterate through the adjacent nodes of the current popped node.
+            for (auto it : adj[node])
+            {
+                int adjNode = it.first;
+                int edW = it.second;
 
-                // If a shorter path to 'adjNode' is found through 'node'
-                if (dis + edW < dist[adjNode]) {
+                // Check if the previously stored distance value is 
+                // greater than the current computed value or not, 
+                // if yes then update the distance value.
+                if (dis + edW < dist[adjNode])
+                {
                     dist[adjNode] = dis + edW;
-                    pq.push(Pair(dist[adjNode], adjNode));
+                    pq.push({dis + edW, adjNode});
+
+                    // Update the parent of the adjNode to the recent 
+                    // node where it came from.
                     parent[adjNode] = node;
                 }
             }
         }
 
-        // Reconstruct the shortest path from source (1) to destination (n)
-        vector<int> path;
-        if (dist[n] == numeric_limits<int>::max()) {
-            path.push_back(-1); // If destination is unreachable
-            return path;
-        }
+        // If distance to a node could not be found, return an array containing -1.
+        if (dist[n] == 1e9)
+            return {-1};
 
+        // Store the final path in the ‘path’ array.
+        vector<int> path;
         int node = n;
-        // Traverse back from destination to source using parent pointers
-        while (parent[node] != node) {
+
+        // Iterate backwards from destination to source through the parent array.
+        while (parent[node] != node)
+        {
             path.push_back(node);
             node = parent[node];
         }
-        path.push_back(1); // Add the source vertex (1) to the path
-        reverse(path.begin(), path.end()); // Reverse the path to get it in the correct order
+        path.push_back(1);
 
+        // Since the path stored is in a reverse order, we reverse the array
+        // to get the final answer and then return the array.
+        reverse(path.begin(), path.end());
         return path;
     }
 };
 
-int main() {
-    int V = 5, E = 6;
-    vector<vector<int>> edges = {{1, 2, 2}, {2, 5, 5}, {2, 3, 4}, {1, 4, 1}, {4, 3, 3}, {3, 5, 1}};
+int main()
+{
+    // Driver Code
 
-    PrintShortestPath obj;
+    int V = 5, E = 6;
+    vector<vector<int>> edges = {{1, 2, 2}, {2, 5, 5}, {2, 3, 4}, {1, 4, 1}, {4, 3, 3}, 
+    {3, 5, 1}};
+    Solution obj;
     vector<int> path = obj.shortestPath(V, E, edges);
 
-    for (int i = 0; i < path.size(); ++i) {
+    for (int i = 0; i < path.size(); i++)
+    {
+
         cout << path[i] << " ";
     }
     cout << endl;
-
     return 0;
 }

@@ -1,62 +1,59 @@
-#include <iostream>
-#include <vector>
-
+#include <bits/stdc++.h>
 using namespace std;
 
-// Function to perform DFS traversal
-void dfs(int node, vector<vector<int>>& adjLs, vector<int>& vis) {
-    vis[node] = 1; // Mark the node as visited
-
-    // Traverse all adjacent nodes
-    for (int it : adjLs[node]) {
-        if (vis[it] == 0) { // If adjacent node is not visited, recursively call DFS
-            dfs(it, adjLs, vis);
-        }
-    }
-}
-
-// Function to count the number of provinces (connected components)
-int numProvinces(vector<vector<int>>& adj, int V) {
-    // Convert adjacency matrix to adjacency list
-    vector<vector<int>> adjLs(V);
-    for (int i = 0; i < V; i++) {
-        for (int j = 0; j < V; j++) {
-            // Self loops are not considered
-            if (adj[i][j] == 1 && i != j) {
-                adjLs[i].push_back(j);
-                adjLs[j].push_back(i);
+class Solution {
+  private: 
+    // dfs traversal function 
+    void dfs(int node, vector<int> adjLs[], int vis[]) {
+        // mark the more as visited
+        vis[node] = 1; 
+        for(auto it: adjLs[node]) {
+            if(!vis[it]) {
+                dfs(it, adjLs, vis); 
             }
         }
     }
-
-    vector<int> vis(V, 0); // Array to mark visited nodes
-    int cnt = 0; // Initialize count of provinces
-
-    // Perform DFS for each node
-    for (int i = 0; i < V; i++) {
-        if (vis[i] == 0) { // If node is not visited, it's a new province
-            cnt++;
-            dfs(i, adjLs, vis); // Perform DFS to mark all reachable nodes
+  public:
+    int numProvinces(vector<vector<int>> adj, int V) {
+        vector<int> adjLs[V]; 
+        
+        // to change adjacency matrix to list 
+        for(int i = 0;i<V;i++) {
+            for(int j = 0;j<V;j++) {
+                // self nodes are not considered
+                if(adj[i][j] == 1 && i != j) {
+                    adjLs[i].push_back(j); 
+                    adjLs[j].push_back(i); 
+                }
+            }
         }
+        int vis[V] = {0}; 
+        int cnt = 0; 
+        for(int i = 0;i<V;i++) {
+            // if the node is not visited
+            if(!vis[i]) {
+                // counter to count the number of provinces 
+                cnt++;
+               dfs(i, adjLs, vis); 
+            }
+        }
+        return cnt; 
+        
     }
-
-    return cnt; // Return the number of provinces
-}
+};
 
 int main() {
-    // Example adjacency matrix representation of graph
-    vector<vector<int>> adj = {
+    
+    vector<vector<int>> adj
+    {
         {1, 0, 1},
         {0, 1, 0},
         {1, 0, 1}
     };
 
-    int V = adj.size(); // Number of vertices
-
-    // Call function to find number of provinces
-    int numProvincesCount = numProvinces(adj, V);
-
-    cout << "Number of provinces: " << numProvincesCount << endl;
-
+        
+    Solution ob;
+    cout << ob.numProvinces(adj,3) << endl;
+        
     return 0;
 }

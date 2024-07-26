@@ -1,79 +1,94 @@
-#include <iostream>
-#include <vector>
-#include <queue>
-#include <climits>
+#include <bits/stdc++.h>
 using namespace std;
 
-class Solution {
+class Solution
+{
 public:
-    // Structure to represent coordinates (x, y)
-    struct Pair {
-        int x, y;
-        Pair(int _x, int _y) : x(_x), y(_y) {}
-    };
+    int shortestPath(vector<vector<int>> &grid, pair<int, int> source,
+                     pair<int, int> destination)
+    {
+        // Edge Case: if the source is only the destination.
+        if (source.first == destination.first &&
+            source.second == destination.second)
+            return 0;
 
-    // Function to check if the current position is valid
-    bool isValid(int x, int y, int rows, int cols, vector<vector<int>>& maze, vector<vector<bool>>& visited) {
-        return x >= 0 && x < rows && y >= 0 && y < cols && maze[x][y] == 1 && !visited[x][y];
-    }
+        // Create a queue for storing cells with their distances from source
+        // in the form {dist,{cell coordinates pair}}.
+        queue<pair<int, pair<int, int>>> q;
+        int n = grid.size();
+        int m = grid[0].size();
 
-    // Function to find the shortest distance in the binary maze
-    int shortestDistance(vector<vector<int>>& maze, vector<int>& start, vector<int>& destination) {
-        int rows = maze.size();
-        int cols = maze[0].size();
+        // Create a distance matrix with initially all the cells marked as
+        // unvisited and the source cell as 0.
+        vector<vector<int>> dist(n, vector<int>(m, 1e9));
+        dist[source.first][source.second] = 0;
+        q.push({0, {source.first, source.second}});
 
-        vector<vector<int>> directions = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
-        queue<Pair> q;
-        vector<vector<bool>> visited(rows, vector<bool>(cols, false));
-        vector<vector<int>> distance(rows, vector<int>(cols, INT_MAX));
+        // The following delta rows and delts columns array are created such that
+        // each index represents each adjacent node that a cell may have 
+        // in a direction.
+        int dr[] = {-1, 0, 1, 0};
+        int dc[] = {0, 1, 0, -1};
 
-        q.push(Pair(start[0], start[1]));
-        visited[start[0]][start[1]] = true;
-        distance[start[0]][start[1]] = 0;
-
-        while (!q.empty()) {
-            Pair current = q.front();
+        // Iterate through the maze by popping the elements out of the queue
+        // and pushing whenever a shorter distance to a cell is found.
+        while (!q.empty())
+        {
+            auto it = q.front();
             q.pop();
+            int dis = it.first;
+            int r = it.second.first;
+            int c = it.second.second;
 
-            for (auto& dir : directions) {
-                int newX = current.x;
-                int newY = current.y;
-                int steps = 0;
+            // Through this loop, we check the 4 direction adjacent nodes
+            // for a shorter path to destination.
+            for (int i = 0; i < 4; i++)
+            {
+                int newr = r + dr[i];
+                int newc = c + dc[i];
 
-                while (isValid(newX + dir[0], newY + dir[1], rows, cols, maze, visited)) {
-                    newX += dir[0];
-                    newY += dir[1];
-                    steps++;
-                }
+                // Checking the validity of the cell and updating if dist is shorter.
+                if (newr >= 0 && newr < n && newc >= 0 && newc < m && grid[newr][newc] 
+                == 1 && dis + 1 < dist[newr][newc])
+                {
+                    dist[newr][newc] = 1 + dis;
 
-                if (!visited[newX][newY]) {
-                    visited[newX][newY] = true;
-                    q.push(Pair(newX, newY));
-                    distance[newX][newY] = min(distance[newX][newY], distance[current.x][current.y] + steps);
+                    // Return the distance until the point when
+                    // we encounter the destination cell.
+                    if (newr == destination.first &&
+                        newc == destination.second)
+                        return dis + 1;
+                    q.push({1 + dis, {newr, newc}});
                 }
             }
         }
-
-        return (visited[destination[0]][destination[1]]) ? distance[destination[0]][destination[1]] : -1;
+        // If no path is found from source to destination.
+        return -1;
     }
 };
 
-int main() {
-    vector<vector<int>> maze = {
-            {1, 0, 1, 0, 1},
-            {1, 1, 1, 1, 1},
-            {0, 0, 0, 0, 1},
-            {1, 1, 1, 1, 1},
-            {1, 0, 1, 0, 1}
-    };
+int main()
+{
+    // Driver Code.
 
-    vector<int> start = {0, 0};
-    vector<int> destination = {4, 4};
+    pair<int, int> source, destination;
+    source.first = 0;
+    source.second = 1;
+    destination.first = 2;
+    destination.second = 2;
 
-    Solution solution;
-    int result = solution.shortestDistance(maze, start, destination);
+    vector<vector<int>> grid = {{1, 1, 1, 1},
+                                {1, 1, 0, 1},
+                                {1, 1, 1, 1},
+                                {1, 1, 0, 0},
+                                {1, 0, 0, 1}};
 
-    cout << "Shortest Distance: " << result << endl;
+    Solution obj;
+
+    int res = obj.shortestPath(grid, source, destination);
+
+    cout << res;
+    cout << endl;
 
     return 0;
 }

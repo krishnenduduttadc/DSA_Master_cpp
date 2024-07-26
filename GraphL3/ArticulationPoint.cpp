@@ -1,18 +1,18 @@
-#include <iostream>
-#include <vector>
+#include <bits/stdc++.h>
 using namespace std;
 
-class ArticulationPoint {
+//User function Template for C++
+
+class Solution {
 private:
     int timer = 1;
-
-    void dfs(int node, int parent, vector<int>& vis,
-             vector<int>& tin, vector<int>& low,
-             vector<int>& mark, vector<vector<int>>& adj) {
+    void dfs(int node, int parent, vector<int> &vis, int tin[], int low[],
+             vector<int> &mark, vector<int>adj[]) {
         vis[node] = 1;
-        tin[node] = low[node] = timer++;
+        tin[node] = low[node] = timer;
+        timer++;
         int child = 0;
-        for (int it : adj[node]) {
+        for (auto it : adj[node]) {
             if (it == parent) continue;
             if (!vis[it]) {
                 dfs(it, node, vis, tin, low, mark, adj);
@@ -21,56 +21,55 @@ private:
                     mark[node] = 1;
                 }
                 child++;
-            } else {
+            }
+            else {
                 low[node] = min(low[node], tin[it]);
             }
         }
-        if (parent == -1 && child > 1) {
+        if (child > 1 && parent == -1) {
             mark[node] = 1;
         }
     }
-
 public:
-    vector<int> articulationPoints(int n, vector<vector<int>>& adj) {
-        vector<int> vis(n, 0), tin(n, -1), low(n, -1), mark(n, 0);
-        for (int i = 0; i < n; ++i) {
+    vector<int> articulationPoints(int n, vector<int>adj[]) {
+        vector<int> vis(n, 0);
+        int tin[n];
+        int low[n];
+        vector<int> mark(n, 0);
+        for (int i = 0; i < n; i++) {
             if (!vis[i]) {
                 dfs(i, -1, vis, tin, low, mark, adj);
             }
         }
         vector<int> ans;
-        for (int i = 0; i < n; ++i) {
+        for (int i = 0; i < n; i++) {
             if (mark[i] == 1) {
                 ans.push_back(i);
             }
         }
-        if (ans.empty()) {
-            ans.push_back(-1);
-        }
+        if (ans.size() == 0) return { -1};
         return ans;
     }
 };
-
 int main() {
+
     int n = 5;
     vector<vector<int>> edges = {
         {0, 1}, {1, 4},
         {2, 4}, {2, 3}, {3, 4}
     };
-    vector<vector<int>> adj(n);
-    for (auto& edge : edges) {
-        int u = edge[0], v = edge[1];
+
+    vector<int> adj[n];
+    for (auto it : edges) {
+        int u = it[0], v = it[1];
         adj[u].push_back(v);
         adj[v].push_back(u);
     }
-
-    ArticulationPoint obj;
+    Solution obj;
     vector<int> nodes = obj.articulationPoints(n, adj);
-
-    for (int node : nodes) {
+    for (auto node : nodes) {
         cout << node << " ";
     }
     cout << endl;
-
     return 0;
 }

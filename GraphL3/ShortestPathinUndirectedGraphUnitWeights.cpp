@@ -1,59 +1,59 @@
-#include <iostream>
-#include <vector>
-#include <queue>
-#include <climits>
+#include<bits/stdc++.h>
 using namespace std;
 
-class ShortestPathinUndirectedGraphUnitWeights {
-public:
-    vector<int> shortestPath(vector<vector<int>>& edges, int n, int m, int s) {
-        vector<vector<int>> adj(n);
-
-        for (int i = 0; i < m; i++) {
-            adj[edges[i][0]].push_back(edges[i][1]);
-            adj[edges[i][1]].push_back(edges[i][0]);
+class Solution {
+  public:
+    vector<int> shortestPath(vector<vector<int>>& edges, int N,int M, int src){
+    //Create an adjacency list of size N for storing the undirected graph.
+        vector<int> adj[N]; 
+        for(auto it : edges) {
+            adj[it[0]].push_back(it[1]); 
+            adj[it[1]].push_back(it[0]); 
         }
 
-        vector<int> dist(n, INT_MAX);
-        dist[s] = 0;
-
+        //A dist array of size N initialised with a large number to 
+        //indicate that initially all the nodes are untraversed.    
+    
+        int dist[N];
+        for(int i = 0;i<N;i++) dist[i] = 1e9;
+        // BFS Implementation.
+        dist[src] = 0; 
         queue<int> q;
-        q.push(s);
-
-        while (!q.empty()) {
-            int node = q.front();
-            q.pop();
-
-            for (int neighbor : adj[node]) {
-                if (dist[node] + 1 < dist[neighbor]) {
-                    dist[neighbor] = dist[node] + 1;
-                    q.push(neighbor);
+        q.push(src); 
+        while(!q.empty()) {
+            int node = q.front(); 
+            q.pop(); 
+            for(auto it : adj[node]) {
+                if(dist[node] + 1 < dist[it]) {
+                    dist[it] = 1 + dist[node]; 
+                    q.push(it); 
                 }
             }
         }
-
-        for (int i = 0; i < n; i++) {
-            if (dist[i] == INT_MAX) {
-                dist[i] = -1;
+        // Updated shortest distances are stored in the resultant array ‘ans’.
+        // Unreachable nodes are marked as -1. 
+        vector<int> ans(N, -1);
+        for(int i = 0;i<N;i++) {
+            if(dist[i] != 1e9) {
+                ans[i] = dist[i]; 
             }
         }
-
-        return dist;
+        return ans; 
     }
 };
 
-int main() {
-    int n = 9, m = 10;
-    vector<vector<int>> edges = {{0,1},{0,3},{3,4},{4,5},{5,6},{1,2},{2,6},{6,7},{7,8},{6,8}};
-    int s = 0;
+int main(){
 
-    ShortestPathinUndirectedGraphUnitWeights obj;
-    vector<int> res = obj.shortestPath(edges, n, m, s);
+int N=9, M=10;
+vector<vector<int>> edges= {{0,1},{0,3},{3,4},{4,5},{5,6},{1,2},{2,6},{6,7},{7,8},{6,8}};
 
-    for (int i = 0; i < n; i++) {
-        cout << res[i] << " ";
-    }
-    cout << endl;
+Solution obj;
+vector<int> ans = obj.shortestPath(edges,N,M,0);
 
-    return 0;
+for(int i=0;i<ans.size();i++){
+    
+    cout<<ans[i]<<" ";
+}
+
+return 0;
 }
