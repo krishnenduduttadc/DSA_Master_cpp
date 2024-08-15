@@ -4,5 +4,6 @@
         "unordered_map": "cpp",
         "iostream": "cpp",
         "climits": "cpp"
-    }
+    },
+    "C_Cpp.errorSquiggles": "enabled"
 }
