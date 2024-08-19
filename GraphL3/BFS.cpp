@@ -31,7 +31,7 @@ class Solution {
     }
 };
 
-void addEdge(vector <int> adj[], int u, int v) {
+void addEdge(vector<int> adj[], int u, int v) {
     adj[u].push_back(v);
     adj[v].push_back(u);
 }
@@ -44,7 +44,7 @@ void printAns(vector <int> &ans) {
 
 int main() 
 {
-    vector <int> adj[6];
+    vector<int> adj[6];
     
     addEdge(adj, 0, 1);
     addEdge(adj, 1, 2);
