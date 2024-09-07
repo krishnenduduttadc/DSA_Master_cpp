@@ -14,8 +14,8 @@ int medianOfThree(int arr[], int l, int h) {
 
 int partition(int arr[],int l,int h){
    
-    int medianIndex  = medianOfThree(arr, l, h);
-    swap(arr[l], arr[medianIndex]);
+    //int medianIndex  = medianOfThree(arr, l, h);
+    //swap(arr[l], arr[medianIndex]);
     int piv=arr[l];
     int left=l+1;
     int right=h;
