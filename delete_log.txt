@@ -1,3 +1,0 @@
-Log started on 14-10-2024 at 19:54:00.14 
-Searching for output folders in: "D:\DSA_Master_cpp" 
-Deletion completed. 
