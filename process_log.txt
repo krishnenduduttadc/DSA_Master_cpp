@@ -1,4 +1,4 @@
-Log started on 14-10-2024 at 23:44:28.55 
+Log started on 16-10-2024 at  0:30:50.77 
 Processing files in base folder: "D:\DSA_Master_cpp" 
 Checking folder: "D:\DSA_Master_cpp\.vscode" 
 Skipping folder "D:\DSA_Master_cpp\.vscode" as it is ".vscode" folder. 
@@ -80,7 +80,11 @@ No .exe files found in "D:\DSA_Master_cpp\Codechef_Bit"
 Skipping output folder: "D:\DSA_Master_cpp\Codechef_Bit\output" 
 Checking folder: "D:\DSA_Master_cpp\Codechef_Combinatorics" 
 Checking for .exe files in "D:\DSA_Master_cpp\Codechef_Combinatorics" 
-No .exe files found in "D:\DSA_Master_cpp\Codechef_Combinatorics" 
+Found .exe file: D:\DSA_Master_cpp\Codechef_Combinatorics\Ck.exe 
+Moving .exe files to output folder 
+D:\DSA_Master_cpp\Codechef_Combinatorics\Ck.exe
+        1 file(s) moved.
+.exe files moved to "D:\DSA_Master_cpp\Codechef_Combinatorics\output". 
 Skipping output folder: "D:\DSA_Master_cpp\Codechef_Combinatorics\output" 
 Checking folder: "D:\DSA_Master_cpp\Codechef_DP" 
 Checking for .exe files in "D:\DSA_Master_cpp\Codechef_DP" 
@@ -112,7 +116,13 @@ No .exe files found in "D:\DSA_Master_cpp\Codechef_Matrix"
 Skipping output folder: "D:\DSA_Master_cpp\Codechef_Matrix\output" 
 Checking folder: "D:\DSA_Master_cpp\Codechef_NumberSystem" 
 Checking for .exe files in "D:\DSA_Master_cpp\Codechef_NumberSystem" 
-No .exe files found in "D:\DSA_Master_cpp\Codechef_NumberSystem" 
+Found .exe file: D:\DSA_Master_cpp\Codechef_NumberSystem\PrimeFactorization.exe 
+Found .exe file: D:\DSA_Master_cpp\Codechef_NumberSystem\PrimeFactorizationUsingSeive.exe 
+Moving .exe files to output folder 
+D:\DSA_Master_cpp\Codechef_NumberSystem\PrimeFactorization.exe
+D:\DSA_Master_cpp\Codechef_NumberSystem\PrimeFactorizationUsingSeive.exe
+        2 file(s) moved.
+.exe files moved to "D:\DSA_Master_cpp\Codechef_NumberSystem\output". 
 Skipping output folder: "D:\DSA_Master_cpp\Codechef_NumberSystem\output" 
 Checking folder: "D:\DSA_Master_cpp\Codechef_PrefixSum" 
 Checking for .exe files in "D:\DSA_Master_cpp\Codechef_PrefixSum" 
@@ -132,15 +142,19 @@ No .exe files found in "D:\DSA_Master_cpp\Codechef_SlidingWindow"
 Skipping output folder: "D:\DSA_Master_cpp\Codechef_SlidingWindow\output" 
 Checking folder: "D:\DSA_Master_cpp\Codechef_StackQueue" 
 Checking for .exe files in "D:\DSA_Master_cpp\Codechef_StackQueue" 
-Found .exe file: D:\DSA_Master_cpp\Codechef_StackQueue\PrintNumbersGivenPattern.exe 
-Moving .exe files to output folder 
-D:\DSA_Master_cpp\Codechef_StackQueue\PrintNumbersGivenPattern.exe
-        1 file(s) moved.
-.exe files moved to "D:\DSA_Master_cpp\Codechef_StackQueue\output". 
+No .exe files found in "D:\DSA_Master_cpp\Codechef_StackQueue" 
 Skipping output folder: "D:\DSA_Master_cpp\Codechef_StackQueue\output" 
 Checking folder: "D:\DSA_Master_cpp\Codechef_TreesBInaryTrees" 
 Checking for .exe files in "D:\DSA_Master_cpp\Codechef_TreesBInaryTrees" 
-No .exe files found in "D:\DSA_Master_cpp\Codechef_TreesBInaryTrees" 
+Found .exe file: D:\DSA_Master_cpp\Codechef_TreesBInaryTrees\LCAinBST.exe 
+Found .exe file: D:\DSA_Master_cpp\Codechef_TreesBInaryTrees\MaxinBST.exe 
+Found .exe file: D:\DSA_Master_cpp\Codechef_TreesBInaryTrees\PathsWithGivenSum.exe 
+Moving .exe files to output folder 
+D:\DSA_Master_cpp\Codechef_TreesBInaryTrees\LCAinBST.exe
+D:\DSA_Master_cpp\Codechef_TreesBInaryTrees\MaxinBST.exe
+D:\DSA_Master_cpp\Codechef_TreesBInaryTrees\PathsWithGivenSum.exe
+        3 file(s) moved.
+.exe files moved to "D:\DSA_Master_cpp\Codechef_TreesBInaryTrees\output". 
 Skipping output folder: "D:\DSA_Master_cpp\Codechef_TreesBInaryTrees\output" 
 Checking folder: "D:\DSA_Master_cpp\Codechef_Tries" 
 Checking for .exe files in "D:\DSA_Master_cpp\Codechef_Tries" 
