@@ -1,6 +1,5 @@
 #include <iostream>
 #include <vector>
-#include <stack>
 
 using namespace std;
 
@@ -33,17 +32,28 @@ void performDFS(int numNodes, vector<vector<int>>& adjList) {
 }
 
 int main() {
-   
-    int numNodes, numEdges;
-    cin >> numNodes >>  numEdges;
-    vector<vector<int>> adjList(numNodes + 1);
+    // Hardcoded number of nodes and edges
+    int numNodes = 4; // Number of nodes
+    int numEdges = 5; // Number of edges
+
+    // Initialize adjacency list
+    vector<vector<int>> adjList(numNodes + 1); // 1-based index
+
+    // Hardcoded edges
+    vector<pair<int, int>> edges = {
+        {1, 2},
+        {2, 3},
+        {3, 4},
+        {1, 4},
+        {1, 3}
+    };
 
     // Adding edges to the graph
-    for(int i = 0; i < numEdges; i++) {
-        int u, v;
-        cin >> u >> v;
-       adjList[u].push_back(v);
-       adjList[v].push_back(u);
+    for (const auto& edge : edges) {
+        int u = edge.first;
+        int v = edge.second;
+        adjList[u].push_back(v);
+        adjList[v].push_back(u); // For undirected graph
     }
 
     // Perform DFS
@@ -53,13 +63,7 @@ int main() {
     return 0;
 }
 
-
 /*
-4 5
-1 2
-2 3
-3 4
-1 4
-1 3
-
+Expected Output:
+DFS traversal: 1 2 3 4 
 */

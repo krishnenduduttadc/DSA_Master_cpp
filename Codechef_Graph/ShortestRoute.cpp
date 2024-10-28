@@ -49,30 +49,29 @@ int minServersOnRoute(int n, vector<pair<int, int>>& connections) {
 }
 
 int main() {
-    int n, m;
-    cin >> n >> m;
+    // Hardcoded input
+    int n = 5;  // Number of servers
+    int m = 6;  // Number of connections
     
-    vector<pair<int, int>> connections(m);
-    for (int i = 0; i < m; ++i) {
-        int u, v;
-        cin >> u >> v;
-        connections[i] = {u, v};
-    }
+    // Hardcoded connections (edges)
+    vector<pair<int, int>> connections = {
+        {1, 2},
+        {2, 3},
+        {1, 3},
+        {3, 5},
+        {2, 4},
+        {4, 5}
+    };
 
+    // Call the function with hardcoded input
     int result = minServersOnRoute(n, connections);
     
-    cout << result << endl;
+    cout << "Minimum number of servers on the shortest path: " << result << endl;
 
     return 0;
 }
 
 /*
-5 6
-1 2
-2 3
-1 3
-3 5
-2 4
-4 5
-
+Expected output for the given hardcoded example:
+Minimum number of servers on the shortest path: 3
 */

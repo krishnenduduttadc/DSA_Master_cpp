@@ -44,35 +44,31 @@ int shortestPathLength(int n, vector<pair<int, int>>& edges, int x, int y) {
 }
 
 int main() {
-    int n, m;
-    cin >> n >> m;  // n is the number of nodes, m is the number of edges
-    
-    vector<pair<int, int>> edges(m);
-    for (int i = 0; i < m; ++i) {
-        int u, v;
-        cin >> u >> v;
-        edges[i] = {u, v};
-    }
+    // Hardcoded input: number of nodes and edges
+    int n = 5;  // Number of nodes
+    int m = 6;  // Number of edges
 
-    int x, y;
-    cin >> x >> y;  // Start and end nodes
+    // Hardcoded edges
+    vector<pair<int, int>> edges = {
+        {1, 2},
+        {2, 3},
+        {1, 3},
+        {3, 5},
+        {2, 4},
+        {4, 5}
+    };
+
+    // Hardcoded start and end nodes
+    int x = 1; // Start node
+    int y = 5; // End node
 
     int result = shortestPathLength(n, edges, x, y);
-
-    cout << result << endl;
+    cout << result << endl; // Output the shortest path length
 
     return 0;
 }
 
-
 /*
-5 6
-1 2
-2 3
-1 3
-3 5
-2 4
-4 5
-2 5
-
+Expected Output for the given hardcoded example:
+2
 */

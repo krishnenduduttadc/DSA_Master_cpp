@@ -27,35 +27,39 @@ int FindConnectedComponents(int n, vector<vector<int>>& adjList) {
 }
 
 int main() {
-    int n, m; // Number of nodes and edges
-    cin >> n >> m;
+    // Hardcoded number of nodes and edges
+    int n = 5; // Number of nodes
+    int m = 6; // Number of edges
 
-    vector<vector<int>> adjList(n + 1); // Initialize adjacency list
+    // Initialize adjacency list
+    vector<vector<int>> adjList(n + 1); // 1-based index
 
-    // Read edges and populate the adjacency list
-    for (int i = 0; i < m; i++) {
-        int u, v;
-        cin >> u >> v;
+    // Hardcoded edges
+    vector<pair<int, int>> edges = {
+        {1, 2},
+        {2, 3},
+        {1, 3},
+        {3, 5},
+        {2, 4},
+        {4, 5}
+    };
+
+    // Adding edges to the adjacency list
+    for (const auto& edge : edges) {
+        int u = edge.first;
+        int v = edge.second;
         adjList[u].push_back(v);
-        adjList[v].push_back(u);
+        adjList[v].push_back(u); // For undirected graph
     }
 
     // Find and output the number of connected components
     int components = FindConnectedComponents(n, adjList);
-    cout << components << endl;
+    cout << components << endl; // Output the number of connected components
 
     return 0;
 }
 
-
-
 /*
-
-5 6
-1 2
-2 3
-1 3
-3 5
-2 4
-4 5
+Expected Output:
+1
 */

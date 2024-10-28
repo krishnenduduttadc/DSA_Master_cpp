@@ -41,31 +41,28 @@ public:
 };
 
 int main() {
-    int n, m;
-    cin >> n >> m; // Read number of nodes and number of edges
-    
-    vector<vector<int>> edges(m, vector<int>(2));
-    
-    // Read the edges
-    for (int i = 0; i < m; ++i) {
-        cin >> edges[i][0] >> edges[i][1];
-    }
-    
+    // Hardcoded number of nodes and edges
+    int n = 5; // Number of nodes
+    int m = 6; // Number of edges
+
+    // Hardcoded edges
+    vector<vector<int>> edges = {
+        {1, 2},
+        {2, 3},
+        {1, 3},
+        {3, 5},
+        {2, 4},
+        {4, 5}
+    };
+
     Solution sol; // Create an instance of the Solution class
     int result = sol.countComponents(n, m, edges); // Find the number of connected components
     cout << result << endl; // Output the result
-    
+
     return 0;
 }
 
-
 /*
-
-5 6
-1 2
-2 3
-1 3
-3 5
-2 4
-4 5
+Expected Output:
+1
 */
