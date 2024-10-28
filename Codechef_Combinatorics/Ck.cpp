@@ -23,16 +23,12 @@ int combinations(int n, int k) {
     return C[n][k];
 }
 
-
 int main() {
     for (int i = 0; i < N; i++)
         for (int j = 0; j < N; j++) C[i][j] = -1;
 
     int n = 7, k = 3;
     cout << n << "C" << k << " is: " << combinations(n, k) << "\n";
+
+    return 0;
 }
-
-
-/*
-
-*/

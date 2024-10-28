@@ -2,7 +2,6 @@
 
 using namespace std;
 
-
 bool check(int arr[], int d, int n, int c)
 {
     int cows = c;
@@ -22,41 +21,25 @@ bool check(int arr[], int d, int n, int c)
 }
 
 int main() {
-    int n, c;
-    cin >> n >> c;
-    int arr[n];
-    for (int i = 0; i < n; i++)
-    {
-        cin >> arr[i];
-    }
-    sort(arr, arr + n); // Sort the stall positions
+    int n = 5, c = 3;
+    int arr[] = {1, 2, 8, 4, 9};
+    sort(arr, arr + n);
 
-    // Binary search for the maximum minimum distance
-    int left = 0; // Minimum possible distance
-    int right = arr[n - 1] - arr[0]; // Maximum possible distance
-    int result = 0; // To store the result
+    int left = 0;
+    int right = arr[n - 1] - arr[0];
+    int result = 0;
 
     while (left <= right) {
-        int mid = left + (right - left) / 2; // Calculate mid distance
+        int mid = left + (right - left) / 2;
 
-        // Check if it's possible to place cows with at least mid distance
         if (check(arr, mid, n, c)) {
-            result = mid; // Update result to mid since it's a valid distance
-            left = mid + 1; // Try for a larger distance
+            result = mid;
+            left = mid + 1;
         } else {
-            right = mid - 1; // Try for a smaller distance
+            right = mid - 1;
         }
     }
 
-    cout << result << endl; // Output the largest minimum distance found
+    cout << result << endl;
     return 0;
-
-
-
 }
-
-/*
-
-5 3
-1 2 8 4 9
-*/

@@ -7,13 +7,13 @@ const int N = 5001;
 int C[N][N];
 
 int combinations(int n, int k) {
-    if(n == k || k == 0) {
+    if (n == k || k == 0) {
         return 1;
     }
-    if(k > n) {
+    if (k > n) {
         return 0;
     }
-    if(C[n][k] != -1) {
+    if (C[n][k] != -1) {
         return C[n][k];
     }
 
@@ -24,35 +24,24 @@ int combinations(int n, int k) {
 
 int main() {
     memset(C, -1, sizeof C);
-    int t = 1;
-    cin >> t;
-    while(t--) {
-        string s; cin >> s;
-        map<char,int> mp;
+    vector<string> test_cases = {"ab", "aa", "aA", "AAbaz"};
+    
+    for (const string& s : test_cases) {
+        map<char, int> mp;
 
-        for(int i = 0; i < s.size(); i++) {
-            mp[s[i]]++;
+        for (char c : s) {
+            mp[c]++;
         }
 
         int ans = 1;
         int left = s.size();
 
-        for(auto [x, y]: mp) {
-            ans = (ans * 1ll * combinations(left, y)) % mod;
-            left = left - y;
+        for (auto& p : mp) {
+            ans = (ans * 1ll * combinations(left, p.second)) % mod;
+            left -= p.second;
         }
 
         cout << ans << "\n";
     }
     return 0;
 }
-
-
-/*
-4
-ab
-aa
-aA
-AAbaz
-
-*/

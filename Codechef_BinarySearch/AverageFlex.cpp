@@ -2,14 +2,16 @@
 using namespace std;
 
 int main() {
-	int t; 
-    cin >> t;
-    while (t--) {
-        int n;
-        cin >> n;
-        vector<int> v(n);
-        for (int i = 0; i < n; i++)
-            cin >> v[i];
+    int t = 3;
+    vector<vector<int>> inputs = {
+        {100, 100, 100},
+        {2, 1, 3},
+        {30, 1, 30, 30}
+    };
+
+    for (int k = 0; k < t; k++) {
+        int n = inputs[k].size();
+        vector<int> v = inputs[k];
         
         sort(v.begin(), v.end());
         
@@ -25,18 +27,4 @@ int main() {
         cout << boast_count << '\n';
     }
     return 0;
-
 }
-
-
-/*
-3
-3
-100 100 100
-3
-2 1 3
-4
-30 1 30 30
-
-
-*/

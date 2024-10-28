@@ -3,24 +3,30 @@ using namespace std;
 
 const int MOD = 1000000007;
 
-int main(){
-    int t; cin >> t;
-    while(t--) {
-        int n, k; 
-        cin >> n >> k;
+int main() {
+    int t = 4; // Number of test cases
+    vector<pair<int, int>> test_cases = {
+        {1, 1},
+        {1, 2},
+        {2, 1},
+        {2, 2}
+    };
 
-        if(n > k) {
+    for (int i = 0; i < t; ++i) {
+        int n = test_cases[i].first;
+        int k = test_cases[i].second;
+
+        if (n > k) {
             int ans = 1;
-            for(int i = 1; i <= k; i++) {
-                ans = (ans * 1ll * i) % MOD;
+            for (int j = 1; j <= k; j++) {
+                ans = (ans * 1ll * j) % MOD;
             }
 
             cout << ans << "\n";
-        }
-        else {
+        } else {
             int ans = 1;
-            for(int i = k - n + 1; i <= k; i++) {
-                ans = (ans * 1ll * i) % MOD;
+            for (int j = k - n + 1; j <= k; j++) {
+                ans = (ans * 1ll * j) % MOD;
             }
             
             cout << ans << "\n";
@@ -28,13 +34,3 @@ int main(){
     }
     return 0;
 }
-
-
-/*
-4
-1 1
-1 2
-2 1
-2 2
-
-*/

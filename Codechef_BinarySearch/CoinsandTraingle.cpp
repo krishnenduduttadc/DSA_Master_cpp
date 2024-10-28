@@ -1,22 +1,19 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-
 long long isTotalCoins(long long h) {
     return (h * (h + 1)) / 2;
 }
 
-
 int main() {
-	int t;
-    cin >> t;
-    while(t--) {
-        long long n;
-        cin >> n;
+    int t = 3;
+    vector<long long> test_cases = {3, 5, 7};
+
+    for (int i = 0; i < t; i++) {
+        long long n = test_cases[i];
         long long ans = 0;
         long long lo = 1, hi = n, mid;
-        
-        // Binary search for the maximum height
+
         while(lo <= hi) {
             mid = (hi + lo) / 2;
             if(isTotalCoins(mid) <= n) {
@@ -26,16 +23,7 @@ int main() {
                 hi = mid - 1;
             }
         }
-        
+
         cout << ans << endl;
     }
-
 }
-
-
-/*
-3
-3
-5
-7
-*/

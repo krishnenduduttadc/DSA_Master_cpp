@@ -1,10 +1,8 @@
 #include <bits/stdc++.h>
-
 using namespace std;
 
 int parent[100000];
 int setSize[100000];
-
 
 int dsuFind(int a) {
     if (parent[a] == a) return a;
@@ -24,20 +22,28 @@ void dsuUnion(int a, int b) {
 }
 
 int main() {
-    int n, m;
-    cin >> n >> m;
+    // Hardcoded input
+    int n = 10; // number of elements
+    int m = 5;  // number of connections
+    vector<pair<int, int>> connections = {
+        {0, 1},
+        {1, 2},
+        {2, 3},
+        {3, 4},
+        {4, 5}
+    };
+
     for (int i = 0; i < n; i++) {
         parent[i] = i;
         setSize[i] = 1;
     }
-    for (int i = 0; i < m; i++) {
-        int a, b;
-        cin >> a >> b;
-        dsuUnion(a, b);
+
+    for (const auto& connection : connections) {
+        dsuUnion(connection.first, connection.second);
     }
-    int leadersSize[100] = {
-        0
-    };
+
+    int leadersSize[100] = {0};
+
     for (int i = 0; i < n; i++) {
         leadersSize[dsuFind(i)]++;
     }
@@ -53,14 +59,3 @@ int main() {
 
     return 0;
 }
-
-
-/*
-10 5
-0 1
-1 2
-2 3
-3 4
-4 5
-
-*/

@@ -4,24 +4,19 @@ using namespace std;
 const int mod = 1e9 + 7;
 
 int main() {
-    int t; 
-    cin >> t;
+    int t = 3;
+    vector<vector<int>> test_cases = {
+        {2, 1, 3, 5},
+        {1},
+        {1, 2}
+    };
 
-    while(t--) {
-        int n; 
-        cin >> n;
-
-        int a[n];
-        for(int i = 0; i < n; i++) {
-            cin >> a[i];
-        }
-
+    for (int i = 0; i < t; ++i) {
+        int n = test_cases[i].size();
         int ways = 1; 
-        for(int i = 0; i < n; i++) {
-            // Can pick 0 or 1 or 2 .... a[i] number of i-th fruit
-            // So we can pick the i-th fruit in a[i] + 1 number of ways
 
-            ways = (ways * 1ll * (a[i] + 1)) % mod; // Multiply by 1ll to avoid overflow
+        for (int j = 0; j < n; j++) {
+            ways = (ways * 1ll * (test_cases[i][j] + 1)) % mod;
         }
 
         cout << ways << "\n";
@@ -29,13 +24,3 @@ int main() {
 
     return 0;
 }
-
-/*
-3
-4 
-2 1 3 5
-1
-1
-2
-1 2
-*/

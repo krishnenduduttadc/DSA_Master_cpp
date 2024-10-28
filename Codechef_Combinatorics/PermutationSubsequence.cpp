@@ -3,39 +3,30 @@ using namespace std;
 
 const int MOD = 1000000007;
 
-int main(){
-    int t;
-    cin>>t;
-    while (t--) {
-        int n;
-        cin>>n;
+int main() {
+    int t = 2;
+    vector<vector<int>> test_cases = {
+        {1, 2, 3, 2, 4},
+        {1, 3, 5, 8, 9, 8}
+    };
 
-        map<int,int> m;
+    for (int i = 0; i < t; i++) {
+        int n = test_cases[i].size();
+        map<int, int> m;
 
-        for(int i = 0; i < n; i++) {
-            int a; cin >> a;
+        for (int a : test_cases[i]) {
             m[a]++;
         }
 
         int sum = 0;
         int prefix = 1;
 
-        for (int i = 1; i <= n; i++){
-            prefix = (prefix * 1ll * m[i]) % MOD;
+        for (int j = 1; j <= n; j++) {
+            prefix = (prefix * 1ll * m[j]) % MOD;
             sum = (sum + prefix) % MOD;
         }
 
-        cout<<sum<<endl;
+        cout << sum << endl;
     }
     return 0;
 }
-
-
-/*
-2
-5
-1 2 3 2 4
-6
-1 3 5 8 9 8
-
-*/

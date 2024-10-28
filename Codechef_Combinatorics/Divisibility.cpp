@@ -2,17 +2,29 @@
 using namespace std;
 
 // Function to calculate lcm of 3 integers
+int lcm(int a, int b) {
+    return a / __gcd(a, b) * b; // Corrected LCM calculation using GCD
+}
+
 int lcm(int a, int b, int c) {
     return lcm(a, lcm(b, c));
 }
  
 int main() {
-    int t; 
-    cin >> t;
+    int t = 5; // Number of test cases
+    vector<tuple<int, int, int, int>> test_cases = {
+        {10, 2, 3, 2},
+        {5, 3, 2, 4},
+        {6, 3, 3, 3},
+        {24, 12, 2, 12},
+        {20, 3, 20, 3}
+    };
 
-    while(t--) {
-        int n, a, b, c; 
-        cin >> n >> a >> b >> c;
+    for (int i = 0; i < t; ++i) {
+        int n = get<0>(test_cases[i]);
+        int a = get<1>(test_cases[i]);
+        int b = get<2>(test_cases[i]);
+        int c = get<3>(test_cases[i]);
 
         int s_a = n / a;
         int s_b = n / b;
@@ -28,14 +40,6 @@ int main() {
 
         cout << S << "\n";
     }
+
+    return 0;
 }
-
-/*
-5
-10 2 3 2
-5 3 2 4
-6 3 3 3
-24 12 2 12
-20 3 20 3
-
-*/
