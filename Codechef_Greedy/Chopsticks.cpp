@@ -1,37 +1,32 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int n, d, a[100010];
-
 int main() {
-    cin>>n>>d;
+    int n = 5, d = 2; // Hardcoded number of elements and the threshold
+    int a[100010] = {0, 1, 3, 3, 9, 4}; // Hardcoded input array
 
-    for (int i = 1; i <= n; i++)
-        cin>>a[i];
-
-    sort (a + 1, a + 1 + n);
+    // Sort the array
+    sort(a + 1, a + 1 + n);
 
     int pos = 1;
     int res = 0;
 
+    // Pairing logic
     while (pos < n) {
         if (abs(a[pos] - a[pos + 1]) <= d) {
-            res ++;
-            pos += 2;
+            res++;        // Found a valid pair
+            pos += 2;     // Move past the paired elements
+        } else {
+            pos++;        // Move to the next element
         }
-        else pos ++;
     }
 
-    cout<<res<<endl;
+    cout << res << endl; // Output the result
 
     return 0;
 }
 
 /*
-5 2
-1
-3
-3
-9
-4
+Expected Output:
+2
 */

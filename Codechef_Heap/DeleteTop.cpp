@@ -2,76 +2,98 @@
 using namespace std;
 
 class Heap {
-    public:
+public:
     vector<int> v;
-    void insert(int value){
+
+    void insert(int value) {
         v.push_back(value);
-        int cur_index = v.size()-1;
-        while(cur_index!=0){
-            int parent_index = (cur_index-1)/2;
-            if(v[parent_index]>v[cur_index]){
+        int cur_index = v.size() - 1;
+        while (cur_index != 0) {
+            int parent_index = (cur_index - 1) / 2;
+            if (v[parent_index] > v[cur_index]) {
                 swap(v[parent_index], v[cur_index]);
+                cur_index = parent_index; // Continue bubbling up
+            } else {
+                break; // If parent is smaller, stop bubbling up
             }
-            cur_index = parent_index;
         }
     }
-    
+
     void Heapify(int index) {
-        int left_child = 2*index+1;
-        int right_child = 2*index+2;
-        if(left_child<v.size() && v[left_child]<v[index]){
-            swap(v[index], v[left_child]);
-            Heapify(left_child);
+        int left_child = 2 * index + 1;
+        int right_child = 2 * index + 2;
+        int smallest = index;
+
+        // Compare with left child
+        if (left_child < v.size() && v[left_child] < v[smallest]) {
+            smallest = left_child;
         }
-        if(right_child<v.size() && v[right_child]<v[index]){
-            swap(v[index], v[right_child]);
-            Heapify(right_child);
+        // Compare with right child
+        if (right_child < v.size() && v[right_child] < v[smallest]) {
+            smallest = right_child;
+        }
+        // If smallest is not the root, swap and continue heapifying
+        if (smallest != index) {
+            swap(v[index], v[smallest]);
+            Heapify(smallest);
         }
     }
-    
-    void delete_from_heap(int index){
-        cout<<"deleting the element "<<v[index]<<endl;
-        swap(v[index], v[v.size()-1]);
+
+    void delete_from_heap(int index) {
+        if (index < 0 || index >= v.size()) {
+            cout << "Invalid index." << endl;
+            return;
+        }
+        cout << "Deleting the element " << v[index] << endl;
+        swap(v[index], v[v.size() - 1]);
         v.pop_back();
         Heapify(index);
     }
-    
+
+    void printHeap() {
+        for (auto i : v) {
+            cout << i << " ";
+        }
+        cout << endl;
+    }
 };
 
 int main() {
     Heap* h1 = new Heap();
-    int n;
-    cin>>n;
-    for(int i=0; i<n; i++){
-        int value;
-        cin>>value;
+
+    // Hardcoded inputs
+    int n = 7;  // Number of elements
+    vector<int> values = {1, 2, 1, 6, 3, 4, 3}; // Elements to be inserted
+
+    // Insert values into the heap
+    for (int value : values) {
         h1->insert(value);
     }
-    for(auto i: h1->v)
-    {
-        cout<<i<<" ";
-    }
-    cout<<endl;
-    int x;
-    cin>>x;
-    for(int i=0; i<x; i++){
-        int index;
-        cin>>index;
+
+    // Print the heap after insertions
+    cout << "Heap after insertions: ";
+    h1->printHeap();
+
+    // Hardcoded deletions
+    int x = 2; // Number of deletions
+    vector<int> indices = {0, 1}; // Indices of elements to delete
+
+    // Perform deletions
+    for (int i = 0; i < x; i++) {
+        int index = indices[i];
         h1->delete_from_heap(index);
-        for(auto j: h1->v){
-            cout<<j<<" ";
-        }
-        cout<<endl;
+        h1->printHeap(); // Print heap after each deletion
     }
-    cout<<endl;
+
+    delete h1; // Clean up
+    return 0;
 }
 
-
-
 /*
-7
-1 2 1 6 3 4 3
-2
-0 1
-
+Hardcoded Input:
+7  // Number of elements
+1 2 1 6 3 4 3  // Elements to insert
+2  // Number of deletions
+0 1  // Indices to delete
 */
+

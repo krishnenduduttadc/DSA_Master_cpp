@@ -19,34 +19,41 @@ bool isMinHeap(int arr[], int n) {
     return true; // Array represents a min-heap
 }
 
-
 int main() {
-    int t;
-    cin>>t;
-    while(t--){
-        int n;
-        cin>>n;
-        int arr[n];
-        for(int i=0; i<n; i++)
-        {
-            cin>>arr[i];
-        }
-        
-        
+    // Hardcoded input
+    int t = 2; // Number of test cases
+    
+    // Test case 1
+    int n1 = 7;
+    int arr1[] = {10, 15, 30, 40, 50, 100, 40};
+
+    // Test case 2
+    int n2 = 3;
+    int arr2[] = {15, 10, 18};
+
+    // Array of test cases
+    pair<int*, int> testCases[] = {
+        {arr1, n1},
+        {arr2, n2}
+    };
+
+    // Iterate through the test cases
+    for (int i = 0; i < t; i++) {
+        int* arr = testCases[i].first;
+        int n = testCases[i].second;
+
         if (isMinHeap(arr, n)) {
-            cout << "Yes" << endl;
+            cout << "Yes" << endl; // It's a min-heap
         } else {
-            cout << "No" << endl;
+            cout << "No" << endl; // It's not a min-heap
         }
     }
+
+    return 0;
 }
 
-
 /*
-2
-7
-10 15 30 40 50 100 40
-3
-15 10 18
-
+Output:
+No
+No
 */
