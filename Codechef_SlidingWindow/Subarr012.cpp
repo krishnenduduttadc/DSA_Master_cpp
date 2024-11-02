@@ -5,10 +5,10 @@
 using namespace std;
 
 long long countSubarrays(vector<long long>& arr) {
-   long long n = arr.size();
+    long long n = arr.size();
     long long left = 0, right = 0;
     long long count = 0;
-    
+
     unordered_map<long long, long long> freq; // To store frequency of 0, 1, 2
 
     // Traverse the array with the sliding window approach
@@ -35,22 +35,9 @@ long long countSubarrays(vector<long long>& arr) {
 }
 
 int main() {
-    long long n;
-    cin >> n;
-
-    vector<long long> arr(n);
-    for (long long i = 0; i < n; i++) {
-        cin >> arr[i];
-    }
+    vector<long long> arr = {0, 1, 2, 0}; // Hardcoded input
 
     cout << countSubarrays(arr) << endl;
 
     return 0;
 }
-
-
-/*
-4
-0 1 2 0
-
-*/

@@ -22,17 +22,10 @@ int largestCommonElement(vector<int>& arr1, vector<int>& arr2) {
 }
 
 int main() {
-    int n, m;
-    cin >> n >> m;
-    vector<int> arr1(n), arr2(m);
-    for (int i = 0; i < n; ++i) cin >> arr1[i];
-    for (int i = 0; i < m; ++i) cin >> arr2[i];
+    vector<int> arr1 = {1, 3, 4, 6, 7}; // Hardcoded array 1
+    vector<int> arr2 = {2, 3, 5, 6, 7, 8}; // Hardcoded array 2
+
     cout << largestCommonElement(arr1, arr2) << endl;
+
     return 0;
 }
-
-/*
-5 6
-1 3 4 6 7
-2 3 5 6 7 8
-*/

@@ -2,14 +2,15 @@
 using namespace std;
 
 int main() {
-	int t;
-    cin >> t;
-    while(t--) {
-        int n;
-        cin >> n;
-        string s;
-        cin >> s;
-        
+    vector<pair<int, string>> test_cases = {
+        {10, "abcdefghij"},
+        {7, "bcadage"}
+    };
+
+    for (const auto& test_case : test_cases) {
+        int n = test_case.first;
+        string s = test_case.second;
+
         // Vowels set
         set<char> vowels = {'a', 'e', 'i', 'o', 'u'};
         
@@ -26,7 +27,7 @@ int main() {
                 result[right--] = s[i];
             }
             
-            if(vowels.count(s[i]) > 0) {
+            if(vowels.find(s[i]) != vowels.end()) {
                 startFromLeft = !startFromLeft;
             }
         }
@@ -38,14 +39,4 @@ int main() {
     }
 
     return 0;
-
 }
-
-
-/*
-2
-10
-abcdefghij
-7
-bcadage
-*/

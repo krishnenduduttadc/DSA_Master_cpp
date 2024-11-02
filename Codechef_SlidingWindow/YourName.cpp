@@ -1,38 +1,33 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-bool isSub(string s1,string s2){
-    int j=0;
-    for (int i = 0; i < s2.length() && j<s1.length(); i++) {
-        if(s1[j]==s2[i]){
+bool isSub(string s1, string s2) {
+    int j = 0;
+    for (int i = 0; i < s2.length() && j < s1.length(); i++) {
+        if (s1[j] == s2[i]) {
             j++;
         }
     }
-    return (j==s1.length());
+    return (j == s1.length());
 }
 
 int main() {
-int T; // Number of test cases
-    cin >> T;
-    while (T--) {
-        string M, W;
-        cin >> M >> W; // Input the pair of strings M and W
+    vector<pair<string, string>> test_cases = {
+        {"john", "johanna"},
+        {"ira", "ira"},
+        {"kayla", "jayla"}
+    };
 
-        if(isSub(M,W)|| isSub(W,M)){
-            std::cout << "YES" << std::endl;
-        }else{
-            std::cout << "NO" << std::endl;
+    for (int i = 0; i < test_cases.size(); i++) {
+        string M = test_cases[i].first;
+        string W = test_cases[i].second;
+
+        if (isSub(M, W) || isSub(W, M)) {
+            cout << "YES" << endl;
+        } else {
+            cout << "NO" << endl;
         }
     }
 
+    return 0;
 }
-
-
-
-/*
-3
-john johanna
-ira ira
-kayla jayla
-
-*/

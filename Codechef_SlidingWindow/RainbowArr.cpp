@@ -2,7 +2,7 @@
 
 using namespace std;
 
-bool isRainbowArray(vector < int > & arr) {
+bool isRainbowArray(vector<int>& arr) {
     int n = arr.size();
 
     // Check if the array starts and ends with 1
@@ -37,21 +37,17 @@ bool isRainbowArray(vector < int > & arr) {
 
     // Finally, check if we have processed all numbers from 1 to 7 correctly
     return currentNumber == 8 && left > right; // Ensure currentNumber reached 8 after processing 1-7
-
 }
 
 int main() {
-    int T;
-    cin >> T;
+    vector<vector<int>> test_cases = {
+        {19, 1, 2, 3, 4, 4, 5, 6, 6, 6, 7, 6, 6, 6, 5, 4, 4, 3, 2, 1},
+        {14, 1, 2, 3, 4, 5, 6, 7, 6, 5, 4, 3, 2, 1, 1},
+        {13, 1, 2, 3, 4, 5, 6, 8, 6, 5, 4, 3, 2, 1}
+    };
 
-    while (T--) {
-        int N;
-        cin >> N;
-        vector < int > arr(N);
-
-        for (int i = 0; i < N; i++) {
-            cin >> arr[i];
-        }
+    for (const auto& test_case : test_cases) {
+        vector<int> arr(test_case.begin() + 1, test_case.end());
 
         if (isRainbowArray(arr)) {
             cout << "yes" << endl;
@@ -62,14 +58,3 @@ int main() {
 
     return 0;
 }
-
-/*
-3
-19
-1 2 3 4 4 5 6 6 6 7 6 6 6 5 4 4 3 2 1
-14
-1 2 3 4 5 6 7 6 5 4 3 2 1 1
-13
-1 2 3 4 5 6 8 6 5 4 3 2 1
-
-*/

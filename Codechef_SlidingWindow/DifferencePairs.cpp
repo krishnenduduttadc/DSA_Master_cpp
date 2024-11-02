@@ -3,21 +3,21 @@
 #include <algorithm>
 
 int main() {
-    int T;
-    std::cin >> T;
-    
-    while (T--) {
-        int N, B;
-        std::cin >> N >> B;
+    std::vector<std::pair<int, std::vector<int>>> test_cases = {
+        {6, {5, 10, 3, 2, 50, 80}},
+        {2, {-10, 20}},
+        {4, {1, 2, 3, 4}}
+    };
+    std::vector<int> B_values = {78, 30, 5};
+
+    for (int t = 0; t < test_cases.size(); ++t) {
+        int N = test_cases[t].first;
+        std::vector<int> A = test_cases[t].second;
+        int B = B_values[t];
         B = std::max(B, -B);
-        std::vector<int> A(N);
-        
-        for (int i = 0; i < N; i++) {
-            std::cin >> A[i];
-        }
-        
+
         std::sort(A.begin(), A.end());
-        
+
         int i = 0, j = 0, match = 0;
         while (i < N && j < N) {
             int D = A[j] - A[i];
@@ -30,20 +30,9 @@ int main() {
                 j++;
             }
         }
-        
+
         std::cout << match << std::endl;
     }
-    
+
     return 0;
 }
-
-/*
-3
-6 78
-5 10 3 2 50 80
-2 30
--10 20
-4 5
-1 2 3 4
-
-*/

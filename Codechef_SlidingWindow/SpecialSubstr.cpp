@@ -2,14 +2,12 @@
 using namespace std;
 
 int main() {
-	 int t;
-    cin >> t;
-    while (t--) {
-        int n;
-        cin >> n;
-        string s;
-        cin >> s;
-        
+    vector<pair<int, string>> test_cases = {
+        {6, "jyjerm"},
+        {4, "abbb"}
+    };
+
+    for (const auto& [n, s] : test_cases) {
         vector<int> freq(26, 0);
         int start = 0, maxLength = 0;
         
@@ -30,14 +28,5 @@ int main() {
         cout << maxLength << "\n";
     }
 
+    return 0;
 }
-
-
-/*
-2
-6
-jyjerm
-4
-abbb
-
-*/

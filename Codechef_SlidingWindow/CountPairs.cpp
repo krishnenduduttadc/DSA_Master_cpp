@@ -16,19 +16,10 @@ long long countPairsLessThanX(vector<int>& arr, int x) {
 }
 
 int main() {
-    int n, x;
-    cin >> n;
-    vector<int> arr(n);
-    for (int i = 0; i < n; i++) {
-        cin >> arr[i];
-    }
-    cin >> x;
-    cout << countPairsLessThanX(arr, x) << endl;
+    vector<int> arr = {1, 2, 3, 4, 5}; // Hardcoded array
+    int x = 7; // Hardcoded value of x
+
+    cout << countPairsLessThanX(arr, x) << endl; // Output the result
+
     return 0;
 }
-
-/*
-5
-1 2 3 4 5
-7
-*/

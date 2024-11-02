@@ -1,7 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-
 string findShortestSubstring(string s, string t) {
     unordered_map<char, int> requiredFreq;
     for (char c : t) {
@@ -56,15 +55,12 @@ string findShortestSubstring(string s, string t) {
     } else {
         return s.substr(minLeft, minLength);
     }
-    }
-    
-    
-    
+}
+
 int main() {
-	int m, n;
-    cin >> m >> n;   // Read the lengths of the strings S and T
-    string s, t;
-    cin >> s >> t;  
+    string s = "aabcbcde"; // Hardcoded string S
+    string t = "ad"; // Hardcoded string T
+
     string result = findShortestSubstring(s, t);
     if (result == "IMPOSSIBLE") {
         cout << result << endl;
@@ -73,11 +69,5 @@ int main() {
         cout << result << endl;
     }
 
+    return 0;
 }
-
-
-/*
-8 2
-aabcbcde
-ad
-*/
