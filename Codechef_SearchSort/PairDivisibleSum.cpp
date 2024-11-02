@@ -3,14 +3,14 @@
 using namespace std;
 
 int main() {
-    int n, k;
-    cin >> n >> k;
+    int n = 3; // Hardcoded number of pairs
+    int k = 5; // Hardcoded value of k
     
     vector<pair<int, int>> pairs(n);
     
-    for (int i = 0; i < n; ++i) {
-        cin >> pairs[i].first >> pairs[i].second;
-    }
+    pairs[0] = {1, 4}; // Hardcoded values for the first pair
+    pairs[1] = {2, 5}; // Hardcoded values for the second pair
+    pairs[2] = {6, 4}; // Hardcoded values for the third pair
     
     for (int i = 0; i < n; ++i) {
         if ((pairs[i].first + pairs[i].second) % k == 0) {
@@ -20,11 +20,3 @@ int main() {
     
     return 0;
 }
-
-
-/*
-3 5
-1 4
-2 5
-6 4
-*/

@@ -23,23 +23,19 @@ int dfs(int node, int parent) {
 }
 
 int main() {
-    int n;
-    cin >> n; // Read the number of nodes
+    int n = 7; // Number of nodes
 
-    // Read the coin information (1 if the node has a coin, 0 otherwise)
-    hasCoin.resize(n + 1); // 1-based indexing
-    for (int i = 1; i <= n; ++i) {
-        cin >> hasCoin[i];
-    }
+    // Hardcoded coin information (1 if the node has a coin, 0 otherwise)
+    hasCoin = {0, 0, 0, 1, 1, 1, 0, 0}; // Using 1-based indexing
 
-    // Build the tree
+    // Build the tree with hardcoded edges
     adj.resize(n + 1);
-    for (int i = 1; i < n; ++i) {
-        int u, v;
-        cin >> u >> v;
-        adj[u].push_back(v);
-        adj[v].push_back(u);
-    }
+    adj[1].push_back(2); adj[2].push_back(1);
+    adj[1].push_back(3); adj[3].push_back(1);
+    adj[2].push_back(4); adj[4].push_back(2);
+    adj[2].push_back(5); adj[5].push_back(2);
+    adj[3].push_back(6); adj[6].push_back(3);
+    adj[3].push_back(7); adj[7].push_back(3);
 
     // Start DFS from the root node (1) and calculate the total time
     int totalTime = dfs(1, -1); // Root has no parent, so we pass -1
@@ -49,17 +45,3 @@ int main() {
 
     return 0;
 }
-
-
-
-/*
-
-7
-0 0 1 1 1 0 0
-1 2
-1 3
-2 4
-2 5
-3 6
-3 7
-*/

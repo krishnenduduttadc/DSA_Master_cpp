@@ -2,25 +2,23 @@
 using namespace std;
 
 int main() {
-	int T;
-    cin >> T;
-    while (T--) {
-        int N, M;
-        cin >> N >> M;
-        vector<int> F(N), C(M);
-        
-        for (int i = 0; i < N; ++i) {
-            cin >> F[i];
-        }
-        for (int i = 0; i < M; ++i) {
-            cin >> C[i];
-        }
+    int T = 3; // Number of test cases
+    vector<pair<vector<int>, vector<int>>> testCases = {
+        {{1, 3}, {2, 4}},
+        {{100, 200, 300}, {1}},
+        {{1, 2}, {1}},
+        {{100, 200}, {}}
+    };
+
+    for (int t = 0; t < T; ++t) {
+        vector<int> F = testCases[t].first;
+        vector<int> C = testCases[t].second;
 
         int switches = 0;
         int i = 0, j = 0;
         bool watchingFootball = true;  // Start by watching football
 
-        while (i < N && j < M) {
+        while (i < F.size() && j < C.size()) {
             if (watchingFootball) {
                 if (F[i] < C[j]) {
                     ++i; // Continue watching football
@@ -39,27 +37,12 @@ int main() {
         }
 
         // After finishing one of the lists, switch to the other list if there are remaining events
-        if (i < N || j < M) {
+        if (i < F.size() || j < C.size()) {
             ++switches;
         }
 
         cout << switches << endl;
     }
+    
     return 0;
-
 }
-
-
-/*
-3
-2 2
-1 3
-2 4
-3 1
-100 200 300
-1
-1 2
-1
-100 200
-
-*/

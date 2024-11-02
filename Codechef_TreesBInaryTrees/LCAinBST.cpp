@@ -59,14 +59,11 @@ void inorderTraversal(Node* root) {
 int main() {
     Node* root = nullptr;
 
-    // Insert nodes into the BST
-    root = insert(root, 20);
-    insert(root, 10);
-    insert(root, 30);
-    insert(root, 5);
-    insert(root, 15);
-    insert(root, 25);
-    insert(root, 35);
+    // Hardcoded nodes to insert into the BST
+    int nodes[] = {20, 10, 30, 5, 15, 25, 35};
+    for (int val : nodes) {
+        root = insert(root, val);
+    }
 
     cout << "In-order traversal of the BST: ";
     inorderTraversal(root); // Display the BST
@@ -74,29 +71,17 @@ int main() {
 
     Solution sol;
     
-    // Test cases for LCA
-    int p = 5, q = 15;
-    Node* lca = sol.lcaInBST(root, p, q);
-    if (lca != nullptr) {
-        cout << "LCA of " << p << " and " << q << " is: " << lca->val << endl; // Expected LCA: 10
-    } else {
-        cout << "LCA not found." << endl;
-    }
-
-    p = 5, q = 25;
-    lca = sol.lcaInBST(root, p, q);
-    if (lca != nullptr) {
-        cout << "LCA of " << p << " and " << q << " is: " << lca->val << endl; // Expected LCA: 20
-    } else {
-        cout << "LCA not found." << endl;
-    }
-
-    p = 15, q = 35;
-    lca = sol.lcaInBST(root, p, q);
-    if (lca != nullptr) {
-        cout << "LCA of " << p << " and " << q << " is: " << lca->val << endl; // Expected LCA: 20
-    } else {
-        cout << "LCA not found." << endl;
+    // Hardcoded test cases for LCA
+    int testCases[][2] = {{5, 15}, {5, 25}, {15, 35}};
+    
+    for (const auto& test : testCases) {
+        int p = test[0], q = test[1];
+        Node* lca = sol.lcaInBST(root, p, q);
+        if (lca != nullptr) {
+            cout << "LCA of " << p << " and " << q << " is: " << lca->val << endl; // Expected results
+        } else {
+            cout << "LCA not found." << endl;
+        }
     }
 
     return 0;

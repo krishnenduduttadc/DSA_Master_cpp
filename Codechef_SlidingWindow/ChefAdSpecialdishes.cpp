@@ -3,11 +3,11 @@
 using namespace std;
 
 int main() {
-    int t;
-    cin >> t;
-    while (t-- > 0) {
-        string s;
-        cin >> s;
+    int t = 3; // Number of test cases
+    string testCases[] = {"aba", "abac", "abcd"}; // Hardcoded test cases
+
+    for (int k = 0; k < t; k++) {
+        string s = testCases[k];
         int l = s.length();
         bool flag = true;
         int cnt1 = 0, cnt2 = 0;
@@ -44,11 +44,3 @@ int main() {
     }
     return 0;
 }
-
-
-/*
-3
-aba
-abac
-abcd
-*/

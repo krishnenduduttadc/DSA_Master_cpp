@@ -53,81 +53,38 @@ public:
 
 int main() {
     // Create a sample Binary Search Tree (BST)
-    Node* root = new Node(20);
-    root->left = new Node(10);
-    root->right = new Node(30);
-    root->left->left = new Node(5);
-    root->left->right = new Node(15);
-    root->right->left = new Node(25);
-    root->right->right = new Node(35);
+    Node* root = new Node(50);
+    root->left = new Node(35);
+    root->right = new Node(106);
+    root->left->left = new Node(27);
+    root->left->right = new Node(38);
+    root->left->left->left = new Node(11);
+    root->left->left->right = new Node(24);
+    root->left->right->left = new Node(36);
+    root->left->right->right = new Node(40);
+    root->right->left = new Node(61);
+    root->right->right = new Node(153);
+    root->right->left->left = new Node(58);
+    root->right->left->right = new Node(67);
+    root->right->right->left = new Node(113);
+    root->right->right->right = new Node(187);
+    root->right->right->left->left = new Node(108);
+    root->right->right->left->right = new Node(126);
+    root->right->right->right->left = new Node(180);
+    root->right->right->right->right = new Node(191);
 
     // Solution instance
     Solution sol;
 
-    // Test case 1: Check if there exists a pair with sum = 40
-    int targetSum1 = 40;
+    // Test case 1: Check if there exists a pair with sum = 100
+    int targetSum1 = 100;
     cout << "Test case 1: Sum = " << targetSum1 << endl;
     sol.twoSumBST(root, targetSum1);  // Expected Output: YES
 
-    // Test case 2: Check if there exists a pair with sum = 100
-    int targetSum2 = 100;
+    // Test case 2: Check if there exists a pair with sum = 300
+    int targetSum2 = 300;
     cout << "Test case 2: Sum = " << targetSum2 << endl;
     sol.twoSumBST(root, targetSum2);  // Expected Output: NO
 
     return 0;
 }
-
-
-/*
-50 106
-7 2 L
-7 10 R
-11 7 L
-11 27 R
-27 24 L
-35 11 L
-35 38 R
-37 36 L
-38 37 L
-38 40 R
-40 39 L
-50 35 L
-50 87 R
-61 58 L
-61 67 R
-70 61 L
-70 81 R
-81 80 L
-87 70 L
-87 94 R
-92 89 L
-94 92 L
-94 97 R
-97 96 L
-100 50 L
-100 153 R
-104 102 L
-104 107 R
-108 104 L
-108 112 R
-112 110 L
-113 108 L
-113 126 R
-123 114 L
-126 123 L
-126 137 R
-137 132 L
-153 113 L
-153 187 R
-174 163 L
-180 174 L
-180 186 R
-186 184 L
-187 180 L
-187 191 R
-190 188 L
-191 190 L
-191 199 R
-199 196 L
-
-*/

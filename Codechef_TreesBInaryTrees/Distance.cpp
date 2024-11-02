@@ -39,15 +39,26 @@ int findDistance(int u, int v) {
 }
 
 int main() {
-    int n, u, v;
-    cin >> n >> u >> v; // Read number of nodes, and the nodes u and v
+    // Hardcoded input
+    int n = 7; // Number of nodes
+    int u = 3; // First node
+    int v = 7; // Second node
+
+    vector<pair<int, int>> edges = {
+        {1, 2},
+        {1, 4},
+        {2, 5},
+        {2, 3},
+        {2, 6},
+        {4, 7}
+    };
 
     vector<vector<int>> adj(n + 1); // Adjacency list for the tree
 
     // Read the edges and build the tree
-    for (int i = 1; i < n; i++) {
-        int ui, vi;
-        cin >> ui >> vi;
+    for (const auto& edge : edges) {
+        int ui = edge.first;
+        int vi = edge.second;
         adj[ui].push_back(vi);
         adj[vi].push_back(ui);
     }
@@ -61,20 +72,7 @@ int main() {
 
     // Calculate and print the distance between u and v
     int distance = findDistance(u, v);
-    cout  << distance << endl;
+    cout << distance << endl; // Output the distance
 
     return 0;
 }
-
-
-
-/*
-7 3 7
-1 2
-1 4
-2 5
-2 3
-2 6
-4 7
-
-*/

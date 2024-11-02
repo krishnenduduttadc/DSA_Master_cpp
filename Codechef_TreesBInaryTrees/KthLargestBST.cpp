@@ -50,20 +50,20 @@ public:
 };
 
 int main() {
-    // Create a sample Binary Search Tree (BST)
-    Node* root = new Node(20);
-    root->left = new Node(10);
-    root->right = new Node(30);
-    root->left->left = new Node(5);
-    root->left->right = new Node(15);
-    root->right->left = new Node(25);
-    root->right->right = new Node(35);
+    // Hardcoded input for the BST structure based on the provided example
+    Node* root = new Node(4);
+    root->left = new Node(2);
+    root->right = new Node(6);
+    root->left->left = new Node(1);
+    root->left->right = new Node(3);
+    root->right->left = new Node(5);
+    root->right->right = new Node(7);
 
     // Solution instance
     Solution sol;
 
     // Find the k-th largest node
-    int k = 3;
+    int k = 3; // Change this value for different k-th largest
     int kthLargest = sol.kthLargestNode(root, k);
     
     if (kthLargest != -1) {
@@ -75,14 +75,7 @@ int main() {
     return 0;
 }
 
-
 /*
-7 3
-4 2 L
-4 6 R
-2 3 R
-2 1 L
-6 5 L
-6 7 R
-
+Expected Output for k = 3:
+The 3-th largest node in the BST is: 5
 */

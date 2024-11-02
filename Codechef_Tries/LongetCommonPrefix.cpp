@@ -7,7 +7,9 @@ struct TrieNode {
     TrieNode* children[ALPHABET_SIZE];
     bool isEndOfWord;
 
-    TrieNode() : isEndOfWord(false) {}
+    TrieNode() : isEndOfWord(false) {
+        memset(children, 0, sizeof(children)); // Initialize children to NULL
+    }
 };
 
 class Trie {
@@ -28,51 +30,51 @@ public:
         }
         current->isEndOfWord = true;
     }
+
     string lcp() {
         TrieNode* current = root;
         string prefix;
         while (current != NULL && !current->isEndOfWord) {
             int count = 0;
-            int nextind = -1;
+            int nextIndex = -1;
             for (int i = 0; i < ALPHABET_SIZE; i++) {
                 if (current->children[i] != NULL) {
                     count++;
-                    nextind = i;
+                    nextIndex = i;
                 }
             }
             if (count == 1) {
-                prefix.push_back('a' + nextind);
-                current = current->children[nextind];
+                prefix.push_back('a' + nextIndex);
+                current = current->children[nextIndex];
             } else {
                 break;
             }
         }
         return prefix;
     }
-
 };
 
 int main() {
-    
     Trie trie;
-    int n;
-    cin>>n;
-    for(int i=0; i<n; i++)
-    {
-        string word;
-        cin>>word;
-        trie.insert(word);
+
+    // Hardcoded input
+    vector<string> words = {"call", "cat", "caller", "camera"};
+    int n = words.size(); // Number of hardcoded words
+
+    for (int i = 0; i < n; i++) {
+        trie.insert(words[i]);
     }
-    cout<<trie.lcp()<<endl;
+    cout << trie.lcp() << endl; // Output the longest common prefix
 }
 
-
-
 /*
+Hardcoded Input:
 4
 call
 cat
 caller
 camera
 
+Expected Output:
+ca
 */

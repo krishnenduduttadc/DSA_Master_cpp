@@ -3,18 +3,18 @@
 using namespace std;
 
 int main() {
-    int n;
-    cin >> n;
+    // Hardcoded number of pairs
+    int n = 3;  
     
-    vector<pair<int, int>> pairs(n);
+    // Hardcoded pairs
+    vector<pair<int, int>> pairs = {
+        {1, 2},
+        {2, 3},
+        {4, 5}
+    };
     
-    // Input pairs
-    for (int i = 0; i < n; ++i) {
-        cin >> pairs[i].first >> pairs[i].second;
-    }
-    
-    int left, right;
-    cin >> left >> right;
+    // Hardcoded range values
+    int left = 3, right = 15;
     
     // Output pairs whose sum and product are within [left, right]
     for (int i = 0; i < n; ++i) {
@@ -28,11 +28,3 @@ int main() {
     
     return 0;
 }
-
-/*
-3
-1 2
-2 3
-4 5
-3 15
-*/

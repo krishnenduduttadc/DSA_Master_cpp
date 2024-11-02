@@ -1,12 +1,15 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
 using namespace std;
 
+// Function to perform DFS and calculate subtree sums
 void dfs(int node, int parent, vector<vector<int>>& adj, vector<long long>& subtreeSum) {
     // Initialize the subtree sum of this node with its own value (node number)
     subtreeSum[node] = node;
 
     // Visit all neighbors (children)
-    for (int neighbor : adj[node]) {
+    for (int i = 0; i < adj[node].size(); i++) {
+        int neighbor = adj[node][i];
         if (neighbor != parent) {  // Avoid going back to the parent node
             dfs(neighbor, node, adj, subtreeSum);  // Recursively calculate subtree sum for the child
             subtreeSum[node] += subtreeSum[neighbor];  // Add the child's subtree sum to this node's sum
@@ -15,15 +18,25 @@ void dfs(int node, int parent, vector<vector<int>>& adj, vector<long long>& subt
 }
 
 int main() {
-    int N;
-    cin >> N; // Read the number of nodes
+    // Hardcoded number of nodes
+    int N = 7;
+
+    // Hardcoded edges for the tree
+    vector<pair<int, int>> edges = {
+        {1, 2},
+        {1, 4},
+        {2, 5},
+        {2, 3},
+        {2, 6},
+        {4, 7}
+    };
 
     vector<vector<int>> adj(N + 1); // Adjacency list (1-based indexing)
 
-    // Read the edges
-    for (int i = 0; i < N - 1; ++i) {
-        int u, v;
-        cin >> u >> v; // Read each edge
+    // Build the adjacency list from the hardcoded edges
+    for (const auto& edge : edges) {
+        int u = edge.first;
+        int v = edge.second;
         adj[u].push_back(v);
         adj[v].push_back(u);
     }
@@ -34,22 +47,21 @@ int main() {
     dfs(1, -1, adj, subtreeSum);
 
     // Output the subtree sums for nodes from 1 to N
+    cout << "Subtree sums:" << endl;
     for (int i = 1; i <= N; ++i) {
-        cout << subtreeSum[i] << " ";
+        cout << "Node " << i << ": " << subtreeSum[i] << endl;
     }
-    cout << endl;
 
     return 0;
 }
 
-
 /*
-7 
-1 2
-1 4
-2 5
-2 3
-2 6
-4 7
-
+The edges represent the following tree:
+        1
+       / \
+      2   4
+     /|   |
+    3 5   7
+    |
+    6
 */

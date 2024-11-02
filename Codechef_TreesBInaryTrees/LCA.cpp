@@ -33,15 +33,27 @@ int findLCA(int u, int v) {
 }
 
 int main() {
-    int n, u, v;
-    cin >> n >> u >> v; // Read number of nodes, and the nodes u and v
+    // Hardcoded input for the number of nodes and the two nodes to find LCA
+    int n = 7; // Number of nodes
+    int u = 3, v = 7; // Nodes for which to find LCA
 
-    vector<vector<int>> adj(n + 1); // Adjacency list for the tree
+    // Adjacency list for the tree
+    vector<vector<int>> adj(n + 1);
 
-    // Read the edges and build the tree
-    for (int i = 1; i < n; i++) {
-        int ui, vi;
-        cin >> ui >> vi;
+    // Hardcoded edges of the tree
+    vector<pair<int, int>> edges = {
+        {1, 2},
+        {1, 4},
+        {2, 5},
+        {2, 3},
+        {2, 6},
+        {4, 7}
+    };
+
+    // Build the tree from hardcoded edges
+    for (const auto& edge : edges) {
+        int ui = edge.first;
+        int vi = edge.second;
         adj[ui].push_back(vi);
         adj[vi].push_back(ui);
     }
@@ -55,17 +67,12 @@ int main() {
 
     // Find and print the LCA of u and v
     int lca = findLCA(u, v);
-    cout  << lca << endl;
+    cout << lca << endl;
 
     return 0;
 }
 
 /*
-7 3 7
-1 2
-1 4
-2 5
-2 3
-2 6
-4 7
+Expected Output:
+1
 */

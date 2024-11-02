@@ -18,19 +18,8 @@ void insertionSort(int arr[], int n) {
 }
 
 int main() {
-    int n;
-    
-    // Taking array size input
-    cout << "Enter the number of elements in the array: ";
-    cin >> n;
-
-    int arr[n];  // Declare array of size n
-
-    // Taking array elements input
-    cout << "Enter the elements of the array: ";
-    for (int i = 0; i < n; i++) {
-        cin >> arr[i];
-    }
+    int n = 8;  // Hardcoded number of elements in the array
+    int arr[] = {6, 5, 3, 1, 8, 7, 2, 4};  // Hardcoded array elements
 
     // Calling the insertion sort function
     insertionSort(arr, n);
@@ -44,12 +33,3 @@ int main() {
 
     return 0;
 }
-
-
-
-
-
-/*
-8
-6 5 3 1 8 7 2 4
-*/

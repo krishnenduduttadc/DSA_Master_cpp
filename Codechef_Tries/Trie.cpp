@@ -7,7 +7,9 @@ struct TrieNode {
     TrieNode* children[ALPHABET_SIZE];
     bool isEndOfWord;
 
-    TrieNode() : isEndOfWord(false) {}
+    TrieNode() : isEndOfWord(false) {
+        memset(children, 0, sizeof(children)); // Initialize children to NULL
+    }
 };
 
 class Trie {
@@ -113,55 +115,53 @@ public:
 };
 
 int main() {
-    
     Trie trie;
-    int n;
-    cin>>n;
-    for(int i=0; i<n; i++)
-    {
-        string command;
-        cin>>command;
-        if(command=="insert"){
-            string word;
-            cin>>word;
-            trie.insert(word);
-        }
-        else if(command=="words")
-        {
+
+    // Hardcoded commands and words
+    vector<pair<string, string>> commands = {
+        {"insert", "cat"},
+        {"insert", "cats"},
+        {"insert", "dog"},
+        {"insert", "hello"},
+        {"words", ""},
+        {"search", "hello"},
+        {"delete", "hello"},
+        {"search", "hello"}
+    };
+
+    // Execute hardcoded commands
+    for (const auto& command : commands) {
+        if (command.first == "insert") {
+            trie.insert(command.second);
+        } else if (command.first == "words") {
             trie.printAllWords();
-        }
-        else if(command =="search")
-        {
-            string word;
-            cin>>word;
-            if(trie.search(word))
-            {
-                cout<<"present"<<endl;
+        } else if (command.first == "search") {
+            if (trie.search(command.second)) {
+                cout << "present" << endl;
+            } else {
+                cout << "not present" << endl;
             }
-            else{
-                cout<<"not present"<<endl;
-            }
-        }
-        else if(command=="delete")
-        {
-            string word;
-            cin>>word;
-            trie.deleteWord(word);
+        } else if (command.first == "delete") {
+            trie.deleteWord(command.second);
         }
     }
+    
     return 0;
 }
 
-
 /*
+Hardcoded Input Explanation:
+- Insert the words: "cat", "cats", "dog", "hello"
+- Print all words
+- Search for "hello"
+- Delete "hello"
+- Search for "hello" again
 
-8
-insert cat
-insert cats
-insert dog
-insert hello
-words
-search hello
-delete hello
-search hello
+Expected Output:
+cat
+cats
+dog
+hello
+present
+not present
 */

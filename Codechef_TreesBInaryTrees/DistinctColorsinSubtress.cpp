@@ -12,6 +12,7 @@ void dfs(int node, int parent) {
     for (int neighbor : adj[node]) {
         if (neighbor != parent) { // Avoid going back to the parent
             dfs(neighbor, node); // Recur for the child
+            
             // Merge sets, keeping the larger one to minimize insertions
             if (subtreeColors[neighbor].size() > subtreeColors[node].size()) {
                 swap(subtreeColors[neighbor], subtreeColors[node]);
@@ -26,22 +27,35 @@ void dfs(int node, int parent) {
 }
 
 int main() {
-    int n;
-    cin >> n; // Read the number of nodes
+    // Hardcoded input
+    int n = 7; // Number of nodes
 
-    // Read the colors of the nodes
-    colors.resize(n + 1); // Using 1-based indexing
+    // Colors of the nodes
+    vector<int> inputColors = {0, 1, 2, 3, 4, 3, 4, 5}; // 1-based indexing
+
+    // Initialize colors
+    colors.resize(n + 1);
     for (int i = 1; i <= n; i++) {
-        cin >> colors[i];
+        colors[i] = inputColors[i];
     }
 
     // Initialize the adjacency list
     adj.resize(n + 1); // Using 1-based indexing
 
+    // Hardcoded edges
+    vector<pair<int, int>> edges = {
+        {1, 2},
+        {1, 7},
+        {1, 5},
+        {2, 4},
+        {2, 3},
+        {5, 6}
+    };
+
     // Read the edges and build the tree
-    for (int i = 1; i < n; i++) {
-        int u, v;
-        cin >> u >> v;
+    for (const auto& edge : edges) {
+        int u = edge.first;
+        int v = edge.second;
         adj[u].push_back(v);
         adj[v].push_back(u);
     }
@@ -61,15 +75,3 @@ int main() {
 
     return 0;
 }
-
-/*
-7
-1 2 3 4 3 4 5
-1 2
-1 7
-1 5
-2 4
-2 3
-5 6
-
-*/

@@ -4,6 +4,7 @@
 
 using namespace std;
 
+// Function to get precedence of operators
 int getPrecedence(char op) {
     switch (op) {
         case '+':
@@ -19,6 +20,7 @@ int getPrecedence(char op) {
     }
 }
 
+// Function to convert infix expression to postfix expression
 string infixToPostfix(const string& infix) {
     stack<char> operatorStack;
     string postfix;
@@ -27,49 +29,54 @@ string infixToPostfix(const string& infix) {
         int precedence = getPrecedence(c);
 
         if (isalnum(c)) {
-            postfix.push_back(c);
+            postfix.push_back(c);  // Add operand to postfix
         } else if (c == '(') {
-            operatorStack.push(c);
+            operatorStack.push(c);  // Push '(' onto stack
         } else if (c == ')') {
             while (!operatorStack.empty() && operatorStack.top() != '(') {
-                postfix.push_back(operatorStack.top());
+                postfix.push_back(operatorStack.top()); // Pop to postfix until '('
                 operatorStack.pop();
             }
             operatorStack.pop(); // Remove the '('
         } else {
             while (!operatorStack.empty() && precedence <= getPrecedence(operatorStack.top())) {
-                postfix.push_back(operatorStack.top());
+                postfix.push_back(operatorStack.top()); // Pop to postfix based on precedence
                 operatorStack.pop();
             }
-            operatorStack.push(c);
+            operatorStack.push(c);  // Push current operator onto stack
         }
     }
 
+    // Pop all the remaining operators from the stack
     while (!operatorStack.empty()) {
         postfix.push_back(operatorStack.top());
         operatorStack.pop();
     }
-    return postfix;
+    return postfix;  // Return the complete postfix expression
 }
 
 int main() {
-    int t;
-    cin >> t;
+    // Hardcoded infix expressions
+    string infixExpressions[] = {
+        "(a+(b*c))",
+        "((a+b)*(z+x))",
+        "((a+t)*((b+(a+c))^(c+d)))"
+    };
+    
+    int t = sizeof(infixExpressions) / sizeof(infixExpressions[0]); // Number of test cases
 
-    while (t--) {
-        string infixExpression;
-        cin >> infixExpression;
-        string postfixExpression = infixToPostfix(infixExpression);
-        cout << postfixExpression << "\n";
+    // Process each hardcoded infix expression
+    for (int i = 0; i < t; i++) {
+        string postfixExpression = infixToPostfix(infixExpressions[i]);
+        cout << postfixExpression << "\n";  // Output the postfix expression
     }
 
     return 0;
 }
 
-
 /*
-3
-(a+(b*c))
-((a+b)*(z+x))
-((a+t)*((b+(a+c))^(c+d)))
+Expected Output:
+abc*+
+zx+ab*+
+at+ac+bcd+^*
 */

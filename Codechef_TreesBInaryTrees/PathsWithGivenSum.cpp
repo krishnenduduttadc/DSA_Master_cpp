@@ -10,13 +10,12 @@ struct Node {
 
     Node(int node_value) {
         val = node_value;
-        left = right = NULL;
+        left = right = nullptr;
     }
 };
 
 class Solution {
-  public:
-  
+public:
     // Helper function to find all paths with a given target sum
     void findPaths(Node* node, int target, vector<int>& path, int currentSum) {
         if (node == nullptr) {
@@ -58,7 +57,7 @@ class Solution {
 };
 
 int main() {
-    // Create a sample binary tree
+    // Hardcoded sample binary tree
     Node* root = new Node(5);
     root->left = new Node(4);
     root->right = new Node(8);
@@ -70,7 +69,7 @@ int main() {
     root->right->right->left = new Node(5);
     root->right->right->right = new Node(1);
 
-    // Define the target sum
+    // Hardcoded target sum
     int targetSum = 22;
 
     // Solution instance

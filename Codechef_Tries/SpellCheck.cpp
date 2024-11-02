@@ -7,7 +7,9 @@ struct TrieNode {
     TrieNode* children[ALPHABET_SIZE];
     bool isEndOfWord;
 
-    TrieNode() : isEndOfWord(false) {}
+    TrieNode() : isEndOfWord(false) {
+        memset(children, 0, sizeof(children)); // Initialize children to NULL
+    }
 };
 
 class Trie {
@@ -29,20 +31,11 @@ public:
         current->isEndOfWord = true;
     }
 
-    bool nodeHasNoChildren(TrieNode* node) {
-        for (TrieNode* child : node->children) {
-            if (child != nullptr) {
-                return false;
-            }
-        }
-        return !node->isEndOfWord;
-    }
-    
     bool search(const string& word) {
         TrieNode* node = searchNode(word);
         return (node != NULL && node->isEndOfWord);
     }
-    
+
     TrieNode* searchNode(const string& word) {
         TrieNode* current = root;
         for (char ch : word) {
@@ -54,40 +47,38 @@ public:
         }
         return current;
     }
-    
-    
 };
 
 int main() {
-    
     Trie trie;
-    int n;
-    cin>>n;
-    for(int i=0; i<n; i++)
-    {
-        string word;
-        cin>>word;
-        trie.insert(word);
+
+    // Hardcoded input
+    vector<string> words = {"cat", "call", "bat", "god", "apple"}; // Trie words
+    int n = words.size(); // Number of words to insert
+
+    // Insert hardcoded words into the Trie
+    for (int i = 0; i < n; i++) {
+        trie.insert(words[i]);
     }
-    int m;
-    cin>>m;
-    for(int i=0; i<m; i++)
-    {
-        string word;
-        cin>>word;
-        if(trie.search(word))
-        {
-            cout<<"correct"<<endl;
-        }
-        else{
-            cout<<"incorrect"<<endl;
+
+    // Hardcoded search words
+    vector<string> searchWords = {"apple", "wolf", "god", "puppy"};
+    int m = searchWords.size(); // Number of words to search
+
+    // Search for hardcoded words in the Trie
+    for (int i = 0; i < m; i++) {
+        if (trie.search(searchWords[i])) {
+            cout << "correct" << endl;
+        } else {
+            cout << "incorrect" << endl;
         }
     }
+    
     return 0;
 }
 
-
 /*
+Hardcoded Input:
 5
 cat
 call
@@ -99,4 +90,10 @@ apple
 wolf
 god
 puppy
+
+Expected Output:
+correct
+incorrect
+correct
+incorrect
 */

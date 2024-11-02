@@ -1,9 +1,7 @@
 #include <iostream>
-
 #include <cmath>
 
 using namespace std;
-
 
 bool isPerfectSquare(int num) {
     int rt = sqrt(num);
@@ -21,19 +19,11 @@ bool judgeSquareSum(long long int c) {
 }
 
 int main() {
-    long long int c;
-    cin >> c;
-
+    long long int c = 25; // Hardcoded input value
     if (judgeSquareSum(c)) {
         cout << "true" << endl;
     } else {
         cout << "false" << endl;
     }
-
     return 0;
 }
-
-
-/*
-25
-*/

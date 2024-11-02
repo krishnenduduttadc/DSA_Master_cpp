@@ -1,11 +1,9 @@
 #include <iostream>
-
 #include <string>
 
 using namespace std;
 
-
-bool isPalindrome(const string & s, int l, int r) {
+bool isPalindrome(const string &s, int l, int r) {
     while (l < r) {
         if (s[l] != s[r]) {
             return false;
@@ -15,6 +13,7 @@ bool isPalindrome(const string & s, int l, int r) {
     }
     return true;
 }
+
 bool validPalindrome(string s) {
     int left = 0, right = s.length() - 1;
     while (left < right) {
@@ -25,20 +24,11 @@ bool validPalindrome(string s) {
         right--;
     }
     return true;
-
 }
 
 int main() {
-    int n;
-    cin >> n;
-    string s;
-    cin >> s;
+    int n = 4;  // Size of the string (this value is fixed for our use case)
+    string s = "abca";  // Hardcoded input string
     cout << (validPalindrome(s) ? "true" : "false") << endl;
     return 0;
 }
-
-/*
-4
-abca
-
-*/

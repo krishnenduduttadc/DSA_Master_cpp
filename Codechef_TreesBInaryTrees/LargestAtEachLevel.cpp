@@ -1,8 +1,21 @@
-int t;
-    cin >> t;
-    while(t--) {
-        string x, y;
-        cin >> x >> y;
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    // Hardcoded test cases
+    int t = 5; // Number of test cases
+    vector<pair<string, string>> testCases = {
+        {"abc?d", "ab?de"},
+        {"hello", "he??o"},
+        {"??", "??"},
+        {"a?c", "abc"},
+        {"xyz", "abc"}
+    };
+
+    for (int caseIndex = 0; caseIndex < t; caseIndex++) {
+        string x = testCases[caseIndex].first;
+        string y = testCases[caseIndex].second;
         bool canMatch = true;
         
         for (int i = 0; i < x.length(); i++) {
@@ -22,14 +35,13 @@ int t;
     }
     
     return 0;
+}
 
-    /*
-    7 
-1 2
-1 4
-2 5
-2 3
-2 6
-4 7
-    
-    */
+/*
+Expected Output:
+Yes
+Yes
+Yes
+Yes
+No
+*/

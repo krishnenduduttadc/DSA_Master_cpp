@@ -28,48 +28,31 @@ int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    int t;
-    cin >> t;
-    while (t--) {
-        int n;
-        cin >> n;
+    // Hardcoded input
+    int t = 3; // Number of test cases
+    vector<tuple<int, vector<int>, vector<pair<int, int>>>> test_cases = {
+        {2, {9, 3}, {{1, 2}}},
+        {4, {0, 3, 9, 5}, {{1, 3}, {3, 4}, {3, 2}}},
+        {3, {9, 0, 2}, {{1, 2}, {1, 3}}}
+    };
 
-        vector<int> a(n + 1);
+    for (auto& [n, a, edges] : test_cases) {
+        vector<int> nodeValues(n + 1);
         for (int i = 1; i <= n; ++i) {
-            cin >> a[i];
+            nodeValues[i] = a[i - 1]; // Fill the node values
         }
 
         vector<vector<int>> g(n + 1);
-        for (int i = 0; i < n - 1; ++i) {
-            int u, v;
-            cin >> u >> v;
+        for (const auto& [u, v] : edges) {
             g[u].push_back(v);
             g[v].push_back(u);
         }
 
         vector<bool> vis(n + 1, false);
-        long long totalBranchSum = dfs(g, a, 1, 0, vis);
+        long long totalBranchSum = dfs(g, nodeValues, 1, 0, vis);
         
         cout << totalBranchSum << '\n';
     }
 
     return 0;
 }
-
-
-/*
-
-
-*/3
-2
-9 3
-1 2
-4
-0 3 9 5
-1 3
-3 4
-3 2
-3
-9 0 2
-1 2
-1 3

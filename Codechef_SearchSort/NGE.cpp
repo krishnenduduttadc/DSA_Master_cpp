@@ -22,20 +22,10 @@ void nextGreaterElements(const vector<int>& arr) {
 }
 
 int main() {
-    int n;
-    cin >> n;
-    vector<int> arr(n);
-    for (int i = 0; i < n; ++i) {
-        cin >> arr[i];
-    }
+    int n = 4; // Hardcoded size of the array
+    vector<int> arr = {4, 5, 2, 10}; // Hardcoded values for the array
 
     nextGreaterElements(arr);
 
     return 0;
 }
-
-
-/*
-4
-4 5 2 10
-*/

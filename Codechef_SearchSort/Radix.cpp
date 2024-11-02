@@ -48,19 +48,9 @@ void radixSort(vector<int>& arr) {
 }
 
 int main() {
-    int n;
+    int n = 8; // Hardcoded number of elements
 
-    // Taking input for the number of elements in the array
-    cout << "Enter the number of elements: ";
-    cin >> n;
-
-    vector<int> arr(n);  // Declare vector of size n
-
-    // Taking input for the elements of the array
-    cout << "Enter the elements: ";
-    for (int i = 0; i < n; i++) {
-        cin >> arr[i];
-    }
+    vector<int> arr = {6, 5, 3, 1, 8, 7, 2, 4};  // Hardcoded array elements
 
     // Call radixSort to sort the array
     radixSort(arr);
@@ -74,9 +64,3 @@ int main() {
 
     return 0;
 }
-
-
-/*
-8
-6 5 3 1 8 7 2 4
-*/

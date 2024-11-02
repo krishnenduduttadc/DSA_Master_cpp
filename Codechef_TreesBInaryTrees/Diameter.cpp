@@ -20,15 +20,23 @@ pair<int, int> dfs(int node, int parent, const vector<vector<int>>& adj) {
 }
 
 int main() {
-    int n;
-    cin >> n; // Read the number of nodes
+    // Hardcoded input
+    int n = 7; // Number of nodes
+    vector<pair<int, int>> edges = {
+        {1, 2},
+        {1, 4},
+        {2, 5},
+        {2, 3},
+        {2, 6},
+        {4, 7}
+    };
 
     vector<vector<int>> adj(n + 1); // Adjacency list (1-based indexing)
 
-    // Read the edges and construct the adjacency list
-    for (int i = 0; i < n - 1; ++i) {
-        int u, v;
-        cin >> u >> v;
+    // Construct the adjacency list
+    for (const auto& edge : edges) {
+        int u = edge.first;
+        int v = edge.second;
         adj[u].push_back(v);
         adj[v].push_back(u);
     }
@@ -42,19 +50,7 @@ int main() {
     // The distance to the farthest node from A is the diameter
     int diameter = farthest_from_A.second;
 
-    cout << diameter << endl;
+    cout << diameter << endl; // Output the diameter
 
     return 0;
 }
-
-
-/*
-
-7 
-1 2
-1 4
-2 5
-2 3
-2 6
-4 7
-*/

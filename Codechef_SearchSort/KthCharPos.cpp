@@ -3,28 +3,21 @@
 using namespace std;
 
 int main() {
-    string s1;
-    char c1;
-    int k;
-    
-    cin >> s1 >> c1 >> k;
-    
+    string s1 = "HelloHowyoudoing"; // Hardcoded string
+    char c1 = 'H';                  // Hardcoded character
+    int k = 2;                      // Hardcoded occurrence number
+
     int count = 0;
     for (int i = 0; i < s1.length(); i++) {
         if (s1[i] == c1) {
             count++;
             if (count == k) {
-                cout << i << endl;
+                cout << i << endl; // Output the index of the k-th occurrence
                 return 0;
             }
         }
     }
     
-    cout << -1 << endl;
+    cout << -1 << endl; // Output -1 if the k-th occurrence is not found
     return 0;
 }
-
-
-/*
-HelloHowyoudoing H 2
-*/

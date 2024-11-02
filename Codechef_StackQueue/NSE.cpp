@@ -1,21 +1,26 @@
 #include <iostream>
 #include <stack>
 #include <vector>
-#include <bits/stdc++.h>
+
 using namespace std;
 
-std::vector<int> nextSmallestElement(const std::vector<int>& arr) {
+// Function to find the next smallest element for each element in the array
+vector<int> nextSmallestElement(const vector<int>& arr) {
     int n = arr.size();
-    std::vector<int> result(n, -1); // Initialize result with -1 for elements with no smaller element
-    std::stack<int> s; // Stack to store indices
+    vector<int> result(n, -1); // Initialize result with -1 for elements with no smaller element
+    stack<int> s; // Stack to store indices
 
-    for (int i = n - 1; i >= 0; --i) { // Iterate from right to left
+    // Iterate from right to left
+    for (int i = n - 1; i >= 0; --i) {
+        // Pop elements from the stack that are greater than or equal to the current element
         while (!s.empty() && arr[i] <= arr[s.top()]) {
             s.pop();
         }
-        if(s.size()!=0) {
+        // If stack is not empty, the top element is the next smallest
+        if (!s.empty()) {
             result[i] = arr[s.top()];
         }
+        // Push the current index onto the stack
         s.push(i);
     }
 
@@ -23,21 +28,18 @@ std::vector<int> nextSmallestElement(const std::vector<int>& arr) {
 }
 
 int main() {
-    int n;
-    cin >> n;
-    vector<int> arr(n);
-    for (int i = 0; i < n; i++) {
-        cin >> arr[i];
-    }
+    // Hardcoded input
+    int n = 5; // Size of the array
+    vector<int> arr = {1, 3, 5, 1, 3}; // The array itself
+
+    // Find the next smallest element for each element
     vector<int> result = nextSmallestElement(arr);
+
+    // Output the result
     for (auto e : result) {
-        cout << e << " ";
+        cout << e << " "; // Print each result
     }
+    cout << endl;
+
     return 0;
 }
-
-
-/*
-5
-1 3 5 1 3
-*/

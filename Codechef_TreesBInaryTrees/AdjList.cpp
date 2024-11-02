@@ -1,17 +1,23 @@
 #include <bits/stdc++.h>
-
 using namespace std;
 
 int main() {
-    int n;
-    cin >> n;
+    // Hardcoded input for testing
+    int n = 6; // Number of nodes in the tree
+    vector<pair<int, int>> edges = {
+        {0, 1},
+        {0, 2},
+        {1, 3},
+        {1, 4},
+        {2, 5}
+    };
     
     // This is our adjacency list
     vector<vector<int>> tree(n);
     
-    int u, v;
-    for (int i = 0; i < n - 1; i++) {
-        cin >> u >> v;
+    for (const auto& edge : edges) {
+        int u = edge.first;
+        int v = edge.second;
         
         // Adding an edge from u to v
         tree[u].push_back(v);
@@ -38,12 +44,3 @@ int main() {
     
     return 0;
 }
-
-/*
-6
-0 1
-0 2
-1 3
-1 4
-2 5
-*/

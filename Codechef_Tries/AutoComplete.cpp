@@ -7,7 +7,9 @@ struct TrieNode {
     TrieNode* children[ALPHABET_SIZE];
     bool isEndOfWord;
 
-    TrieNode() : isEndOfWord(false) {}
+    TrieNode() : isEndOfWord(false) {
+        memset(children, 0, sizeof(children)); // Initialize children to NULL
+    }
 };
 
 class Trie {
@@ -28,7 +30,6 @@ public:
         }
         current->isEndOfWord = true;
     }
-    
 
     bool nodeHasNoChildren(TrieNode* node) {
         for (TrieNode* child : node->children) {
@@ -38,12 +39,12 @@ public:
         }
         return !node->isEndOfWord;
     }
-    
+
     bool search(const string& word) {
         TrieNode* node = searchNode(word);
         return (node != NULL && node->isEndOfWord);
     }
-    
+
     TrieNode* searchNode(const string& word) {
         TrieNode* current = root;
         for (char ch : word) {
@@ -55,22 +56,20 @@ public:
         }
         return current;
     }
-    
-    
-    void autocomplete(string s){
+
+    void autocomplete(string s) {
         TrieNode* current = root;
-        for(auto ch: s)
-        {
-            int index = ch-'a';
+        for (auto ch : s) {
+            int index = ch - 'a';
             if (current->children[index] == NULL) {
-                return;
+                return; // No suggestions if prefix not found
             }
             current = current->children[index];
         }
         string currentWord = s;
         printWordsRecursive(current, currentWord);
     }
-    
+
     void printWordsRecursive(TrieNode* node, string& currentWord) {
         if (node == NULL) {
             return;
@@ -91,34 +90,34 @@ public:
 };
 
 int main() {
-    
     Trie trie;
-    int n;
-    cin>>n;
-    string s;
-    cin>>s;
-    for(int i=0; i<n; i++)
-    {
-        string word;
-        cin>>word;
+
+    // Hardcoded number of words
+    int n = 10;  
+    
+    // Hardcoded prefix for autocomplete
+    string s = "sa";  
+    
+    // Hardcoded words to insert into the Trie
+    vector<string> words = {
+        "hello",
+        "world",
+        "code",
+        "chef",
+        "so",
+        "safari",
+        "safe",
+        "safer",
+        "save",
+        "saved"
+    };
+
+    for (const string& word : words) {
         trie.insert(word);
     }
+
+    // Perform autocomplete
     trie.autocomplete(s);
+
     return 0;
 }
-
-
-/*
-10 sa
-hello 
-world
-code
-chef
-so
-safari
-safe
-safer
-save
-saved
-
-*/

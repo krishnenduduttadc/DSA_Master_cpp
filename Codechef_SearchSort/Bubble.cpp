@@ -21,14 +21,9 @@ void printArray(int arr[], int size) {
 }
 
 int main() {
-    int arr[] = {6, 5, 3, 1, 8, 7, 2, 4};
+    int arr[] = {6, 5, 3, 1, 8, 7, 2, 4}; // Hardcoded input array
     int n = sizeof(arr) / sizeof(arr[0]);
     bubbleSort(arr, n);
     printArray(arr, n);
     return 0;
 }
-
-
-/*
-6 5 3 1 8 7 2 4
-*/

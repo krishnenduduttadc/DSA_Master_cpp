@@ -15,7 +15,7 @@ bool isStackFull() {
 
 void pushToStack(char element) {
     if (isStackFull()) {
-        cout << "Stack is full";
+        cout << "Stack is full\n";
     } else {
         stackTop++;
         stackArray[stackTop] = element;
@@ -24,8 +24,8 @@ void pushToStack(char element) {
 
 char popFromStack() {
     if (isStackEmpty()) {
-        cout << "Stack is empty";
-        return '-1';
+        cout << "Stack is empty\n";
+        return '-1'; // Returning a sentinel value to indicate an error
     } else {
         char poppedElement = stackArray[stackTop];
         stackTop--;
@@ -34,6 +34,7 @@ char popFromStack() {
 }
 
 int main() {
+    // Hardcoded input string
     string inputString = "Hello, World!";
     int inputLength = inputString.length();
 
@@ -48,11 +49,13 @@ int main() {
     while (!isStackEmpty()) {
         reversedString.push_back(popFromStack());
     }
-    cout << reversedString << "\n";
+
+    // Output the reversed string
+    cout << reversedString << "\n"; // Expected Output: !dlroW ,olleH
+
     return 0;
 }
 
 /*
 Hello, World!
-
 */

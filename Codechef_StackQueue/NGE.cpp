@@ -1,50 +1,65 @@
 #include <iostream>
-#include <vector>
-#include <stack>
+#include <queue>
 
 using namespace std;
 
 int main() {
-    int n;
-    cin >> n;
+    // Hardcoded number of test cases
+    int t = 2; // Number of test cases
 
-    vector<int> arr(n);
-    for (int i = 0; i < n; i++) {
-        cin >> arr[i];
+    // Test Case 1
+    int n1 = 5; // Number of pearls
+    int k1 = 3; // Number of positions to move
+    int pearls1[] = {1, 5, 3, 4, 2}; // Pearls
+
+    // Process Test Case 1
+    cout << "Test Case 1 Output: ";
+    queue<int> necklace1; // Use std::queue for Test Case 1
+    for (int i = 0; i < n1; i++) {
+        necklace1.push(pearls1[i]);
     }
 
-    stack<int> stack;
-
-    // Initialize the NGE array
-    vector<int> nge(n, -1);
-
-    // Iterating the array from right to left
-    for (int i = n - 1; i >= 0; i--) {
-
-        // Pop till the top element is smaller than current
-        while (!stack.empty() && stack.top() < arr[i]) {
-            stack.pop();
-        }
-
-        if (!stack.empty()) {
-            nge[i] = stack.top();
-        } else {
-            nge[i] = -1;
-        }
-
-        // Push the current element to stack
-        stack.push(arr[i]);
+    // Rotate the queue left by k positions
+    for (int i = 0; i < k1; i++) {
+        int removed = necklace1.front();
+        necklace1.pop();
+        necklace1.push(removed);
     }
 
-    // Print the NGE array
-    for (int i = 0; i < n; i++) {
-        cout << nge[i] << " ";
+    // Print the modified necklace for Test Case 1
+    while (!necklace1.empty()) {
+        int pearl = necklace1.front();
+        necklace1.pop();
+        cout << pearl << " ";
     }
-    cout << endl;
+    cout << "\n"; // Move to the next line for the next test case
+
+    // Test Case 2
+    int n2 = 6; // Number of pearls
+    int k2 = 5; // Number of positions to move
+    int pearls2[] = {10, 1, 2, 9, 8, 2}; // Pearls
+
+    // Process Test Case 2
+    cout << "Test Case 2 Output: ";
+    queue<int> necklace2; // Use std::queue for Test Case 2
+    for (int i = 0; i < n2; i++) {
+        necklace2.push(pearls2[i]);
+    }
+
+    // Rotate the queue left by k positions
+    for (int i = 0; i < k2; i++) {
+        int removed = necklace2.front();
+        necklace2.pop();
+        necklace2.push(removed);
+    }
+
+    // Print the modified necklace for Test Case 2
+    while (!necklace2.empty()) {
+        int pearl = necklace2.front();
+        necklace2.pop();
+        cout << pearl << " ";
+    }
+    cout << "\n"; // Move to the next line for the next test case
+
+    return 0;
 }
-
-
-/*
-4 
-4 5 2 25
-*/
