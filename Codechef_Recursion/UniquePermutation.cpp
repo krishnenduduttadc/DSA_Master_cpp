@@ -65,15 +65,8 @@ void printPermutations(const vector<vector<int>>& permutations) {
 }
 
 int main() {
-    int n;
-    // Take the size of the multiset as input
-    cin >> n;
-    
-    vector<int> multiset(n);
-    // Take the multiset elements as input
-    for (int i = 0; i < n; ++i) {
-        cin >> multiset[i];
-    }
+    // Hardcoded input
+    vector<int> multiset = {1, 2}; // Change this line for different inputs
     
     // Get the unique permutations
     vector<vector<int>> result = uniquePermutations(multiset);
@@ -83,9 +76,3 @@ int main() {
 
     return 0;
 }
-
-
-/*
-2
-1 2
-*/

@@ -9,13 +9,7 @@ int Factorial(int n) {
 }
 
 int main() {
-    int n;
-    cin >> n;
-    cout << Factorial(n) << endl;
+    int n = 5; // Hardcoded input
+    cout << Factorial(n) << endl; // Output the factorial of n
     return 0;
 }
-
-
-/*
-5
-*/

@@ -1,5 +1,4 @@
 #include <bits/stdc++.h>
-
 using namespace std;
 
 // Helper function to perform backtracking and generate unique subsets
@@ -59,15 +58,8 @@ void printSubsets(vector<vector<int>>& subsets) {
 }
 
 int main() {
-    int n;
-    // Take the size of the multiset as input
-    cin >> n;
-    
-    vector<int> multiset(n);
-    // Take the multiset elements as input
-    for (int i = 0; i < n; ++i) {
-        cin >> multiset[i];
-    }
+    // Hardcoded input
+    vector<int> multiset = {1, 2}; // Change this to any other values you want to test
     
     // Get the unique subsets
     vector<vector<int>> result = uniqueSubsets(multiset);
@@ -77,9 +69,3 @@ int main() {
 
     return 0;
 }
-
-
-/*
-2
-1 2
-*/

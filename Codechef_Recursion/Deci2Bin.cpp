@@ -9,14 +9,12 @@ string Binary(int n) {
 }
 
 int main() {
-    int n;
-    cin >> n;
-    cout << Binary(n) << endl;
+    int n = 27; // Hardcoded input
+    // Special case for 0 since the recursive function won't return "0"
+    if (n == 0) {
+        cout << "0" << endl;
+    } else {
+        cout << Binary(n) << endl; // Output the binary representation of n
+    }
     return 0;
 }
-
-
-/*
-27
-
-*/

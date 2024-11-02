@@ -5,10 +5,10 @@ using namespace std;
 int findPascalsValue(int N, int M) {
     // Base cases
     if (M == 0 || M == N) {
-        return 1;
+        return 1; // Edge values are always 1
     }
-    if(M > N){
-        cerr << "Error: Invalid Input" << endl;
+    if (M > N) {
+        cerr << "Error: Invalid Input" << endl; // Error handling for invalid indices
         exit(1);
     }
     // Recursive step: value is the sum of the values above it
@@ -16,20 +16,12 @@ int findPascalsValue(int N, int M) {
 }
 
 int main() {
-    int N, M;
- 
-    cin >> N >> M;
-  
-    
+    // Hardcoded input values for N and M
+    int N = 4; // Example: 4th row
+    int M = 2; // Example: 2nd column
+
     int result = findPascalsValue(N, M);
-    cout << result << endl;
+    cout << result << endl; // Output the result
 
     return 0;
 }
-
-
-
-/*
-
-4 2
-*/

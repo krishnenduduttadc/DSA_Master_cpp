@@ -11,14 +11,7 @@ long long collatz_steps(long long n) {
 }
 
 int main() {
-    long long n;
-    cin >> n;
-    cout << collatz_steps(n) << endl;
+    long long n = 6; // Hardcoded input
+    cout << collatz_steps(n) << endl; // Output the number of steps in the Collatz sequence
     return 0;
 }
-
-
-
-/*
-6
-*/

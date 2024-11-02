@@ -1,15 +1,15 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 
-void generateParenthesis(int n, int open, int close, string str, vector<string> &result) {
-    if(open == n && close == n) {
+void generateParenthesis(int n, int open, int close, string str, vector<string>& result) {
+    if (open == n && close == n) {
         result.push_back(str);
         return;
     }
-    if(open < n) {
+    if (open < n) {
         generateParenthesis(n, open + 1, close, str + "(", result);
     }
-    if(close < open) {
+    if (close < open) {
         generateParenthesis(n, open, close + 1, str + ")", result);
     }
 }
@@ -21,17 +21,11 @@ vector<string> generateParenthesis(int n) {
 }
 
 int main() {
-    int n;
-    cin >> n;
+    int n = 3; // Hardcoded input
     vector<string> result = generateParenthesis(n);
     sort(result.begin(), result.end()); // Sorting the result vector
-    for(const string &s : result) {
+    for (const string& s : result) {
         cout << s << endl;
     }
     return 0;
 }
-
-
-/*
-3
-*/

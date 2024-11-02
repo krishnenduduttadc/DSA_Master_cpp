@@ -3,6 +3,7 @@
 
 using namespace std;
 
+// Function to check if s3 is an interleaving of s1 and s2
 bool is_interleave(const string &s1, const string &s2, const string &s3) {
     // Base case: if all strings are empty, return true
     if (s1.empty() && s2.empty() && s3.empty()) {
@@ -27,22 +28,13 @@ bool is_interleave(const string &s1, const string &s2, const string &s3) {
 }
 
 int main() {
-    string s1, s2, s3;
-
-    // Input strings
-    cin >> s1 >> s2 >> s3;
+    // Hardcoded input strings
+    string s1 = "abc";
+    string s2 = "def";
+    string s3 = "adbcef";
 
     // Output result
     cout << (is_interleave(s1, s2, s3) ? "True" : "False") << endl;
 
     return 0;
 }
-
-
-
-/*
-abc
-def
-adbcef
-
-*/

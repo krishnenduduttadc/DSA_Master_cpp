@@ -1,4 +1,4 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 
 int countWays(int S) {
@@ -8,14 +8,7 @@ int countWays(int S) {
 }
 
 int main() {
-    int S;
-    cin >> S;
-    cout << countWays(S) << endl;
+    int S = 3; // Hardcoded input
+    cout << countWays(S) << endl; // Output the number of ways to reach sum S
     return 0;
 }
-
-
-/*
-3
-
-*/

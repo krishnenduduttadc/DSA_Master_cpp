@@ -21,18 +21,12 @@ int longestPalindromicSubsequence(string s, int start, int end) {
 }
 
 int main() {
-    string s;
-    cin >> s;
-    int length = s.length();
+    // Hardcoded input string
+    string s = "agbdba";
 
+    int length = s.length();
     int result = longestPalindromicSubsequence(s, 0, length - 1);
-    cout << result;
+    cout << result << endl; // Output the length of the longest palindromic subsequence
 
     return 0;
 }
-
-
-
-/*
-agbdba
-*/
