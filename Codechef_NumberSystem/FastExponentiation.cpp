@@ -14,9 +14,9 @@ long long fastpow(long long a, long long b) {
 }
 
 int main() {
-    long long a, b;
-    cout << "Enter base and exponent: ";
-    cin >> a >> b;
+    // Hardcoded values for base and exponent
+    long long a = 2; // Base
+    long long b = 10; // Exponent
 
     // Calculate a^b using fast exponentiation
     long long result = fastpow(a, b);

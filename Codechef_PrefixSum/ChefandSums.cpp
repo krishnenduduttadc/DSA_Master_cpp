@@ -5,41 +5,46 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
-    int T; // Number of test cases
-    cin >> T;
+    int T = 2;
+    cout << T << endl;
+
+    int N = 3;
+    cout << N << endl;
+    cout << "1 2 3" << endl;
+
+    N = 4;
+    cout << N << endl;
+    cout << "2 1 3 1" << endl;
+
+    int n = 3; 
+    vector<int> A = {1, 2, 3};
     
-    while (T--) {
-        int N; // Size of the array
-        cin >> N;
-        
-        vector<int> A(N);
-        for (int i = 0; i < N; ++i) {
-            cin >> A[i];
+    int minElement = A[0];
+    int minIndex = 0;
+
+    for (int i = 1; i < n; ++i) {
+        if (A[i] < minElement) {
+            minElement = A[i];
+            minIndex = i;
         }
-        
-        // Find the index of the first occurrence of the minimum element
-        int minElement = A[0];
-        int minIndex = 0;
-        
-        for (int i = 1; i < N; ++i) {
-            if (A[i] < minElement) {
-                minElement = A[i];
-                minIndex = i;
-            }
-        }
-        
-        // Output the 1-based index of the minimum element
-        cout << minIndex + 1 << "\n";
     }
     
+    cout << minIndex + 1 << "\n";
+
+    n = 4; 
+    A = {2, 1, 3, 1};
+
+    minElement = A[0];
+    minIndex = 0;
+
+    for (int i = 1; i < n; ++i) {
+        if (A[i] < minElement) {
+            minElement = A[i];
+            minIndex = i;
+        }
+    }
+    
+    cout << minIndex + 1 << "\n";
+
     return 0;
 }
-
-
-/*
-2
-3
-1 2 3
-4
-2 1 3 1
-*/

@@ -7,15 +7,12 @@ const int MAX_N = 300;
 const int MAX_VAL = 10;
 
 int main() {
-    int N;
-    cin >> N;
-    vector<vector<int>> A(N, vector<int>(N));
-    
-    for (int i = 0; i < N; ++i) {
-        for (int j = 0; j < N; ++j) {
-            cin >> A[i][j];
-        }
-    }
+    int N = 3; // Hardcoded size of the grid
+    vector<vector<int>> A = {
+        {1, 2, 3},
+        {3, 2, 1},
+        {5, 6, 3}
+    };
 
     // Create prefix sums for each distinct number (1 to 10)
     vector<vector<vector<int>>> prefix(MAX_VAL + 1, vector<vector<int>>(N + 1, vector<int>(N + 1, 0)));
@@ -29,12 +26,16 @@ int main() {
         }
     }
 
-    int Q;
-    cin >> Q;
+    // Hardcoded number of queries
+    int Q = 3; 
+    vector<vector<int>> queries = {
+        {1, 1, 2, 3},
+        {2, 2, 2, 2},
+        {1, 1, 3, 3}
+    };
     
-    while (Q--) {
-        int x1, y1, x2, y2;
-        cin >> x1 >> y1 >> x2 >> y2;
+    for (int k = 0; k < Q; ++k) {
+        int x1 = queries[k][0], y1 = queries[k][1], x2 = queries[k][2], y2 = queries[k][3];
 
         int distinctCount = 0;
         for (int d = 1; d <= MAX_VAL; ++d) {
@@ -43,21 +44,8 @@ int main() {
                 ++distinctCount;
             }
         }
-        cout << distinctCount << endl;
+        cout << distinctCount << endl; // Output the count of distinct numbers in the range
     }
 
     return 0;
 }
-
-
-/*
-3
-1 2 3
-3 2 1
-5 6 3
-3
-1 1 2 3
-2 2 2 2
-1 1 3 3 
-
-*/

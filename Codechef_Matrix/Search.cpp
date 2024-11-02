@@ -1,6 +1,4 @@
 #include <bits/stdc++.h>
-#include <iostream>
-#include <vector>
 using namespace std;
 
 bool searchInMatrix(vector<vector<int>>& matrix, int N, int M, int X) {
@@ -23,17 +21,17 @@ bool searchInMatrix(vector<vector<int>>& matrix, int N, int M, int X) {
 }
 
 int main() {
-    int N, M, X;
-    cin >> N >> M >> X; // Read dimensions and target value
+    // Hardcoded dimensions and target value
+    int N = 3; // Number of rows
+    int M = 4; // Number of columns
+    int X = 7; // Target value to search for
 
-    vector<vector<int>> matrix(N, vector<int>(M)); // Initialize the matrix
-
-    // Read the matrix elements
-    for (int i = 0; i < N; i++) {
-        for (int j = 0; j < M; j++) {
-            cin >> matrix[i][j];
-        }
-    }
+    // Hardcoded matrix elements
+    vector<vector<int>> matrix = {
+        {1, 2, 3, 4},
+        {5, 6, 7, 8},
+        {9, 10, 11, 12}
+    };
 
     // Search for the element and output the result
     if (searchInMatrix(matrix, N, M, X)) {
@@ -44,13 +42,3 @@ int main() {
 
     return 0;
 }
-
-
-
-/*
-3 4 7
-1 2 3 4
-5 6 7 8
-9 10 11 12
-
-*/

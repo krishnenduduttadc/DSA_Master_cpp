@@ -2,7 +2,9 @@
 
 using namespace std;
 
-long long t, a, b;
+long long t = 3; // Hardcoded number of test cases
+long long a[] = {5, 5, 6}; // Hardcoded values for a
+long long b[] = {2, 3, 4}; // Hardcoded values for b
 
 const long long MAXN = 1e6;
 const long long MOD = 1e9 + 7;
@@ -42,22 +44,21 @@ long long choose1(long long n, long long k, long long m) {
     return fac[n] * inv[k] % m * inv[n - k] % m;
 }
 
-
 int main()
 {
     factorial(MOD);
     inverses(MOD);
 
-	cin>>t;
+    // Hardcoded test cases
+    for (int i = 0; i < t; i++) {
+        cout << choose1(a[i], b[i], MOD) << endl;
+    }
 
-	while(t--)
-	{
-		cin >> a >> b;
-		cout << choose1(a, b, MOD) << endl;
-	}
+    return 0;
 }
 
 /*
+Hardcoded Input
 3
 5 2
 5 3

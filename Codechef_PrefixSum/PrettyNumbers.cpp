@@ -14,20 +14,15 @@ int countPrettyNumbers(int L, int R) {
 }
 
 int main() {
-    int T;
-    cin >> T;  // Read the number of test cases
-    while (T--) {
-        int L, R;
-        cin >> L >> R;  // Read the range L to R for each test case
+    // Hardcoded input values
+    int T = 2;  // Number of test cases
+    vector<pair<int, int>> testCases = {{1, 10}, {11, 33}};  // Hardcoded ranges
+
+    for (int t = 0; t < T; ++t) {
+        int L = testCases[t].first;
+        int R = testCases[t].second;
         cout << countPrettyNumbers(L, R) << endl;  // Output the count of pretty numbers
     }
+
     return 0;
 }
-
-
-
-/*
-2
-1 10
-11 33
-*/

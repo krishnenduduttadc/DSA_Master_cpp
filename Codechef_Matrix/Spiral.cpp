@@ -38,29 +38,19 @@ void printSpiral(vector<vector<int>>& matrix, int N, int M) {
 }
 
 int main() {
-    int N, M;
-    cin >> N >> M;  // Read the dimensions of the matrix
+    // Hardcoded dimensions
+    int N = 3; // Number of rows
+    int M = 4; // Number of columns
 
-    vector<vector<int>> matrix(N, vector<int>(M));  // Initialize the matrix
-
-    // Read the matrix elements
-    for (int i = 0; i < N; i++) {
-        for (int j = 0; j < M; j++) {
-            cin >> matrix[i][j];
-        }
-    }
+    // Hardcoded matrix elements
+    vector<vector<int>> matrix = {
+        {1, 2, 3, 4},
+        {5, 6, 7, 8},
+        {9, 10, 11, 12}
+    };
 
     // Print the matrix in spiral fashion
     printSpiral(matrix, N, M);
 
     return 0;
 }
-
-
-/*
-3 4
-1 2 3 4
-5 6 7 8
-9 10 11 12
-
-*/

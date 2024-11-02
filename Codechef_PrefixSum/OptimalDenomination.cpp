@@ -5,16 +5,17 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
-    int T;
-    cin >> T;
-    while (T--) {
-        int N;
-        cin >> N;
-        vector<long long> A(N);
-        for (int i = 0; i < N; ++i) {
-            cin >> A[i];
-        }
-        
+    int T = 3; // Number of test cases
+    vector<vector<long long>> testCases = {
+        {1, 2, 3},  // Test case 1
+        {8, 4, 2},  // Test case 2
+        {2, 2}      // Test case 3
+    };
+
+    for (int t = 0; t < T; ++t) {
+        vector<long long> A = testCases[t];
+        int N = A.size();
+
         if (N == 1) {
             cout << 1 << endl;
             continue;
@@ -43,15 +44,3 @@ int main() {
     
     return 0;
 }
-
-
-/*
-
-3
-3
-1 2 3
-3
-8 4 2
-2
-2 2 
-*/

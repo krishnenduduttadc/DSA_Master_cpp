@@ -9,18 +9,18 @@ pair<int, int> intersect(pair<int, int> a, pair<int, int> b) {
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(0);
-
-    int t;
-    cin >> t;
     
+    // Hardcoded test cases
+    int t = 1; // Number of test cases
+
     while (t--) {
-        int n;
-        cin >> n;
-        
-        vector<pair<int, int>> ranges(n);
-        for (int i = 0; i < n; i++) {
-            cin >> ranges[i].first >> ranges[i].second;
-        }
+        int n = 4; // Number of ranges
+        vector<pair<int, int>> ranges = {
+            {2, 2},
+            {1, 1},
+            {1, 3},
+            {1, 3}
+        };
 
         vector<pair<int, int>> prefix(n), suffix(n);
         
@@ -64,13 +64,3 @@ int main() {
 
     return 0;
 }
-
-
-/*
-1
-4
-2 2
-1 1
-1 3
-1 3
-*/

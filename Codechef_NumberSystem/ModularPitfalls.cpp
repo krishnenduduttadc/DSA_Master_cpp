@@ -13,33 +13,31 @@ long long computeSumOfSquares(vector<int>& arr) {
 }
 
 int main() {
-    int t;
-    cin >> t;
+    // Hardcoded input
+    int t = 2; // Number of test cases
+
+    // Test case 1
+    vector<vector<int>> testCases = {
+        {2, 34, 4, 56, 76}, // First test case
+        {23, 7, 21}         // Second test case
+    };
 
     for (int i = 0; i < t; i++) {
-        int n;
-        cin >> n;
-
-        vector<int> arr(n);
-        for (int j = 0; j < n; j++) {
-            cin >> arr[j];
-            arr[j] = arr[j] % MOD;
-        }
+        int n = testCases[i].size(); // Get the number of elements for the current test case
+        vector<int> arr = testCases[i]; // Use the hardcoded values
 
         long long result = computeSumOfSquares(arr);
-        cout << result << endl;
+        cout << result << endl; // Output the result for the current test case
     }
 
     return 0;
 }
 
-
-
 /*
+Hardcoded Input:
 2
 5
 2 34 4 56 76
 3
 23 7 21
-
 */

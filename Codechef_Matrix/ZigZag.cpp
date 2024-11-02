@@ -3,37 +3,28 @@
 using namespace std;
 
 int main() {
-    int n, m;
-    cin >> n >> m; // read dimensions of the matrix
+    // Hardcoded dimensions of the matrix
+    int n = 3; // Number of rows
+    int m = 3; // Number of columns
 
-    int arr[n][m];
-    for (int i = 0; i < n; i++) { // loop through rows
-        for (int j = 0; j < m; j++) { // loop through columns
-            cin >> arr[i][j]; // read each element
+    // Hardcoded matrix elements
+    int arr[3][3] = {
+        {4, 6, 0},
+        {8, 2, 1},
+        {3, 1, 5}
+    };
+
+    bool dirl = true; // Direction toggle
+    for (int i = 0; i < n; i++) { // Loop through rows
+        for (int j = 0; j < m; j++) { // Loop through columns
+            if (dirl) {
+                cout << arr[i][j] << " "; // Print in left to right direction
+            } else {
+                cout << arr[i][m - j - 1] << " "; // Print in right to left direction
+            }
         }
+        dirl = !dirl; // Toggle the direction for the next row
     }
 
-    bool dirl = true;
-    for (int i = 0; i < n; i++) {
-
-        for (int j = 0; j < m; j++) {
-            if (dirl == true) {
-                cout << arr[i][j] << " ";
-            }
-            else if (dirl == false) {
-                cout << arr[i][m - j - 1] << " ";
-            }
-
-        }
-        dirl = !dirl;
-    }
-
+    return 0;
 }
-
-/*
-3 3
-4 6 0
-8 2 1
-3 1 5
-
-*/

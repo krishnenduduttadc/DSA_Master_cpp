@@ -18,17 +18,13 @@ int findRowWithMaxOnes(vector<vector<int>>& mat, int n, int m) {
 }
 
 int main() {
-    int n, m;
-    cin >> n >> m;  // Read the number of rows and columns
-
-    vector<vector<int>> mat(n, vector<int>(m));  // Initialize a 2D vector (matrix)
-
-    // Read the matrix
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < m; j++) {
-            cin >> mat[i][j];
-        }
-    }
+    // Hardcoded matrix dimensions and elements
+    int n = 3, m = 3;
+    vector<vector<int>> mat = {
+        {0, 1, 1},
+        {0, 1, 1},
+        {0, 1, 1}
+    };
 
     // Find the row with the maximum number of 1's
     int result = findRowWithMaxOnes(mat, n, m);
@@ -42,11 +38,3 @@ int main() {
 
     return 0;
 }
-
-/*
-3 3
-0 1 1
-0 1 1
-0 1 1
-
-*/

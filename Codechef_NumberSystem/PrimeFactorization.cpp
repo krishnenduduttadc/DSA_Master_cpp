@@ -18,16 +18,14 @@ vector<int> factor(int n) {
 }
 
 int main() {
-    int n;
-    cout << "Enter a number to factor: ";
-    n=20;
+    int n = 20; // Hardcoded number to factor
 
     // Get the prime factors
     vector<int> factors = factor(n);
 
     // Display the factors
     cout << "Prime factors of " << n << " are: ";
-    for (int i = 0; i < factors.size(); i++) {
+    for (size_t i = 0; i < factors.size(); i++) {
         cout << factors[i];
         if (i != factors.size() - 1) {
             cout << " x "; // Formatting the output with 'x' between factors

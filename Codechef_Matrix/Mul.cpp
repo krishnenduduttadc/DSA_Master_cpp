@@ -3,26 +3,18 @@
 using namespace std;
 
 int main() {
-    int m, n, p;
+    int m = 2, n = 3, p = 2;
 
-    // Input for first matrix
-    cin >> m >> n;
-    int a[m][n];
-    for (int i = 0; i < m; i++) {
-        for (int j = 0; j < n; j++) {
-            cin >> a[i][j];
-        }
-    }
+    int a[2][3] = {
+        {2, 3, 4},
+        {4, 5, 6}
+    };
 
-    // Input for second matrix
-    cin >> n >> p; // Note: n is read again to ensure matrix dimensions match
-    int b[n][p];
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < p; j++) {
-            cin >> b[i][j];
-        }
-    }
-    
+    int b[3][2] = {
+        {1, 2},
+        {3, 4},
+        {2, 2}
+    };
     
     int result[m][p];
 
@@ -36,7 +28,7 @@ int main() {
     // Perform matrix multiplication
     for (int i = 0; i < m; i++) {
         for (int j = 0; j < p; j++) {
-            for (int k = 0; k < n; k++) { // Note: 'k' runs over the common dimension n
+            for (int k = 0; k < n; k++) {
                 result[i][j] += a[i][k] * b[k][j];
             }
         }
@@ -50,16 +42,5 @@ int main() {
         cout << endl;
     }
 
-
+    return 0;
 }
-
-/*
-2 3
-2 3 4
-4 5 6
-3 2
-1 2
-3 4
-2 2
-
-*/

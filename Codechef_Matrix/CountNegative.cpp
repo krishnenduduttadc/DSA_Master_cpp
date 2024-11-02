@@ -1,7 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-
 int countNegatives(vector<vector<int>>& matrix) {
     int rows = matrix.size();
     int cols = matrix[0].size();
@@ -17,29 +16,13 @@ int countNegatives(vector<vector<int>>& matrix) {
     return negatives_count;
 }
 
-
 int main() {
-	 int n, m;
-    cin >> n >> m; // Reading the dimensions of the matrix
-    
-    vector<vector<int>> mat(n, vector<int>(m)); // Initializing a 2D vector to store the matrix
-    
-    // Loop to read the matrix elements
-    for (int i = 0; i < n; ++i) {
-        for (int j = 0; j < m; ++j) {
-            cin >> mat[i][j]; // Reading each element into the matrix
-        }
-    }
+    int n = 3, m = 4;
+    vector<vector<int>> mat = {
+        {8, 7, 6, -1},
+        {7, 7, -1, -2},
+        {4, -5, -6, -7}
+    };
     
     cout << countNegatives(mat);
-
 }
-
-
-/*
-3 4
-8 7 6 -1
-7 7 -1 -2
-4 -5 -6 -7
-
-*/

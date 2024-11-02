@@ -3,17 +3,16 @@
 using namespace std;
 
 int main() {
-    int N, M;
-    cin >> N >> M; // Read the number of rows and columns
+    // Hardcoded dimensions
+    int N = 3; // Number of rows
+    int M = 3; // Number of columns
 
-    vector<vector<int>> matrix(N, vector<int>(M)); // Define a 2D vector to store the matrix
-
-    // Read the elements of the matrix
-    for (int i = 0; i < N; i++) {
-        for (int j = 0; j < M; j++) {
-            cin >> matrix[i][j];
-        }
-    }
+    // Hardcoded matrix elements
+    vector<vector<int>> matrix = {
+        {4, 6, 0},
+        {8, 2, 1},
+        {3, 1, 5}
+    };
 
     vector<bool> zeroRows(N, false);
     vector<bool> zeroCols(M, false);
@@ -53,12 +52,6 @@ int main() {
         }
         cout << endl;
     }
+
+    return 0;
 }
-
-/*
-3 3
-4 6 0
-8 2 1
-3 1 5
-
-*/

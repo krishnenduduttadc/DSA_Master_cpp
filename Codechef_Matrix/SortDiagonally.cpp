@@ -31,16 +31,16 @@ void diagonalSort(vector<vector<int>>& matrix, int N, int M) {
 }
 
 int main() {
-    int N, M;
-    cin >> N >> M;
+    // Hardcoded dimensions
+    int N = 3; // Number of rows
+    int M = 3; // Number of columns
 
-    // Reading the matrix
-    vector<vector<int>> matrix(N, vector<int>(M));
-    for (int i = 0; i < N; i++) {
-        for (int j = 0; j < M; j++) {
-            cin >> matrix[i][j];
-        }
-    }
+    // Hardcoded matrix elements
+    vector<vector<int>> matrix = {
+        {3, 1, 5},
+        {8, 2, 1},
+        {4, 6, 0}
+    };
 
     // Sort the matrix diagonally
     diagonalSort(matrix, N, M);
@@ -55,13 +55,3 @@ int main() {
 
     return 0;
 }
-
-
-
-/*
-3 3
-3 1 5
-8 2 1
-4 6 0
-
-*/
