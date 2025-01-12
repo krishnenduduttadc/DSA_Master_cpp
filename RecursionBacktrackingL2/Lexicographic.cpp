@@ -12,7 +12,7 @@ void dfs(int i, int n) {
 }
 
 int main() {
-    int n = 40;
+    int n = 20;
     for (int i = 1; i <= 9; i++) {
         dfs(i, n);
     }

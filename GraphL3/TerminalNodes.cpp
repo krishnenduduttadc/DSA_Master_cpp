@@ -18,9 +18,9 @@ public:
 
     void printTerminalNodes() {
         vector<int> terminalNodes;
-        for (auto& [node, neighbors] : adjacencyList) {
-            if (neighbors.empty()) {
-                terminalNodes.push_back(node);
+        for (auto it = adjacencyList.begin(); it != adjacencyList.end(); ++it) {
+            if (it->second.empty()) {
+                terminalNodes.push_back(it->first);
             }
         }
         cout << "Terminal Nodes:" << endl;

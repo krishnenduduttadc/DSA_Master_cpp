@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <unordered_map>
-
+using namespace std;
 class SubarraySumEqualsK {
 public:
     static int sol(const std::vector<int>& arr, int target) {
@@ -23,8 +23,8 @@ public:
 };
 
 int main() {
-    std::vector<int> arr = {3, 9, -2, 4, 1, -7, 2, 6, -5, 8, -3, -7, 6, 2, 1};
+    vector<int> arr = {3, 9, -2, 4, 1, -7, 2, 6, -5, 8, -3, -7, 6, 2, 1};
     int k = 5;
-    std::cout << SubarraySumEqualsK::sol(arr, k) << std::endl;
+    cout << SubarraySumEqualsK::sol(arr, k) << std::endl;
     return 0;
 }
