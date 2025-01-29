@@ -1,32 +1,36 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 
 using namespace std;
-void generateParenthesisHelper(int open, int close, string current, vector < string > & result) {
+
+vector<string> generateParenthesisHelper(int open, int close, string current) {
     if (open == 0 && close == 0) {
-        result.push_back(current);
-        return;
+        return {current}; // Base case: return a vector with the completed string
     }
     
-    if(open>0){
-         generateParenthesisHelper(open - 1, close, current + "(", result);
+    vector<string> result;
+    
+    if (open > 0) {
+        vector<string> left = generateParenthesisHelper(open - 1, close, current + "(");
+        result.insert(result.end(), left.begin(), left.end());
     }
-    if(close>open){
-        generateParenthesisHelper(open,close-1,current+")",result);
+    
+    if (close > open) {
+        vector<string> right = generateParenthesisHelper(open, close - 1, current + ")");
+        result.insert(result.end(), right.begin(), right.end());
     }
-}
-
-vector < string > generateParenthesis(int n) {
-    vector < string > result;
-    generateParenthesisHelper(n, n, "", result);
+    
     return result;
 }
 
+vector<string> generateParenthesis(int n) {
+    return generateParenthesisHelper(n, n, "");
+}
+
 int main() {
-    int n;
-    cin >> n;
-    vector < string > result = generateParenthesis(n);
-    sort(result.begin(), result.end()); // Sorting the result vector
-    for (const string & s: result) {
+    int n = 3;
+    vector<string> result = generateParenthesis(n);
+    sort(result.begin(), result.end()); // Sorting to match expected output
+    for (const string s : result) {
         cout << s << endl;
     }
     return 0;
