@@ -4,7 +4,7 @@
 
 using namespace std;
 
-int solution(const string& str) {
+int solution(const string str) {
     int ans = 0;
     int i = -1;
     int j = -1;

@@ -4,7 +4,7 @@
 
 using namespace std;
 
-int sol(const vector<int>& arr) {
+int sol(const vector<int> arr) {
     int count = 0;
     unordered_map<int, int> map;
     int sum = 0;

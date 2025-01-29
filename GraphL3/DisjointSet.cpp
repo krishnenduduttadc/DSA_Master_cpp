@@ -26,7 +26,7 @@ void unionByRank(int u, int v) {
     if (rankVec[ulp_u] < rankVec[ulp_v]) { // Use rankVec here
         parent[ulp_u] = ulp_v;
     }
-    else if (rankVec[ulp_v] < rankVec[ulp_u]) { // Use rankVec here
+    else if (rankVec[ulp_u] > rankVec[ulp_v]) { // Use rankVec here
         parent[ulp_v] = ulp_u;
     }
     else {

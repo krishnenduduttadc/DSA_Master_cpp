@@ -5,7 +5,7 @@
 
 using namespace std;
 
-vector<int> distinctElementsInWindow(const vector<int>& arr, int k) {
+vector<int> distinctElementsInWindow(const vector<int> arr, int k) {
     vector<int> result;
     unordered_map<int, int> frequencyMap;
     int n = arr.size();

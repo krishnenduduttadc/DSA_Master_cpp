@@ -3,7 +3,7 @@
 #include <unordered_map>
 using namespace std;
 
-void sol(const vector<int>& arr, int k) {
+void sol(const vector<int> arr, int k) {
     unordered_map<int, int> remainderFreqMap;
     
     for (int val : arr) {

@@ -38,7 +38,7 @@ int largest3(vector<int> arr, int n) {
 
 
 
-int largestSubarrayWithZeroSum(vector<int>& arr) {
+int largestSubarrayWithZeroSum(vector<int> arr) {
     unordered_map<int, int> hm; // Maps sum to index
     int sum = 0;
     int max_len = 0;

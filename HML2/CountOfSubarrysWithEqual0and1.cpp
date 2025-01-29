@@ -4,7 +4,7 @@
 
 using namespace std;
 
-int solution(vector<int>& arr) {
+int solution(vector<int> arr) {
     unordered_map<int, int> map;
     int ans = 0;
     map[0] = 1; // Initialize with sum 0 having count 1

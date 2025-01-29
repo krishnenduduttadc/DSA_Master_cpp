@@ -4,7 +4,7 @@
 
 using namespace std;
 
-int solution(vector<int>& arr) {
+int solution(vector<int> arr) {
     int ans = 0;
     
     for (int i = 0; i < arr.size() - 1; i++) {

@@ -5,7 +5,7 @@
 
 using namespace std;
 
-int findEquivalentSubarrays(vector<int>& arr) {
+int findEquivalentSubarrays(vector<int> arr) {
     int n = arr.size();
     unordered_set<int> uniqueElements;
     for (int num : arr) {
