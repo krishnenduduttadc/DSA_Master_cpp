@@ -5,7 +5,7 @@ using namespace std;
 
 class DFSDirected {
 public:
-    static vector<int> dfs(int s, vector<bool>& vis, vector<vector<int>>& adj, vector<int>& ls) {
+    static void dfs(int s, vector<bool> vis, vector<vector<int>> adj, vector<int> &ls) {
         vis[s] = true;
         ls.push_back(s);
         for (int it : adj[s]) {
@@ -13,14 +13,12 @@ public:
                 dfs(it, vis, adj, ls);
             }
         }
-        return ls;
     }
 };
 
 int main() {
     int V = 5;
     vector<bool> vis(V + 1, false);
-    vector<int> ls;
     vector<vector<int>> adj(V + 1);
 
     adj[1].push_back(3);
@@ -32,11 +30,12 @@ int main() {
     for (int i = 1; i <= V; i++) {
         if (!vis[i]) {
             vector<int> ls;
-            res.push_back(DFSDirected::dfs(i, vis, adj, ls));
+            DFSDirected::dfs(i, vis, adj, ls);
+            res.push_back(ls);
         }
     }
 
-    for (const auto& component : res) {
+    for (vector<int> component : res) {
         for (int node : component) {
             cout << node << " ";
         }

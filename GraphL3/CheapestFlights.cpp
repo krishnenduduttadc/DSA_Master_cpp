@@ -4,7 +4,7 @@ using namespace std;
 class Solution
 {
 public:
-    int CheapestFLight(int n, vector<vector<int>> &flights,
+    int CheapestFLight(int n, vector<vector<int>> flights,
                        int src, int dst, int K)
     {
         // Create the adjacency list to depict airports and flights in

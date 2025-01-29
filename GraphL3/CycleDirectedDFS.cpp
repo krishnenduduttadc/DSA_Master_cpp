@@ -5,7 +5,7 @@ using namespace std;
 
 class CycleDirectedDFS {
 private:
-    bool dfsCheck(int node, vector<vector<int>>& adj, vector<int>& vis, vector<int>& pathVis) {
+    bool dfsCheck(int node, vector<vector<int>>& adj, vector<int> vis, vector<int> pathVis) {
         vis[node] = 1;
         pathVis[node] = 1;
 
@@ -29,7 +29,7 @@ private:
 
 public:
     // Function to detect cycle in a directed graph.
-    bool isCyclic(int V, vector<vector<int>>& adj) {
+    bool isCyclic(int V, vector<vector<int>> adj) {
         vector<int> vis(V, 0);
         vector<int> pathVis(V, 0);
 

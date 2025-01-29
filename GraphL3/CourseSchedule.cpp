@@ -6,7 +6,7 @@ using namespace std;
 
 class CourseSchedule {
 public:
-    static vector<int> findOrder(int n, int m, vector<vector<int>>& prerequisites) {
+    static vector<int> findOrder(int n, int m, vector<vector<int>> prerequisites) {
         vector<vector<int>> adj(n);
         vector<int> indegree(n, 0);
 

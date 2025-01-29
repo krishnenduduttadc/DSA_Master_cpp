@@ -12,27 +12,28 @@ private:
     int time = 0;
 
 public:
-    vector<vector<int>> criticalConnections(int n, vector<vector<int>>& connections) {
+    vector<vector<int>> criticalConnections(int n, vector<vector<int>> connections) {
         vector<vector<int>> ans;
         vector<list<int>> graph(n);
 
-        // Constructing the adjacency list representation of the graph
-        for (auto& connection : connections) {
+        // Construct adjacency list
+        for (vector<int> connection : connections) {
             int u = connection[0];
             int v = connection[1];
             graph[u].push_back(v);
             graph[v].push_back(u);
         }
 
-        // Initializing arrays for DFS
+        // Initialize arrays for DFS
         vis.assign(n, false);
         disc.assign(n, -1);
         low.assign(n, -1);
 
         // Finding bridges using DFS
-        for (int i = 0; i < n; ++i) {
+        for (int i = 0; i < n; i++) {
             if (!vis[i]) {
-                bridges(graph, i, -1, ans);
+                vector<vector<int>> bridgesResult = bridges(graph, i, -1);
+                ans.insert(ans.end(), bridgesResult.begin(), bridgesResult.end());
             }
         }
 
@@ -40,15 +41,20 @@ public:
     }
 
 private:
-    void bridges(vector<list<int>>& graph, int src, int par, vector<vector<int>>& ans) {
+    vector<vector<int>> bridges(vector<list<int>> graph, int src, int par) {
         vis[src] = true;
         disc[src] = low[src] = ++time;
+
+        vector<vector<int>> ans;
 
         for (int nbr : graph[src]) {
             if (nbr == par) continue;
             if (!vis[nbr]) {
-                bridges(graph, nbr, src, ans);
+                vector<vector<int>> childBridges = bridges(graph, nbr, src);
+                ans.insert(ans.end(), childBridges.begin(), childBridges.end());
+
                 low[src] = min(low[src], low[nbr]);
+
                 if (low[nbr] > disc[src]) {
                     ans.push_back({src, nbr});
                 }
@@ -56,6 +62,8 @@ private:
                 low[src] = min(low[src], disc[nbr]);
             }
         }
+
+        return ans;
     }
 };
 
@@ -77,7 +85,7 @@ int main() {
 
     // Printing out the critical connections
     cout << "Critical Connections (Bridges):" << endl;
-    for (auto& connection : criticalConnections) {
+    for (vector<int> connection : criticalConnections) {
         cout << connection[0] << " - " << connection[1] << endl;
     }
 

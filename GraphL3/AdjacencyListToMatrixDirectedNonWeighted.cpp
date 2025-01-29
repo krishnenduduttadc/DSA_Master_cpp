@@ -2,7 +2,7 @@
 #include <vector>
 using namespace std;
 
-vector<vector<int>> convertToAdjacencyMatrix(vector<vector<int>>& adj, int V) {
+vector<vector<int>> convertToAdjacencyMatrix(vector<vector<int>> adj, int V) {
     vector<vector<int>> adjacencyMatrix(V + 1, vector<int>(V + 1, 0));
 
     for (int i = 1; i <= V; ++i) {

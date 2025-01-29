@@ -12,7 +12,7 @@ struct Edge {
     }
 };
 
-vector<vector<int>> convertToAdjacencyMatrix(vector<vector<Edge>>& adj, int V) {
+vector<vector<int>> convertToAdjacencyMatrix(vector<vector<Edge>> adj, int V) {
     vector<vector<int>> adjmat(V + 1, vector<int>(V + 1, 0));
 
     for (int i = 1; i <= V; ++i) {
