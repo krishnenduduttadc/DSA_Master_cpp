@@ -7,8 +7,8 @@ using namespace std;
 // Definition for a binary tree node.
 struct TreeNode {
     int val;
-    TreeNode *left;
-    TreeNode *right;
+    TreeNode* left;
+    TreeNode* right;
     TreeNode(int x) {
         val = x;
         left = nullptr;
@@ -16,45 +16,45 @@ struct TreeNode {
     }
 };
 
-class TopView {
-public:
-    vector<int> topView(TreeNode* root) {
-        vector<int> topViewNodes;
-        if (!root) {
-            return topViewNodes;
-        }
-
-        map<int, int> hdMap; // TreeMap equivalent in Java
-        queue<pair<TreeNode*, int>> q; // Queue to store node and its horizontal distance
-
-        q.push({root, 0});
-
-        while (!q.empty()) {
-            TreeNode* node = q.front().first;
-            int hd = q.front().second;
-            q.pop();
-
-            if (hdMap.find(hd) == hdMap.end()) { // If hd is not in the map, add it
-                hdMap[hd] = node->val;
-            }
-
-            if (node->left) {
-                q.push({node->left, hd - 1});
-            }
-
-            if (node->right) {
-                q.push({node->right, hd + 1});
-            }
-        }
-
-        // Extract values from map to result vector
-        for (const auto& pair : hdMap) {
-            topViewNodes.push_back(pair.second);
-        }
-
+// Function to compute the top view of a binary tree
+vector<int> topView(TreeNode* root) {
+    vector<int> topViewNodes;
+    if (!root) {
         return topViewNodes;
     }
-};
+
+    map<int, int> hdMap; // Horizontal Distance Map (hd -> node value)
+    queue<pair<TreeNode*, int>> q; // Queue to store nodes and their horizontal distance
+
+    q.push({root, 0}); // Start with the root node at horizontal distance 0
+
+    while (!q.empty()) {
+        TreeNode* node = q.front().first;
+        int hd = q.front().second;
+        q.pop();
+
+        // If this horizontal distance is not already in the map, add the node value
+        if (hdMap.find(hd) == hdMap.end()) {
+            hdMap[hd] = node->val;
+        }
+
+        // Enqueue left and right children with updated horizontal distances
+        if (node->left) {
+            q.push({node->left, hd - 1});
+        }
+
+        if (node->right) {
+            q.push({node->right, hd + 1});
+        }
+    }
+
+    // Extract values from the map in order of horizontal distance
+    for (const auto& pair : hdMap) {
+        topViewNodes.push_back(pair.second);
+    }
+
+    return topViewNodes;
+}
 
 // Utility function to create a new node
 TreeNode* newNode(int key) {
@@ -63,7 +63,7 @@ TreeNode* newNode(int key) {
 }
 
 int main() {
-    TopView tree;
+    // Constructing the binary tree
     TreeNode* root = newNode(1);
     root->left = newNode(2);
     root->right = newNode(3);
@@ -71,7 +71,8 @@ int main() {
     root->left->right->right = newNode(5);
     root->left->right->right->right = newNode(6);
 
-    vector<int> result = tree.topView(root);
+    // Get the top view of the binary tree
+    vector<int> result = topView(root);
 
     // Print the top view of the binary tree
     cout << "Top view of the binary tree:" << endl;

@@ -14,45 +14,38 @@ struct TreeNode {
     }
 };
 
-// DiagonalOrder class definition
-class DiagonalOrder {
-public:
-    // Function to perform diagonal order traversal of a binary tree
-    std::vector<std::vector<int>> diagonalOrder(TreeNode* root) {
-        std::vector<std::vector<int>> ans;
-        if (root == nullptr) return ans;
+// Function to perform diagonal order traversal of a binary tree
+std::vector<std::vector<int>> diagonalOrder(TreeNode* root) {
+    std::vector<std::vector<int>> ans;
+    if (root == nullptr) return ans;
 
-        std::queue<TreeNode*> que;
-        que.push(root);
+    std::queue<TreeNode*> que;
+    que.push(root);
 
-        while (!que.empty()) {
-            int size = que.size();
-            std::vector<int> smallAns;
+    while (!que.empty()) {
+        int size = que.size();
+        std::vector<int> smallAns;
 
-            while (size--) {
-                TreeNode* node = que.front();
-                que.pop();
+        while (size--) {
+            TreeNode* node = que.front();
+            que.pop();
 
-                while (node != nullptr) {
-                    smallAns.push_back(node->val);
+            while (node != nullptr) {
+                smallAns.push_back(node->val);
 
-                    if (node->left) que.push(node->left);
+                if (node->left) que.push(node->left);
 
-                    node = node->right;
-                }
+                node = node->right;
             }
-
-            ans.push_back(smallAns);
         }
 
-        return ans;
+        ans.push_back(smallAns);
     }
-};
 
-// Main function
+    return ans;
+}
+
 int main() {
-    DiagonalOrder solution;
-
     // Constructing the binary tree
     TreeNode* root = new TreeNode(1);
     root->left = new TreeNode(2);
@@ -63,7 +56,7 @@ int main() {
     root->right->right = new TreeNode(7);
 
     // Calling diagonalOrder function and printing the result
-    std::vector<std::vector<int>> ans = solution.diagonalOrder(root);
+    std::vector<std::vector<int>> ans = diagonalOrder(root);
 
     std::cout << "Diagonal Order Traversal:\n";
     for (const auto& level : ans) {
@@ -74,6 +67,7 @@ int main() {
     }
 
     // Deallocating memory to avoid memory leaks
+    delete root->right->right;
     delete root->right->left;
     delete root->left->right;
     delete root->left->left;

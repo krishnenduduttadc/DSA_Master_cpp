@@ -12,27 +12,21 @@ struct TreeNode {
     }
 };
 
-// PathSum class definition
-class PathSum {
-public:
-    // Function to check if there exists a path from root to a leaf node
-    // whose sum of values equals targetSum
-    static bool hasPathSum(TreeNode* root, int targetSum) {
-        if (root == nullptr) {
-            return false;
-        }
-        if (root->left == nullptr && root->right == nullptr) {
-            return (targetSum - root->val) == 0;
-        }
-
-        return hasPathSum(root->left, targetSum - root->val) || hasPathSum(root->right, targetSum - root->val);
+// Function to check if there exists a path from root to a leaf node
+// whose sum of values equals targetSum
+bool hasPathSum(TreeNode* root, int targetSum) {
+    if (root == nullptr) {
+        return false;
     }
-};
+    if (root->left == nullptr && root->right == nullptr) {
+        return (targetSum - root->val) == 0;
+    }
+
+    return hasPathSum(root->left, targetSum - root->val) || hasPathSum(root->right, targetSum - root->val);
+}
 
 // Main function
 int main() {
-    PathSum solution;
-
     // Constructing the binary tree
     TreeNode* root = new TreeNode(1);
     root->left = new TreeNode(2);
@@ -43,7 +37,7 @@ int main() {
     root->right->right = new TreeNode(7);
 
     // Calling hasPathSum function and printing the result
-    bool ans = PathSum::hasPathSum(root, 11);
+    bool ans = hasPathSum(root, 11);
     std::cout << std::boolalpha << ans << std::endl;  // Output: true
 
     // Deallocating memory to avoid memory leaks

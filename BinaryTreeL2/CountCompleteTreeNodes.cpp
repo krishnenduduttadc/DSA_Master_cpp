@@ -1,5 +1,5 @@
 #include <iostream>
-#include <cmath> // for pow function
+#include <cmath> // For pow function
 
 // TreeNode structure definition
 struct TreeNode {
@@ -13,39 +13,31 @@ struct TreeNode {
     }
 };
 
-// CountCompleteTreeNodes class definition
-class CountCompleteTreeNodes {
-public:
-    // Function to count nodes in a complete binary tree
-    int countNodes(TreeNode* root) {
-        if (root == nullptr) return 0;
-        
-        int leftHeight = getHeight(root, true);
-        int rightHeight = getHeight(root, false);
-        
-        if (leftHeight == rightHeight) {
-            return std::pow(2, leftHeight) - 1;
-        }
-        
-        return 1 + countNodes(root->left) + countNodes(root->right);
+// Function to calculate the height of the tree (left or right)
+int getHeight(TreeNode* node, bool isLeft) {
+    int height = 0;
+    while (node != nullptr) {
+        height++;
+        node = isLeft ? node->left : node->right;
+    }
+    return height;
+}
+
+// Function to count nodes in a complete binary tree
+int countNodes(TreeNode* root) {
+    if (root == nullptr) return 0;
+
+    int leftHeight = getHeight(root, true);
+    int rightHeight = getHeight(root, false);
+
+    if (leftHeight == rightHeight) {
+        return std::pow(2, leftHeight) - 1;
     }
 
-private:
-    // Function to calculate height of the tree
-    int getHeight(TreeNode* node, bool isLeft) {
-        int height = 0;
-        while (node != nullptr) {
-            height++;
-            node = isLeft ? node->left : node->right;
-        }
-        return height;
-    }
-};
+    return 1 + countNodes(root->left) + countNodes(root->right);
+}
 
-// Main function
 int main() {
-    CountCompleteTreeNodes solution;
-
     // Constructing the tree
     TreeNode* root = new TreeNode(1);
     root->left = new TreeNode(2);
@@ -55,7 +47,7 @@ int main() {
     root->right->left = new TreeNode(6);
 
     // Calling countNodes function and printing the result
-    std::cout << "Number of nodes: " << solution.countNodes(root) << std::endl;  // Output: 6
+    std::cout << "Number of nodes: " << countNodes(root) << std::endl;  // Output: 6
 
     // Deallocating memory to avoid memory leaks
     delete root->right->left;
