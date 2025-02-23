@@ -2,37 +2,34 @@
 #include <vector>
 using namespace std;
 
-class PrintBoundary {
-public:
-    static void printBoundary(vector<vector<int>>& mat) {
-        int n = mat.size();
-        int m = mat[0].size();
+void printBoundary(vector<vector<int>>& mat) {
+    int n = mat.size();
+    int m = mat[0].size();
 
-        // Print top row
-        for (int j = 0; j < m; j++) {
-            cout << mat[0][j] << " ";
-        }
+    // Print top row
+    for (int j = 0; j < m; j++) {
+        cout << mat[0][j] << " ";
+    }
 
-        // Print right column (excluding the top and bottom elements already printed)
-        for (int i = 1; i < n; i++) {
-            cout << mat[i][m - 1] << " ";
-        }
+    // Print right column (excluding the top and bottom elements already printed)
+    for (int i = 1; i < n; i++) {
+        cout << mat[i][m - 1] << " ";
+    }
 
-        // Print bottom row (excluding the bottom-right corner already printed)
-        if (n > 1) {
-            for (int j = m - 2; j >= 0; j--) {
-                cout << mat[n - 1][j] << " ";
-            }
-        }
-
-        // Print left column (excluding the top-left and bottom-left corners already printed)
-        if (m > 1) {
-            for (int i = n - 2; i > 0; i--) {
-                cout << mat[i][0] << " ";
-            }
+    // Print bottom row (excluding the bottom-right corner already printed)
+    if (n > 1) {
+        for (int j = m - 2; j >= 0; j--) {
+            cout << mat[n - 1][j] << " ";
         }
     }
-};
+
+    // Print left column (excluding the top-left and bottom-left corners already printed)
+    if (m > 1) {
+        for (int i = n - 2; i > 0; i--) {
+            cout << mat[i][0] << " ";
+        }
+    }
+}
 
 int main() {
     vector<vector<int>> mat = {
@@ -43,7 +40,7 @@ int main() {
         {21, 22, 23, 24, 25}
     };
 
-    PrintBoundary::printBoundary(mat);
+    printBoundary(mat);
     cout << endl;
 
     return 0;

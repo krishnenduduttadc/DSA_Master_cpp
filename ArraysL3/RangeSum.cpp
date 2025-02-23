@@ -2,33 +2,27 @@
 #include <vector>
 using namespace std;
 
-class RangeSum {
-private:
-    static vector<int> psum;
+vector<int> prefixSum;
 
-public:
-    static void NumArray(vector<int>& nums) {
-        psum.resize(nums.size());
-        psum[0] = nums[0];
-        for (int i = 1; i < nums.size(); i++) {
-            psum[i] = psum[i - 1] + nums[i];
-        }
+void NumArray(vector<int>& nums) {
+    prefixSum.resize(nums.size());
+    prefixSum[0] = nums[0];
+    for (int i = 1; i < nums.size(); i++) {
+        prefixSum[i] = prefixSum[i - 1] + nums[i];
     }
+}
 
-    static int sumRange(int i, int j) {
-        if (i == 0) {
-            return psum[j];
-        }
-        return psum[j] - psum[i - 1];
+int sumRange(int i, int j) {
+    if (i == 0) {
+        return prefixSum[j];
     }
-};
-
-vector<int> RangeSum::psum; // Definition of static member variable
+    return prefixSum[j] - prefixSum[i - 1];
+}
 
 int main() {
     vector<int> arr = {1, 2, 3, 4};
-    RangeSum::NumArray(arr);
-    int res = RangeSum::sumRange(1, 2);
+    NumArray(arr);
+    int res = sumRange(1, 2);
     cout << res << endl; // Output should be 5
 
     return 0;

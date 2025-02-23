@@ -2,32 +2,29 @@
 #include <vector>
 using namespace std;
 
-class RotateImage {
-public:
-    void rotate(vector<vector<int>>& matrix) {
-        int n = matrix.size();
-        int m = matrix[0].size();
+void rotate(vector<vector<int>>& matrix) {
+    int n = matrix.size();
+    int m = matrix[0].size();
 
-        // Transpose the matrix
-        for (int i = 0; i < n; i++) {
-            for (int j = i; j < m; j++) {
-                swap(matrix[i][j], matrix[j][i]);
-            }
-        }
-
-        // Reverse each row
-        for (int i = 0; i < n; i++) {
-            int sp = 0;
-            int ep = m - 1;
-
-            while (sp < ep) {
-                swap(matrix[i][sp], matrix[i][ep]);
-                sp++;
-                ep--;
-            }
+    // Transpose the matrix
+    for (int i = 0; i < n; i++) {
+        for (int j = i; j < m; j++) {
+            swap(matrix[i][j], matrix[j][i]);
         }
     }
-};
+
+    // Reverse each row
+    for (int i = 0; i < n; i++) {
+        int sp = 0;
+        int ep = m - 1;
+
+        while (sp < ep) {
+            swap(matrix[i][sp], matrix[i][ep]);
+            sp++;
+            ep--;
+        }
+    }
+}
 
 // Function to print the 2D matrix
 void print2DArray(const vector<vector<int>>& array) {
@@ -40,8 +37,6 @@ void print2DArray(const vector<vector<int>>& array) {
 }
 
 int main() {
-    RotateImage solution;
-
     vector<vector<int>> matrix = {
         {1, 2, 3},
         {4, 5, 6},
@@ -51,7 +46,7 @@ int main() {
     cout << "Original matrix:" << endl;
     print2DArray(matrix);
 
-    solution.rotate(matrix);
+    rotate(matrix);
 
     cout << "Rotated matrix:" << endl;
     print2DArray(matrix);
