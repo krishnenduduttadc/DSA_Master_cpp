@@ -20,14 +20,14 @@ public:
 
         // Source initialised with dist=0.
         distTo[S] = 0;
-        pq.push({0, S});
+        pq.push({S, 0});
 
         // Now, pop the minimum distance node first from the min-heap
         // and traverse for all its adjacent nodes.
         while (!pq.empty())
         {
-            int node = pq.top().second;
-            int dis = pq.top().first;
+            int node = pq.top().first;
+            int dis = pq.top().second;
             pq.pop();
 
             // Check for all adjacent nodes of the popped out
@@ -42,7 +42,7 @@ public:
     
                     // If current distance is smaller,
                     // push it into the queue.
-                    pq.push({dis + w, v});
+                    pq.push({v,dis + w});
                 }
             }
         }
