@@ -2,12 +2,12 @@
 using namespace std;
 
 class Solution {
-  private: 
-  bool detect(int src, vector<int> adj[], int vis[]) {
-      vis[src] = 1; 
+    public:
+    bool detect(int s, vector<int> adj[], int vis[]) {
+      vis[s] = 1; 
       // store <source node, parent node>
       queue<pair<int,int>> q; 
-      q.push({src, -1}); 
+      q.push({s, -1}); 
       // traverse until queue is not empty
       while(!q.empty()) {
           int node = q.front().first; 
@@ -15,14 +15,14 @@ class Solution {
           q.pop(); 
           
           // go to all adjacent nodes
-          for(auto adjacentNode: adj[node]) {
+          for(auto it: adj[node]) {
               // if adjacent node is unvisited
-              if(!vis[adjacentNode]) {
-                  vis[adjacentNode] = 1; 
-                  q.push({adjacentNode, node}); 
+              if(!vis[it]) {
+                  vis[it] = 1; 
+                  q.push({it, node}); 
               }
               // if adjacent node is visited and is not it's own parent node
-              else if(parent != adjacentNode) {
+              else if(parent != it) {
                   // yes it is a cycle
                   return true; 
               }
@@ -31,7 +31,6 @@ class Solution {
       // there's no cycle
       return false; 
   }
-  public:
     // Function to detect cycle in an undirected graph.
     bool isCycle(int V, vector<int> adj[]) {
         // initialise them as unvisited 

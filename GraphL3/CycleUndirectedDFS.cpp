@@ -6,14 +6,14 @@ class Solution {
     bool dfs(int node, int parent, int vis[], vector<int> adj[]) {
         vis[node] = 1; 
         // visit adjacent nodes
-        for(auto adjacentNode: adj[node]) {
+        for(auto it: adj[node]) {
             // unvisited adjacent node
-            if(!vis[adjacentNode]) {
-                if(dfs(adjacentNode, node, vis, adj) == true) 
+            if(!vis[it]) {
+                if(dfs(it, node, vis, adj) == true) 
                     return true; 
             }
             // visited node but not a parent node
-            else if(adjacentNode != parent) return true; 
+            else if(it != parent) return true; 
         }
         return false; 
     }
