@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <unordered_map>
+using namespace std;
 
 class LongestSubstringWithNonRepeatingCharacters {
 public:
@@ -50,7 +51,7 @@ public:
 };
 
 int main() {
-    std::string str = "aabcbcdbca";
-    std::cout << LongestSubstringWithNonRepeatingCharacters::solution(str) << std::endl;
+    string str = "aabcbcdbca";
+    cout << LongestSubstringWithNonRepeatingCharacters::solution(str) << std::endl;
     return 0;
 }

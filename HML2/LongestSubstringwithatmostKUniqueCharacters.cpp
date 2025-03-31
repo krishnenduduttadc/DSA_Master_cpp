@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <unordered_map>
+using namespace std;
 
 class LongestSubstringWithAtMostKUniqueCharacters {
 public:
@@ -60,8 +61,8 @@ public:
 };
 
 int main() {
-    std::string str = "ddacbbaccdedacebb";
+    string str = "ddacbbaccdedacebb";
     int k = 3;
-    std::cout << LongestSubstringWithAtMostKUniqueCharacters::sol(str, k) << std::endl;
+    cout << LongestSubstringWithAtMostKUniqueCharacters::sol(str, k) << std::endl;
     return 0;
 }

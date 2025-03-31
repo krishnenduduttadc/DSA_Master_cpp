@@ -1,11 +1,12 @@
 #include <iostream>
 #include <string>
 #include <unordered_map>
+using namespace std;
 
 class ValidAnagrams {
 public:
-    static bool sol(const std::string& s1, const std::string& s2) {
-        std::unordered_map<char, int> map;
+    static bool sol(const string& s1, const string& s2) {
+        unordered_map<char, int> map;
         for (char ch : s1) {
             map[ch]++;
         }
@@ -24,8 +25,8 @@ public:
 };
 
 int main() {
-    std::string s1 = "abbcaad";
-    std::string s2 = "babacda";
-    std::cout << (ValidAnagrams::sol(s1, s2) ? "true" : "false") << std::endl;
+    string s1 = "abbcaad";
+    string s2 = "babacda";
+    cout << (ValidAnagrams::sol(s1, s2) ? "true" : "false") << std::endl;
     return 0;
 }
