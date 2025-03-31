@@ -4,7 +4,12 @@ using namespace std;
 
 int eggDrop(int n, int k) {
     // Initialize a 2D array for DP table
-    int dp[n + 1][k + 1] = {0}; // Array with (n + 1) rows and (k + 1) columns
+    int dp[n + 1][k + 1]; // Array with (n + 1) rows and (k + 1) columns
+    for (int i = 0; i <= n; i++) {
+        for (int j = 0; j <= k; j++) {
+            dp[i][j] = 0;
+        }
+    }
 
     // Fill the DP table
     for (int i = 1; i <= n; i++) {
