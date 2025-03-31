@@ -10,26 +10,26 @@ int main() {
     int m = s1.length();
     int n = s2.length();
 
-    // Initialize the 2D array with dimensions (m+1) x (n+1)
-    int dp[m + 1][n + 1] = {0};
+    int dp[m + 1][n + 1];
 
-    // Fill the dp array
-    for (int i = 0; i <= m; i++) {
-        for (int j = 0; j <= n; j++) {
-            if (i == 0) {
-                dp[i][j] = j; // If s1 is empty, insert all characters of s2
-            } else if (j == 0) {
-                dp[i][j] = i; // If s2 is empty, remove all characters of s1
+    // Base cases
+    for (int i = 0; i <= m; i++) dp[i][0] = i; // Deleting all characters
+    for (int j = 0; j <= n; j++) dp[0][j] = j; // Inserting all characters
+
+    // Fill the DP table
+    for (int i = 1; i <= m; i++) {
+        for (int j = 1; j <= n; j++) {
+            if (s1[i - 1] == s2[j - 1]) {
+                dp[i][j] = dp[i - 1][j - 1]; // No operation needed
             } else {
-                int f1 = 1 + dp[i - 1][j - 1]; // Replace
-                int f2 = 1 + dp[i - 1][j];     // Delete
-                int f3 = 1 + dp[i][j - 1];     // Insert
-                dp[i][j] = min({f1, f2, f3});
+                dp[i][j] = 1 + min({dp[i - 1][j - 1], // Replace
+                                    dp[i - 1][j],     // Delete
+                                    dp[i][j - 1]});   // Insert
             }
         }
     }
 
-    cout << dp[m][n] << endl; // Output the result
+    cout << dp[m][n] << endl; // Output the minimum edit distance
 
     return 0;
 }

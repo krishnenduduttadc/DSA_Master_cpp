@@ -4,8 +4,8 @@
 using namespace std;
 
 int main() {
-    vector<int> coins = {2, 3, 5, 6};
-    int tar = 10;
+    vector<int> coins = {2, 3, 5};
+    int tar = 7;
     vector<int> dp(tar + 1, 0);
     dp[0] = 1; // Base case: 1 way to make amount 0 (using no coins)
 
