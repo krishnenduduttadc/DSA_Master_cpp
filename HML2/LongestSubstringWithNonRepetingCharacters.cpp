@@ -5,12 +5,12 @@ using namespace std;
 
 class LongestSubstringWithNonRepeatingCharacters {
 public:
-    static int solution(const std::string& str) {
+    static int solution(const string& str) {
         int ans = 0;
         int i = -1;
         int j = -1;
 
-        std::unordered_map<char, int> map;
+        unordered_map<char, int> map;
         while (true) {
             bool f1 = false;
             bool f2 = false;

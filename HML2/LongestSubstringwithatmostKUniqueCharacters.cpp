@@ -5,7 +5,7 @@ using namespace std;
 
 class LongestSubstringWithAtMostKUniqueCharacters {
 public:
-    static int sol(const std::string& str, int k) {
+    static int sol(const string& str, int k) {
         int ans = 0;
         int i = -1;
         int j = -1;

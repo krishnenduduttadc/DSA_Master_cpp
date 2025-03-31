@@ -4,9 +4,9 @@
 using namespace std;
 class SubarraySumEqualsK {
 public:
-    static int sol(const std::vector<int>& arr, int target) {
+    static int sol(const vector<int>& arr, int target) {
         int ans = 0;
-        std::unordered_map<int, int> map;
+        unordered_map<int, int> map;
         map[0] = 1;
         int sum = 0;
 
