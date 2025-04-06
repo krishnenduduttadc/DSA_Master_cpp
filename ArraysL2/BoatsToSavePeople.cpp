@@ -3,7 +3,7 @@
 #include <algorithm>
 using namespace std;
 
-int numRescueBoats(vector<int>& people, int limit) {
+int numRescueBoats(vector<int> people, int limit) {
     int boats = 0;
     sort(people.begin(), people.end());
 

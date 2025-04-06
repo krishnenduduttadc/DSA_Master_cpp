@@ -3,7 +3,7 @@
 #include <algorithm>
 using namespace std;
 
-vector<vector<int>> twoSum(vector<int>& nums, int target) {
+vector<vector<int>> twoSum(vector<int> nums, int target) {
     vector<vector<int>> res;
     int n = nums.size();
     sort(nums.begin(), nums.end()); // Sorting the array
