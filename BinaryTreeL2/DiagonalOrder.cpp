@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <queue>
+using namespace std;
 
 // TreeNode structure definition
 struct TreeNode {
@@ -15,11 +16,11 @@ struct TreeNode {
 };
 
 // Function to perform diagonal order traversal of a binary tree
-std::vector<std::vector<int>> diagonalOrder(TreeNode* root) {
-    std::vector<std::vector<int>> ans;
+vector<vector<int>> diagonalOrder(TreeNode* root) {
+    vector<vector<int>> ans;
     if (root == nullptr) return ans;
 
-    std::queue<TreeNode*> que;
+    queue<TreeNode*> que;
     que.push(root);
 
     while (!que.empty()) {
@@ -56,14 +57,14 @@ int main() {
     root->right->right = new TreeNode(7);
 
     // Calling diagonalOrder function and printing the result
-    std::vector<std::vector<int>> ans = diagonalOrder(root);
+    vector<vector<int>> ans = diagonalOrder(root);
 
-    std::cout << "Diagonal Order Traversal:\n";
-    for (const auto& level : ans) {
+    cout << "Diagonal Order Traversal:\n";
+    for (const auto level : ans) {
         for (int num : level) {
-            std::cout << num << " ";
+            cout << num << " ";
         }
-        std::cout << "\n";
+        cout << "\n";
     }
 
     // Deallocating memory to avoid memory leaks
