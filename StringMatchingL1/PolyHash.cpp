@@ -5,7 +5,7 @@ using namespace std;
 long long poly_hash(const string& s) {
     long long hash = 0;
     long long p = 31;
-    long long mod = 1e9 + 7;
+    const long long mod = 1000000007;
     long long p_power = 1;
 
     for (int i = 0; i < s.length(); i++) {
