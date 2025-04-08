@@ -22,6 +22,6 @@ int main() {
     vector<int> arr = {10, 7, 8, 20, 12};
     int x = 32;
 
-    cout << std::boolalpha << pairWithGivenSum(arr, x) << endl;
+    cout << boolalpha << pairWithGivenSum(arr, x) << endl;
     return 0;
 }
