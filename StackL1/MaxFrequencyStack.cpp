@@ -15,7 +15,7 @@ public:
     }
 
     void push(int val) {
-        int f = fmap[val]++;
+        int f = ++fmap[val];
         st[f].push(val);
         maxfreq = max(maxfreq, f);
     }
