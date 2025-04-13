@@ -1,74 +1,103 @@
 #include <iostream>
-#include <stack>
 using namespace std;
 
-// Node class definition
+// Node class for the linked list
 class Node {
 public:
-    int data;
-    Node* ptr;
-
-    Node(int d) {
-        data = d;
-        ptr = nullptr;
+    int val;
+    Node* next;
+    
+    Node(int val) {
+        this->val = val;
+        this->next = nullptr;
     }
 };
 
-// Function to check if a linked list is palindrome
-bool isPalindrome(Node* head) {
-    Node* slow = head;
-    bool ispalin = true;
-    stack<int> stack;
+// Function to find the middle node of the linked list
+Node* midNode(Node* head) {
+    if (head == nullptr || head->next == nullptr) return head;
 
-    // Push elements onto stack
-    while (slow != nullptr) {
-        stack.push(slow->data);
-        slow = slow->ptr;
+    Node* slow = head;
+    Node* fast = head;
+
+    while (fast->next != nullptr && fast->next->next != nullptr) {
+        slow = slow->next;
+        fast = fast->next->next;
     }
 
-    // Check palindrome by popping elements from stack
-    while (head != nullptr) {
-        int i = stack.top();
-        stack.pop();
-        if (head->data == i) {
-            ispalin = true;
-        } else {
-            ispalin = false;
+    return slow;
+}
+
+// Function to reverse a linked list
+Node* reverseOfLL(Node* head) {
+    if (head == nullptr || head->next == nullptr) return head;
+
+    Node* prev = nullptr;
+    Node* curr = head;
+    Node* forw = nullptr;
+
+    while (curr != nullptr) {
+        forw = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = forw;
+    }
+
+    return prev;
+}
+
+// Function to check if a linked list is a palindrome
+bool isPalindrome(Node* head) {
+    if (head == nullptr || head->next == nullptr) return true;
+
+    // Find the middle of the linked list
+    Node* mid = midNode(head);
+
+    // Reverse the second half of the list
+    Node* nHead = mid->next;
+    mid->next = nullptr;  // Split the list into two halves
+    nHead = reverseOfLL(nHead);
+
+    // Compare the two halves
+    Node* c1 = head;
+    Node* c2 = nHead;
+
+    bool res = true;
+    while (c2 != nullptr) {  // Only need to compare until c2 ends
+        if (c1->val != c2->val) {
+            res = false;
             break;
         }
-        head = head->ptr;
+        c1 = c1->next;
+        c2 = c2->next;
     }
-    return ispalin;
+
+    // Restore the original list
+    nHead = reverseOfLL(nHead);
+    mid->next = nHead;
+
+    return res;
+}
+
+// Function to create a linked list from an array of integers
+Node* createList(int values[], int n) {
+    Node* dummy = new Node(-1);
+    Node* prev = dummy;
+    for (int i = 0; i < n; ++i) {
+        prev->next = new Node(values[i]);
+        prev = prev->next;
+    }
+    return dummy->next;
 }
 
 int main() {
-    // Create nodes and form a linked list: 1->2->3->4->3->2->1
-    Node* one = new Node(1);
-    Node* two = new Node(2);
-    Node* three = new Node(3);
-    Node* four = new Node(4);
-    Node* five = new Node(3);
-    Node* six = new Node(2);
-    Node* seven = new Node(1);
-    one->ptr = two;
-    two->ptr = three;
-    three->ptr = four;
-    four->ptr = five;
-    five->ptr = six;
-    six->ptr = seven;
+    // Hardcoding the linked list: 1 -> 2 -> 3 -> 2 -> 1
+    int arr[] = {1, 2, 3, 2, 1};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    Node* head = createList(arr, n);
 
-    // Check if the linked list is palindrome
-    bool condition = isPalindrome(one);
-    cout << "isPalidrome: " << boolalpha << condition << endl;
-
-    // Clean up allocated memory
-    delete one;
-    delete two;
-    delete three;
-    delete four;
-    delete five;
-    delete six;
-    delete seven;
+    // Checking if the linked list is a palindrome
+    cout << boolalpha << isPalindrome(head) << endl;  // should print true
 
     return 0;
 }

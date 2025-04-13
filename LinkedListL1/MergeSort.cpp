@@ -2,126 +2,113 @@
 
 using namespace std;
 
-// Node class definition
-class Node {
-public:
+// Definition for a singly-linked list node
+struct ListNode {
     int data;
-    Node* next;
+    ListNode* next;
 
-    Node(int data) {
-        this->data = data;
-        this->next = nullptr;
+    ListNode(int x) {
+        data = x;
+        next = nullptr;
     }
 };
 
-// LinkedList class definition
-class LinkedList {
-public:
-    Node* head;
-    Node* tail;
-    int size;
+// Function to merge two sorted linked lists
+ListNode* merge(ListNode* h1, ListNode* h2) {
+    if (h1 == nullptr) return h2;
+    if (h2 == nullptr) return h1;
 
-    LinkedList() {
-        head = nullptr;
-        tail = nullptr;
-        size = 0;
+    ListNode* ans = nullptr;
+    ListNode* t = nullptr;
+
+    if (h1->data < h2->data) {
+        ans = h1;
+        t = h1;
+        h1 = h1->next;
+    } else {
+        ans = h2;
+        t = h2;
+        h2 = h2->next;
     }
 
-    // Method to add a node at the end of the list
-    void addLast(int val) {
-        Node* newNode = new Node(val);
-        if (size == 0) {
-            head = tail = newNode;
+    while (h1 != nullptr && h2 != nullptr) {
+        if (h1->data < h2->data) {
+            t->next = h1;
+            t = t->next;
+            h1 = h1->next;
         } else {
-            tail->next = newNode;
-            tail = newNode;
+            t->next = h2;
+            t = t->next;
+            h2 = h2->next;
         }
-        size++;
     }
 
-    // Method to display the elements of the list
-    void display() {
-        Node* temp = head;
-        while (temp != nullptr) {
-            cout << temp->data << " ";
-            temp = temp->next;
-        }
-        cout << endl;
+    if (h1 != nullptr) t->next = h1;
+    if (h2 != nullptr) t->next = h2;
+
+    return ans;
+}
+
+// Function to find the middle of the linked list
+ListNode* mid(ListNode* h) {
+    ListNode* slow = h;
+    ListNode* fast = h;
+
+    while (fast != nullptr && fast->next != nullptr) {
+        slow = slow->next;
+        fast = fast->next->next;
     }
 
-    // Method to merge two sorted linked lists
-    static LinkedList* mergeTwoSortedLists(LinkedList* l1, LinkedList* l2) {
-        LinkedList* mergedList = new LinkedList();
+    return slow;
+}
 
-        Node* one = l1->head;
-        Node* two = l2->head;
-        while (one != nullptr && two != nullptr) {
-            if (one->data < two->data) {
-                mergedList->addLast(one->data);
-                one = one->next;
-            } else {
-                mergedList->addLast(two->data);
-                two = two->next;
-            }
-        }
+// Function to perform merge sort on the linked list
+ListNode* mergeSort(ListNode* h1) {
+    if (h1 == nullptr || h1->next == nullptr) return h1;
 
-        while (one != nullptr) {
-            mergedList->addLast(one->data);
-            one = one->next;
-        }
+    ListNode* m = mid(h1);
+    ListNode* h2 = m->next;
+    m->next = nullptr;
 
-        while (two != nullptr) {
-            mergedList->addLast(two->data);
-            two = two->next;
-        }
+    ListNode* t1 = mergeSort(h1);
+    ListNode* t2 = mergeSort(h2);
+    ListNode* t3 = merge(t1, t2);
 
-        return mergedList;
+    return t3;
+}
+
+// Function to print the linked list
+void printList(ListNode* head) {
+    ListNode* temp = head;
+    while (temp != nullptr) {
+        cout << temp->data << " ";
+        temp = temp->next;
     }
-
-    // Method to find the middle node of the list for merge sort
-    static Node* midNode(Node* head, Node* tail) {
-        Node* slow = head;
-        Node* fast = head;
-        while (fast != tail && fast->next != tail) {
-            slow = slow->next;
-            fast = fast->next->next;
-        }
-        return slow;
-    }
-
-    // Method to perform merge sort on the linked list
-    static LinkedList* mergeSort(Node* head, Node* tail) {
-        if (head == tail) {
-            LinkedList* singleNodeList = new LinkedList();
-            singleNodeList->addLast(head->data);
-            return singleNodeList;
-        }
-
-        Node* mid = midNode(head, tail);
-        LinkedList* firstHalf = mergeSort(head, mid);
-        LinkedList* secondHalf = mergeSort(mid->next, tail);
-
-        return mergeTwoSortedLists(firstHalf, secondHalf);
-    }
-};
+    cout << endl;
+}
 
 int main() {
-    LinkedList* list = new LinkedList();
+    // Creating an example linked list: 4 -> 2 -> 1 -> 3
+    ListNode* head = new ListNode(4);
+    head->next = new ListNode(2);
+    head->next->next = new ListNode(1);
+    head->next->next->next = new ListNode(3);
 
-    // Adding elements to the list
-    list->addLast(10);
-    list->addLast(2);
-    list->addLast(19);
-    list->addLast(22);
-    list->addLast(3);
-    list->addLast(7);
+    cout << "Original Linked List:" << endl;
+    printList(head);
 
-    // Performing merge sort
-    LinkedList* sorted = LinkedList::mergeSort(list->head, list->tail);
+    head = mergeSort(head);
 
-    // Displaying the sorted list
-    cout << "Sorted list:" << endl;
-    sorted->display();
+    cout << "Sorted Linked List:" << endl;
+    printList(head);
+
+    // Clean up allocated memory
+    ListNode* current = head;
+    while (current != nullptr) {
+        ListNode* next = current->next;
+        delete current;
+        current = next;
+    }
 
     return 0;
 }
