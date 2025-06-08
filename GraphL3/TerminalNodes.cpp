@@ -1,46 +1,36 @@
 #include <iostream>
 #include <vector>
 #include <unordered_map>
-#include <unordered_set>
 using namespace std;
 
-class TerminalNodes {
-private:
-    unordered_map<int, vector<int>> adjacencyList;
-
-public:
-    TerminalNodes() {}
-
-    void addEdge(int source, int destination) {
-        adjacencyList[source].push_back(destination);
-        adjacencyList[destination]; // Ensure destination is also in the map
+void addEdge(unordered_map<int, vector<int>>& adj, int source, int destination) {
+    adj[source].push_back(destination);
+    // Ensure destination is in the map, even if it has no outgoing edges
+    if (adj.find(destination) == adj.end()) {
+        adj[destination] = vector<int>();
     }
+}
 
-    void printTerminalNodes() {
-        vector<int> terminalNodes;
-        for (auto it = adjacencyList.begin(); it != adjacencyList.end(); ++it) {
-            if (it->second.empty()) {
-                terminalNodes.push_back(it->first);
-            }
-        }
-        cout << "Terminal Nodes:" << endl;
-        for (int node : terminalNodes) {
-            cout << node << endl;
+void printTerminalNodes(const unordered_map<int, vector<int>>& adj) {
+    cout << "Terminal Nodes:" << endl;
+    for (unordered_map<int, vector<int>>::const_iterator it = adj.begin(); it != adj.end(); ++it) {
+        if (it->second.empty()) {
+            cout << it->first << endl;
         }
     }
-};
+}
 
 int main() {
-    TerminalNodes graph;
+    unordered_map<int, vector<int>> adjacencyList;
 
-    // Adding edges to the graph
-    graph.addEdge(1, 2);
-    graph.addEdge(2, 3);
-    graph.addEdge(3, 4);
-    graph.addEdge(4, 5);
-    graph.addEdge(6, 7);
+    // Add edges to the graph
+    addEdge(adjacencyList, 1, 2);
+    addEdge(adjacencyList, 2, 3);
+    addEdge(adjacencyList, 3, 4);
+    addEdge(adjacencyList, 4, 5);
+    addEdge(adjacencyList, 6, 7);
 
-    graph.printTerminalNodes();
+    printTerminalNodes(adjacencyList);
 
     return 0;
 }

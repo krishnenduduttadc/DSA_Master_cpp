@@ -7,31 +7,36 @@
 
 using namespace std;
 
-vector<int> dijkstra(int V, vector<vector<vector<int>>>& adj, int S) {
+vector<int> dijkstra(int V, vector<vector<vector<int>>> &adj, int S)
+{
     vector<int> ans(V, INT_MAX);
     priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
     pq.push(make_pair(0, S));
 
-    while (!pq.empty()) {
-        pair<int, int> rem = pq.top();  // (weight so far, vertex)
+    while (!pq.empty())
+    {
+        pair<int, int> rem = pq.top(); // (weight so far, vertex)
         pq.pop();
 
         int wsf = rem.first;
         int vtx = rem.second;
 
         // If we have already processed this vertex, continue.
-        if (ans[vtx] != INT_MAX) continue;
+        if (ans[vtx] != INT_MAX)
+            continue;
 
         // Update the shortest distance to this vertex.
         ans[vtx] = wsf;
 
         // Traverse all neighboring vertices.
-        for (vector<int>& edge : adj[vtx]) {
+        for (vector<int> &edge : adj[vtx])
+        {
             int nbr = edge[0];
             int wt = edge[1];
 
             // If the neighboring vertex has not been visited, add it to the priority queue.
-            if (ans[nbr] == INT_MAX) {
+            if (ans[nbr] == INT_MAX)
+            {
                 pq.push(make_pair(wsf + wt, nbr));
             }
         }
@@ -40,7 +45,8 @@ vector<int> dijkstra(int V, vector<vector<vector<int>>>& adj, int S) {
     return ans;
 }
 
-int main() {
+int main()
+{
     int V = 6;
     vector<vector<vector<int>>> adj(V);
     // Adding edges to the graph
@@ -60,7 +66,8 @@ int main() {
 
     // Print the shortest distances
     cout << "Shortest distances from vertex " << sourceVertex << ": " << endl;
-    for (int i = 0; i < V; i++) {
+    for (int i = 0; i < V; i++)
+    {
         cout << "Vertex " << i << ": " << shortestDistances[i] << endl;
     }
 

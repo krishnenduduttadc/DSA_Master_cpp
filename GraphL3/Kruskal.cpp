@@ -1,7 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// ---------- Disjoint Set (Union-Find) Without Class ----------
 vector<int> parent, rankArr, sizeArr;
 
 void makeSet(int n) {

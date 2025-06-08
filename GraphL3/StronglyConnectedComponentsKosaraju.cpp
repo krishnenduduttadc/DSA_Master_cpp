@@ -1,80 +1,79 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <stack>
 using namespace std;
 
-
-
-
-class Solution
-{
-private:
-    void dfs(int node, vector<int> &vis, vector<int> adj[],
-             stack<int> &st) {
-        vis[node] = 1;
-        for (auto it : adj[node]) {
-            if (!vis[it]) {
-                dfs(it, vis, adj, st);
-            }
-        }
-
-        st.push(node);
-    }
-private:
-    void dfs3(int node, vector<int> &vis, vector<int> adjT[]) {
-        vis[node] = 1;
-        for (auto it : adjT[node]) {
-            if (!vis[it]) {
-                dfs3(it, vis, adjT);
-            }
+// Step 1: First DFS to fill stack based on finishing times
+void dfs1(int node, vector<int> &vis, vector<int> adj[], stack<int> &st) {
+    vis[node] = 1;
+    for (int neighbor : adj[node]) {
+        if (!vis[neighbor]) {
+            dfs1(neighbor, vis, adj, st);
         }
     }
-public:
-    //Function to find number of strongly connected components in the graph.
-    int kosaraju(int V, vector<int> adj[])
-    {
-        vector<int> vis(V, 0);
-        stack<int> st;
-        for (int i = 0; i < V; i++) {
-            if (!vis[i]) {
-                dfs(i, vis, adj, st);
-            }
-        }
+    st.push(node);
+}
 
-        vector<int> adjT[V];
-        for (int i = 0; i < V; i++) {
-            vis[i] = 0;
-            for (auto it : adj[i]) {
-                // i -> it
-                // it -> i
-                adjT[it].push_back(i);
-            }
+// Step 2: DFS on transposed graph
+void dfs2(int node, vector<int> &vis, vector<int> adjT[]) {
+    vis[node] = 1;
+    for (int neighbor : adjT[node]) {
+        if (!vis[neighbor]) {
+            dfs2(neighbor, vis, adjT);
         }
-        int scc = 0;
-        while (!st.empty()) {
-            int node = st.top();
-            st.pop();
-            if (!vis[node]) {
-                scc++;
-                dfs3(node, vis, adjT);
-            }
-        }
-        return scc;
     }
-};
+}
+
+// Main Kosaraju algorithm function
+int kosaraju(int V, vector<int> adj[]) {
+    vector<int> vis(V, 0);
+    stack<int> st;
+
+    // Step 1: Fill stack with nodes in order of finishing times
+    for (int i = 0; i < V; i++) {
+        if (!vis[i]) {
+            dfs1(i, vis, adj, st);
+        }
+    }
+
+    // Step 2: Transpose the graph
+    vector<int> adjT[V];
+    for (int i = 0; i < V; i++) {
+        for (int neighbor : adj[i]) {
+            adjT[neighbor].push_back(i);
+        }
+    }
+
+    // Step 3: Process all nodes in order defined by the stack
+    fill(vis.begin(), vis.end(), 0);
+    int scc = 0;
+    while (!st.empty()) {
+        int node = st.top();
+        st.pop();
+        if (!vis[node]) {
+            scc++;
+            dfs2(node, vis, adjT);
+        }
+    }
+
+    return scc;
+}
 
 int main() {
-
     int n = 5;
     int edges[5][2] = {
         {1, 0}, {0, 2},
         {2, 1}, {0, 3},
         {3, 4}
     };
+
     vector<int> adj[n];
-    for (int i = 0; i < n; i++) {
+    for (int i = 0; i < 5; i++) {
         adj[edges[i][0]].push_back(edges[i][1]);
     }
-    Solution obj;
-    int ans = obj.kosaraju(n, adj);
-    cout << "The number of strongly connected components is: " << ans << endl;
+
+    int result = kosaraju(n, adj);
+    cout << "The number of strongly connected components is: " << result << endl;
+
     return 0;
 }

@@ -11,7 +11,7 @@ int countPaths(int n, vector<vector<int>> &roads)
         adj[it[1]].push_back({it[0], it[2]});
     }
 
-    // Defining a priority queue (min heap). 
+    // Defining a priority queue (min heap).
     priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
 
     // Initializing the dist array and the ways array
@@ -56,10 +56,7 @@ int main()
 {
     int n = 7;
     vector<vector<int>> edges = {
-        {0, 6, 7}, {0, 1, 2}, {1, 2, 3}, {1, 3, 3},
-        {6, 3, 3}, {3, 5, 1}, {6, 5, 1}, {2, 5, 1},
-        {0, 4, 5}, {4, 6, 2}
-    };
+        {0, 6, 7}, {0, 1, 2}, {1, 2, 3}, {1, 3, 3}, {6, 3, 3}, {3, 5, 1}, {6, 5, 1}, {2, 5, 1}, {0, 4, 5}, {4, 6, 2}};
 
     int ans = countPaths(n, edges);
     cout << ans << endl;

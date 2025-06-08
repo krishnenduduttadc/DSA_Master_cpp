@@ -1,57 +1,71 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// ---------- Disjoint Set Without Class ----------
 vector<int> parent, rankArr, sizeArr;
 
-void makeSet(int n) {
+void makeSet(int n)
+{
     parent.resize(n + 1);
     rankArr.resize(n + 1, 0);
     sizeArr.resize(n + 1, 1);
-    for (int i = 0; i <= n; i++) {
+    for (int i = 0; i <= n; i++)
+    {
         parent[i] = i;
     }
 }
 
-int findUPar(int node) {
+int findUPar(int node)
+{
     if (node == parent[node])
         return node;
     return parent[node] = findUPar(parent[node]);
 }
 
-void unionBySize(int u, int v) {
+void unionBySize(int u, int v)
+{
     int ulp_u = findUPar(u);
     int ulp_v = findUPar(v);
-    if (ulp_u == ulp_v) return;
-    if (sizeArr[ulp_u] < sizeArr[ulp_v]) {
+    if (ulp_u == ulp_v)
+        return;
+    if (sizeArr[ulp_u] < sizeArr[ulp_v])
+    {
         parent[ulp_u] = ulp_v;
         sizeArr[ulp_v] += sizeArr[ulp_u];
-    } else {
+    }
+    else
+    {
         parent[ulp_v] = ulp_u;
         sizeArr[ulp_u] += sizeArr[ulp_v];
     }
 }
 
 // ---------- Helper ----------
-bool isValid(int newr, int newc, int n) {
+bool isValid(int newr, int newc, int n)
+{
     return newr >= 0 && newr < n && newc >= 0 && newc < n;
 }
 
 // ---------- Main Function ----------
-int MaxConnection(vector<vector<int>>& grid) {
+int MaxConnection(vector<vector<int>> &grid)
+{
     int n = grid.size();
     makeSet(n * n);
 
     // Step 1: Join all 1s
-    for (int row = 0; row < n ; row++) {
-        for (int col = 0; col < n ; col++) {
-            if (grid[row][col] == 0) continue;
+    for (int row = 0; row < n; row++)
+    {
+        for (int col = 0; col < n; col++)
+        {
+            if (grid[row][col] == 0)
+                continue;
             int dr[] = {-1, 0, 1, 0};
             int dc[] = {0, -1, 0, 1};
-            for (int ind = 0; ind < 4; ind++) {
+            for (int ind = 0; ind < 4; ind++)
+            {
                 int newr = row + dr[ind];
                 int newc = col + dc[ind];
-                if (isValid(newr, newc, n) && grid[newr][newc] == 1) {
+                if (isValid(newr, newc, n) && grid[newr][newc] == 1)
+                {
                     int nodeNo = row * n + col;
                     int adjNodeNo = newr * n + newc;
                     unionBySize(nodeNo, adjNodeNo);
@@ -62,23 +76,30 @@ int MaxConnection(vector<vector<int>>& grid) {
 
     // Step 2: Try flipping each 0 and calculate max connection
     int mx = 0;
-    for (int row = 0; row < n; row++) {
-        for (int col = 0; col < n; col++) {
-            if (grid[row][col] == 1) continue;
+    for (int row = 0; row < n; row++)
+    {
+        for (int col = 0; col < n; col++)
+        {
+            if (grid[row][col] == 1)
+                continue;
             int dr[] = {-1, 0, 1, 0};
             int dc[] = {0, -1, 0, 1};
             set<int> components;
-            for (int ind = 0; ind < 4; ind++) {
+            for (int ind = 0; ind < 4; ind++)
+            {
                 int newr = row + dr[ind];
                 int newc = col + dc[ind];
-                if (isValid(newr, newc, n)) {
-                    if (grid[newr][newc] == 1) {
+                if (isValid(newr, newc, n))
+                {
+                    if (grid[newr][newc] == 1)
+                    {
                         components.insert(findUPar(newr * n + newc));
                     }
                 }
             }
             int sizeTotal = 0;
-            for (auto it : components) {
+            for (auto it : components)
+            {
                 sizeTotal += sizeArr[it];
             }
             mx = max(mx, sizeTotal + 1);
@@ -86,7 +107,8 @@ int MaxConnection(vector<vector<int>>& grid) {
     }
 
     // Final check: if all are 1s
-    for (int cellNo = 0; cellNo < n * n; cellNo++) {
+    for (int cellNo = 0; cellNo < n * n; cellNo++)
+    {
         mx = max(mx, sizeArr[findUPar(cellNo)]);
     }
 
@@ -94,12 +116,10 @@ int MaxConnection(vector<vector<int>>& grid) {
 }
 
 // ---------- Driver ----------
-int main() {
+int main()
+{
     vector<vector<int>> grid = {
-        {1, 1, 0, 1, 1, 0}, {1, 1, 0, 1, 1, 0},
-        {1, 1, 0, 1, 1, 0}, {0, 0, 1, 0, 0, 0},
-        {0, 0, 1, 1, 1, 0}, {0, 0, 1, 1, 1, 0}
-    };
+        {1, 1, 0, 1, 1, 0}, {1, 1, 0, 1, 1, 0}, {1, 1, 0, 1, 1, 0}, {0, 0, 1, 0, 0, 0}, {0, 0, 1, 1, 1, 0}, {0, 0, 1, 1, 1, 0}};
 
     int ans = MaxConnection(grid);
     cout << "The largest group of connected 1s is of size: " << ans << endl;

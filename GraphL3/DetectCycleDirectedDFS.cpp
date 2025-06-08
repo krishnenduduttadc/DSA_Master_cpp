@@ -1,57 +1,56 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-class Solution {
-private:
-	bool dfsCheck(int node, vector<int> adj[], int vis[], int pathVis[]) {
-		vis[node] = 1;
-		pathVis[node] = 1;
+bool dfsCheck(int node, vector<int> adj[], int vis[], int pathVis[]) {
+    vis[node] = 1;
+    pathVis[node] = 1;
 
-		// traverse for adjacent nodes
-		for (auto it : adj[node]) {
-			// when the node is not visited
-			if (!vis[it]) {
-				if (dfsCheck(it, adj, vis, pathVis) == true)
-					return true;
-			}
-			// if the node has been previously visited
-			// but it has to be visited on the same path
-			else if (pathVis[it]) {
-				return true;
-			}
-		}
+    for (auto it : adj[node]) {
+        if (!vis[it]) {
+            if (dfsCheck(it, adj, vis, pathVis))
+                return true;
+        }
+        else if (pathVis[it]) {
+            return true;
+        }
+    }
 
-		pathVis[node] = 0;
-		return false;
-	}
-public:
-	// Function to detect cycle in a directed graph.
-	bool isCyclic(int V, vector<int> adj[]) {
-		int vis[V] = {0};
-		int pathVis[V] = {0};
+    pathVis[node] = 0;
+    return false;
+}
 
-		for (int i = 0; i < V; i++) {
-			if (!vis[i]) {
-				if (dfsCheck(i, adj, vis, pathVis) == true) return true;
-			}
-		}
-		return false;
-	}
-};
+bool isCyclic(int V, vector<int> adj[]) {
+    int vis[V] = {0};
+    int pathVis[V] = {0};
 
+    for (int i = 0; i < V; i++) {
+        if (!vis[i]) {
+            if (dfsCheck(i, adj, vis, pathVis))
+                return true;
+        }
+    }
+    return false;
+}
 
 int main() {
+    int V = 11;
+    vector<int> adj[11] = {
+        {},     // 0
+        {2},    // 1
+        {3},    // 2
+        {4, 7}, // 3
+        {5},    // 4
+        {6},    // 5
+        {},     // 6
+        {5},    // 7
+        {9},    // 8
+        {10},   // 9
+        {8}     // 10
+    };
 
-	// V = 11, E = 11;
-	vector<int> adj[11] = {{}, {2}, {3}, {4, 7}, {5}, {6}, {}, {5}, {9}, {10}, {8}};
-	int V = 11;
-	Solution obj;
-	bool ans = obj.isCyclic(V, adj);
+    bool ans = isCyclic(V, adj);
 
-	if (ans)
-		cout << "True\n";
-	else
-		cout << "False\n";
+    cout << (ans ? "True" : "False") << "\n";
 
-	return 0;
+    return 0;
 }

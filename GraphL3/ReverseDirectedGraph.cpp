@@ -2,28 +2,28 @@
 #include <vector>
 using namespace std;
 
-class ReverseDirectedGraph {
-public:
-    static vector<vector<int>> reverseDirectedGraph(const vector<vector<int>>& adj, int V) {
-        vector<vector<int>> reversedAdj(V + 1);
+// Reverse the directed graph adjacency list
+vector<vector<int>> reverseDirectedGraph(const vector<vector<int>>& adj, int V) {
+    vector<vector<int>> reversedAdj(V + 1);
 
-        for (int i = 0; i <= V; ++i) {
-            for (int j : adj[i]) {
-                reversedAdj[j].push_back(i);
-            }
-        }
-
-        return reversedAdj;
-    }
-
-    static void printGraph(const vector<vector<int>>& graph, int V) {
-        for (int i = 1; i <= V; ++i) {
-            for (int j : graph[i]) {
-                cout << i << " -> " << j << endl;
-            }
+    // Note: changed loop from 0..V to 1..V since nodes start at 1
+    for (int i = 1; i <= V; ++i) {
+        for (int j : adj[i]) {
+            reversedAdj[j].push_back(i);
         }
     }
-};
+
+    return reversedAdj;
+}
+
+// Print graph edges
+void printGraph(const vector<vector<int>>& graph, int V) {
+    for (int i = 1; i <= V; ++i) {
+        for (int j : graph[i]) {
+            cout << i << " -> " << j << endl;
+        }
+    }
+}
 
 int main() {
     int V = 5;
@@ -34,10 +34,10 @@ int main() {
     adj[3].push_back(4);
     adj[4].push_back(5);
 
-    vector<vector<int>> reversedAdj = ReverseDirectedGraph::reverseDirectedGraph(adj, V);
+    vector<vector<int>> reversedAdj = reverseDirectedGraph(adj, V);
 
     cout << "Reversed Graph:" << endl;
-    ReverseDirectedGraph::printGraph(reversedAdj, V);
+    printGraph(reversedAdj, V);
 
     return 0;
 }
