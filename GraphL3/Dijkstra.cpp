@@ -1,38 +1,33 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-class Solution
+vector<int> dijkstra(int V, vector<vector<int>> adj[], int S)
 {
-public:
+    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
+    vector<int> distTo(V, INT_MAX);
+    distTo[S] = 0;
+    pq.push({S, 0}); // src, dist
 
-    vector<int> dijkstra(int V, vector<vector<int>> adj[], int S)
+    while (!pq.empty())
     {
-        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
-        vector<int> distTo(V, INT_MAX);
-        distTo[S] = 0;
-        pq.push({S, 0}); //src, dist
+        int node = pq.top().first;
+        int dis = pq.top().second;
+        pq.pop();
 
-        while (!pq.empty())
+        for (auto it : adj[node])
         {
-            int node = pq.top().first;
-            int dis = pq.top().second;
-            pq.pop();
-
-            for (auto it : adj[node])
+            int v = it[0];
+            int w = it[1];
+            if (distTo[v] > dis + w)
             {
-                int v = it[0];
-                int w = it[1];
-                if (distTo[v] > dis + w )
-                {
-                    distTo[v] = dis + w;
-                    pq.push({v,dis + w});
-                }
+                distTo[v] = dis + w;
+                pq.push({v, dis + w});
             }
         }
-
-        return distTo;
     }
-};
+
+    return distTo;
+}
 
 int main()
 {
@@ -49,8 +44,7 @@ int main()
     adj[2].push_back(v5);
     adj[2].push_back(v6);
 
-    Solution obj;
-    vector<int> res = obj.dijkstra(V, adj, S);
+    vector<int> res = dijkstra(V, adj, S);
 
     for (int i = 0; i < V; i++)
     {

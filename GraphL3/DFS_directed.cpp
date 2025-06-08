@@ -3,20 +3,21 @@
 
 using namespace std;
 
-class DFSDirected {
-public:
-    static void dfs(int s, vector<bool> vis, vector<vector<int>> adj, vector<int> &ls) {
-        vis[s] = true;
-        ls.push_back(s);
-        for (int it : adj[s]) {
-            if (!vis[it]) {
-                dfs(it, vis, adj, ls);
-            }
+static void dfs(int s, vector<bool> vis, vector<vector<int>> adj, vector<int> &ls)
+{
+    vis[s] = true;
+    ls.push_back(s);
+    for (int it : adj[s])
+    {
+        if (!vis[it])
+        {
+            dfs(it, vis, adj, ls);
         }
     }
-};
+}
 
-int main() {
+int main()
+{
     int V = 5;
     vector<bool> vis(V + 1, false);
     vector<vector<int>> adj(V + 1);
@@ -27,16 +28,20 @@ int main() {
     adj[4].push_back(5);
 
     vector<vector<int>> res;
-    for (int i = 1; i <= V; i++) {
-        if (!vis[i]) {
+    for (int i = 1; i <= V; i++)
+    {
+        if (!vis[i])
+        {
             vector<int> ls;
-            DFSDirected::dfs(i, vis, adj, ls);
+            dfs(i, vis, adj, ls);
             res.push_back(ls);
         }
     }
 
-    for (vector<int> component : res) {
-        for (int node : component) {
+    for (vector<int> component : res)
+    {
+        for (int node : component)
+        {
             cout << node << " ";
         }
         cout << endl;

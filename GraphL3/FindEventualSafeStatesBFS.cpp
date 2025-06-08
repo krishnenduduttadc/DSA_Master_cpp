@@ -2,8 +2,7 @@
 using namespace std;
 
 
-class Solution {
-public:
+
 	vector<int> eventualSafeNodes(int V, vector<int> adj[]) {
 		vector<int> adjRev[V];
 		int indegree[V] = {0};
@@ -36,7 +35,7 @@ public:
 		sort(safeNodes.begin(), safeNodes.end());
 		return safeNodes;
 	}
-};
+
 
 int main() {
 
@@ -44,8 +43,7 @@ int main() {
 		{8}, {9}
 	};
 	int V = 12;
-	Solution obj;
-	vector<int> safeNodes = obj.eventualSafeNodes(V, adj);
+	vector<int> safeNodes = eventualSafeNodes(V, adj);
 
 	for (auto node : safeNodes) {
 		cout << node << " ";
