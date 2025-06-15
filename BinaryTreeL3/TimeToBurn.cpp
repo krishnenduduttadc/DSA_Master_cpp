@@ -1,6 +1,7 @@
 #include <iostream>
 #include <queue>
 #include <unordered_map>
+using namespace std;
 
 // TreeNode structure definition
 struct TreeNode {
@@ -11,8 +12,8 @@ struct TreeNode {
 };
 
 // Function to perform BFS to map parents and find the target node
-TreeNode* bfsToMapParents(TreeNode* root, std::unordered_map<TreeNode*, TreeNode*>& mpp, int start) {
-    std::queue<TreeNode*> q;
+TreeNode* bfsToMapParents(TreeNode* root, unordered_map<TreeNode*, TreeNode*>& mpp, int start) {
+    queue<TreeNode*> q;
     q.push(root);
     TreeNode* res = nullptr;
 
@@ -34,10 +35,10 @@ TreeNode* bfsToMapParents(TreeNode* root, std::unordered_map<TreeNode*, TreeNode
 }
 
 // Function to find the maximum distance from the target node using BFS
-int findMaxDistance(std::unordered_map<TreeNode*, TreeNode*>& mpp, TreeNode* target) {
-    std::queue<TreeNode*> q;
+int findMaxDistance(unordered_map<TreeNode*, TreeNode*>& mpp, TreeNode* target) {
+    queue<TreeNode*> q;
     q.push(target);
-    std::unordered_map<TreeNode*, int> vis;
+    unordered_map<TreeNode*, int> vis;
     vis[target] = 1;
     int maxi = 0;
 
@@ -73,7 +74,7 @@ int findMaxDistance(std::unordered_map<TreeNode*, TreeNode*>& mpp, TreeNode* tar
 
 // Function to calculate time to burn the entire tree
 int timeToBurnTree(TreeNode* root, int start) {
-    std::unordered_map<TreeNode*, TreeNode*> mpp;
+    unordered_map<TreeNode*, TreeNode*> mpp;
     TreeNode* target = bfsToMapParents(root, mpp, start);
     int maxi = findMaxDistance(mpp, target);
     return maxi;
@@ -89,7 +90,7 @@ int main() {
     root->left->left->left = new TreeNode(6);
 
     int timeToBurn = timeToBurnTree(root, 3);
-    std::cout << "Time to burn the tree starting from node 3: " << timeToBurn << std::endl;
+    cout << "Time to burn the tree starting from node 3: " << timeToBurn << endl;
 
     // Deallocating memory to avoid memory leaks
     delete root->left->left->left;

@@ -1,58 +1,53 @@
 #include <iostream>
 using namespace std;
-class Node {
-public:
+
+struct Node {
     int key;
     Node* left;
     Node* right;
-    
-    Node(int value) {
-        key = value;
-        left = nullptr;
-        right = nullptr;
-    }
 };
 
-class BinTree2LL {
-private:
-    static Node* prev;
+Node* createNode(int value) {
+    Node* newNode = new Node;
+    newNode->key = value;
+    newNode->left = nullptr;
+    newNode->right = nullptr;
+    return newNode;
+}
 
-public:
-    static void flatten(Node* root) {
-        if (root == nullptr) return;
+void flatten(Node* root, Node*& prev) {
+    if (root == nullptr) return;
 
-        flatten(root->right);
-        flatten(root->left);
+    flatten(root->right, prev);
+    flatten(root->left, prev);
 
-        root->right = prev;
-        root->left = nullptr;
-        prev = root;
+    root->right = prev;
+    root->left = nullptr;
+    prev = root;
+}
+
+void printList(Node* root) {
+    while (root->right != nullptr) {
+        cout << root->key << "->";
+        root = root->right;
     }
-
-    static void printList(Node* root) {
-        while (root->right != nullptr) {
-            cout << root->key << "->";
-            root = root->right;
-        }
-        cout << root->key;
-    }
-};
-
-Node* BinTree2LL::prev = nullptr;
+    cout << root->key;
+}
 
 int main() {
-    Node* root = new Node(1);
-    root->left = new Node(2);
-    root->left->left = new Node(3);
-    root->left->right = new Node(4);
-    root->right = new Node(5);
-    root->right->right = new Node(6);
-    root->right->right->left = new Node(7);
+    Node* root = createNode(1);
+    root->left = createNode(2);
+    root->left->left = createNode(3);
+    root->left->right = createNode(4);
+    root->right = createNode(5);
+    root->right->right = createNode(6);
+    root->right->right->left = createNode(7);
 
-    BinTree2LL::flatten(root);
-    BinTree2LL::printList(root);
+    Node* prev = nullptr;
+    flatten(root, prev);
+    printList(root);
 
-    // Clean up allocated memory (not present in Java version)
+    // Clean up allocated memory
     while (root != nullptr) {
         Node* temp = root;
         root = root->right;

@@ -2,25 +2,24 @@
 #include <vector>
 using namespace std;
 
-// Definition of the Node class
-class Node {
-public:
+struct Node {
     int key;
     Node* left;
     Node* right;
-
-    Node(int item) {
-        key = item;
-        left = right = nullptr;
-    }
 };
 
-// Utility function to check if a node is a leaf node
+Node* createNode(int item) {
+    Node* newNode = new Node;
+    newNode->key = item;
+    newNode->left = nullptr;
+    newNode->right = nullptr;
+    return newNode;
+}
+
 bool isLeaf(Node* root) {
     return (root->left == nullptr && root->right == nullptr);
 }
 
-// Function to add nodes of the left boundary (excluding the leaf node itself)
 void addLeftBoundary(Node* root, vector<int>& res) {
     Node* cur = root->left;
     while (cur != nullptr) {
@@ -33,7 +32,6 @@ void addLeftBoundary(Node* root, vector<int>& res) {
     }
 }
 
-// Function to add nodes of the right boundary (excluding the leaf node itself)
 void addRightBoundary(Node* root, vector<int>& res) {
     Node* cur = root->right;
     vector<int> tmp;
@@ -50,7 +48,6 @@ void addRightBoundary(Node* root, vector<int>& res) {
     }
 }
 
-// Function to add all leaf nodes in left-to-right order
 void addLeaves(Node* root, vector<int>& res) {
     if (isLeaf(root)) {
         res.push_back(root->key);
@@ -62,7 +59,6 @@ void addLeaves(Node* root, vector<int>& res) {
         addLeaves(root->right, res);
 }
 
-// Function to perform boundary traversal and return the result as vector
 vector<int> printBoundary(Node* node) {
     vector<int> ans;
     if (!isLeaf(node))
@@ -74,23 +70,20 @@ vector<int> printBoundary(Node* node) {
 }
 
 int main() {
-    // Constructing the binary tree
-    Node* root = new Node(1);
-    root->left = new Node(2);
-    root->left->left = new Node(3);
-    root->left->left->right = new Node(4);
-    root->left->left->right->left = new Node(5);
-    root->left->left->right->right = new Node(6);
-    root->right = new Node(7);
-    root->right->right = new Node(8);
-    root->right->right->left = new Node(9);
-    root->right->right->left->left = new Node(10);
-    root->right->right->left->right = new Node(11);
+    Node* root = createNode(1);
+    root->left = createNode(2);
+    root->left->left = createNode(3);
+    root->left->left->right = createNode(4);
+    root->left->left->right->left = createNode(5);
+    root->left->left->right->right = createNode(6);
+    root->right = createNode(7);
+    root->right->right = createNode(8);
+    root->right->right->left = createNode(9);
+    root->right->right->left->left = createNode(10);
+    root->right->right->left->right = createNode(11);
 
-    // Performing boundary traversal
     vector<int> boundaryTraversal = printBoundary(root);
 
-    // Printing the result
     cout << "The Boundary Traversal is : ";
     for (int i = 0; i < boundaryTraversal.size(); i++) {
         cout << boundaryTraversal[i] << " ";

@@ -1,20 +1,20 @@
 #include <iostream>
 using namespace std;
 
-// Definition of the Node class
-class Node {
-public:
+struct Node {
     int key;
     Node* left;
     Node* right;
-
-    Node(int item) {
-        key = item;
-        left = right = nullptr;
-    }
 };
 
-// Function to reorder the binary tree based on Children Sum Property
+Node* createNode(int item) {
+    Node* newNode = new Node;
+    newNode->key = item;
+    newNode->left = nullptr;
+    newNode->right = nullptr;
+    return newNode;
+}
+
 void reorder(Node* root) {
     if (root == nullptr) return;
 
@@ -40,19 +40,18 @@ void reorder(Node* root) {
     if (root->left != nullptr || root->right != nullptr) root->key = tot;
 }
 
-// Function to change the tree based on Children Sum Property
 void changeTree(Node* root) {
     reorder(root);
 }
 
 int main() {
-    Node* root = new Node(2);
-    root->left = new Node(35);
-    root->left->left = new Node(2);
-    root->left->right = new Node(3);
-    root->right = new Node(10);
-    root->right->left = new Node(5);
-    root->right->right = new Node(2);
+    Node* root = createNode(2);
+    root->left = createNode(35);
+    root->left->left = createNode(2);
+    root->left->right = createNode(3);
+    root->right = createNode(10);
+    root->right->left = createNode(5);
+    root->right->right = createNode(2);
 
     changeTree(root);
 

@@ -17,7 +17,8 @@ struct Node
 
 void levelOrderTraversal(Node *root)
 {
-    if (root == nullptr) {
+    if (root == nullptr)
+    {
         return;
     }
     queue<Node *> q;
@@ -25,12 +26,12 @@ void levelOrderTraversal(Node *root)
     while (!q.empty())
     {
         int s = q.size();
-        
+
         for (int i = 0; i < s; i++)
         {
-            Node* curr=q.front();
+            Node *curr = q.front();
             q.pop();
-            cout<<curr->data<<" ";
+            cout << curr->data << " ";
             if (curr->left != nullptr)
             {
                 q.push(curr->left);
@@ -40,7 +41,7 @@ void levelOrderTraversal(Node *root)
                 q.push(curr->right);
             }
         }
-        cout<<endl;
+        cout << endl;
     }
 }
 
@@ -50,60 +51,70 @@ Node *insertLevelOrder(int arr[], Node *root, int i, int n)
     {
         return nullptr;
     }
-    Node* tmp=new Node(arr[i]);
-    root=tmp;
-    root->left =insertLevelOrder(arr,root->left,2*i+1,n);
-    root->right=insertLevelOrder(arr,root->right,2*i+2,n);
+    Node *tmp = new Node(arr[i]);
+    root = tmp;
+    root->left = insertLevelOrder(arr, root->left, 2 * i + 1, n);
+    root->right = insertLevelOrder(arr, root->right, 2 * i + 2, n);
     return root;
 }
-int height(Node* root){
-    if(root==nullptr){
+
+int height(Node *root)
+{
+    if (root == nullptr)
+    {
         return 0;
-    }else{
-        int l=height(root->left);
-        int r=height(root->right);
-        return max(l,r)+1;
     }
-}
-int size(Node* root){
-    if(root==nullptr){
-        return 0;
-    }else{
-        int l=size(root->left);
-        int r=size(root->right);
-        return l+r+1;
+    else
+    {
+        int l = height(root->left);
+        int r = height(root->right);
+        return max(l, r) + 1;
     }
 }
 
-int max(Node* root){
-    if(root==nullptr){
+int size(Node *root)
+{
+    if (root == nullptr)
+    {
+        return 0;
+    }
+    else
+    {
+        int l = size(root->left);
+        int r = size(root->right);
+        return l + r + 1;
+    }
+}
+
+int maxValue(Node *root)
+{
+    if (root == nullptr)
+    {
         return INT_MIN;
-    }else{
-        int l=max(root->left);
-        int r=max(root->right);
-        return max(root->data,max(l,r));
+    }
+    else
+    {
+        int l = maxValue(root->left);
+        int r = maxValue(root->right);
+        return max(root->data, max(l, r));
     }
 }
 
 int main()
 {
-    int n;
-    cin >> n;
-
-    int arr[n];
-    for (int i = 0; i < n; i++)
-    {
-        cin >> arr[i];
-    }
+    // ✅ Hardcoded input
+    int arr[] = {10, 20, 30, 40, 50, 60, 70};
+    int n = sizeof(arr) / sizeof(arr[0]);
 
     Node *root = insertLevelOrder(arr, nullptr, 0, n);
-    
 
-    cout << "Level-order Traversal of the Binary Tree:\n ";
+    cout << "Level-order Traversal of the Binary Tree:\n";
     levelOrderTraversal(root);
     cout << endl;
 
-    cout<<height(root)<<endl;
-    cout<<size(root)<<endl;
-    cout<<max(root)<<endl;
+    cout << "Height: " << height(root) << endl;
+    cout << "Size: " << size(root) << endl;
+    cout << "Max Value: " << maxValue(root) << endl;
+
+    return 0;
 }

@@ -25,6 +25,7 @@ void inOrderTraversal(Node *root)
     cout << root->data << " ";
     inOrderTraversal(root->right);
 }
+
 void levelOrderTraversal(Node *root)
 {
     if (root == nullptr) {
@@ -38,9 +39,9 @@ void levelOrderTraversal(Node *root)
         
         for (int i = 0; i < s; i++)
         {
-            Node* curr=q.front();
+            Node* curr = q.front();
             q.pop();
-            cout<<curr->data<<" ";
+            cout << curr->data << " ";
             if (curr->left != nullptr)
             {
                 q.push(curr->left);
@@ -50,7 +51,7 @@ void levelOrderTraversal(Node *root)
                 q.push(curr->right);
             }
         }
-        cout<<endl;
+        cout << endl;
     }
 }
 
@@ -70,21 +71,19 @@ Node *insertLevelOrder(int arr[], Node *root, int i, int n)
 
 int main()
 {
-    int n;
-    cin >> n;
-
-    int arr[n];
-    for (int i = 0; i < n; i++)
-    {
-        cin >> arr[i];
-    }
+    // ✅ Hardcoded input
+    int arr[] = {10, 20, 30, 40, 50, 60, 70};
+    int n = sizeof(arr) / sizeof(arr[0]);
 
     Node *root = insertLevelOrder(arr, nullptr, 0, n);
+    
     cout << "In-order Traversal of the Binary Tree: ";
     inOrderTraversal(root);
-    //cout<<endl;
+    cout << endl;
 
-    cout << "Level-order Traversal of the Binary Tree:\n ";
+    cout << "Level-order Traversal of the Binary Tree:\n";
     levelOrderTraversal(root);
     cout << endl;
+
+    return 0;
 }

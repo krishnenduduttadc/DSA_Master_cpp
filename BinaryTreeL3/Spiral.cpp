@@ -2,6 +2,8 @@
 #include <vector>
 #include <queue>
 
+using namespace std;
+
 // TreeNode structure definition
 struct TreeNode {
     int key;
@@ -11,17 +13,17 @@ struct TreeNode {
 };
 
 // Function to perform zigzag level order traversal
-std::vector<std::vector<int>> zigzagLevelOrder(TreeNode* root) {
-    std::vector<std::vector<int>> wrapList;
+vector<std::vector<int>> zigzagLevelOrder(TreeNode* root) {
+    vector<vector<int>> wrapList;
     if (root == nullptr) return wrapList;
 
-    std::queue<TreeNode*> queue;
+    queue<TreeNode*> queue;
     queue.push(root);
     bool flag = true; // Flag to control direction of traversal
 
     while (!queue.empty()) {
         int levelNum = queue.size();
-        std::vector<int> subList(levelNum);
+        vector<int> subList(levelNum);
 
         for (int i = 0; i < levelNum; i++) {
             TreeNode* node = queue.front();
@@ -53,9 +55,9 @@ int main() {
     std::cout << "Zig Zag Traversal of Binary Tree: " << std::endl;
     for (size_t i = 0; i < ans.size(); i++) {
         for (size_t j = 0; j < ans[i].size(); j++) {
-            std::cout << ans[i][j] << " ";
+            cout << ans[i][j] << " ";
         }
-        std::cout << std::endl;
+        cout << std::endl;
     }
 
     // Deallocating memory
