@@ -1,9 +1,8 @@
 #include <iostream>
 using namespace std;
 
-class ArrMod_m {
-public:
-    static void main() {
+
+    static void start() {
         // Hardcoded input array
         int arr[] = {3, 1, 4, 1, 5}; // Example input
         int n = sizeof(arr) / sizeof(arr[0]);
@@ -18,9 +17,9 @@ public:
 
         cout << num << endl;
     }
-};
+
 
 int main() {
-    ArrMod_m::main();
+    start();
     return 0;
 }

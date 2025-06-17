@@ -1,34 +1,41 @@
 #include <iostream>
 using namespace std;
 
-class SubsequencewithGCD {
-public:
-    static void main() {
-        int arr[] = {1, 2, 3, 4};
-        int n = sizeof(arr) / sizeof(arr[0]);
+static int gcd(int a, int b)
+{
+    if (b == 0)
+    {
+        return a;
+    }
+    else
+    {
+        return gcd(b, a % b);
+    }
+}
 
-        int ans = 0;
-        for (int i = 0; i < n; i++) {
-            ans = gcd(ans, arr[i]);
-        }
+static void start()
+{
+    int arr[] = {1, 2, 3, 4};
+    int n = sizeof(arr) / sizeof(arr[0]);
 
-        if (ans == 1) {
-            cout << "true" << endl;
-        } else {
-            cout << "false" << endl;
-        }
+    int ans = 0;
+    for (int i = 0; i < n; i++)
+    {
+        ans = gcd(ans, arr[i]);
     }
 
-    static int gcd(int a, int b) {
-        if (b == 0) {
-            return a;
-        } else {
-            return gcd(b, a % b);
-        }
+    if (ans == 1)
+    {
+        cout << "true" << endl;
     }
-};
+    else
+    {
+        cout << "false" << endl;
+    }
+}
 
-int main() {
-    SubsequencewithGCD::main();
+int main()
+{
+    start();
     return 0;
 }

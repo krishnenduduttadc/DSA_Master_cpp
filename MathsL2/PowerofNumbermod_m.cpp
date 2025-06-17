@@ -1,9 +1,8 @@
 #include <iostream>
 using namespace std;
 
-class PowerofNumbermod_m {
-public:
-    static void main() {
+
+    static void start() {
         int a = 10;
         int n = 5;
         long long ans = 1;
@@ -15,9 +14,9 @@ public:
 
         cout << ans << endl;
     }
-};
+
 
 int main() {
-    PowerofNumbermod_m::main();
+    start();
     return 0;
 }

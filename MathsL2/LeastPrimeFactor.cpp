@@ -3,8 +3,7 @@
 #include <algorithm>
 using namespace std;
 
-class LeastPrimeFactor {
-public:
+
     vector<int> leastPrimeFactor(int n) {
         vector<int> spf(n + 1);
 
@@ -26,15 +25,15 @@ public:
 
         return spf;
     }
-};
+
 
 int main() {
-    LeastPrimeFactor lpf;
+   
 
     // Hard-coded input
     int n = 10;
 
-    vector<int> result = lpf.leastPrimeFactor(n);
+    vector<int> result = leastPrimeFactor(n);
 
     // Print the result
     cout << "Least Prime Factors from 1 to " << n << ": ";

@@ -2,28 +2,30 @@
 #include <vector>
 using namespace std;
 
-class CoinChangeCombination1 {
-public:
-    static void coinChange(int i, vector<int>& coins, int amtsf, int tamt, string asf) {
-        if (i == coins.size()) {
-            if (amtsf == tamt) {
-                cout << asf << "." << endl;
-            }
-            return;
+static void coinChange(int i, vector<int> &coins, int amtsf, int tamt, string asf)
+{
+    if (i == coins.size())
+    {
+        if (amtsf == tamt)
+        {
+            cout << asf << "." << endl;
         }
-
-        coinChange(i + 1, coins, amtsf + coins[i], tamt, asf + to_string(coins[i]) + "-");
-        coinChange(i + 1, coins, amtsf + 0, tamt, asf);
+        return;
     }
 
-    static void main() {
-        vector<int> coins = {2, 3, 5, 6, 7};
-        int amt = 12;
-        coinChange(0, coins, 0, amt, "");
-    }
-};
+    coinChange(i + 1, coins, amtsf + coins[i], tamt, asf + to_string(coins[i]) + "-");
+    coinChange(i + 1, coins, amtsf + 0, tamt, asf);
+}
 
-int main() {
-    CoinChangeCombination1::main();
+static void start()
+{
+    vector<int> coins = {2, 3, 5, 6, 7};
+    int amt = 12;
+    coinChange(0, coins, 0, amt, "");
+}
+
+int main()
+{
+    start();
     return 0;
 }

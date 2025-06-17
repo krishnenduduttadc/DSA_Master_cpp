@@ -2,9 +2,8 @@
 #include <cmath>
 using namespace std;
 
-class RotateNumber {
-public:
-    static void main() {
+
+    static void start() {
         int n = 56789;
         int k = 2;
 
@@ -25,9 +24,9 @@ public:
         int g = n / static_cast<int>(pow(10, k));
         cout << a + g << endl;
     }
-};
+
 
 int main() {
-    RotateNumber::main();
+    start();
     return 0;
 }

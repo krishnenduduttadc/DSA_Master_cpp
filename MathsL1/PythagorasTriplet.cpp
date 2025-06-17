@@ -1,9 +1,8 @@
 #include <iostream>
 using namespace std;
 
-class PythagorasTriplet {
-public:
-    static void main() {
+
+    static void start() {
         int a = 3;
         int b = 4;
         int c = 5;
@@ -32,9 +31,9 @@ public:
             }
         }
     }
-};
+
 
 int main() {
-    PythagorasTriplet::main();
+    start();
     return 0;
 }

@@ -1,8 +1,7 @@
 #include <iostream>
 using namespace std;
 
-class Palin {
-public:
+
     static void main() {
         int n = 101;
         int temp = n;
@@ -16,9 +15,9 @@ public:
 
         cout << (rev == n) << endl;
     }
-};
+
 
 int main() {
-    Palin::main();
+    main();
     return 0;
 }

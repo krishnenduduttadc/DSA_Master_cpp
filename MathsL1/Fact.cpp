@@ -1,8 +1,7 @@
 #include <iostream>
 using namespace std;
 
-class Fact {
-public:
+
     static void main() {
         int n = 10;
         int res = 1;
@@ -11,9 +10,9 @@ public:
         }
         cout << res << endl;
     }
-};
+
 
 int main() {
-    Fact::main();
+    main();
     return 0;
 }

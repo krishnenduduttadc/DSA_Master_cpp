@@ -1,8 +1,7 @@
 #include <iostream>
 using namespace std;
 
-class BasicMath {
-public:
+
     static int countDigits(int n) {
         int cnt = 0;
         while (n != 0) {
@@ -117,21 +116,21 @@ public:
         }
         cout << endl;
     }
-};
+
 
 int main() {
-    cout << BasicMath::countDigits(123) << endl;
-    cout << BasicMath::countDigitsR(123) << endl;
-    cout << BasicMath::isPalindrome(12321) << endl;
-    cout << BasicMath::factI(5) << endl;
-    cout << BasicMath::factR(5) << endl;
-    cout << BasicMath::countTrailingZeroes(251) << endl;
-    cout << BasicMath::gcd(100, 200) << endl;
-    cout << BasicMath::gcdR(100, 200) << endl;
-    cout << BasicMath::lcm(100, 200) << endl;
-    cout << BasicMath::isPrime(14) << endl;
-    cout << BasicMath::power(2, 6) << endl;
-    BasicMath::primefactors(91);
+    cout << countDigits(123) << endl;
+    cout << countDigitsR(123) << endl;
+    cout << isPalindrome(12321) << endl;
+    cout << factI(5) << endl;
+    cout << factR(5) << endl;
+    cout << countTrailingZeroes(251) << endl;
+    cout << gcd(100, 200) << endl;
+    cout << gcdR(100, 200) << endl;
+    cout << lcm(100, 200) << endl;
+    cout << isPrime(14) << endl;
+    cout << power(2, 6) << endl;
+    primefactors(91);
 
     return 0;
 }
