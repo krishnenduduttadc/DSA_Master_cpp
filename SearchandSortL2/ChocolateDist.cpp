@@ -4,8 +4,7 @@
 #include <climits>
 using namespace std;
 
-class ChocolateDistribution {
-public:
+
     static int find(vector<int>& arr, int n, int m) {
         // Sort the array of weights
         sort(arr.begin(), arr.end());
@@ -25,7 +24,7 @@ public:
 
         return minDifference;
     }
-};
+
 
 int main() {
     // Hardcoded input
@@ -34,7 +33,7 @@ int main() {
     int m = 5;
 
     // Call the find method to get the minimum difference
-    int ans = ChocolateDistribution::find(arr, n, m);
+    int ans = find(arr, n, m);
 
     // Print the result
     cout << ans << endl;

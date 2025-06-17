@@ -2,8 +2,7 @@
 #include <algorithm>
 using namespace std;
 
-class CountPossibleTriangles {
-public:
+
     static int countTriangles(int arr[], int n) {
         // Sort the array
         sort(arr, arr + n);
@@ -27,7 +26,7 @@ public:
 
         return count;
     }
-};
+
 
 int main() {
     // Hardcoded input
@@ -35,7 +34,7 @@ int main() {
     int arr[] = {6, 4, 9, 2, 8};
 
     // Call the countTriangles method to count possible triangles
-    int result = CountPossibleTriangles::countTriangles(arr, n);
+    int result = countTriangles(arr, n);
 
     // Print the result
     cout << "Number of triangles possible: " << result << endl;

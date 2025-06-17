@@ -1,53 +1,37 @@
-#include <iostream>
-#include <vector>
-#include <algorithm>
+#include <bits/stdc++.h>
 
 using namespace std;
 
-// Define a class to represent marks
-class Marks {
-public:
-    int phy;
-    int chem;
-    int math;
+// Define a struct-like comparator function
+bool compare(const tuple<int, int, int>& a, const tuple<int, int, int>& b) {
+    int phy1 = get<0>(a), chem1 = get<1>(a), math1 = get<2>(a);
+    int phy2 = get<0>(b), chem2 = get<1>(b), math2 = get<2>(b);
 
-    // Constructor
-     Marks(int p, int c, int m) {
-        phy = p;
-        chem = c;
-        math = m;
+    if (phy1 != phy2) {
+        return phy1 < phy2;
+    } else if (chem1 != chem2) {
+        return chem1 > chem2; // Descending chem
+    } else {
+        return math1 < math2;
     }
-
-    // Method to compare for sorting
-    bool operator<(const Marks& other) const {
-        if (phy != other.phy) {
-            return phy < other.phy;
-        } else if (chem != other.chem) {
-            return chem > other.chem; // Sort chem descending if phy are equal
-        } else {
-            return math < other.math;
-        }
-    }
-};
+}
 
 // Function to custom sort marks
 void customSort(vector<int>& phy, vector<int>& chem, vector<int>& math) {
     int n = phy.size();
-    vector<Marks> arr;
+    vector<tuple<int, int, int>> arr;
 
-    // Populate the vector of Marks objects
+    // Combine all marks into a tuple list
     for (int i = 0; i < n; ++i) {
         arr.emplace_back(phy[i], chem[i], math[i]);
     }
 
-    // Sort using overloaded < operator in Marks class
-    sort(arr.begin(), arr.end());
+    // Sort using custom comparator
+    sort(arr.begin(), arr.end(), compare);
 
-    // Update original arrays with sorted values
+    // Unpack sorted values back into original arrays
     for (int i = 0; i < n; ++i) {
-        phy[i] = arr[i].phy;
-        chem[i] = arr[i].chem;
-        math[i] = arr[i].math;
+        tie(phy[i], chem[i], math[i]) = arr[i];
     }
 }
 
