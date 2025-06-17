@@ -1,86 +1,59 @@
 #include <iostream>
 using namespace std;
 
-#define MAX 1000 // Maximum size of Stack
+#define MAX 1000
 
-class StackDemo {
-private:
-    int top;
-    char a[MAX]; // Array to store elements of the stack
+int top = -1;
+char stackArr[MAX];
 
-public:
-    // Constructor to initialize the stack
-    StackDemo() {
-        top = -1; // Initialize top to -1 (empty stack)
+bool isEmpty() {
+    return top < 0;
+}
+
+bool isFull() {
+    return top >= MAX - 1;
+}
+
+bool push(char x) {
+    if (isFull()) {
+        cout << "Stack Overflow" << endl;
+        return false;
     }
+    stackArr[++top] = x;
+    cout << x << " pushed to stack" << endl;
+    return true;
+}
 
-    // Function to check if the stack is empty
-    bool isEmpty() {
-        return (top < 0);
+char pop() {
+    if (isEmpty()) {
+        cout << "Stack Underflow" << endl;
+        return 0;
     }
+    return stackArr[top--];
+}
 
-    // Function to push an element into the stack
-    bool push(char x) {
-        if (top >= MAX - 1) {
-            cout << "Stack Overflow" << endl;
-            return false;
-        } else {
-            a[++top] = x;
-            cout << "Stack pushed" << endl;
-            return true;
-        }
+char peek() {
+    if (isEmpty()) {
+        cout << "Stack Underflow" << endl;
+        return 0;
     }
+    return stackArr[top];
+}
 
-    // Function to pop an element from the stack
-    char pop() {
-        if (top < 0) {
-            cout << "Stack Underflow" << endl;
-            return 0;
-        } else {
-            char abc = a[top--];
-            return abc;
-        }
-    }
-
-    // Function to return the top element of the stack without removing it
-    char peek() {
-        if (top < 0) {
-            cout << "Stack Underflow" << endl;
-            return 0;
-        } else {
-            return a[top];
-        }
-    }
-
-    // Function to return the top element of the stack
-    char topElement() {
-        return a[top];
-    }
-
-    // Function to check if the stack is empty
-    bool empty() {
-        return (top < 0);
-    }
-};
+char topElement() {
+    return peek();
+}
 
 int main() {
-    StackDemo s;
+    push('a');
+    push('b');
+    push('c');
+    push('d');
+    push('e');
 
-    // Pushing elements into the stack
-    s.push('a');
-    s.push('b');
-    s.push('c');
-    s.push('d');
-    s.push('e');
-
-    // Popping and displaying elements from the stack
-    cout << s.pop() << " Popped from stack" << endl;
-
-    // Peeking the top element of the stack
-    cout << s.peek() << " Peeked from stack" << endl;
-
-    // Displaying the top element of the stack
-    cout << s.topElement() << " is top of stack" << endl;
+    cout << pop() << " popped from stack" << endl;
+    cout << peek() << " is on top after peek" << endl;
+    cout << topElement() << " is top of stack using topElement()" << endl;
 
     return 0;
 }

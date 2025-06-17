@@ -2,119 +2,110 @@
 #include <vector>
 using namespace std;
 
-class TwoStack {
-private:
+// Structure to hold TwoStack state
+struct TwoStack {
     vector<int> data;
-    int tos1;  // Top of stack 1
-    int tos2;  // Top of stack 2
-public:
-    TwoStack(int cap) {
-        // Constructor to initialize the two stacks
-        data.resize(cap);  // Resize the vector to given capacity
-        tos1 = -1;  // Initialize top of stack 1 to -1
-        tos2 = cap;  // Initialize top of stack 2 to cap (end of array)
-    }
-
-    int size1() {
-        // Returns the size of stack 1
-        return tos1 + 1;
-    }
-
-    int size2() {
-        // Returns the size of stack 2
-        return data.size() - tos2;
-    }
-
-    void push1(int val) {
-        // Pushes an element onto stack 1
-        if (tos2 == tos1 + 1) {
-            cout << "Stack overflow\n";
-        } else {
-            tos1++;
-            data[tos1] = val;
-        }
-    }
-
-    void push2(int val) {
-        // Pushes an element onto stack 2
-        if (tos2 == tos1 + 1) {
-            cout << "Stack overflow\n";
-        } else {
-            tos2--;
-            data[tos2] = val;
-        }
-    }
-
-    int pop1() {
-        // Pops an element from stack 1
-        if (size1() == 0) {
-            cout << "Stack underflow\n";
-            return -1;
-        } else {
-            int val = data[tos1];
-            tos1--;
-            return val;
-        }
-    }
-
-    int pop2() {
-        // Pops an element from stack 2
-        if (size2() == 0) {
-            cout << "Stack underflow\n";
-            return -1;
-        } else {
-            int val = data[tos2];
-            tos2++;
-            return val;
-        }
-    }
-
-    int top1() {
-        // Returns the top element of stack 1
-        if (size1() == 0) {
-            cout << "Stack underflow\n";
-            return -1;
-        } else {
-            return data[tos1];
-        }
-    }
-
-    int top2() {
-        // Returns the top element of stack 2
-        if (size2() == 0) {
-            cout << "Stack underflow\n";
-            return -1;
-        } else {
-            return data[tos2];
-        }
-    }
+    int tos1; // Top of Stack 1
+    int tos2; // Top of Stack 2
 };
 
+// Initialize TwoStack with given capacity
+void initTwoStack(TwoStack& st, int cap) {
+    st.data.resize(cap);
+    st.tos1 = -1;
+    st.tos2 = cap;
+}
+
+int size1(const TwoStack& st) {
+    return st.tos1 + 1;
+}
+
+int size2(const TwoStack& st) {
+    return st.data.size() - st.tos2;
+}
+
+void push1(TwoStack& st, int val) {
+    if (st.tos2 == st.tos1 + 1) {
+        cout << "Stack overflow\n";
+    } else {
+        st.tos1++;
+        st.data[st.tos1] = val;
+    }
+}
+
+void push2(TwoStack& st, int val) {
+    if (st.tos2 == st.tos1 + 1) {
+        cout << "Stack overflow\n";
+    } else {
+        st.tos2--;
+        st.data[st.tos2] = val;
+    }
+}
+
+int pop1(TwoStack& st) {
+    if (size1(st) == 0) {
+        cout << "Stack underflow\n";
+        return -1;
+    } else {
+        int val = st.data[st.tos1];
+        st.tos1--;
+        return val;
+    }
+}
+
+int pop2(TwoStack& st) {
+    if (size2(st) == 0) {
+        cout << "Stack underflow\n";
+        return -1;
+    } else {
+        int val = st.data[st.tos2];
+        st.tos2++;
+        return val;
+    }
+}
+
+int top1(const TwoStack& st) {
+    if (size1(st) == 0) {
+        cout << "Stack underflow\n";
+        return -1;
+    } else {
+        return st.data[st.tos1];
+    }
+}
+
+int top2(const TwoStack& st) {
+    if (size2(st) == 0) {
+        cout << "Stack underflow\n";
+        return -1;
+    } else {
+        return st.data[st.tos2];
+    }
+}
+
 int main() {
-    // Hardcoded example
     int capacity = 5;
-    TwoStack st(capacity);
+    TwoStack st;
+    initTwoStack(st, capacity);
 
-    // Perform operations
-    st.push1(10);
-    st.push1(20);
-    st.push2(30);
-    st.push2(40);
-    st.push2(50);
-    st.push1(60);
+    push1(st, 10);
+    push1(st, 20);
+    push2(st, 30);
+    push2(st, 40);
+    push2(st, 50);
+    push1(st, 60); // Overflow
 
-    cout << "top1: " << st.top1() << "\n";
-    cout << "pop1: " << st.pop1() << "\n";
-    cout << "top1: " << st.top1() << "\n";
-    cout << "pop1: " << st.pop1() << "\n";
-    cout << "top2: " << st.top2() << "\n";
-    cout << "pop2: " << st.pop2() << "\n";
-    cout << "top2: " << st.top2() << "\n";
-    cout << "pop2: " << st.pop2() << "\n";
-    cout << "top1: " << st.top1() << "\n";
-    cout << "pop1: " << st.pop1() << "\n";
-    cout << "top2: " << st.top2() << "\n";
-    cout << "pop2: " << st.pop2() << "\n";
+    cout << "top1: " << top1(st) << "\n";
+    cout << "pop1: " << pop1(st) << "\n";
+    cout << "top1: " << top1(st) << "\n";
+    cout << "pop1: " << pop1(st) << "\n";
+    cout << "top2: " << top2(st) << "\n";
+    cout << "pop2: " << pop2(st) << "\n";
+    cout << "top2: " << top2(st) << "\n";
+    cout << "pop2: " << pop2(st) << "\n";
+    cout << "top1: " << top1(st) << "\n";
+    cout << "pop1: " << pop1(st) << "\n";
+    cout << "top2: " << top2(st) << "\n";
+    cout << "pop2: " << pop2(st) << "\n";
 
     return 0;
 }

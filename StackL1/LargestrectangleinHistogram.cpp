@@ -3,8 +3,7 @@
 #include <vector>
 using namespace std;
 
-class LargestRectangleInHistogram {
-public:
+
     int largestRectangleArea(vector<int>& heights) {
         stack<int> s;
         int ans = 0;
@@ -24,12 +23,11 @@ public:
         }
         return ans;
     }
-};
+
 
 int main() {
     vector<int> heights = {2, 1, 5, 6, 2, 3};
-    LargestRectangleInHistogram histogram;
-    int maxArea = histogram.largestRectangleArea(heights);
+    int maxArea = largestRectangleArea(heights);
     cout << "The largest rectangle area is: " << maxArea << endl;
     return 0;
 }
