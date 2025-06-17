@@ -1,65 +1,49 @@
 #include <iostream>
 #include <vector>
-
 using namespace std;
 
-class MinHeap {
-    vector<int> arr;
-    int size;
-    int capacity;
+// Heap utility functions
+int left(int i) { return 2 * i + 1; }
+int right(int i) { return 2 * i + 2; }
+int parent(int i) { return (i - 1) / 2; }
 
-public:
-    MinHeap(int c) {
-        size = 0;
-        capacity = c;
-        arr.resize(c);
-    }
+// Insert into min-heap
+void insertMinHeap(vector<int>& heap, int& size, int capacity, int value) {
+    if (size == capacity) return;
 
-    int left(int i) {
-        return 2 * i + 1;
-    }
+    heap[size] = value;
+    int i = size;
+    size++;
 
-    int right(int i) {
-        return 2 * i + 2;
+    while (i != 0 && heap[parent(i)] > heap[i]) {
+        swap(heap[i], heap[parent(i)]);
+        i = parent(i);
     }
+}
 
-    int parent(int i) {
-        return (i - 1) / 2;
+// Display heap
+void showHeap(const vector<int>& heap, int size) {
+    for (int i = 0; i < size; i++) {
+        cout << heap[i] << " ";
     }
-
-    void show() {
-        for (int i = 0; i < size; i++) {
-            cout << arr[i] << " ";
-        }
-        cout << endl;
-    }
-
-    void insert(int x) {
-        if (size == capacity) {
-            return;
-        }
-        size++;
-        arr[size - 1] = x;
-        int i = size - 1;
-        while (i != 0 && arr[parent(i)] > arr[i]) {
-            swap(arr[i], arr[parent(i)]);
-            i = parent(i);
-        }
-    }
-};
+    cout << endl;
+}
 
 int main() {
-    MinHeap h(9);
-    h.insert(10);
-    h.insert(20);
-    h.insert(15);
-    h.insert(40);
-    h.insert(50);
-    h.insert(100);
-    h.insert(25);
-    h.insert(45);
+    int capacity = 9;
+    vector<int> heap(capacity);
+    int size = 0;
 
-    h.show();
+    insertMinHeap(heap, size, capacity, 10);
+    insertMinHeap(heap, size, capacity, 20);
+    insertMinHeap(heap, size, capacity, 15);
+    insertMinHeap(heap, size, capacity, 40);
+    insertMinHeap(heap, size, capacity, 50);
+    insertMinHeap(heap, size, capacity, 100);
+    insertMinHeap(heap, size, capacity, 25);
+    insertMinHeap(heap, size, capacity, 45);
+
+    showHeap(heap, size);
 
     return 0;
 }

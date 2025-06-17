@@ -1,60 +1,47 @@
 #include <iostream>
 #include <vector>
 #include <queue>
+#include <tuple>
 #include <algorithm>
 
 using namespace std;
 
-class Pair {
-public:
-    int row, col, msf;
-    Pair(int row, int col, int msf) {
-        this->row = row;
-        this->col = col;
-        this->msf = msf;
-    }
-    bool operator>(const Pair &other) const {
-        return msf > other.msf;
-    }
-};
-
 int swimInRisingWater(vector<vector<int>>& grid) {
     int n = grid.size();
-    priority_queue<Pair, vector<Pair>, greater<Pair>> pq;
-    pq.emplace(0, 0, grid[0][0]);
+
+    // Min-heap priority queue storing (msf, row, col)
+    priority_queue<tuple<int, int, int>, vector<tuple<int, int, int>>, greater<tuple<int, int, int>>> pq;
+    pq.push(make_tuple(grid[0][0], 0, 0));  // msf, row, col
+
     vector<vector<bool>> vis(n, vector<bool>(n, false));
     vector<vector<int>> dirs{{0, 1}, {1, 0}, {-1, 0}, {0, -1}};
 
     while (!pq.empty()) {
-        Pair rem = pq.top();
+        int msf, row, col;
+        tie(msf, row, col) = pq.top();
         pq.pop();
 
-        if (rem.row == n - 1 && rem.col == n - 1) {
-            return rem.msf;
+        if (row == n - 1 && col == n - 1) {
+            return msf;
         }
 
-        if (vis[rem.row][rem.col]) {
-            continue;
-        }
-
-        vis[rem.row][rem.col] = true;
+        if (vis[row][col]) continue;
+        vis[row][col] = true;
 
         for (int i = 0; i < 4; ++i) {
-            int rowdash = rem.row + dirs[i][0];
-            int coldash = rem.col + dirs[i][1];
+            int r = row + dirs[i][0];
+            int c = col + dirs[i][1];
 
-            if (rowdash < 0 || coldash < 0 || rowdash >= n || coldash >= n || vis[rowdash][coldash]) {
-                continue;
+            if (r >= 0 && c >= 0 && r < n && c < n && !vis[r][c]) {
+                pq.push(make_tuple(max(msf, grid[r][c]), r, c));
             }
-
-            pq.emplace(rowdash, coldash, max(rem.msf, grid[rowdash][coldash]));
         }
     }
+
     return 0;
 }
 
 int main() {
-    // Hardcoded input
     vector<vector<int>> grid = {
         {0, 2},
         {1, 3}

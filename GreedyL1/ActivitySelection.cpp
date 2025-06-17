@@ -1,40 +1,37 @@
 #include <iostream>
 #include <algorithm>
 #include <vector>
+
 using namespace std;
 
-class Activity {
-public:
-    int start;
-    int finish;
-    
-    Activity(int s, int f) {
-        start = s;
-        finish = f;
-    }
-};
+int maxActivity(vector<pair<int, int>>& activities) {
+    // Sort by finish time (second element of pair)
+    sort(activities.begin(), activities.end(), [](const pair<int, int>& a, const pair<int, int>& b) {
+        return a.second < b.second;
+    });
 
-struct MyCmp {
-    bool operator()(const Activity& a1, const Activity& a2) const {
-        return a1.finish < a2.finish;
-    }
-};
-
-int maxActivity(vector<Activity>& arr) {
-    sort(arr.begin(), arr.end(), MyCmp());
-    int res = 1;
+    int res = 1;  // Always select the first activity
     int prev = 0;
-    for (int curr = 1; curr < arr.size(); curr++) {
-        if (arr[curr].start >= arr[prev].finish) {
+
+    for (int curr = 1; curr < activities.size(); ++curr) {
+        if (activities[curr].first >= activities[prev].second) {
             res++;
             prev = curr;
         }
     }
+
     return res;
 }
 
 int main() {
-    vector<Activity> arr = {Activity(12, 25), Activity(10, 20), Activity(20, 30)};
-    cout << maxActivity(arr) << endl;
+    // Each pair = {start time, finish time}
+    vector<pair<int, int>> activities = {
+        {12, 25},
+        {10, 20},
+        {20, 30}
+    };
+
+    cout << maxActivity(activities) << endl;
+
     return 0;
 }

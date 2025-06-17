@@ -3,30 +3,33 @@
 #include <unordered_map>
 using namespace std;
 
-class ValidAnagrams {
-public:
-    static bool sol(const string& s1, const string& s2) {
-        unordered_map<char, int> map;
-        for (char ch : s1) {
-            map[ch]++;
-        }
+bool areAnagrams(const string& s1, const string& s2) {
+    if (s1.length() != s2.length()) return false;
 
-        for (char ch : s2) {
-            if (map.find(ch) == map.end()) {
-                return false;
-            } else if (map[ch] == 1) {
-                map.erase(ch);
-            } else {
-                map[ch]--;
-            }
-        }
-        return map.empty();
+    unordered_map<char, int> freq;
+
+    for (char ch : s1) {
+        freq[ch]++;
     }
-};
+
+    for (char ch : s2) {
+        if (freq.find(ch) == freq.end()) {
+            return false;
+        } else if (freq[ch] == 1) {
+            freq.erase(ch);
+        } else {
+            freq[ch]--;
+        }
+    }
+
+    return freq.empty();
+}
 
 int main() {
     string s1 = "abbcaad";
     string s2 = "babacda";
-    cout << (ValidAnagrams::sol(s1, s2) ? "true" : "false") << std::endl;
+
+    cout << (areAnagrams(s1, s2) ? "true" : "false") << endl;
+
     return 0;
 }

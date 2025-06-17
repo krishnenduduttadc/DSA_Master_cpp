@@ -3,8 +3,8 @@
 
 using namespace std;
 
-class UnionFind {
-public:
+// Replacing class with struct
+struct UnionFind {
     vector<int> parent;
     vector<int> rank;
 
@@ -22,7 +22,7 @@ public:
             return x;
         }
         int root = find(parent[x]);
-        parent[x] = root;
+        parent[x] = root; // Path compression
         return root;
     }
 
@@ -43,27 +43,37 @@ public:
     }
 };
 
+// Island counting logic remains unchanged
 vector<int> numIslands2(int m, int n, vector<vector<int>>& positions) {
     vector<int> ans;
     vector<vector<int>> grid(m, vector<int>(n, 0));
     UnionFind uf(m * n);
     int count = 0;
     vector<vector<int>> dirs = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
+    vector<bool> visited(m * n, false);
 
     for (auto& pos : positions) {
         int row = pos[0];
         int col = pos[1];
+        int idx = row * n + col;
 
-        if (grid[row][col] == 0) {
+        if (!visited[idx]) {
+            visited[idx] = true;
             grid[row][col] = 1;
             count++;
 
             for (auto& dir : dirs) {
                 int r = row + dir[0];
                 int c = col + dir[1];
+                int neighborIdx = r * n + c;
 
                 if (r >= 0 && r < m && c >= 0 && c < n && grid[r][c] == 1) {
-                    uf.unionSets(row * n + col, r * n + c);
+                    int root1 = uf.find(idx);
+                    int root2 = uf.find(neighborIdx);
+                    if (root1 != root2) {
+                        uf.unionSets(idx, neighborIdx);
+                        count--;
+                    }
                 }
             }
         }
@@ -74,6 +84,7 @@ vector<int> numIslands2(int m, int n, vector<vector<int>>& positions) {
     return ans;
 }
 
+// Main function
 int main() {
     int m = 3, n = 3;
     vector<vector<int>> positions = {

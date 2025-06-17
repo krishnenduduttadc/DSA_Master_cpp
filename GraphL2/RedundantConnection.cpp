@@ -3,8 +3,8 @@
 
 using namespace std;
 
-class UnionFind {
-public:
+// Replacing class with struct
+struct UnionFind {
     vector<int> parent;
     vector<int> rank;
 
@@ -18,7 +18,7 @@ public:
 
     int find(int x) {
         if (parent[x] != x) {
-            parent[x] = find(parent[x]);  // Path compression
+            parent[x] = find(parent[x]); // Path compression
         }
         return parent[x];
     }
@@ -40,6 +40,7 @@ public:
     }
 };
 
+// Same logic for finding redundant connection
 vector<int> findRedundantConnection(vector<vector<int>>& edges) {
     int n = edges.size();
     UnionFind uf(n);
@@ -49,15 +50,15 @@ vector<int> findRedundantConnection(vector<vector<int>>& edges) {
         int v = edge[1];
 
         if (uf.find(u) == uf.find(v)) {
-            return edge;  // This edge is a redundant connection
+            return edge;  // Redundant edge
         }
         uf.unionSets(u, v);
     }
+
     return {};
 }
 
 int main() {
-    // Hardcoded input
     vector<vector<int>> edges = {
         {1, 2},
         {1, 3},

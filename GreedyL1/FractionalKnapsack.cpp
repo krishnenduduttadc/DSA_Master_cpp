@@ -1,41 +1,46 @@
 #include <iostream>
 #include <algorithm>
+#include <vector>
+
 using namespace std;
 
-class Item {
-public:
-    int wt, val;
+// Custom comparator for sorting by value/weight ratio in descending order
+bool cmp(const pair<int, int>& a, const pair<int, int>& b) {
+    double r1 = (double)a.second / a.first;
+    double r2 = (double)b.second / b.first;
+    return r1 > r2;
+}
 
-     Item(int w, int v) {
-        wt = w;
-        val = v;
-    }
-
-    bool operator<(const Item& i) const {
-        return (double)val / wt > (double)i.val / i.wt;
-    }
-};
-
-double fracKnapsack(Item arr[], int n, int W) {
-    sort(arr, arr + n);
+double fracKnapsack(vector<pair<int, int>>& items, int W) {
+    sort(items.begin(), items.end(), cmp);
     double res = 0.0;
 
-    for (int i = 0; i < n; i++) {
-        if (arr[i].wt <= W) {
-            res += arr[i].val;
-            W -= arr[i].wt;
+    for (const auto& item : items) {
+        int wt = item.first;
+        int val = item.second;
+
+        if (wt <= W) {
+            res += val;
+            W -= wt;
         } else {
-            res += (arr[i].val * (double)W) / arr[i].wt;
+            res += (val * (double)W) / wt;
             break;
         }
     }
+
     return res;
 }
 
 int main() {
-    Item arr[] = {Item(10, 60), Item(40, 40), Item(20, 100), Item(30, 120)};
-    int n = sizeof(arr) / sizeof(arr[0]);
+    vector<pair<int, int>> items = {
+        {10, 60},
+        {40, 40},
+        {20, 100},
+        {30, 120}
+    };
+    
     int W = 50;
-    cout << fracKnapsack(arr, n, W) << endl;
+    cout << fracKnapsack(items, W) << endl;
+
     return 0;
 }

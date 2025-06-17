@@ -1,18 +1,20 @@
 #include <iostream>
 #include <vector>
 #include <queue>
-#include <utility>
 
 using namespace std;
 
-class Pair {
-public:
+// Replace class with struct
+struct Pair {
     int vtx;
     int wt;
-    Pair(int vtx, int wt) {
-        this->vtx = vtx;
-        this->wt = wt;
+
+    Pair(int v, int w) {
+        vtx = v;
+        wt = w;
     }
+
+    // Custom comparator for priority_queue (min-heap)
     bool operator>(const Pair& other) const {
         return this->wt > other.wt;
     }
@@ -20,6 +22,7 @@ public:
 
 int minCostToSupplyWater(int n, vector<int>& wells, vector<vector<int>>& pipes) {
     vector<vector<Pair>> graph(n + 1);
+    
     for (const auto& pipe : pipes) {
         int u = pipe[0];
         int v = pipe[1];
@@ -27,6 +30,7 @@ int minCostToSupplyWater(int n, vector<int>& wells, vector<vector<int>>& pipes) 
         graph[u].emplace_back(v, wt);
         graph[v].emplace_back(u, wt);
     }
+
     for (int i = 1; i <= n; ++i) {
         graph[i].emplace_back(0, wells[i - 1]);
         graph[0].emplace_back(i, wells[i - 1]);
@@ -34,21 +38,24 @@ int minCostToSupplyWater(int n, vector<int>& wells, vector<vector<int>>& pipes) 
 
     int ans = 0;
     priority_queue<Pair, vector<Pair>, greater<Pair>> pq;
-    pq.emplace(0, 0);
+    pq.emplace(0, 0); // Start from imaginary node 0
     vector<bool> vis(n + 1, false);
 
     while (!pq.empty()) {
         Pair rem = pq.top();
         pq.pop();
+
         if (vis[rem.vtx]) continue;
-        ans += rem.wt;
         vis[rem.vtx] = true;
+        ans += rem.wt;
+
         for (const Pair& nbr : graph[rem.vtx]) {
             if (!vis[nbr.vtx]) {
                 pq.push(nbr);
             }
         }
     }
+
     return ans;
 }
 

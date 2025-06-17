@@ -1,58 +1,58 @@
 #include <iostream>
 #include <vector>
+#include <tuple>
 #include <algorithm>
 #include <set>
 
-class Job {
-public:
-    char id;
-    int deadline;
-    int profit;
+using namespace std;
 
-     Job(char id, int deadline, int profit) {
-        this->id = id;
-        this->deadline = deadline;
-        this->profit = profit;
+// Comparator for sorting jobs by profit in descending order
+bool cmp(const tuple<char, int, int> a, const tuple<char, int, int> b) {
+    return get<2>(a) > get<2>(b);  // Compare profits
+}
+
+void printJobScheduling(vector<tuple<char, int, int>>& jobs) {
+    // Sort jobs by decreasing profit
+    sort(jobs.begin(), jobs.end(), cmp);
+
+    // Find maximum deadline to allocate time slots
+    int maxDeadline = 0;
+    for (const auto job : jobs) {
+        maxDeadline = max(maxDeadline, get<1>(job));
     }
-};
 
-struct JobComparator {
-    bool operator()(const Job& j1, const Job& j2) {
-        if (j1.profit != j2.profit)
-            return j2.profit < j1.profit;
-        else
-            return j2.deadline < j1.deadline;
+    // Create a set of available slots
+    set<int> slots;
+    for (int i = 0; i < maxDeadline; ++i) {
+        slots.insert(i);
     }
-};
 
-void printJobScheduling(std::vector<Job>& jobs) {
-    std::sort(jobs.begin(), jobs.end(), JobComparator());
-
-    std::set<int> ts;
-    for (int i = 0; i < jobs.size(); i++)
-        ts.insert(i);
-
+    // Schedule jobs
     for (const auto& job : jobs) {
-        auto it = ts.upper_bound(job.deadline - 1);
-        if (it != ts.begin()) {
+        char id = get<0>(job);
+        int deadline = get<1>(job);
+
+        // Find latest available time slot before deadline
+        auto it = slots.upper_bound(deadline - 1);
+        if (it != slots.begin()) {
             --it;
-            std::cout << job.id << " ";
-            ts.erase(it);
+            cout << id << " ";  // Schedule job
+            slots.erase(it);    // Mark slot as used
         }
     }
 }
 
 int main() {
-    std::vector<Job> jobs = {
-        Job('a', 2, 100),
-        Job('b', 1, 19),
-        Job('c', 2, 27),
-        Job('d', 1, 25),
-        Job('e', 3, 15)
+    vector<tuple<char, int, int>> jobs = {
+        {'a', 2, 100},
+        {'b', 1, 19},
+        {'c', 2, 27},
+        {'d', 1, 25},
+        {'e', 3, 15}
     };
 
     printJobScheduling(jobs);
-    std::cout << std::endl;
+    cout << endl;
 
     return 0;
 }
