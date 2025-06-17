@@ -4,84 +4,77 @@
 
 using namespace std;
 
-// Node class definition
-class Node {
-public:
+// Node struct definition
+struct Node {
     int data;
     vector<Node*> children;
 
-    Node(int val) {
-        data = val;
-    }
+    Node(int val)  {data=val;}
 };
 
 // Function to construct the tree from the given array
-Node* construct(vector<int>& arr) {
+Node* construct(const vector<int>& arr) {
     Node* root = nullptr;
     stack<Node*> st;
 
-    for (int i = 0; i < arr.size(); ++i) {
-        if (arr[i] == -1) {
+    for (int val : arr) {
+        if (val == -1) {
             st.pop();
         } else {
-            Node* t = new Node(arr[i]);
+            Node* node = new Node(val);
 
             if (!st.empty()) {
-                st.top()->children.push_back(t);
+                st.top()->children.push_back(node);
             } else {
-                root = t;
+                root = node;
             }
 
-            st.push(t);
+            st.push(node);
         }
     }
 
     return root;
 }
 
-// Function for level order traversal in zigzag manner
-void levelOrderLinewiseZZ(Node* node) {
-    if (!node)
-        return;
+// Zigzag level order traversal (linewise)
+void levelOrderLinewiseZZ(Node* root) {
+    if (!root) return;
 
-    stack<Node*> ms;  // Main stack
-    stack<Node*> cs;  // Children stack
+    stack<Node*> currentLevel;
+    stack<Node*> nextLevel;
     int level = 1;
 
-    ms.push(node);
+    currentLevel.push(root);
 
-    while (!ms.empty()) {
-        node = ms.top();
-        ms.pop();
+    while (!currentLevel.empty()) {
+        Node* node = currentLevel.top();
+        currentLevel.pop();
 
         cout << node->data << " ";
 
-        // Determine the order of pushing children based on level
-        if (level % 2 == 1) { // Odd level: left to right
-            for (int i = 0; i < node->children.size(); ++i) {
-                cs.push(node->children[i]);
-            }
-        } else { // Even level: right to left
-            for (int i = node->children.size() - 1; i >= 0; --i) {
-                cs.push(node->children[i]);
-            }
+        if (level % 2 == 1) {
+            for (Node* child : node->children)
+                nextLevel.push(child);
+        } else {
+            for (int i = node->children.size() - 1; i >= 0; --i)
+                nextLevel.push(node->children[i]);
         }
 
-        // If main stack is empty, switch to children stack for next level
-        if (ms.empty()) {
-            ms = cs;
-            while (!cs.empty()) {
-                cs.pop();
-            }
-            level++;
+        if (currentLevel.empty()) {
             cout << endl;
+            swap(currentLevel, nextLevel);
+            level++;
         }
     }
 }
 
 // Main function
 int main() {
-    vector<int> arr = {24, 10, 20, 50, -1, 60, -1, -1, 30, 70, -1, 80, 110, -1, 120, -1, -1, 90, -1, -1, 40, 100, -1, -1, -1};
+    vector<int> arr = {
+        24, 10, 20, 50, -1, 60, -1, -1,
+        30, 70, -1, 80, 110, -1, 120, -1,
+        -1, 90, -1, -1, 40, 100, -1, -1, -1
+    };
 
     Node* root = construct(arr);
     levelOrderLinewiseZZ(root);

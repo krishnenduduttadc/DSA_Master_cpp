@@ -4,33 +4,28 @@
 
 using namespace std;
 
-class BestTimeToBuyAndSellStock {
-public:
-    int maxProfit(vector<int>& prices) {
-        if (prices.empty()) return 0;
+// Function to calculate the maximum profit
+int maxProfit(vector<int>& prices) {
+    if (prices.empty()) return 0;
 
-        int maxP = 0;
-        int minBP = prices[0];
+    int maxProfit = 0;
+    int minBuyPrice = prices[0];
 
-        for (int prc : prices) {
-            int tp = prc - minBP;
-            if (tp > maxP) {
-                maxP = tp;
-            }
-            minBP = min(minBP, prc);
-        }
-
-        return maxP;
+    for (int price : prices) {
+        int todayProfit = price - minBuyPrice;
+        maxProfit = max(maxProfit, todayProfit);
+        minBuyPrice = min(minBuyPrice, price);
     }
-};
+
+    return maxProfit;
+}
 
 int main() {
-    BestTimeToBuyAndSellStock solution;
+    // Test case
+    vector<int> prices = {7, 1, 5, 3, 6, 4};
+    int result = maxProfit(prices);
 
-    // Test case 1
-    vector<int> prices1 = {7, 1, 5, 3, 6, 4};
-    int maxProfit1 = solution.maxProfit(prices1);
-    cout << "Max profit for prices1: " << maxProfit1 << endl; // Output: 5
+    cout << "Max profit: " << result << endl; // Output: 5
 
     return 0;
 }

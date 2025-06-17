@@ -4,9 +4,8 @@
 
 using namespace std;
 
-// Node class definition
-class Node {
-public:
+// Struct instead of class
+struct Node {
     int data;
     vector<Node*> children;
 
@@ -77,8 +76,12 @@ void linearize(Node* node) {
 
 // Main function
 int main() {
-    vector<int> arr = {24, 10, 20, 50, -1, 60, -1, -1, 30, 70, -1, 80, 110, -1, 120, -1, -1, 90, -1, -1, 40, 100, -1, -1, -1};
-    
+    vector<int> arr = {
+        24, 10, 20, 50, -1, 60, -1, -1,
+        30, 70, -1, 80, 110, -1, 120, -1, -1,
+        90, -1, -1, 40, 100, -1, -1, -1
+    };
+
     Node* root = construct(arr);
     linearize(root);
     display(root);

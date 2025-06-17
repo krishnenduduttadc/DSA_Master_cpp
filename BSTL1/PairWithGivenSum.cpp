@@ -2,54 +2,47 @@
 #include <vector>
 using namespace std;
 
-class Node {
-public:
+struct Node {
     int key;
     Node* left;
     Node* right;
 
-     Node(int item) {
+    Node(int item) {
         key = item;
         left = nullptr;
         right = nullptr;
     }
 };
 
-class PairWithGivenSum {
-public:
-    static vector<int> treeToList(Node* root, vector<int>& list) {
-        if (root == nullptr) 
-            return list;
-        
-        treeToList(root->left, list);
-        list.push_back(root->key);
-        treeToList(root->right, list);
-        
-        return list;
-    }
+void treeToList(Node* root, vector<int>& list) {
+    if (root == nullptr) return;
+    treeToList(root->left, list);
+    list.push_back(root->key);
+    treeToList(root->right, list);
+}
 
-    static bool isPairPresent(Node* root, int target) {
-        vector<int> nodeList;
-        vector<int> sortedList = treeToList(root, nodeList);
+bool isPairPresent(Node* root, int target) {
+    vector<int> nodeList;
+    treeToList(root, nodeList);
 
-        int start = 0;
-        int end = sortedList.size() - 1;
+    int start = 0;
+    int end = nodeList.size() - 1;
 
-        while (start < end) {
-            if (sortedList[start] + sortedList[end] == target) {
-                cout << "Pair Found: " << sortedList[start] << " + " << sortedList[end] << " = " << target << endl;
-                return true;
-            } else if (sortedList[start] + sortedList[end] < target) {
-                start++;
-            } else {
-                end--;
-            }
+    while (start < end) {
+        int sum = nodeList[start] + nodeList[end];
+        if (sum == target) {
+            cout << "Pair Found: " << nodeList[start] << " + " << nodeList[end] << " = " << target << endl;
+            return true;
+        } else if (sum < target) {
+            start++;
+        } else {
+            end--;
         }
-
-        cout << "No such values are found!" << endl;
-        return false;
     }
-};
+
+    cout << "No such values are found!" << endl;
+    return false;
+}
 
 int main() {
     Node* root = new Node(10);
@@ -63,7 +56,7 @@ int main() {
 
     int sum = 33;
 
-    PairWithGivenSum::isPairPresent(root, sum);
+    isPairPresent(root, sum);
 
     return 0;
 }

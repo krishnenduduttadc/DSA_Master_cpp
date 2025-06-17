@@ -5,9 +5,8 @@
 
 using namespace std;
 
-// Node class definition
-class Node {
-public:
+// Node structure definition (instead of class)
+struct Node {
     int data;
     vector<Node*> children;
 
@@ -46,12 +45,8 @@ int floor_val = INT_MIN;
 
 // Function to find ceil and floor values in the tree
 void ceilAndFloor(Node* node, int data) {
-    // Base case: if node is nullptr
-    if (!node) {
-        return;
-    }
+    if (!node) return;
 
-    // Update ceil and floor values
     if (node->data > data) {
         if (node->data < ceil_val) {
             ceil_val = node->data;
@@ -64,13 +59,11 @@ void ceilAndFloor(Node* node, int data) {
         }
     }
 
-    // Recursively search in children
     for (Node* child : node->children) {
         ceilAndFloor(child, data);
     }
 }
 
-// Main function
 int main() {
     vector<int> arr = {10, 20, -50, -1, 60, -1, -1, 30, 70, -1, -80, 110, -1, -120, -1, -1, 90, -1, -1, 40, -100, -1, -1, -1};
     int data = 70;
@@ -78,6 +71,7 @@ int main() {
     Node* root = construct(arr);
     ceil_val = INT_MAX;
     floor_val = INT_MIN;
+
     ceilAndFloor(root, data);
 
     cout << "CEIL = " << ceil_val << endl;

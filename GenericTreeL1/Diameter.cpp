@@ -4,9 +4,8 @@
 
 using namespace std;
 
-// Node class definition
-class Node {
-public:
+// Node structure definition
+struct Node {
     int data;
     vector<Node*> children;
 
@@ -39,13 +38,13 @@ Node* construct(vector<int>& arr) {
     return root;
 }
 
-// Variables to store the diameter of the tree
+// Global variable to store the diameter
 int dia = 0;
 
-// Function to calculate the diameter and return the height of the subtree
+// Recursive function to compute diameter and return height
 int calculateDiaReturnHeight(Node* node) {
-    int dch = -1; // deepest child height
-    int sdch = -1; // second deepest child height
+    int dch = -1;    // deepest child height
+    int sdch = -1;   // second deepest child height
 
     for (Node* child : node->children) {
         int ch = calculateDiaReturnHeight(child);
@@ -57,13 +56,10 @@ int calculateDiaReturnHeight(Node* node) {
         }
     }
 
-    // Update diameter if necessary
-    if (dch + sdch + 2 > dia) {
-        dia = dch + sdch + 2;
-    }
+    // Update the diameter
+    dia = max(dia, dch + sdch + 2);
 
-    dch += 1; // height of current node
-    return dch;
+    return dch + 1; // return height of current node
 }
 
 // Main function

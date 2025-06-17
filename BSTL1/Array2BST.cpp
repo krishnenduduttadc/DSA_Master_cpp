@@ -2,26 +2,27 @@
 #include <queue>
 using namespace std;
 
-class Node {
-public:
+struct Node {
     int key;
     Node* left;
     Node* right;
-
-    Node(int item) {
-        key = item;
-        left = nullptr;
-        right = nullptr;
-    }
 };
 
+// Function to create a new node
+Node* createNode(int item) {
+    Node* newNode = new Node;
+    newNode->key = item;
+    newNode->left = nullptr;
+    newNode->right = nullptr;
+    return newNode;
+}
+
+// Convert sorted array to balanced BST
 Node* SortedArrayToBST(int arr[], int start, int end) {
-    if (start > end) {
-        return nullptr;
-    }
+    if (start > end) return nullptr;
 
     int mid = (start + end) / 2;
-    Node* root = new Node(arr[mid]);
+    Node* root = createNode(arr[mid]);
 
     root->left = SortedArrayToBST(arr, start, mid - 1);
     root->right = SortedArrayToBST(arr, mid + 1, end);
@@ -29,27 +30,23 @@ Node* SortedArrayToBST(int arr[], int start, int end) {
     return root;
 }
 
+// Print tree level-wise
 void printLevelWise(Node* root) {
-    if (root == nullptr) {
-        return;
-    }
+    if (root == nullptr) return;
 
     queue<Node*> q;
     q.push(root);
 
     while (!q.empty()) {
         int size = q.size();
+
         for (int i = 0; i < size; i++) {
             Node* current = q.front();
             q.pop();
             cout << current->key << " ";
 
-            if (current->left != nullptr) {
-                q.push(current->left);
-            }
-            if (current->right != nullptr) {
-                q.push(current->right);
-            }
+            if (current->left) q.push(current->left);
+            if (current->right) q.push(current->right);
         }
         cout << endl;
     }

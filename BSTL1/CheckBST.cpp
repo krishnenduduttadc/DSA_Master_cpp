@@ -1,69 +1,40 @@
 #include <iostream>
-#include <climits> // For INT_MIN and INT_MAX
+#include <climits>
 using namespace std;
 
-class CheckBST
-{
-public:
-    struct Node
-    {
-        int key;
-        Node *left;
-        Node *right;
-
-        Node(int item)
-        {
-            key = item;
-            left = nullptr;
-            right = nullptr;
-        }
-    };
-
-    static int max(Node *root)
-    {
-        if (root == nullptr)
-        {
-            return INT_MIN;
-        }
-        return std::max(root->key, std::max(max(root->left), max(root->right)));
-    }
-
-    static int min(Node *root)
-    {
-        if (root == nullptr)
-        {
-            return INT_MAX;
-        }
-        return std::min(root->key, std::min(min(root->left), min(root->right)));
-    }
-
-    static bool isBST(Node *root)
-    {
-        if (root == nullptr)
-        {
-            return true;
-        }
-        int lmax = max(root->left);
-        int rmin = min(root->right);
-        if (root->key < lmax || root->key > rmin)
-        {
-            return false;
-        }
-        bool isLeftBST = isBST(root->left);
-        bool isRightBST = isBST(root->right);
-        return isLeftBST && isRightBST;
-    }
+struct Node {
+    int key;
+    Node* left;
+    Node* right;
 };
 
-int main()
-{
-    CheckBST::Node *root = new CheckBST::Node(6);
-    root->left = new CheckBST::Node(3);
-    root->right = new CheckBST::Node(8);
-    root->right->left = new CheckBST::Node(7);
-    root->right->right = new CheckBST::Node(9);
+// Create a new node
+Node* createNode(int key) {
+    Node* node = new Node;
+    node->key = key;
+    node->left = nullptr;
+    node->right = nullptr;
+    return node;
+}
 
-    cout << "Is BST? " << (CheckBST::isBST(root) ? "Yes" : "No") << endl;
+// Efficient BST check using min/max range
+bool isBST(Node* root, int minVal, int maxVal) {
+    if (root == nullptr)
+        return true;
+    if (root->key <= minVal || root->key >= maxVal)
+        return false;
+    return isBST(root->left, minVal, root->key) &&
+           isBST(root->right, root->key, maxVal);
+}
+
+int main() {
+    Node* root = createNode(6);
+    root->left = createNode(3);
+    root->right = createNode(8);
+    root->right->left = createNode(7);
+    root->right->right = createNode(9);
+
+    cout << "Is BST? " << (isBST(root, INT_MIN, INT_MAX) ? "Yes" : "No") << endl;
 
     return 0;
 }

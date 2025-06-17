@@ -4,64 +4,56 @@
 
 using namespace std;
 
-// Node class definition
-class Node {
-public:
+// Define Node using struct instead of class
+struct Node {
     int data;
     vector<Node*> children;
-
-    Node(int val) {
-        data = val;
-    }
+    Node(int val)  {data=val;}
 };
 
-// Function to construct the tree from the given array
-Node* construct(vector<int>& arr) {
+// Construct tree from array
+Node* constructTree(const vector<int>& arr) {
     Node* root = nullptr;
     stack<Node*> st;
 
-    for (int i = 0; i < arr.size(); ++i) {
-        if (arr[i] == -1) {
+    for (int val : arr) {
+        if (val == -1) {
             st.pop();
         } else {
-            Node* t = new Node(arr[i]);
-
+            Node* node = new Node(val);
             if (!st.empty()) {
-                st.top()->children.push_back(t);
+                st.top()->children.push_back(node);
             } else {
-                root = t;
+                root = node;
             }
-
-            st.push(t);
+            st.push(node);
         }
     }
-
     return root;
 }
 
-// Function to find if a node with given data exists in the tree
-bool find(Node* node, int data) {
-    if (node->data == data) {
-        return true;
-    }
+// Function to find if a node with the given data exists
+bool findNode(Node* node, int data) {
+    if (node->data == data) return true;
 
     for (Node* child : node->children) {
-        if (find(child, data)) {
-            return true;
-        }
+        if (findNode(child, data)) return true;
     }
-
     return false;
 }
 
-// Main function
+// Main
 int main() {
-    vector<int> arr = {10, 20, 50, -1, 60, -1, -1, 30, 70, -1, 80, 110, -1, 120, -1, -1, 90, -1, -1, 40, 100, -1, -1, -1};
-    int data = 120; // Data of the node to search for
+    vector<int> arr = {
+        10, 20, 50, -1, 60, -1, -1,
+        30, 70, -1, 80, 110, -1, 120, -1, -1,
+        90, -1, -1, 40, 100, -1, -1, -1
+    };
+    int data = 120;
 
-    Node* root = construct(arr);
-    bool flag = find(root, data);
-    cout << boolalpha << flag << endl;
+    Node* root = constructTree(arr);
+    bool found = findNode(root, data);
+    cout << boolalpha << found << endl;
 
     return 0;
 }

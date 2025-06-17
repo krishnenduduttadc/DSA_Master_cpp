@@ -2,280 +2,225 @@
 #include <queue>
 #include <stack>
 #include <unordered_set>
-#include <algorithm>
 #include <climits>
+#include <cmath>
+using namespace std;
 
-class Node {
-public:
+struct Node {
     int key;
-    Node *left, *right;
-
-     Node(int item) {
-        key = item;
-        left = nullptr;
-        right = nullptr;    
-    }
+    Node* left;
+    Node* right;
+    Node(int item) : key(item), left(nullptr), right(nullptr) {}
 };
 
-class BST {
-private:
-    Node* root;
-    int maxlevel = 0;
-    int dia = 0;
+// BST Operations
+Node* insert(Node* root, int key) {
+    if (root == nullptr) return new Node(key);
+    if (key < root->key)
+        root->left = insert(root->left, key);
+    else if (key > root->key)
+        root->right = insert(root->right, key);
+    return root;
+}
 
-public:
-    BST() : root(nullptr) {}
+void inorder(Node* root) {
+    if (root == nullptr) return;
+    inorder(root->left);
+    cout << root->key << " ";
+    inorder(root->right);
+}
 
-    void Inorder(Node* root) {
-        if (root == nullptr) return;
-        Inorder(root->left);
-        std::cout << root->key << " ";
-        Inorder(root->right);
+bool search(Node* root, int x) {
+    if (root == nullptr) return false;
+    if (root->key == x) return true;
+    return (x < root->key) ? search(root->left, x) : search(root->right, x);
+}
+
+bool isPairSum(Node* root, int sum, unordered_set<int>& s) {
+    if (root == nullptr) return false;
+    if (isPairSum(root->left, sum, s)) return true;
+    if (s.count(sum - root->key)) return true;
+    s.insert(root->key);
+    return isPairSum(root->right, sum, s);
+}
+
+int height(Node* root) {
+    if (root == nullptr) return 0;
+    return 1 + max(height(root->left), height(root->right));
+}
+
+int size(Node* root) {
+    if (root == nullptr) return 0;
+    return 1 + size(root->left) + size(root->right);
+}
+
+int getMax(Node* root) {
+    if (root == nullptr) return INT_MIN;
+    return max(root->key, max(getMax(root->left), getMax(root->right)));
+}
+
+bool isBalanced(Node* root) {
+    if (root == nullptr) return true;
+    int lh = height(root->left);
+    int rh = height(root->right);
+    return abs(lh - rh) <= 1 && isBalanced(root->left) && isBalanced(root->right);
+}
+
+bool childrenSum(Node* root) {
+    if (root == nullptr || (root->left == nullptr && root->right == nullptr)) return true;
+    int sum = 0;
+    if (root->left) sum += root->left->key;
+    if (root->right) sum += root->right->key;
+    return (root->key == sum && childrenSum(root->left) && childrenSum(root->right));
+}
+
+void levelOrder(Node* root) {
+    if (root == nullptr) return;
+    queue<Node*> q;
+    q.push(root);
+    while (!q.empty()) {
+        Node* curr = q.front();
+        q.pop();
+        cout << curr->key << " ";
+        if (curr->left) q.push(curr->left);
+        if (curr->right) q.push(curr->right);
     }
+}
 
-    Node* insert(Node* root, int x) {
-        if (root == nullptr) return new Node(x);
-        if (x < root->key)
-            root->left = insert(root->left, x);
-        else if (x > root->key)
-            root->right = insert(root->right, x);
-        return root;
-    }
-
-    bool search(Node* root, int x) {
-        if (root == nullptr) return false;
-        if (root->key == x) return true;
-        return (x < root->key) ? search(root->left, x) : search(root->right, x);
-    }
-
-    bool isPairSum(Node* root, int sum, std::unordered_set<int>& s) {
-        if (root == nullptr) return false;
-        if (isPairSum(root->left, sum, s)) return true;
-        if (s.find(sum - root->key) != s.end()) return true;
-        s.insert(root->key);
-        return isPairSum(root->right, sum, s);
-    }
-
-    int height(Node* root) {
-        if (root == nullptr) return 0;
-        return 1 + std::max(height(root->left), height(root->right));
-    }
-
-    void nodeatdistK(Node* root, int k) {
-        if (root == nullptr) return;
-        if (k == 0) std::cout << root->key << " ";
-        else {
-            nodeatdistK(root->left, k - 1);
-            nodeatdistK(root->right, k - 1);
-        }
-    }
-
-    void levelOrder(Node* root) {
-        if (root == nullptr) return;
-        std::queue<Node*> q;
-        q.push(root);
-        while (!q.empty()) {
+void levelOrderLineByLine(Node* root) {
+    if (root == nullptr) return;
+    queue<Node*> q;
+    q.push(root);
+    while (!q.empty()) {
+        int size = q.size();
+        for (int i = 0; i < size; i++) {
             Node* curr = q.front();
             q.pop();
-            std::cout << curr->key << " ";
+            cout << curr->key << " ";
+            if (curr->left) q.push(curr->left);
+            if (curr->right) q.push(curr->right);
+        }
+        cout << endl;
+    }
+}
+
+void printNodesAtDistanceK(Node* root, int k) {
+    if (root == nullptr) return;
+    if (k == 0) cout << root->key << " ";
+    else {
+        printNodesAtDistanceK(root->left, k - 1);
+        printNodesAtDistanceK(root->right, k - 1);
+    }
+}
+
+int diameterUtil(Node* root, int& dia) {
+    if (root == nullptr) return 0;
+    int lh = diameterUtil(root->left, dia);
+    int rh = diameterUtil(root->right, dia);
+    dia = max(dia, 1 + lh + rh);
+    return 1 + max(lh, rh);
+}
+
+int diameter(Node* root) {
+    int dia = 0;
+    diameterUtil(root, dia);
+    return dia;
+}
+
+int maxWidth(Node* root) {
+    if (root == nullptr) return 0;
+    queue<Node*> q;
+    q.push(root);
+    int maxW = 0;
+    while (!q.empty()) {
+        int width = q.size();
+        maxW = max(maxW, width);
+        for (int i = 0; i < width; i++) {
+            Node* curr = q.front(); q.pop();
             if (curr->left) q.push(curr->left);
             if (curr->right) q.push(curr->right);
         }
     }
+    return maxW;
+}
 
-    void levelOrderLineByLine(Node* root) {
-        if (root == nullptr) return;
-        std::queue<Node*> q;
-        q.push(root);
-        while (!q.empty()) {
-            int size = q.size();
-            for (int i = 0; i < size; i++) {
-                Node* curr = q.front();
-                q.pop();
-                std::cout << curr->key << " ";
-                if (curr->left) q.push(curr->left);
-                if (curr->right) q.push(curr->right);
-            }
-            std::cout << std::endl;
+void printSpiral(Node* root) {
+    if (root == nullptr) return;
+    stack<Node*> s1, s2;
+    s1.push(root);
+    while (!s1.empty() || !s2.empty()) {
+        while (!s1.empty()) {
+            Node* curr = s1.top(); s1.pop();
+            cout << curr->key << " ";
+            if (curr->right) s2.push(curr->right);
+            if (curr->left) s2.push(curr->left);
+        }
+        while (!s2.empty()) {
+            Node* curr = s2.top(); s2.pop();
+            cout << curr->key << " ";
+            if (curr->left) s1.push(curr->left);
+            if (curr->right) s1.push(curr->right);
         }
     }
+}
 
-    int size(Node* root) {
-        if (root == nullptr) return 0;
-        return 1 + size(root->left) + size(root->right);
+void printLeftView(Node* root, int level, int& maxLevel) {
+    if (root == nullptr) return;
+    if (level > maxLevel) {
+        cout << root->key << " ";
+        maxLevel = level;
     }
-
-    int getMax(Node* root) {
-        if (root == nullptr) return INT_MIN;
-        return std::max(root->key, std::max(getMax(root->left), getMax(root->right)));
-    }
-
-    void printLeftRecursive(Node* root, int level) {
-        if (root == nullptr) return;
-        if (maxlevel < level) {
-            std::cout << root->key << std::endl;
-            maxlevel = level;
-        }
-        printLeftRecursive(root->left, level + 1);
-        printLeftRecursive(root->right, level + 1);
-    }
-
-    void printLeftIterative(Node* root) {
-        if (root == nullptr) return;
-        std::queue<Node*> q;
-        q.push(root);
-        while (!q.empty()) {
-            int size = q.size();
-            for (int i = 0; i < size; i++) {
-                Node* curr = q.front();
-                q.pop();
-                if (i == 0) std::cout << curr->key << " ";
-                if (curr->left) q.push(curr->left);
-                if (curr->right) q.push(curr->right);
-            }
-            std::cout << std::endl;
-        }
-    }
-
-    bool childrenSum(Node* root) {
-        if (root == nullptr) return true;
-        if (root->left == nullptr && root->right == nullptr) return true;
-        int sum = 0;
-        if (root->left) sum += root->left->key;
-        if (root->right) sum += root->right->key;
-        return (root->key == sum && childrenSum(root->left) && childrenSum(root->right));
-    }
-
-    bool isBalanced(Node* root) {
-        if (root == nullptr) return true;
-        int lh = height(root->left);
-        int rh = height(root->right);
-        return (std::abs(lh - rh) <= 1 && isBalanced(root->left) && isBalanced(root->right));
-    }
-
-    int maxWidth(Node* root) {
-        if (root == nullptr) return 0;
-        std::queue<Node*> q;
-        q.push(root);
-        int maxWidth = 0;
-        while (!q.empty()) {
-            int size = q.size();
-            maxWidth = std::max(maxWidth, size);
-            for (int i = 0; i < size; i++) {
-                Node* curr = q.front();
-                q.pop();
-                if (curr->left) q.push(curr->left);
-                if (curr->right) q.push(curr->right);
-            }
-        }
-        return maxWidth;
-    }
-
-    void printSpiral(Node* root) {
-        if (root == nullptr) return;
-        std::queue<Node*> q;
-        std::stack<int> s;
-        bool reverse = false;
-        q.push(root);
-        while (!q.empty()) {
-            int size = q.size();
-            for (int i = 0; i < size; i++) {
-                Node* curr = q.front();
-                q.pop();
-                if (reverse)
-                    s.push(curr->key);
-                else
-                    std::cout << curr->key << " ";
-                if (curr->left) q.push(curr->left);
-                if (curr->right) q.push(curr->right);
-            }
-            if (reverse) {
-                while (!s.empty()) {
-                    std::cout << s.top() << " ";
-                    s.pop();
-                }
-            }
-            reverse = !reverse;
-            std::cout << std::endl;
-        }
-    }
-
-    int diameter(Node* root) {
-        if (root == nullptr) return 0;
-        int lh = height(root->left);
-        int rh = height(root->right);
-        dia = std::max(dia, 1 + lh + rh);
-        return 1 + std::max(lh, rh);
-    }
-
-    // Public interface methods
-    void insert(int x) { root = insert(root, x); }
-    void inorder() { Inorder(root); }
-    bool search(int x) { return search(root, x); }
-    bool isPairSum(int sum) {
-        std::unordered_set<int> s;
-        return isPairSum(root, sum, s);
-    }
-    int getHeight() { return height(root); }
-    int getSize() { return size(root); }
-    int getDiameter() { diameter(root); return dia; }
-    int getMaximum() { return getMax(root); }
-    bool isBalanced() { return isBalanced(root); }
-    void printNodesAtDistanceK(int k) { nodeatdistK(root, k); }
-    void printLevelOrder() { levelOrder(root); }
-    void printLevelOrderLineByLine() { levelOrderLineByLine(root); }
-    void printLeftView() { printLeftRecursive(root, 1); }
-    void printLeftViewIterative() { printLeftIterative(root); }
-    bool hasChildrenSum() { return childrenSum(root); }
-    int getMaxWidth() { return maxWidth(root); }
-    void printSpiralOrder() { printSpiral(root); }
-};
+    printLeftView(root->left, level + 1, maxLevel);
+    printLeftView(root->right, level + 1, maxLevel);
+}
 
 int main() {
-    BST tree;
+    Node* root = nullptr;
+    root = insert(root, 10);
+    insert(root, 30);
+    insert(root, 20);
+    insert(root, 40);
+    insert(root, 70);
+    insert(root, 60);
+    insert(root, 80);
 
-    tree.insert(10);
-    tree.insert(30);
-    tree.insert(20);
-    tree.insert(40);
-    tree.insert(70);
-    tree.insert(60);
-    tree.insert(80);
+    cout << "Inorder Traversal: ";
+    inorder(root);
+    cout << "\n";
 
-    std::cout << "Inorder traversal: ";
-    tree.inorder();
-    std::cout << std::endl;
+    cout << "Search 70: " << (search(root, 70) ? "Yes" : "No") << "\n";
 
-    std::cout << "Item found: " << (tree.search(70) ? "Yes" : "No") << std::endl;
-    std::cout << "Pair sum exists: " << (tree.isPairSum(51) ? "Yes" : "No") << std::endl;
-    std::cout << "Height is: " << tree.getHeight() << std::endl;
-    std::cout << "Size is: " << tree.getSize() << std::endl;
-    std::cout << "Diameter is: " << tree.getDiameter() << std::endl;
-    std::cout << "Maximum is: " << tree.getMaximum() << std::endl;
-    std::cout << "Is tree balanced: " << (tree.isBalanced() ? "Yes" : "No") << std::endl;
+    unordered_set<int> s;
+    cout << "Pair sum 51 exists: " << (isPairSum(root, 51, s) ? "Yes" : "No") << "\n";
 
-    std::cout << "Nodes at distance 2: ";
-    tree.printNodesAtDistanceK(2);
-    std::cout << std::endl;
+    cout << "Height: " << height(root) << "\n";
+    cout << "Size: " << size(root) << "\n";
+    cout << "Diameter: " << diameter(root) << "\n";
+    cout << "Maximum: " << getMax(root) << "\n";
+    cout << "Is Balanced: " << (isBalanced(root) ? "Yes" : "No") << "\n";
+    cout << "Children Sum Property: " << (childrenSum(root) ? "Yes" : "No") << "\n";
 
-    std::cout << "Level order traversal: ";
-    tree.printLevelOrder();
-    std::cout << std::endl;
+    cout << "Nodes at Distance 2: ";
+    printNodesAtDistanceK(root, 2);
+    cout << "\n";
 
-    std::cout << "Level order line by line:" << std::endl;
-    tree.printLevelOrderLineByLine();
+    cout << "Level Order: ";
+    levelOrder(root);
+    cout << "\n";
 
-    std::cout << "Spiral order:" << std::endl;
-    tree.printSpiralOrder();
+    cout << "Level Order Line by Line:\n";
+    levelOrderLineByLine(root);
 
-    std::cout << "Left view:" << std::endl;
-    tree.printLeftView();
+    cout << "Spiral Order: ";
+    printSpiral(root);
+    cout << "\n";
 
-    std::cout << "Left view (iterative):" << std::endl;
-    tree.printLeftViewIterative();
+    cout << "Left View: ";
+    int maxLevel = 0;
+    printLeftView(root, 1, maxLevel);
+    cout << "\n";
 
-    std::cout << "Children sum property holds: " << (tree.hasChildrenSum() ? "Yes" : "No") << std::endl;
-    std::cout << "Width of tree is: " << tree.getMaxWidth() << std::endl;
+    cout << "Maximum Width: " << maxWidth(root) << "\n";
 
     return 0;
 }

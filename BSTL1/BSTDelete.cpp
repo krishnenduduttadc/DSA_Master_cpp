@@ -1,101 +1,99 @@
 #include <iostream>
 using namespace std;
 
-class Node {
-public:
+struct Node {
     int key;
     Node *left, *right;
-
-    Node(int item) {
-        key = item;
-        left = right = nullptr;
-    }
 };
 
-class BST {
-public:
-    Node* root;
+// Create a new node
+Node* newNode(int item) {
+    Node* temp = new Node;
+    temp->key = item;
+    temp->left = temp->right = nullptr;
+    return temp;
+}
 
-    BST() {
-        root = nullptr;
+// Insert a node
+Node* insert(Node* root, int x) {
+    if (root == nullptr) {
+        return newNode(x);
     }
 
-    Node* insert(Node* root, int x) {
-        if (root == nullptr) {
-            return new Node(x);
-        }
+    if (x < root->key) {
+        root->left = insert(root->left, x);
+    } else if (x > root->key) {
+        root->right = insert(root->right, x);
+    }
 
-        if (x < root->key) {
-            root->left = insert(root->left, x);
-        } else if (x > root->key) {
-            root->right = insert(root->right, x);
-        }
+    return root;
+}
 
+// Inorder traversal
+void inorder(Node* root) {
+    if (root != nullptr) {
+        inorder(root->left);
+        cout << root->key << " ";
+        inorder(root->right);
+    }
+}
+
+// Find the in-order successor (smallest in the right subtree)
+Node* getSuccessor(Node* root) {
+    Node* curr = root;
+    while (curr != nullptr && curr->left != nullptr) {
+        curr = curr->left;
+    }
+    return curr;
+}
+
+// Delete a node
+Node* deleteNode(Node* root, int x) {
+    if (root == nullptr) {
         return root;
     }
 
-    void inorder(Node* root) {
-        if (root != nullptr) {
-            inorder(root->left);
-            cout << root->key << " ";
-            inorder(root->right);
+    if (x < root->key) {
+        root->left = deleteNode(root->left, x);
+    } else if (x > root->key) {
+        root->right = deleteNode(root->right, x);
+    } else {
+        if (root->left == nullptr) {
+            Node* temp = root->right;
+            delete root;
+            return temp;
+        } else if (root->right == nullptr) {
+            Node* temp = root->left;
+            delete root;
+            return temp;
         }
+
+        Node* succ = getSuccessor(root->right);
+        root->key = succ->key;
+        root->right = deleteNode(root->right, succ->key);
     }
 
-    Node* deleteNode(Node* root, int x) {
-        if (root == nullptr) {
-            return root;
-        }
-
-        if (x < root->key) {
-            root->left = deleteNode(root->left, x);
-        } else if (x > root->key) {
-            root->right = deleteNode(root->right, x);
-        } else {
-            if (root->left == nullptr) {
-                Node* temp = root->right;
-                delete root;
-                return temp;
-            } else if (root->right == nullptr) {
-                Node* temp = root->left;
-                delete root;
-                return temp;
-            }
-
-            Node* succ = getSuccessor(root->right);
-            root->key = succ->key;
-            root->right = deleteNode(root->right, succ->key);
-        }
-
-        return root;
-    }
-
-    Node* getSuccessor(Node* root) {
-        Node* curr = root;
-        while (curr != nullptr && curr->left != nullptr) {
-            curr = curr->left;
-        }
-        return curr;
-    }
-};
+    return root;
+}
 
 int main() {
-    BST tree;
-    tree.root = tree.insert(tree.root, 10);
-    tree.insert(tree.root, 30);
-    tree.insert(tree.root, 20);
-    tree.insert(tree.root, 40);
-    tree.insert(tree.root, 70);
-    tree.insert(tree.root, 60);
-    tree.insert(tree.root, 80);
+    Node* root = nullptr;
+    root = insert(root, 10);
+    insert(root, 30);
+    insert(root, 20);
+    insert(root, 40);
+    insert(root, 70);
+    insert(root, 60);
+    insert(root, 80);
 
     cout << "Inorder traversal before deletion: ";
-    tree.inorder(tree.root);
+    inorder(root);
     cout << endl;
 
-    tree.deleteNode(tree.root, 20);
+    root = deleteNode(root, 20);
+
     cout << "Inorder traversal after deletion: ";
-    tree.inorder(tree.root);
+    inorder(root);
     cout << endl;
 
     return 0;

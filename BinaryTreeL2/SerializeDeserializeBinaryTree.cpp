@@ -3,6 +3,7 @@
 #include <queue>
 #include <vector>
 #include <string>
+using namespace std;
 
 // TreeNode structure definition
 struct TreeNode {
@@ -17,11 +18,11 @@ struct TreeNode {
 };
 
 // Encodes a tree to a single string.
-std::string serialize(TreeNode* root) {
+string serialize(TreeNode* root) {
     if (root == nullptr) return "null";
     
-    std::stringstream ss;
-    std::queue<TreeNode*> q;
+    stringstream ss;
+    queue<TreeNode*> q;
     q.push(root);
     
     while (!q.empty()) {
@@ -37,24 +38,24 @@ std::string serialize(TreeNode* root) {
         }
     }
     
-    std::string result = ss.str();
+    string result = ss.str();
     return result.substr(0, result.length() - 1); // Remove last comma
 }
 
 // Decodes your encoded data to tree.
-TreeNode* deserialize(std::string data) {
+TreeNode* deserialize(string data) {
     if (data == "null") return nullptr;
     
-    std::vector<std::string> nodes;
-    std::stringstream ss(data);
-    std::string item;
+    vector<string> nodes;
+    stringstream ss(data);
+    string item;
     
-    while (std::getline(ss, item, ',')) {
+    while (getline(ss, item, ',')) {
         nodes.push_back(item);
     }
     
-    TreeNode* root = new TreeNode(std::stoi(nodes[0]));
-    std::queue<TreeNode*> q;
+    TreeNode* root = new TreeNode(stoi(nodes[0]));
+    queue<TreeNode*> q;
     q.push(root);
     int i = 1;
     
@@ -63,13 +64,13 @@ TreeNode* deserialize(std::string data) {
         q.pop();
         
         if (nodes[i] != "null") {
-            parent->left = new TreeNode(std::stoi(nodes[i]));
+            parent->left = new TreeNode(stoi(nodes[i]));
             q.push(parent->left);
         }
         i++;
         
         if (i < nodes.size() && nodes[i] != "null") {
-            parent->right = new TreeNode(std::stoi(nodes[i]));
+            parent->right = new TreeNode(stoi(nodes[i]));
             q.push(parent->right);
         }
         i++;
@@ -96,13 +97,13 @@ int main() {
     root->right->right = new TreeNode(5);
 
     // Serializing the tree
-    std::string serialized = serialize(root);
-    std::cout << "Serialized: " << serialized << std::endl;
+    string serialized = serialize(root);
+    cout << "Serialized: " << serialized << endl;
 
     // Deserializing the serialized string
     TreeNode* deserialized = deserialize(serialized);
-    std::string reserialized = serialize(deserialized);
-    std::cout << "Deserialized: " << reserialized << std::endl;
+    string reserialized = serialize(deserialized);
+    cout << "Deserialized: " << reserialized << endl;
 
     // Deleting the trees to free allocated memory
     deleteTree(root);

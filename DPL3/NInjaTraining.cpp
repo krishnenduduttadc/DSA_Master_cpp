@@ -2,10 +2,9 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// Function to find the maximum points for ninja training
+
 int ninjaTraining(int n, vector<vector<int>>& points) {
-  // Create a 2D DP (Dynamic Programming) table to store the maximum points
-  // dp[i][j] represents the maximum points at day i, considering the last activity as j
+
   vector<vector<int>> dp(n, vector<int>(4, 0));
 
   // Initialize the DP table for the first day (day 0)
@@ -21,10 +20,9 @@ int ninjaTraining(int n, vector<vector<int>>& points) {
       // Iterate through the tasks for the current day
       for (int task = 0; task <= 2; task++) {
         if (task != last) {
-          // Calculate the points for the current activity and add it to the
-          // maximum points obtained on the previous day (recursively calculated)
+
           int activity = points[day][task] + dp[day - 1][task];
-          // Update the maximum points for the current day and last activity
+
           dp[day][last] = max(dp[day][last], activity);
         }
       }

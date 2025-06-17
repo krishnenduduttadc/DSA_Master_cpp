@@ -4,50 +4,46 @@
 
 using namespace std;
 
-class LCS3strings {
-public:
-    int LCSof3(string A, string B, string C) {
-        int n1 = A.length();
-        int n2 = B.length();
-        int n3 = C.length();
-        
-        // Create a 3D dp array and initialize it with -1
-        vector<vector<vector<int>>> dp(n1, vector<vector<int>>(n2, vector<int>(n3, -1)));
-        
-        return LCS(A, n1 - 1, B, n2 - 1, C, n3 - 1, dp);
+// Recursive function for LCS with memoization
+int LCS(string &s1, int i, string &s2, int j, string &s3, int k, vector<vector<vector<int>>> &dp) {
+    if (i == -1 || j == -1 || k == -1)
+        return 0;
+
+    if (dp[i][j][k] != -1)
+        return dp[i][j][k];
+
+    if (s1[i] == s2[j] && s1[i] == s3[k]) {
+        int x = LCS(s1, i - 1, s2, j - 1, s3, k - 1, dp);
+        dp[i][j][k] = x + 1;
+        return dp[i][j][k];
+    } else {
+        int x = LCS(s1, i - 1, s2, j, s3, k, dp);
+        int y = LCS(s1, i, s2, j - 1, s3, k, dp);
+        int z = LCS(s1, i, s2, j, s3, k - 1, dp);
+        dp[i][j][k] = max({x, y, z});
+        return dp[i][j][k];
     }
+}
 
-private:
-    int LCS(string &s1, int i, string &s2, int j, string &s3, int k, vector<vector<vector<int>>> &dp) {
-        if (i == -1 || j == -1 || k == -1)
-            return 0;
+// Wrapper function to prepare DP array and call the recursive LCS function
+int LCSof3(string A, string B, string C) {
+    int n1 = A.length();
+    int n2 = B.length();
+    int n3 = C.length();
 
-        if (dp[i][j][k] != -1)
-            return dp[i][j][k];
+    // Create a 3D dp array and initialize it with -1
+    vector<vector<vector<int>>> dp(n1, vector<vector<int>>(n2, vector<int>(n3, -1)));
 
-        if (s1[i] == s2[j] && s1[i] == s3[k]) {
-            int x = LCS(s1, i - 1, s2, j - 1, s3, k - 1, dp);
-            dp[i][j][k] = x + 1;
-            return dp[i][j][k];
-        } else {
-            int x = LCS(s1, i - 1, s2, j, s3, k, dp);
-            int y = LCS(s1, i, s2, j - 1, s3, k, dp);
-            int z = LCS(s1, i, s2, j, s3, k - 1, dp);
-            dp[i][j][k] = max({x, y, z});
-            return dp[i][j][k];
-        }
-    }
-};
+    return LCS(A, n1 - 1, B, n2 - 1, C, n3 - 1, dp);
+}
 
 int main() {
-    LCS3strings solution;
-
     // Test case
     string A = "geeks";
     string B = "geeksfor";
     string C = "geeksforgeeks";
 
-    int result = solution.LCSof3(A, B, C);
+    int result = LCSof3(A, B, C);
 
     cout << "Length of LCS of (" << A << ", " << B << ", " << C << ") is: " << result << endl;
 

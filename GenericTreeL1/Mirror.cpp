@@ -5,9 +5,8 @@
 
 using namespace std;
 
-// Node class definition
-class Node {
-public:
+// Node struct definition (default access is public)
+struct Node {
     int data;
     vector<Node*> children;
 
@@ -42,24 +41,20 @@ Node* construct(vector<int>& arr) {
 
 // Function to perform mirror operation on the tree
 void mirror(Node* node) {
-    // Base case: if node is nullptr or has no children
     if (!node || node->children.empty()) {
         return;
     }
 
-    // Recursively mirror each child
     for (Node* child : node->children) {
         mirror(child);
     }
 
-    // Reverse the order of children
     reverse(node->children.begin(), node->children.end());
 }
 
-// Function to display the tree (optional)
+// Function to display the tree
 void display(Node* node) {
-    if (!node)
-        return;
+    if (!node) return;
 
     cout << node->data << " -> ";
     for (Node* child : node->children) {
@@ -74,12 +69,21 @@ void display(Node* node) {
 
 // Main function
 int main() {
-    vector<int> arr = {24, 10, 20, 50, -1, 60, -1, -1, 30, 70, -1, 80, 110, -1, 120, -1, -1, 90, -1, -1, 40, 100, -1, -1, -1};
+    vector<int> arr = {
+        24, 10, 20, 50, -1, 60, -1, -1,
+        30, 70, -1, 80, 110, -1, 120, -1, -1,
+        90, -1, -1, 40, 100, -1, -1, -1
+    };
 
     Node* root = construct(arr);
-    display(root); // Display original tree
-    mirror(root);  // Mirror the tree
-    display(root); // Display mirrored tree
+
+    cout << "Original Tree:" << endl;
+    display(root);
+
+    mirror(root);
+
+    cout << "\nMirrored Tree:" << endl;
+    display(root);
 
     return 0;
 }

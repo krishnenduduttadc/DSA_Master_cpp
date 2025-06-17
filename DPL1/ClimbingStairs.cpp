@@ -4,7 +4,7 @@
 
 using namespace std;
 
-void printMinSteps(vector<int>& arr) {
+void printMinSteps(vector<int> arr) {
     int n = arr.size();
     vector<int> dp(n + 1, INT_MAX); // Use INT_MAX for initialization
 
