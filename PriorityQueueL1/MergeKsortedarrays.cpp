@@ -4,13 +4,13 @@
 #include <algorithm> 
 using namespace std;
 
-vector<int> mergeKSortedArrays(vector<vector<int>> &input)
+vector<int> mergeKSortedArrays(vector<vector<int>> input)
 {
     priority_queue<int, vector<int>, greater<int>> minHeap; // min heap to merge elements
     vector<int> result;
 
     // Push all elements from input arrays into min heap
-    for (auto &arr : input)
+    for (auto arr : input)
     {
         for (int num : arr)
         {

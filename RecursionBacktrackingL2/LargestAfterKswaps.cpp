@@ -4,14 +4,13 @@ using namespace std;
 string max_str;
 
 void findMaximum(string str, int k) {
-    // Base case: When k swaps are used up
     if (k == 0) {
         return;
     }
 
     int n = str.length();
 
-    // Find the maximum digit available for current position
+    
     for (int i = 0; i < n - 1; i++) {
         for (int j = i + 1; j < n; j++) {
             // If digit at position j is greater than digit at position i, swap them
@@ -35,15 +34,9 @@ void findMaximum(string str, int k) {
 
 int main() {
     string str = "1234567";
-    int k = 4;
-
-    // Initialize max_str with the original string
+    int k = 4; 
     max_str = str;
-
-    // Find the maximum number possible after k swaps
     findMaximum(str, k);
-
-    // Print the maximum number found
     cout << max_str << endl;
 
     return 0;

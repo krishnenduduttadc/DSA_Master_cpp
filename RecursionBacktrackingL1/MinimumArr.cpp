@@ -1,5 +1,5 @@
 #include <iostream>
-#include <climits> // for INT_MAX and INT_MIN
+#include <climits> 
 using namespace std;
 
 int getMin(int arr[], int i, int n) {

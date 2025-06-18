@@ -40,7 +40,6 @@ int subarrayGCD(vector<int> &nums, int k)
 int main()
 {
 
-    // Hard-coded input
     vector<int> nums = {2, 4, 6, 8, 3, 9};
     int k = 3;
 

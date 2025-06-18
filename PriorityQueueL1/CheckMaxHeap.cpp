@@ -25,13 +25,10 @@ static bool checkMaxHeap(vector<int> &arr)
 
 int main()
 {
-    // Example input
     vector<int> arr = {42, 20, 18, 6, 14, 11, 9, 4};
 
-    // Call the static method checkMaxHeap from Solution class
     bool result = checkMaxHeap(arr);
 
-    // Print the result
     cout << boolalpha << result << endl;
 
     return 0;

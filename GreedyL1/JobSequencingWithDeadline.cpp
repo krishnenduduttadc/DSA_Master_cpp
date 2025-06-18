@@ -28,7 +28,7 @@ void printJobScheduling(vector<tuple<char, int, int>>& jobs) {
     }
 
     // Schedule jobs
-    for (const auto& job : jobs) {
+    for (const auto job : jobs) {
         char id = get<0>(job);
         int deadline = get<1>(job);
 

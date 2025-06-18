@@ -4,7 +4,7 @@ using namespace std;
 
 vector<string> generateParenthesisHelper(int open, int close, string current) {
     if (open == 0 && close == 0) {
-        return {current}; // Base case: return a vector with the completed string
+        return {current}; 
     }
     
     vector<string> result;
@@ -29,7 +29,7 @@ vector<string> generateParenthesis(int n) {
 int main() {
     int n = 3;
     vector<string> result = generateParenthesis(n);
-    sort(result.begin(), result.end()); // Sorting to match expected output
+    sort(result.begin(), result.end()); 
     for (const string s : result) {
         cout << s << endl;
     }

@@ -21,7 +21,6 @@ int main() {
     unordered_set<char> unique;
     string ustr = "";
 
-    // Extract unique characters from str
     for (char ch : str) {
         if (unique.find(ch) == unique.end()) {
             unique.insert(ch);

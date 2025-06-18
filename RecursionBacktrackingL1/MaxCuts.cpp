@@ -6,7 +6,7 @@ using namespace std;
 
 int maxcuts(int n, int a, int b, int c) {
     if (n == 0) return 0;
-    if (n < 0) return -1; // This case is problematic, we'll fix it
+    if (n < 0) return -1; 
     
     vector<int> dp(n + 1, -1);
     dp[0] = 0;

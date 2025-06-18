@@ -3,7 +3,7 @@
 #include <deque>
 using namespace std;
 
-vector<int> getMinimums(vector<int> &nums, int k)
+vector<int> getMinimums(vector<int> nums, int k)
 {
     int n = nums.size();
     vector<int> ans;

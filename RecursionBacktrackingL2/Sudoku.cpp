@@ -13,7 +13,6 @@ void display(vector<vector<int>>& board) {
 }
 
 bool isValid(vector<vector<int>>& board, int x, int y, int val) {
-    // Check row and column
     for (int j = 0; j < board[0].size(); j++) {
         if (board[x][j] == val) {
             return false;
