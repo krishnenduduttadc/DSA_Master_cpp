@@ -1,10 +1,10 @@
 #include <iostream>
 #include <vector>
 #include <queue>
-#include <algorithm> // for std::sort
+#include <algorithm> 
 using namespace std;
 
-static vector<int> mergeKSortedArrays(vector<vector<int>> &input)
+vector<int> mergeKSortedArrays(vector<vector<int>> &input)
 {
     priority_queue<int, vector<int>, greater<int>> minHeap; // min heap to merge elements
     vector<int> result;
@@ -18,7 +18,7 @@ static vector<int> mergeKSortedArrays(vector<vector<int>> &input)
         }
     }
 
-    // Extract elements from min heap to get sorted result
+    
     while (!minHeap.empty())
     {
         result.push_back(minHeap.top());
