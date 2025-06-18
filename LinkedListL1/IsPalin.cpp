@@ -3,96 +3,85 @@
 
 using namespace std;
 
-// Node class definition
-class Node {
-public:
+// Node structure definition
+struct Node {
     int data;
     Node* next;
 
-    // Constructor
     Node(int d) {
         data = d;
         next = nullptr;
     }
 };
 
-// LinkedList class definition
-class LinkedList {
-private:
-    Node* head;
-    Node* tail;
-    int size;
+// Function to add a node at the end of the list
+void addLast(Node*& head, Node*& tail, int val) {
+    Node* temp = new Node(val);
+    if (head == nullptr) {
+        head = tail = temp;
+    } else {
+        tail->next = temp;
+        tail = temp;
+    }
+}
 
-public:
-    // Constructor
-    LinkedList() {
-        head = nullptr;
-        tail = nullptr;
-        size = 0;
+// Function to display the elements of the list
+void display(Node* head) {
+    Node* temp = head;
+    while (temp != nullptr) {
+        cout << temp->data << " ";
+        temp = temp->next;
+    }
+    cout << endl;
+}
+
+// Function to check if the linked list is a palindrome
+bool isPalindrome(Node* head) {
+    stack<int> s;
+    Node* slow = head;
+
+    // Push all elements to stack
+    while (slow != nullptr) {
+        s.push(slow->data);
+        slow = slow->next;
     }
 
-    // Method to add a node at the end of the list
-    void addLast(int val) {
-        Node* temp = new Node(val);
-        if (size == 0) {
-            head = tail = temp;
-        } else {
-            tail->next = temp;
-            tail = temp;
+    // Compare while popping
+    slow = head;
+    while (slow != nullptr) {
+        int top = s.top();
+        s.pop();
+        if (slow->data != top) {
+            return false;
         }
-        size++;
+        slow = slow->next;
     }
 
-    // Method to display the elements of the list
-    void display() {
-        Node* temp = head;
-        while (temp != nullptr) {
-            cout << temp->data << " ";
-            temp = temp->next;
-        }
-        cout << endl;
-    }
+    return true;
+}
 
-    // Method to check if the linked list is a palindrome
-    bool isPalindrome() {
-        Node* slow = head;
-        stack<int> stack;
-
-        // Push elements of the first half of the linked list onto the stack
-        while (slow != nullptr) {
-            stack.push(slow->data);
-            slow = slow->next;
-        }
-
-        // Compare elements of the second half of the linked list with the stack
-        slow = head;
-        while (slow != nullptr) {
-            int top = stack.top();
-            stack.pop();
-            if (slow->data != top) {
-                return false;
-            }
-            slow = slow->next;
-        }
-
-        return true;
-    }
-};
-
-// Main function to demonstrate LinkedList operations
+// Main function to demonstrate linked list operations
 int main() {
-    // Create a linked list
-    LinkedList list;
+    Node* head = nullptr;
+    Node* tail = nullptr;
 
-    // Add elements to the linked list
-    list.addLast(1);
-    list.addLast(2);
-    list.addLast(3);
-    list.addLast(2);
-    list.addLast(1);
+    // Add elements
+    addLast(head, tail, 1);
+    addLast(head, tail, 2);
+    addLast(head, tail, 3);
+    addLast(head, tail, 2);
+    addLast(head, tail, 1);
 
-    // Check if the linked list is a palindrome
-    cout << boolalpha << list.isPalindrome() << endl; // Output: true
+    // Display and check palindrome
+    display(head);
+    cout << boolalpha << isPalindrome(head) << endl; // Output: true
+
+    // Cleanup
+    while (head != nullptr) {
+        Node* temp = head;
+        head = head->next;
+        delete temp;
+    }
 
     return 0;
 }

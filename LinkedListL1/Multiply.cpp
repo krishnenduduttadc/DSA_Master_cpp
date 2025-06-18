@@ -1,41 +1,38 @@
 #include <iostream>
 using namespace std;
 
-// Node class for the linked list
-class Node {
-public:
+// Node structure
+struct Node {
     int val;
     Node* next;
-
-    Node(int val) {
-        this->val = val;
-        this->next = nullptr;
+    Node(int value) {
+        val = value;
+        next = nullptr;
     }
 };
 
 // Function to reverse a linked list
 Node* reverse(Node* head) {
-    if (head == nullptr || head->next == nullptr) return head;
-
     Node* prev = nullptr;
     Node* curr = head;
+
     while (curr != nullptr) {
-        Node* forw = curr->next;
+        Node* next = curr->next;
         curr->next = prev;
         prev = curr;
-        curr = forw;
+        curr = next;
     }
 
     return prev;
 }
 
-// Function to add two linked lists in place
+// Function to add two linked lists
 Node* addTwoLinkedList(Node* l1, Node* l2) {
     Node* dummy = new Node(-1);
-    Node* p = dummy;
+    Node* curr = dummy;
     int carry = 0;
 
-    while (l1 != nullptr || l2 != nullptr || carry != 0) {
+    while (l1 != nullptr || l2 != nullptr || carry > 0) {
         int sum = carry;
         if (l1 != nullptr) {
             sum += l1->val;
@@ -47,100 +44,95 @@ Node* addTwoLinkedList(Node* l1, Node* l2) {
         }
 
         carry = sum / 10;
-        p->next = new Node(sum % 10);
-        p = p->next;
+        curr->next = new Node(sum % 10);
+        curr = curr->next;
     }
 
     return dummy->next;
 }
 
-// Function to multiply a linked list with a single digit
-Node* multiplyLLWithDigit(Node* head, int dig) {
+// Multiply a linked list by a single digit
+Node* multiplyLLWithDigit(Node* head, int digit) {
     Node* dummy = new Node(-1);
-    Node* ac = dummy;
-    Node* curr = head;
+    Node* curr = dummy;
+    Node* temp = head;
     int carry = 0;
 
-    while (curr != nullptr || carry != 0) {
-        int sum = carry + (curr != nullptr ? curr->val * dig : 0);
-        int digit = sum % 10;
-        carry = sum / 10;
+    while (temp != nullptr || carry != 0) {
+        int product = carry + (temp != nullptr ? temp->val * digit : 0);
+        carry = product / 10;
+        curr->next = new Node(product % 10);
+        curr = curr->next;
 
-        ac->next = new Node(digit);
-        ac = ac->next;
-
-        if (curr != nullptr) curr = curr->next;
+        if (temp != nullptr) temp = temp->next;
     }
 
     return dummy->next;
 }
 
-// Function to multiply two linked lists representing numbers
+// Multiply two linked lists
 Node* multiplyTwoLL(Node* l1, Node* l2) {
     l1 = reverse(l1);
     l2 = reverse(l2);
 
     Node* result = nullptr;
-    Node* l2_itr = l2;
+    Node* l2_curr = l2;
     int shift = 0;
 
-    // Multiply l1 with each digit of l2
-    while (l2_itr != nullptr) {
-        Node* prod = multiplyLLWithDigit(l1, l2_itr->val);
+    while (l2_curr != nullptr) {
+        Node* partial = multiplyLLWithDigit(l1, l2_curr->val);
 
-        // Add the current product with proper shifting
-        Node* temp = prod;
-        for (int i = 0; i < shift; ++i) {
-            Node* zeroNode = new Node(0);
-            zeroNode->next = temp;
-            temp = zeroNode;
+        // Apply shift (equivalent to multiplying by 10^shift)
+        for (int i = 0; i < shift; i++) {
+            Node* zero = new Node(0);
+            zero->next = partial;
+            partial = zero;
         }
 
-        result = addTwoLinkedList(result, temp);
-        l2_itr = l2_itr->next;
-        ++shift;
+        result = addTwoLinkedList(result, partial);
+        l2_curr = l2_curr->next;
+        shift++;
     }
 
     return reverse(result);
 }
 
-// Function to print the linked list
-void printList(Node* node) {
-    while (node != nullptr) {
-        cout << node->val;
-        node = node->next;
-    }
-    cout << endl;
-}
-
-// Function to create a linked list from an array of integers
-Node* createList(int values[], int n) {
+// Create linked list from array
+Node* createList(int arr[], int n) {
     Node* dummy = new Node(-1);
-    Node* prev = dummy;
+    Node* curr = dummy;
     for (int i = 0; i < n; ++i) {
-        prev->next = new Node(values[i]);
-        prev = prev->next;
+        curr->next = new Node(arr[i]);
+        curr = curr->next;
     }
     return dummy->next;
 }
 
+// Print the linked list
+void printList(Node* head) {
+    while (head != nullptr) {
+        cout << head->val;
+        head = head->next;
+    }
+    cout << endl;
+}
+
 int main() {
-    // Hardcoding the lists
-    // First list: 3 -> 4 -> 2 (represents the number 243)
+    // First number: 243
     int arr1[] = {3, 4, 2};
     int n1 = sizeof(arr1) / sizeof(arr1[0]);
-    Node* head1 = createList(arr1, n1);
+    Node* l1 = createList(arr1, n1);
 
-    // Second list: 4 -> 6 -> 5 (represents the number 564)
+    // Second number: 564
     int arr2[] = {4, 6, 5};
     int n2 = sizeof(arr2) / sizeof(arr2[0]);
-    Node* head2 = createList(arr2, n2);
+    Node* l2 = createList(arr2, n2);
 
-    // Multiplying the two linked lists
-    Node* ans = multiplyTwoLL(head1, head2);
+    // Multiply
+    Node* result = multiplyTwoLL(l1, l2);
 
-    // Printing the result
-    printList(ans);
+    // Print result: 137052
+    printList(result);
 
     return 0;
 }

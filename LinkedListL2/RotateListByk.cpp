@@ -1,5 +1,5 @@
 #include <iostream>
-
+using namespace std;
 struct Node {
     int val;
     Node* next;
@@ -36,10 +36,10 @@ Node* rotateRight(Node* head, int k) {
 
 void printList(Node* head) {
     while (head != nullptr) {
-        std::cout << head->val << " -> ";
+        cout << head->val << " -> ";
         head = head->next;
     }
-    std::cout << "null" << std::endl;
+    cout << "null" << endl;
 }
 
 int main() {

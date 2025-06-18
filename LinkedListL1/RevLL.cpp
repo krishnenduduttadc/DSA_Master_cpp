@@ -1,17 +1,19 @@
 #include <iostream>
 using namespace std;
 
-// Node class definition
-class Node {
-public:
+// Node structure for linked list
+struct Node {
     int data;
     Node* next;
-
-    Node(int d) {
-        data = d;
-        next = nullptr;
-    }
 };
+
+// Function to create a new node
+Node* createNode(int data) {
+    Node* newNode = new Node;
+    newNode->data = data;
+    newNode->next = nullptr;
+    return newNode;
+}
 
 // Function to display the linked list
 void display(Node* head) {
@@ -26,24 +28,22 @@ void display(Node* head) {
 }
 
 // Function to reverse the linked list recursively
-Node* reverse(Node* head) {
+Node* reverseRecursive(Node* head) {
     if (head == nullptr || head->next == nullptr) {
         return head;
     }
-    Node* smallAns = reverse(head->next);
+    Node* newHead = reverseRecursive(head->next);
     head->next->next = head;
     head->next = nullptr;
-    return smallAns;
+    return newHead;
 }
 
 // Function to reverse the linked list iteratively
-Node* reverseI(Node* head) {
-    if (head == nullptr || head->next == nullptr) {
-        return head;
-    }
+Node* reverseIterative(Node* head) {
     Node* prev = nullptr;
     Node* curr = head;
     Node* next = nullptr;
+
     while (curr != nullptr) {
         next = curr->next;
         curr->next = prev;
@@ -53,38 +53,40 @@ Node* reverseI(Node* head) {
     return prev;
 }
 
+// Function to delete the entire linked list
+void deleteList(Node* head) {
+    while (head != nullptr) {
+        Node* next = head->next;
+        delete head;
+        head = next;
+    }
+}
+
 int main() {
-    // Creating the linked list
-    Node* one = new Node(1);
-    Node* two = new Node(2);
-    Node* three = new Node(3);
-    Node* four = new Node(4);
-    Node* five = new Node(5);
-    Node* six = new Node(6);
-    Node* seven = new Node(7);
-    one->next = two;
-    two->next = three;
-    three->next = four;
-    four->next = five;
-    five->next = six;
-    six->next = seven;
+    // Creating the linked list: 1->2->3->4->5->6->7
+    Node* head = createNode(1);
+    head->next = createNode(2);
+    head->next->next = createNode(3);
+    head->next->next->next = createNode(4);
+    head->next->next->next->next = createNode(5);
+    head->next->next->next->next->next = createNode(6);
+    head->next->next->next->next->next->next = createNode(7);
 
-    // Displaying the original list
     cout << "Original List: ";
-    display(one);
+    display(head);
 
-    // Reversing the list recursively
+    // Reverse recursively
+    head = reverseRecursive(head);
     cout << "List after recursive reversal: ";
-    Node* revRec = reverse(one);
-    display(revRec);
+    display(head);
 
-    // Reversing the list iteratively
+    // Reverse iteratively
+    head = reverseIterative(head);
     cout << "List after iterative reversal: ";
-    Node* revIter = reverseI(revRec);
-    display(revIter);
+    display(head);
 
-    // Deallocating memory
-    delete revIter;
+    // Clean up memory
+    deleteList(head);
 
     return 0;
 }

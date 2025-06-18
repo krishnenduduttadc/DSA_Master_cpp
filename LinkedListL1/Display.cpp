@@ -1,88 +1,86 @@
 #include <iostream>
-
 using namespace std;
 
-// Node class definition
-class Node {
-public:
+struct Node {
     int data;
     Node* next;
 
-    // Constructor
     Node(int d) {
         data = d;
         next = nullptr;
     }
 };
 
-// LinkedList class definition
-class LinkedList {
-private:
+struct LinkedList {
     Node* head;
     Node* tail;
     int size;
-
-public:
-    // Constructor
-    LinkedList() {
-        head = nullptr;
-        tail = nullptr;
-        size = 0;
-    }
-
-    // Method to add a node at the end of the list
-    void addLast(int val) {
-        Node* newNode = new Node(val);
-        if (size == 0) {
-            head = tail = newNode;
-        } else {
-            tail->next = newNode;
-            tail = newNode;
-        }
-        size++;
-    }
-
-    // Method to get the size of the list
-    int getSize() {
-        return size;
-    }
-
-    // Method to display the elements of the list
-    void display() {
-        Node* temp = head;
-        while (temp != nullptr) {
-            cout << temp->data << " ";
-            temp = temp->next;
-        }
-        cout << endl;
-    }
-
-    // Destructor to free memory
-    ~LinkedList() {
-        Node* temp = head;
-        while (temp != nullptr) {
-            Node* next = temp->next;
-            delete temp;
-            temp = next;
-        }
-    }
 };
 
-// Main function to demonstrate LinkedList operations
+// Initialize the linked list
+void initList(LinkedList& list) {
+    list.head = nullptr;
+    list.tail = nullptr;
+    list.size = 0;
+}
+
+// Add a node to the end
+void addLast(LinkedList& list, int val) {
+    Node* newNode = new Node(val);
+    if (list.size == 0) {
+        list.head = list.tail = newNode;
+    } else {
+        list.tail->next = newNode;
+        list.tail = newNode;
+    }
+    list.size++;
+}
+
+// Get the size of the list
+int getSize(const LinkedList& list) {
+    return list.size;
+}
+
+// Display the elements
+void display(const LinkedList& list) {
+    Node* temp = list.head;
+    while (temp != nullptr) {
+        cout << temp->data << " ";
+        temp = temp->next;
+    }
+    cout << endl;
+}
+
+// Free the memory
+void deleteList(LinkedList& list) {
+    Node* temp = list.head;
+    while (temp != nullptr) {
+        Node* next = temp->next;
+        delete temp;
+        temp = next;
+    }
+    list.head = list.tail = nullptr;
+    list.size = 0;
+}
+
 int main() {
     LinkedList list;
+    initList(list);
 
     // Hardcoded sequence of operations
-    list.addLast(10);
-    list.addLast(20);
-    list.addLast(30);
-    list.display(); // Should display: 10 20 30
-    cout << list.getSize() << endl; // Should display: 3
+    addLast(list, 10);
+    addLast(list, 20);
+    addLast(list, 30);
+    display(list); // Should display: 10 20 30
+    cout << getSize(list) << endl; // Should display: 3
 
-    list.addLast(40);
-    list.addLast(50);
-    list.display(); // Should display: 10 20 30 40 50
-    cout << list.getSize() << endl; // Should display: 5
+    addLast(list, 40);
+    addLast(list, 50);
+    display(list); // Should display: 10 20 30 40 50
+    cout << getSize(list) << endl; // Should display: 5
+
+    // Cleanup
+    deleteList(list);
 
     return 0;
 }

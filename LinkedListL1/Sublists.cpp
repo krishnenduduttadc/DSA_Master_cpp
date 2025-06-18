@@ -1,17 +1,21 @@
 #include <iostream>
 using namespace std;
 
-class Node {
-public:
+// Node structure
+struct Node {
     int data;
     Node* next;
-
-    Node(int data) {
-        this->data = data;
-        this->next = nullptr;
-    }
 };
 
+// Function to create a new node
+Node* createNode(int value) {
+    Node* newNode = new Node;
+    newNode->data = value;
+    newNode->next = nullptr;
+    return newNode;
+}
+
+// Function to print the entire linked list
 void printList(Node* head) {
     Node* current = head;
     while (current != nullptr) {
@@ -21,6 +25,7 @@ void printList(Node* head) {
     cout << "null" << endl;
 }
 
+// Function to print all sublists of the linked list
 void sublists(Node* head) {
     Node* i = head;
     while (i != nullptr) {
@@ -34,29 +39,35 @@ void sublists(Node* head) {
     }
 }
 
-int main() {
-    // Create a linked list with 5 hard-coded nodes
-    Node* head = new Node(1);
-    head->next = new Node(2);
-    head->next->next = new Node(2);
-    head->next->next->next = new Node(3);
-    head->next->next->next->next = new Node(4);
-    head->next->next->next->next->next = new Node(3);
-    head->next->next->next->next->next->next = new Node(5);
+// Function to clean up memory
+void deleteList(Node* head) {
+    while (head != nullptr) {
+        Node* temp = head;
+        head = head->next;
+        delete temp;
+    }
+}
 
-    // Print the linked list
+int main() {
+    // Create a linked list: 1 -> 2 -> 2 -> 3 -> 4 -> 3 -> 5 -> null
+    Node* head = createNode(1);
+    head->next = createNode(2);
+    head->next->next = createNode(2);
+    head->next->next->next = createNode(3);
+    head->next->next->next->next = createNode(4);
+    head->next->next->next->next->next = createNode(3);
+    head->next->next->next->next->next->next = createNode(5);
+
+    // Print the original linked list
+    cout << "Original Linked List:\n";
     printList(head);
 
     // Print all sublists
+    cout << "\nAll Sublists:\n";
     sublists(head);
 
-    // Clean up memory
-    Node* current = head;
-    while (current != nullptr) {
-        Node* next = current->next;
-        delete current;
-        current = next;
-    }
+    // Free the allocated memory
+    deleteList(head);
 
     return 0;
 }

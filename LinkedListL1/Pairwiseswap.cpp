@@ -1,82 +1,68 @@
 #include <iostream>
-
 using namespace std;
 
-// Node class definition
-class Node {
-public:
+// Node structure
+struct Node {
     int data;
     Node* next;
-
-    Node(int d) {
-        data = d;
-        next = nullptr;
-    }
 };
 
-// PairwiseSwapLL class definition
-class PairwiseSwapLL {
-public:
-    Node* head;
+// Function to create a new node
+Node* createNode(int val) {
+    Node* newNode = new Node;
+    newNode->data = val;
+    newNode->next = nullptr;
+    return newNode;
+}
 
-    PairwiseSwapLL() {
-        head = nullptr;
+// Function to print the list
+void printList(Node* node) {
+    while (node != nullptr) {
+        cout << node->data << " ";
+        node = node->next;
     }
+    cout << endl;
+}
 
-    // Method to print the elements of the list
-    void printList(Node* node) {
-        while (node != nullptr) {
-            cout << node->data << " ";
-            node = node->next;
-        }
-        cout << endl;
-    }
+// Function to perform pairwise swap
+Node* pairWiseSwap(Node* node) {
+    if (node == nullptr || node->next == nullptr)
+        return node;
 
-    // Method to perform pairwise swapping of nodes
-    Node* pairWiseSwap(Node* node) {
-        if (node == nullptr || node->next == nullptr) {
-            return node;
-        }
-
-        Node* remaining = node->next->next;
-        Node* newHead = node->next;
-        node->next->next = node;
-        node->next = pairWiseSwap(remaining);
-        return newHead;
-    }
-};
+    Node* remaining = node->next->next;
+    Node* newHead = node->next;
+    newHead->next = node;
+    node->next = pairWiseSwap(remaining);
+    return newHead;
+}
 
 int main() {
-    // Create an instance of PairwiseSwapLL
-    PairwiseSwapLL list;
+    // Create the linked list manually: 1->2->3->4->5->6->7
+    Node* head = createNode(1);
+    head->next = createNode(2);
+    head->next->next = createNode(3);
+    head->next->next->next = createNode(4);
+    head->next->next->next->next = createNode(5);
+    head->next->next->next->next->next = createNode(6);
+    head->next->next->next->next->next->next = createNode(7);
 
-    // Construct the linked list: 1->2->3->4->5->6->7
-    list.head = new Node(1);
-    list.head->next = new Node(2);
-    list.head->next->next = new Node(3);
-    list.head->next->next->next = new Node(4);
-    list.head->next->next->next->next = new Node(5);
-    list.head->next->next->next->next->next = new Node(6);
-    list.head->next->next->next->next->next->next = new Node(7);
+    // Print original list
+    cout << "Linked list before calling pairwiseSwap():\n";
+    printList(head);
 
-    // Display the original list
-    cout << "Linked list before calling pairwiseSwap() " << endl;
-    list.printList(list.head);
+    // Perform pairwise swap
+    head = pairWiseSwap(head);
 
-    // Perform pairwise swapping
-    list.head = list.pairWiseSwap(list.head);
+    // Print list after swap
+    cout << "Linked list after calling pairwiseSwap():\n";
+    printList(head);
 
-    // Display the list after pairwise swapping
-    cout << "Linked list after calling pairwiseSwap() " << endl;
-    list.printList(list.head);
-
-    // Clean up allocated memory
-    Node* curr = list.head;
-    Node* next = nullptr;
+    // Clean up memory
+    Node* curr = head;
     while (curr != nullptr) {
-        next = curr->next;
-        delete curr;
-        curr = next;
+        Node* temp = curr;
+        curr = curr->next;
+        delete temp;
     }
 
     return 0;

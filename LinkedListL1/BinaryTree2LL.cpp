@@ -1,9 +1,8 @@
 #include <iostream>
 using namespace std;
 
-// TreeNode class definition
-class TreeNode {
-public:
+// TreeNode structure
+struct TreeNode {
     int val;
     TreeNode* left;
     TreeNode* right;
@@ -15,57 +14,53 @@ public:
     }
 };
 
-class FlattenBinaryTreeToLinkedList {
-public:
-    void flatten(TreeNode* root) {
-        flattenHelper(root);
+// Helper function to flatten the binary tree
+TreeNode* flattenHelper(TreeNode* root) {
+    if (root == nullptr) return nullptr;
+
+    TreeNode* leftTail = flattenHelper(root->left);
+    TreeNode* rightTail = flattenHelper(root->right);
+
+    if (leftTail != nullptr) {
+        leftTail->right = root->right;  // Connect the end of the left subtree to the start of the right subtree
+        root->right = root->left;       // Move the left subtree to the right
+        root->left = nullptr;           // Nullify the left pointer
     }
 
-private:
-    TreeNode* flattenHelper(TreeNode* root) {
-        if (root == nullptr) return nullptr;
-
-        TreeNode* leftTail = flattenHelper(root->left);
-        TreeNode* rightTail = flattenHelper(root->right);
-
-        if (leftTail != nullptr) {
-            leftTail->right = root->right;  // Connect the end of the left subtree to the start of the right subtree
-            root->right = root->left;       // Move the left subtree to the right
-            root->left = nullptr;           // Nullify the left pointer
-        }
-
-        // Return the last node in the flattened tree
-        if (rightTail != nullptr) {
-            return rightTail;
-        } else if (leftTail != nullptr) {
-            return leftTail;
-        } else {
-            return root;
-        }
+    // Return the last node in the flattened tree
+    if (rightTail != nullptr) {
+        return rightTail;
+    } else if (leftTail != nullptr) {
+        return leftTail;
+    } else {
+        return root;
     }
+}
 
-public:
-    // Utility function to print the flattened tree
-    void printFlattenedTree(TreeNode* root) {
-        while (root != nullptr) {
-            cout << root->val << " ";
-            root = root->right;
-        }
-        cout << endl;
+// Function to flatten the binary tree
+void flatten(TreeNode* root) {
+    flattenHelper(root);
+}
+
+// Function to print the flattened tree
+void printFlattenedTree(TreeNode* root) {
+    while (root != nullptr) {
+        cout << root->val << " ";
+        root = root->right;
     }
+    cout << endl;
+}
 
-    // Function to delete a binary tree to free memory
-    void deleteTree(TreeNode* root) {
-        if (root == nullptr) return;
-        deleteTree(root->left);
-        deleteTree(root->right);
-        delete root;
-    }
-};
+// Function to delete a binary tree to free memory
+void deleteTree(TreeNode* root) {
+    if (root == nullptr) return;
+    deleteTree(root->left);
+    deleteTree(root->right);
+    delete root;
+}
 
+// Main function to test flattening
 int main() {
-    FlattenBinaryTreeToLinkedList solution;
-
     // Creating a sample binary tree:
     //     1
     //    / \
@@ -80,15 +75,15 @@ int main() {
     root->right->right = new TreeNode(6);
 
     cout << "Original Tree:" << endl;
-    solution.printFlattenedTree(root); // This will just print the root node, as the tree is not flattened yet
+    printFlattenedTree(root); // This will just print the root node
 
-    solution.flatten(root);
+    flatten(root);
 
     cout << "Flattened Tree:" << endl;
-    solution.printFlattenedTree(root);
+    printFlattenedTree(root);
 
     // Clean up memory
-    solution.deleteTree(root);
+    deleteTree(root);
 
     return 0;
 }

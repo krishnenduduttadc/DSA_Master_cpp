@@ -1,109 +1,96 @@
 #include <iostream>
-
 using namespace std;
 
-// Node class definition
-class Node {
-public:
+// Node structure
+struct Node {
     int data;
     Node* next;
 
-    // Constructor
-    Node(int d) {
-        data = d;
+    Node(int val) {
+        data = val;
         next = nullptr;
     }
 };
 
-// LinkedList class definition
-class LinkedList {
-public:
-    Node* head;
-    Node* tail;
-    int size;
-
-    // Constructor
-    LinkedList() {
-        head = nullptr;
-        tail = nullptr;
-        size = 0;
+// Function to add a node at the end of the list
+void addLast(Node*& head, Node*& tail, int val) {
+    Node* temp = new Node(val);
+    if (head == nullptr) {
+        head = tail = temp;
+    } else {
+        tail->next = temp;
+        tail = temp;
     }
+}
 
-    // Method to add node at the end
-    void addLast(int val) {
-        Node* temp = new Node(val);
-        if (size == 0) {
-            head = tail = temp;
-        } else {
-            tail->next = temp;
-            tail = temp;
-        }
-        size++;
-    }
-
-    // Method to print the linked list
-    void display() {
-        Node* temp = head;
-        while (temp != nullptr) {
-            cout << temp->data << " ";
-            temp = temp->next;
-        }
-        cout << endl;
-    }
-
-    // Function to merge two sorted linked lists
-    static Node* sortedMerge(Node* headA, Node* headB) {
-        Node* dummyNode = new Node(0);
-        Node* tail = dummyNode;
-
-        while (true) {
-            if (headA == nullptr) {
-                tail->next = headB;
-                break;
-            }
-            if (headB == nullptr) {
-                tail->next = headA;
-                break;
-            }
-            if (headA->data <= headB->data) {
-                tail->next = headA;
-                headA = headA->next;
-            } else {
-                tail->next = headB;
-                headB = headB->next;
-            }
-            tail = tail->next;
-        }
-
-        return dummyNode->next;
-    }
-};
-
-// Main function
-int main() {
-    LinkedList llist1;
-    LinkedList llist2;
-
-    // Adding elements to the first linked list
-    llist1.addLast(5);
-    llist1.addLast(10);
-    llist1.addLast(15);
-
-    // Adding elements to the second linked list
-    llist2.addLast(2);
-    llist2.addLast(3);
-    llist2.addLast(20);
-
-    // Merging the two sorted linked lists
-    Node* mergedHead = LinkedList::sortedMerge(llist1.head, llist2.head);
-
-    // Printing the merged list
-    Node* temp = mergedHead;
+// Function to display the linked list
+void display(Node* head) {
+    Node* temp = head;
     while (temp != nullptr) {
         cout << temp->data << " ";
         temp = temp->next;
     }
     cout << endl;
+}
+
+// Function to merge two sorted linked lists
+Node* sortedMerge(Node* headA, Node* headB) {
+    Node* dummyNode = new Node(0);
+    Node* tail = dummyNode;
+
+    while (true) {
+        if (headA == nullptr) {
+            tail->next = headB;
+            break;
+        }
+        if (headB == nullptr) {
+            tail->next = headA;
+            break;
+        }
+
+        if (headA->data <= headB->data) {
+            tail->next = headA;
+            headA = headA->next;
+        } else {
+            tail->next = headB;
+            headB = headB->next;
+        }
+        tail = tail->next;
+    }
+
+    Node* mergedHead = dummyNode->next;
+    delete dummyNode; // Free dummy node
+    return mergedHead;
+}
+
+// Main function
+int main() {
+    // First linked list
+    Node* head1 = nullptr;
+    Node* tail1 = nullptr;
+    addLast(head1, tail1, 5);
+    addLast(head1, tail1, 10);
+    addLast(head1, tail1, 15);
+
+    // Second linked list
+    Node* head2 = nullptr;
+    Node* tail2 = nullptr;
+    addLast(head2, tail2, 2);
+    addLast(head2, tail2, 3);
+    addLast(head2, tail2, 20);
+
+    // Merge and display
+    Node* mergedHead = sortedMerge(head1, head2);
+    cout << "Merged Linked List:" << endl;
+    display(mergedHead);
+
+    // Optional: Free memory
+    Node* temp;
+    while (mergedHead != nullptr) {
+        temp = mergedHead;
+        mergedHead = mergedHead->next;
+        delete temp;
+    }
 
     return 0;
 }

@@ -1,73 +1,72 @@
 #include <iostream>
 using namespace std;
 
-// Define the Node class
-class Node {
-public:
+// Define the Node structure
+struct Node {
     int data;
     Node* next;
-
-    Node(int d) {
-        data = d;
-        next = nullptr;
-    }
 };
 
-// Define the MyLL class
-class MyLL {
-public:
-    Node* head;  // head of list
+// Function to create a new node
+Node* createNode(int val) {
+    Node* newNode = new Node;
+    newNode->data = val;
+    newNode->next = nullptr;
+    return newNode;
+}
 
-    MyLL() {
-        head = nullptr;
+// Function to push a new element at the beginning of the list
+void push(Node*& head, int val) {
+    Node* newNode = createNode(val);
+    newNode->next = head;
+    head = newNode;
+}
+
+// Function to print the linked list
+void printList(Node* head) {
+    Node* temp = head;
+    while (temp != nullptr) {
+        cout << temp->data << " ";
+        temp = temp->next;
     }
+    cout << endl;
+}
 
-    void printList(Node* head) {
-        Node* temp = head;
-        while (temp != nullptr) {
-            cout << temp->data << " ";
-            temp = temp->next;
-        }
-        cout << endl;
+// Function to reverse the linked list
+Node* reverse(Node* head) {
+    Node* prev = nullptr;
+    Node* curr = head;
+    Node* next = nullptr;
+
+    while (curr != nullptr) {
+        next = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = next;
     }
+    return prev;
+}
 
-    void push(int new_data) {
-        Node* new_node = new Node(new_data);
-        new_node->next = head;
-        head = new_node;
-    }
-
-    Node* reverse(Node* head) {
-        Node* prev = nullptr;
-        Node* curr = head;
-        Node* next;
-
-        while (curr != nullptr) {
-            next = curr->next;
-            curr->next = prev;
-            prev = curr;
-            curr = next;
-        }
-        return prev;
-    }
-};
-
+// Main function
 int main() {
-    MyLL llist;
-    llist.push(11);
-    llist.push(10);
-    llist.push(9);
-    llist.push(6);
-    llist.push(4);
-    llist.push(1);
-    llist.push(0);
+    Node* head = nullptr;
+
+    // Push elements to the list
+    push(head, 11);
+    push(head, 10);
+    push(head, 9);
+    push(head, 6);
+    push(head, 4);
+    push(head, 1);
+    push(head, 0);
 
     cout << "Original Linked List:" << endl;
-    llist.printList(llist.head);
+    printList(head);
+
+    head = reverse(head);
 
     cout << "Reversed Linked List:" << endl;
-    llist.head = llist.reverse(llist.head);
-    llist.printList(llist.head);
+    printList(head);
 
     return 0;
 }

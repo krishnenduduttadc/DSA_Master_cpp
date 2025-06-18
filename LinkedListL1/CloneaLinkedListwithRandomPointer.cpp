@@ -2,77 +2,73 @@
 #include <unordered_map>
 using namespace std;
 
-class Node {
-public:
+// Node structure
+struct Node {
     int val;
     Node* next;
     Node* random;
 
-   Node(int x) {
+    Node(int x) {
         val = x;
         next = nullptr;
         random = nullptr;
     }
 };
 
-class CloneLinkedList {
-public:
-    Node* copyRandomList(Node* head) {
-        if (head == nullptr) return nullptr;
+// Function to copy the linked list with random pointers
+Node* copyRandomList(Node* head) {
+    if (head == nullptr) return nullptr;
 
-        unordered_map<Node*, Node*> map;
+    unordered_map<Node*, Node*> map;
 
-        // First pass: create new nodes and map original nodes to new nodes
-        Node* curr = head;
-        while (curr != nullptr) {
-            map[curr] = new Node(curr->val);
-            curr = curr->next;
-        }
-
-        // Second pass: assign next and random pointers for new nodes
-        curr = head;
-        while (curr != nullptr) {
-            map[curr]->next = map[curr->next];
-            map[curr]->random = map[curr->random];
-            curr = curr->next;
-        }
-
-        return map[head];
+    // First pass: create new nodes and map original to new
+    Node* curr = head;
+    while (curr != nullptr) {
+        map[curr] = new Node(curr->val);
+        curr = curr->next;
     }
 
-    // Helper method to print the linked list with random pointers
-    void printListWithRandom(Node* head) {
-        Node* curr = head;
-        while (curr != nullptr) {
-            cout << curr->val << "(" << (curr->random != nullptr ? to_string(curr->random->val) : "null") << ") ";
-            curr = curr->next;
-        }
-        cout << endl;
+    // Second pass: set next and random pointers
+    curr = head;
+    while (curr != nullptr) {
+        map[curr]->next = map[curr->next];
+        map[curr]->random = map[curr->random];
+        curr = curr->next;
     }
-};
 
+    return map[head];
+}
+
+// Helper function to print list with random pointers
+void printListWithRandom(Node* head) {
+    Node* curr = head;
+    while (curr != nullptr) {
+        cout << curr->val << "(" << (curr->random ? to_string(curr->random->val) : "null") << ") ";
+        curr = curr->next;
+    }
+    cout << endl;
+}
+
+// Main function
 int main() {
-    // Create a linked list with random pointers
+    // Create linked list: 1 -> 2 -> 3
     Node* head = new Node(1);
     head->next = new Node(2);
     head->next->next = new Node(3);
-    head->random = head->next->next;
-    head->next->random = head;
-    head->next->next->random = head->next;
 
-    // Call the function to clone the linked list
-    CloneLinkedList solution;
-    Node* clonedHead = solution.copyRandomList(head);
+    // Assign random pointers
+    head->random = head->next->next;       // 1 -> 3
+    head->next->random = head;             // 2 -> 1
+    head->next->next->random = head->next; // 3 -> 2
 
-    // Print the cloned linked list with random pointers
+    // Clone the list
+    Node* clonedHead = copyRandomList(head);
+
+    // Print both lists
     cout << "Original List:" << endl;
-    solution.printListWithRandom(head);
+    printListWithRandom(head);
     cout << "\nCloned List:" << endl;
-    solution.printListWithRandom(clonedHead);
-
-    // Clean up memory
-    // In a real-world scenario, you would implement a function to delete the linked list nodes.
-    // For brevity, memory cleanup is not shown in this example.
+    printListWithRandom(clonedHead);
 
     return 0;
 }

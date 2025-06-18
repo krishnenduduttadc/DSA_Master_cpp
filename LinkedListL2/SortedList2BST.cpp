@@ -1,5 +1,5 @@
 #include <iostream>
-
+using namespace std;
 struct ListNode {
     int val;
     ListNode* next;
@@ -38,7 +38,7 @@ TreeNode* sortedListToBST(ListNode* head) {
 void printTree(TreeNode* root) {
     if (root != nullptr) {
         printTree(root->left);
-        std::cout << root->val << " ";
+        cout << root->val << " ";
         printTree(root->right);
     }
 }
@@ -52,7 +52,7 @@ int main() {
 
     TreeNode* result = sortedListToBST(head);
     printTree(result);
-    std::cout << std::endl;
+    cout << endl;
 
     return 0;
 }

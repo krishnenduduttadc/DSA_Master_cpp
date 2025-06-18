@@ -1,35 +1,54 @@
 #include <iostream>
 using namespace std;
 
-class Node {
-public:
+// Node structure
+struct Node {
     int val;
     Node* next;
-
-    Node(int val) {
-        this->val = val;
-        this->next = nullptr;
-    }
 };
 
+// Function to create a new node
+Node* createNode(int value) {
+    Node* newNode = new Node;
+    newNode->val = value;
+    newNode->next = nullptr;
+    return newNode;
+}
+
+// Function to push a new node at the beginning
+void push(Node*& head, int value) {
+    Node* newNode = createNode(value);
+    newNode->next = head;
+    head = newNode;
+}
+
+// Function to print the linked list
+void printList(Node* head) {
+    while (head != nullptr) {
+        cout << head->val << " ";
+        head = head->next;
+    }
+    cout << endl;
+}
+
+// Function to segregate even and odd nodes
 Node* segregateEvenOdd(Node* head) {
     if (head == nullptr || head->next == nullptr) return head;
 
-    Node* dummyEven = new Node(-1);
-    Node* dummyOdd = new Node(-1);
+    Node* dummyEven = createNode(-1);
+    Node* dummyOdd = createNode(-1);
     Node* evenTail = dummyEven;
     Node* oddTail = dummyOdd;
     Node* curr = head;
 
     while (curr != nullptr) {
-        if (curr->val % 2 != 0) {
-            oddTail->next = curr;
-            oddTail = oddTail->next;
-        } else {
+        if (curr->val % 2 == 0) {
             evenTail->next = curr;
             evenTail = evenTail->next;
+        } else {
+            oddTail->next = curr;
+            oddTail = oddTail->next;
         }
-
         curr = curr->next;
     }
 
@@ -42,29 +61,31 @@ Node* segregateEvenOdd(Node* head) {
     return result;
 }
 
-void push(Node*& head, int new_data) {
-    Node* new_node = new Node(new_data);
-    new_node->next = head;
-    head = new_node;
-}
-
-void printList(Node* node) {
-    while (node != nullptr) {
-        cout << node->val << " ";
-        node = node->next;
+// Clean up memory
+void deleteList(Node* head) {
+    while (head != nullptr) {
+        Node* next = head->next;
+        delete head;
+        head = next;
     }
-    cout << endl;
 }
 
 int main() {
     Node* head = nullptr;
+
+    // Linked list: 6 -> 9 -> 10 -> 11
     push(head, 11);
     push(head, 10);
     push(head, 9);
     push(head, 6);
 
-    Node* head1 = segregateEvenOdd(head);
-    printList(head1);
+    Node* result = segregateEvenOdd(head);
+
+    cout << "List after segregating even and odd values:\n";
+    printList(result);
+
+    // Clean up memory
+    deleteList(result);
 
     return 0;
 }

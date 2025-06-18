@@ -1,6 +1,8 @@
 #include <iostream>
 #include <stack>
 
+using namespace std;
+
 struct Node {
     int val;
     Node* prev;
@@ -23,7 +25,7 @@ Node* flatten(Node* head) {
     Node* curr = &dummy;
     Node* prev = &dummy;
 
-    std::stack<Node*> stack;
+    stack<Node*> stack;
     stack.push(head);
 
     while (!stack.empty()) {
@@ -46,10 +48,10 @@ Node* flatten(Node* head) {
 
 void printList(Node* head) {
     while (head != nullptr) {
-        std::cout << head->val << " -> ";
+        cout << head->val << " -> ";
         head = head->next;
     }
-    std::cout << "null" << std::endl;
+    cout << "null" << endl;
 }
 
 int main() {

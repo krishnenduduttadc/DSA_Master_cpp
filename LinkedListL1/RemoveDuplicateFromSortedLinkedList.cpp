@@ -1,17 +1,19 @@
 #include <iostream>
 using namespace std;
 
-// Node class for the linked list
-class ListNode {
-public:
+// Node structure for the linked list
+struct ListNode {
     int val;
     ListNode* next;
-
-    ListNode(int val) {
-        this->val = val;
-        this->next = nullptr;
-    }
 };
+
+// Function to create a new node
+ListNode* createNode(int val) {
+    ListNode* newNode = new ListNode;
+    newNode->val = val;
+    newNode->next = nullptr;
+    return newNode;
+}
 
 // Function to print the linked list
 void printList(ListNode* node) {
@@ -42,7 +44,6 @@ ListNode* removeDuplicates(ListNode* head) {
                 tt = curr;
             }
         }
-
         curr = forw;
     }
 
@@ -50,23 +51,29 @@ ListNode* removeDuplicates(ListNode* head) {
 }
 
 int main() {
-    // Creating a linked list with 4 hard-coded nodes
-    ListNode* head = nullptr;
-    ListNode* llist = new ListNode(6);
-    llist->next = new ListNode(11);
-    llist->next->next = new ListNode(10);
-    llist->next->next->next = new ListNode(11);
+    // Create the sorted linked list: 6 -> 10 -> 11 -> 11
+    ListNode* llist = createNode(6);
+    llist->next = createNode(10);
+    llist->next->next = createNode(11);
+    llist->next->next->next = createNode(11);
 
-    // Print the original linked list
+    // Print the original list
     cout << "Original Linked List:" << endl;
     printList(llist);
 
     // Remove duplicates
     ListNode* ans = removeDuplicates(llist);
 
-    // Print the linked list after removing duplicates
+    // Print the updated list
     cout << "Linked List after removing duplicates:" << endl;
     printList(ans);
+
+    // Cleanup memory
+    while (ans != nullptr) {
+        ListNode* temp = ans;
+        ans = ans->next;
+        delete temp;
+    }
 
     return 0;
 }

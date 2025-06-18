@@ -1,14 +1,13 @@
 #include <iostream>
 using namespace std;
 
-class Node {
-public:
+struct Node {
     int data;
     Node* next;
 
-    Node(int data) {
-        this->data = data;
-        this->next = nullptr;
+    Node(int d) {
+        data = d;
+        next = nullptr;
     }
 };
 
@@ -36,7 +35,7 @@ bool deleteNode(Node* givenNode) {
 }
 
 int main() {
-    // Create a linked list with 5 hard-coded nodes
+    // Create a linked list with 7 hard-coded nodes
     Node* head = new Node(1);
     head->next = new Node(2);
     head->next->next = new Node(2);

@@ -1,14 +1,13 @@
 #include <iostream>
 using namespace std;
 
-class Node {
-public:
+struct Node {
     int val;
     Node* next;
 
-    Node(int val) {
-        this->val = val;
-        this->next = nullptr;
+    Node(int v) {
+        val = v;
+        next = nullptr;
     }
 };
 
@@ -57,10 +56,6 @@ int main() {
     // Find the start node of the cycle
     Node* ans = findCycleNode(head);
     cout << (ans != nullptr ? ans->val : -1) << endl;
-
-    // Clean up memory
-    // In a real-world scenario, you would implement a function to delete the linked list nodes.
-    // For brevity, memory cleanup is not shown in this example.
 
     return 0;
 }

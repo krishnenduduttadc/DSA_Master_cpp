@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <queue>
-
+using namespace std;
 struct Node {
     int val;
     Node* next;
@@ -11,11 +11,11 @@ struct Node {
     }
 };
 
-Node* mergeKLists(std::vector<Node*>& lists) {
+Node* mergeKLists(vector<Node*>& lists) {
     if (lists.empty()) return nullptr;
 
     auto compare = [](Node* a, Node* b) { return a->val > b->val; };
-    std::priority_queue<Node*, std::vector<Node*>, decltype(compare)> queue(compare);
+    priority_queue<Node*, vector<Node*>, decltype(compare)> queue(compare);
 
     Node dummy(0);
     Node* tail = &dummy;
@@ -37,14 +37,14 @@ Node* mergeKLists(std::vector<Node*>& lists) {
 
 void printList(Node* head) {
     while (head != nullptr) {
-        std::cout << head->val << " -> ";
+        cout << head->val << " -> ";
         head = head->next;
     }
-    std::cout << "null" << std::endl;
+    cout << "null" << endl;
 }
 
 int main() {
-    std::vector<Node*> lists(3);
+    vector<Node*> lists(3);
     lists[0] = new Node(1);
     lists[0]->next = new Node(4);
     lists[0]->next->next = new Node(5);

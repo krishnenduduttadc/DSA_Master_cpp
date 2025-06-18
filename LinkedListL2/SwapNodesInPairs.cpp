@@ -1,5 +1,5 @@
 #include <iostream>
-
+using namespace std;
 struct Node {
     int val;
     Node* next;
@@ -32,10 +32,10 @@ public:
 
     static void printList(Node* head) {
         while (head != nullptr) {
-            std::cout << head->val << " -> ";
+            cout << head->val << " -> ";
             head = head->next;
         }
-        std::cout << "null" << std::endl;
+        cout << "null" << endl;
     }
 };
 

@@ -1,18 +1,21 @@
 #include <iostream>
-#include <unordered_set>
 using namespace std;
 
-class Node {
-public:
+// Define Node using struct (instead of class)
+struct Node {
     int data;
     Node* next;
-
-    Node(int data) {
-        this->data = data;
-        this->next = nullptr;
-    }
 };
 
+// Function to create a new node
+Node* createNode(int value) {
+    Node* newNode = new Node;
+    newNode->data = value;
+    newNode->next = nullptr;
+    return newNode;
+}
+
+// Function to print the linked list
 void printList(Node* head) {
     Node* current = head;
     while (current != nullptr) {
@@ -22,6 +25,7 @@ void printList(Node* head) {
     cout << "null" << endl;
 }
 
+// Function to find all pairs of nodes whose sum is k
 void sublist(Node* head, int k) {
     Node* i = head;
     while (i != nullptr) {
@@ -36,28 +40,36 @@ void sublist(Node* head, int k) {
     }
 }
 
-int main() {
-    Node* head = new Node(1);
-    head->next = new Node(2);
-    head->next->next = new Node(2);
-    head->next->next->next = new Node(3);
-    head->next->next->next->next = new Node(4);
-    head->next->next->next->next->next = new Node(3);
-    head->next->next->next->next->next->next = new Node(5);
+// Function to delete the entire linked list and free memory
+void deleteList(Node* head) {
+    while (head != nullptr) {
+        Node* temp = head;
+        head = head->next;
+        delete temp;
+    }
+}
 
-    // Print the linked list
+int main() {
+    // Creating the linked list: 1 -> 2 -> 2 -> 3 -> 4 -> 3 -> 5 -> null
+    Node* head = createNode(1);
+    head->next = createNode(2);
+    head->next->next = createNode(2);
+    head->next->next->next = createNode(3);
+    head->next->next->next->next = createNode(4);
+    head->next->next->next->next->next = createNode(3);
+    head->next->next->next->next->next->next = createNode(5);
+
+    // Print the original list
+    cout << "Linked List:\n";
     printList(head);
 
+    // Call the function with target sum
     int k = 7;
+    cout << "\nPairs whose sum is " << k << ":\n";
     sublist(head, k);
 
-    // Clean up memory
-    Node* current = head;
-    while (current != nullptr) {
-        Node* next = current->next;
-        delete current;
-        current = next;
-    }
+    // Free memory
+    deleteList(head);
 
     return 0;
 }

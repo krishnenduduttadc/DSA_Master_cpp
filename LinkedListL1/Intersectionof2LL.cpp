@@ -1,9 +1,8 @@
 #include <iostream>
 using namespace std;
 
-// Node class definition
-class Node {
-public:
+// Node structure definition
+struct Node {
     int data;
     Node* next;
 
@@ -13,86 +12,71 @@ public:
     }
 };
 
-// Intersection2LL class definition
-class Intersection2LL {
-public:
-    Node* head1;
-    Node* head2;
+// Function to count the number of nodes in a linked list
+int getCount(Node* node) {
+    int count = 0;
+    Node* current = node;
+    while (current != nullptr) {
+        count++;
+        current = current->next;
+    }
+    return count;
+}
 
-    int getCount(Node* node) {
-        Node* current = node;
-        int count = 0;
+// Function to get the intersection node's data
+int getIntersectionNode(int d, Node* node1, Node* node2) {
+    Node* current1 = node1;
+    Node* current2 = node2;
 
-        while (current != nullptr) {
-            count++;
-            current = current->next;
-        }
-        return count;
+    for (int i = 0; i < d; i++) {
+        if (current1 == nullptr) return -1;
+        current1 = current1->next;
     }
 
-    int getNode() {
-        int c1 = getCount(head1);
-        int c2 = getCount(head2);
-        int d;
-        if (c1 > c2) {
-            d = c1 - c2;
-            return getIntesectionNode(d, head1, head2);
-        } else {
-            d = c2 - c1;
-            return getIntesectionNode(d, head2, head1);
-        }
+    while (current1 != nullptr && current2 != nullptr) {
+        if (current1 == current2) return current1->data;
+        current1 = current1->next;
+        current2 = current2->next;
     }
 
-    int getIntesectionNode(int d, Node* node1, Node* node2) {
-        Node* current1 = node1;
-        Node* current2 = node2;
+    return -1;
+}
 
-        for (int i = 0; i < d; i++) {
-            if (current1 == nullptr) {
-                return -1;
-            }
-            current1 = current1->next;
-        }
+// Function to find the intersection point between two linked lists
+int getNode(Node* head1, Node* head2) {
+    int c1 = getCount(head1);
+    int c2 = getCount(head2);
 
-        while (current1 != nullptr && current2 != nullptr) {
-            if (current1->data == current2->data) {
-                return current1->data;
-            }
-            current1 = current1->next;
-            current2 = current2->next;
-        }
-
-        return -1;
+    if (c1 > c2) {
+        return getIntersectionNode(c1 - c2, head1, head2);
+    } else {
+        return getIntersectionNode(c2 - c1, head2, head1);
     }
-};
+}
 
 int main() {
-    // Creating an instance of Intersection2LL
-    Intersection2LL list;
-
     // Creating first linked list
-    list.head1 = new Node(3);
-    list.head1->next = new Node(6);
-    list.head1->next->next = new Node(9);
-    list.head1->next->next->next = new Node(15);
-    list.head1->next->next->next->next = new Node(30);
+    Node* head1 = new Node(3);
+    head1->next = new Node(6);
+    head1->next->next = new Node(9);
+    Node* intersection = new Node(15);
+    head1->next->next->next = intersection;
+    intersection->next = new Node(30);
 
     // Creating second linked list
-    list.head2 = new Node(10);
-    list.head2->next = new Node(15);
-    list.head2->next->next = new Node(30);
+    Node* head2 = new Node(10);
+    head2->next = intersection;
 
     // Finding the intersection node
-    cout << "The node of intersection is " << list.getNode() << endl;
+    cout << "The node of intersection is " << getNode(head1, head2) << endl;
 
     // Clean up memory
-    delete list.head1->next->next->next->next;
-    delete list.head1->next->next->next;
-    delete list.head1->next->next;
-    delete list.head1->next;
-    delete list.head2->next->next;
-    delete list.head2->next;
-    delete list.head2;
+    delete intersection->next;
+    delete intersection;
+    delete head1->next->next;
+    delete head1->next;
+    delete head1;
+    delete head2;
 
     return 0;
 }

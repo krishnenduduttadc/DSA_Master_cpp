@@ -1,6 +1,6 @@
 #include <iostream>
 #include <vector>
-
+using namespace std;
 struct Node {
     int val;
     Node* next;
@@ -12,8 +12,8 @@ struct Node {
 
 class SplitLinkedListInParts {
 public:
-    std::vector<Node*> splitListToParts(Node* root, int k) {
-        std::vector<Node*> parts(k, nullptr);
+    vector<Node*> splitListToParts(Node* root, int k) {
+        vector<Node*> parts(k, nullptr);
         int length = 0;
         Node* temp = root;
 
@@ -44,10 +44,10 @@ public:
 
     static void printList(Node* head) {
         while (head != nullptr) {
-            std::cout << head->val << " -> ";
+            cout << head->val << " -> ";
             head = head->next;
         }
-        std::cout << "null" << std::endl;
+        cout << "null" << endl;
     }
 };
 
@@ -66,7 +66,7 @@ int main() {
     head->next->next->next->next->next->next->next->next->next = new Node(10);
 
     SplitLinkedListInParts::printList(head);
-    std::vector<Node*> result = solution.splitListToParts(head, 3);
+    vector<Node*> result = solution.splitListToParts(head, 3);
     for (Node* part : result) {
         SplitLinkedListInParts::printList(part);
     }
