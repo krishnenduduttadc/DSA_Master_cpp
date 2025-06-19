@@ -2,7 +2,6 @@
 #include <queue>
 using namespace std;
 
-// Definition of a binary tree node
 struct Node {
     int data;
     Node* left;
@@ -15,7 +14,6 @@ struct Node {
     }
 };
 
-// Function to print level-wise traversal of the binary tree
 void printLevelWise(Node* root) {
     if (root == nullptr) {
         return;
@@ -41,7 +39,6 @@ void printLevelWise(Node* root) {
     }
 }
 
-// Function to remove all leaf nodes from the binary tree
 Node* removeAllLeaves(Node* root) {
     if (root == nullptr) {
         return nullptr;
@@ -58,7 +55,6 @@ Node* removeAllLeaves(Node* root) {
 }
 
 int main() {
-    // Hardcoded tree construction
     Node* root = new Node(10);
     root->left = new Node(20);
     root->right = new Node(30);
@@ -70,13 +66,11 @@ int main() {
     printLevelWise(root);
     cout << endl;
 
-    // Remove all leaf nodes
     Node* modifiedRoot = removeAllLeaves(root);
 
     cout << "Binary Tree after removing leaf nodes:" << endl;
     printLevelWise(modifiedRoot);
 
-    // Clean up dynamically allocated memory
     delete modifiedRoot->right->left;
     delete modifiedRoot->left->right;
     delete modifiedRoot->left->left;

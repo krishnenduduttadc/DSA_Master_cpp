@@ -1,7 +1,6 @@
 #include <iostream>
 using namespace std;
 
-// Definition of a binary tree node
 struct Node {
     int data;
     Node *left, *right;
@@ -13,7 +12,6 @@ struct Node {
     }
 };
 
-// Function to determine the depth of a node with value `p`
 int depth(Node* root, int p) {
     if (root == nullptr) {
         return 0;
@@ -36,7 +34,6 @@ int depth(Node* root, int p) {
     return 0;
 }
 
-// Function to check if two nodes with values `p` and `q` are siblings
 bool siblings(Node* root, int p, int q) {
     if (root == nullptr) {
         return false;

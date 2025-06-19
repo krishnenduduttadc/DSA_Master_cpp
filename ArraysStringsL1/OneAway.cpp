@@ -41,13 +41,13 @@ bool oneEditAway(const string& f, const string& s) {
     } else if (f.length() + 1 == s.length()) {
         return oneEditInsert(f, s);
     } else if (f.length() - 1 == s.length()) {
-        return oneEditInsert(s, f);  // Swap f and s for insertion case
+        return oneEditInsert(s, f);  
     }
     return false;
 }
 
 int main() {
-    cout << boolalpha;  // Print bools as true/false instead of 1/0
+    cout << boolalpha;  
 
     cout << oneEditAway("pale", "ple") << endl;  // true
     cout << oneEditAway("pale", "bae") << endl;  // false

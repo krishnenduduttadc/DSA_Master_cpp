@@ -42,12 +42,10 @@ int main() {
     
     vector<vector<int>> res = twoSum(nums, target);
     
-    // Sorting each pair and then sorting all pairs lexicographically
     sort(res.begin(), res.end(), [](const vector<int>& a, const vector<int>& b) {
         return a[0] == b[0] ? a[1] < b[1] : a[0] < b[0];
     });
 
-    // Printing the result
     for (auto& pair : res) {
         for (int val : pair) {
             cout << val << " ";

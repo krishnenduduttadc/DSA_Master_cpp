@@ -28,7 +28,7 @@ int main() {
     string n1 = "123";
     string n2 = "23";
     string res = addStrings(n1, n2);
-    cout << res << endl; // Output should be 146
+    cout << res << endl; 
 
     return 0;
 }

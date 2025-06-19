@@ -1,7 +1,6 @@
 #include <iostream>
 using namespace std;
 
-// Definition of a binary tree node
 struct Node {
     int data;
     Node *left, *right;
@@ -13,7 +12,6 @@ struct Node {
     }
 };
 
-// Function to find the Lowest Common Ancestor (LCA) of two nodes
 Node* getLCA(Node* root, int a, int b) {
     if (root == nullptr) {
         return nullptr;
@@ -35,7 +33,6 @@ Node* getLCA(Node* root, int a, int b) {
     }
 }
 
-// Function to create a binary tree and find LCA
 int main() {
     // Hardcoded tree construction
     Node* root = new Node(6);

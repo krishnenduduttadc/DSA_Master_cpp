@@ -2,7 +2,6 @@
 using namespace std;
 
 int main() {
-    // Hardcoded input values
     int n = 2; // Number of rows
     int m = 4; // Number of columns
 

@@ -2,7 +2,7 @@
 using namespace std;
 
 int main() {
-    int n = 4; // Size of the square matrix
+    int n = 4; 
     int arr[4][4] = {
         {11, 12, 13, 14},
         {21, 22, 23, 24},

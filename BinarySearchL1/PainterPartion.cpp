@@ -8,7 +8,6 @@ using namespace std;
 // Function declaration
 long long calculate(vector<int>& weights, long long maxCapacity);
 
-// Function to calculate the minimum time required
 long long minTime(vector<int>& weights, int days) {
     long long maxWeight = *max_element(weights.begin(), weights.end());
     long long totalWeight = accumulate(weights.begin(), weights.end(), 0LL);

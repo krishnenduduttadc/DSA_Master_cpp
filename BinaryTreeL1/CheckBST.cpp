@@ -2,7 +2,6 @@
 #include <climits> // For INT_MIN and INT_MAX
 using namespace std;
 
-// Definition of a binary tree node
 struct Node {
     int data;
     Node *left, *right;
@@ -13,7 +12,6 @@ struct Node {
     }
 };
 
-// Function to display the binary tree (preorder traversal)
 void display(Node *node) {
     if (node == nullptr) {
         return;
@@ -28,7 +26,6 @@ void display(Node *node) {
     display(node->right);
 }
 
-// Function to check if a subtree rooted at 'node' is a BST
 bool isBST(Node *node, int minVal, int maxVal) {
     if (node == nullptr) {
         return true;

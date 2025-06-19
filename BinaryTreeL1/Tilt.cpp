@@ -2,7 +2,6 @@
 #include <cstdlib> // for abs function
 using namespace std;
 
-// Definition of a binary tree node
 struct Node {
     int data;
     Node* left;
@@ -15,7 +14,6 @@ struct Node {
     }
 };
 
-// Function to display the binary tree (for debugging purposes)
 void display(Node* node) {
     if (node == nullptr) {
         return;
@@ -31,7 +29,6 @@ void display(Node* node) {
     display(node->right);
 }
 
-// Function to calculate the height of the binary tree
 int height(Node* node) {
     if (node == nullptr) {
         return -1;
@@ -43,10 +40,8 @@ int height(Node* node) {
     return max(lh, rh) + 1;
 }
 
-// Global variable to store the tilt of the entire tree
 int tilt = 0;
 
-// Function to calculate the tilt of the binary tree
 int calculateTilt(Node* node) {
     if (node == nullptr) {
         return 0;
@@ -63,7 +58,6 @@ int calculateTilt(Node* node) {
 }
 
 int main() {
-    // Hardcoded tree construction
     Node* root = new Node(50);
     root->left = new Node(25);
     root->left->left = new Node(12);

@@ -3,7 +3,6 @@
 #include <stack>
 using namespace std;
 
-// Definition of a binary tree node
 struct Node {
     int data;
     Node* left;
@@ -16,7 +15,6 @@ struct Node {
     }
 };
 
-// Function to print level-wise traversal of the binary tree
 void printLevelWise(Node* root) {
     if (root == nullptr) {
         return;
@@ -42,7 +40,6 @@ void printLevelWise(Node* root) {
     }
 }
 
-// Function to print zigzag traversal of the binary tree
 void printZigZag(Node* root) {
     if (root == nullptr) {
         return;

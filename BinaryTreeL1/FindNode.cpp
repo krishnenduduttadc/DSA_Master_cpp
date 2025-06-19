@@ -1,7 +1,6 @@
 #include <iostream>
 using namespace std;
 
-// Definition of a binary tree node
 struct Node {
     int data;
     Node *left, *right;
@@ -13,7 +12,6 @@ struct Node {
     }
 };
 
-// Function to check if a node with value `x` is present in the binary tree
 bool isNodePresent(Node* root, int x) {
     if (root == nullptr) {
         return false;

@@ -2,7 +2,6 @@
 #include <queue>
 using namespace std;
 
-// Definition of a binary tree node
 struct Node {
     int data;
     Node* left;
@@ -15,7 +14,6 @@ struct Node {
     }
 };
 
-// Function to perform level-wise traversal
 void levelWise(Node* root) {
     if (root == nullptr)
         return;
@@ -35,7 +33,6 @@ void levelWise(Node* root) {
     }
 }
 
-// Function to print level-wise
 void printLevelWise(Node* root) {
     if (root == nullptr)
         return;
@@ -59,7 +56,6 @@ void printLevelWise(Node* root) {
     }
 }
 
-// Function to print left view of the tree
 void printLeftView(Node* root) {
     if (root == nullptr)
         return;

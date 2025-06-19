@@ -4,12 +4,10 @@
 using namespace std;
 
 bool meetingRooms(vector<vector<int>>& intervals) {
-    // Sort intervals based on their start times
     sort(intervals.begin(), intervals.end(), [](const vector<int>& a, const vector<int>& b) {
         return a[0] < b[0];
     });
 
-    // Check for overlapping intervals
     if (intervals.size() <= 1) {
         return true;
     }

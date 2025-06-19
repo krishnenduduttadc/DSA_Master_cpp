@@ -26,7 +26,6 @@ vector<vector<int>> twoSum(vector<int>& nums, int target, int si) {
             left++;
             right--;
 
-            // Skip duplicate elements to avoid duplicate pairs
             while (left < right && nums[left] == nums[left - 1]) left++;
             while (left < right && nums[right] == nums[right + 1]) right--;
         } else if (sum > target) {

@@ -2,7 +2,6 @@
 #include <cmath> // for abs function
 using namespace std;
 
-// Definition of a binary tree node
 struct Node {
     int key;
     Node *left, *right;
@@ -14,7 +13,6 @@ struct Node {
     }
 };
 
-// Function to check if the tree is balanced and return its height
 int isBalanced(Node* root) {
     if (root == nullptr) {
         return 0;

@@ -4,7 +4,6 @@
 using namespace std;
 
 int minTotalDistance(vector<vector<int>>& grid) {
-    // Collect x-coordinates and y-coordinates of all 1s in the grid
     vector<int> xcord, ycord;
     int rows = grid.size();
     int cols = grid[0].size();

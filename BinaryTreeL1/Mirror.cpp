@@ -2,7 +2,6 @@
 #include <queue>
 using namespace std;
 
-// Definition of a binary tree node
 struct Node {
     int data;
     Node* left;
@@ -15,7 +14,6 @@ struct Node {
     }
 };
 
-// Function to perform mirror transformation of a binary tree
 void mirrorBinaryTree(Node* root) {
     if (root == nullptr)
         return;
@@ -23,7 +21,6 @@ void mirrorBinaryTree(Node* root) {
     mirrorBinaryTree(root->left);
     mirrorBinaryTree(root->right);
 
-    // Swap left and right children of the current node
     Node* temp = root->left;
     root->left = root->right;
     root->right = temp;
@@ -31,7 +28,6 @@ void mirrorBinaryTree(Node* root) {
     //swap(root->left,root->right); //shortcut
 }
 
-// Function to print level-wise traversal of a binary tree
 void printLevelWise(Node* root) {
     if (root == nullptr)
         return;

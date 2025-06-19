@@ -5,13 +5,11 @@ int minJumps(int x) {
     int jump = 1;
     int sum = 0;
 
-    // Find the smallest jump count that reaches or exceeds x
     while (sum < x) {
         sum += jump;
         jump++;
     }
 
-    // Determine the exact number of jumps needed
     if ((sum - x) % 2 == 0) {
         return jump - 1;
     } else if ((sum + jump - x) % 2 == 0) {

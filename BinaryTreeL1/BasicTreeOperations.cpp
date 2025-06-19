@@ -4,7 +4,6 @@
 
 using namespace std;
 
-// Node structure for the binary tree
 struct Node {
     int key;
     Node* left;
@@ -16,7 +15,6 @@ struct Node {
     }
 };
 
-// Function to print postorder traversal of the tree
 void printPostorder(Node* node) {
     if (node == nullptr)
         return;
@@ -26,7 +24,6 @@ void printPostorder(Node* node) {
     cout << node->key << " ";
 }
 
-// Function to perform level order traversal
 void levelOrder(Node* root) {
     if (root == nullptr)
         return;
@@ -46,7 +43,6 @@ void levelOrder(Node* root) {
     }
 }
 
-// Function to find the longest root-to-leaf path
 vector<int> longestRootToLeafPath(Node* root) {
     if (root == nullptr)
         return vector<int>();
@@ -66,14 +62,12 @@ vector<int> longestRootToLeafPath(Node* root) {
 }
 
 int main() {
-    // Creating a binary tree
     Node* root = new Node(1);
     root->left = new Node(2);
     root->right = new Node(3);
     root->left->left = new Node(4);
     root->left->right = new Node(5);
 
-    // Printing longest root-to-leaf path
     vector<int> longestPath = longestRootToLeafPath(root);
     cout << "Longest root to leaf path: ";
     for (size_t i = 0; i < longestPath.size(); i++) {
@@ -83,12 +77,10 @@ int main() {
     }
     cout << endl;
 
-    // Printing postorder traversal
     cout << "Postorder traversal: ";
     printPostorder(root);
     cout << endl;
 
-    // Printing level order traversal
     cout << "Level order traversal: ";
     levelOrder(root);
     cout << endl;

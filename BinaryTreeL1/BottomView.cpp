@@ -3,7 +3,6 @@
 #include <map>
 using namespace std;
 
-// Definition of a binary tree node
 struct Node {
     int key;
     Node *left, *right;
@@ -15,7 +14,6 @@ struct Node {
     }
 };
 
-// Structure to hold the node and its horizontal distance from the root
 struct QueueObj {
     Node* node;
     int hd;
@@ -23,7 +21,6 @@ struct QueueObj {
     QueueObj(Node* n, int h) : node(n), hd(h) {}
 };
 
-// Function to print the bottom view of the binary tree
 void bottomView(Node* root) {
     if (root == nullptr)
         return;
