@@ -4,7 +4,6 @@
 #include <string>
 using namespace std;
 
-// Definition of a Binary Tree Node
 struct TreeNode {
     int val;
     TreeNode *left;
@@ -16,7 +15,6 @@ struct TreeNode {
     }
 };
 
-// Function to serialize a binary tree to a string
 string serialize(TreeNode* root) {
     if (root == nullptr) return "";
     queue<TreeNode*> q;
@@ -36,7 +34,6 @@ string serialize(TreeNode* root) {
     return ss.str();
 }
 
-// Function to deserialize a string to a binary tree
 TreeNode* deserialize(string data) {
     if (data.empty()) return nullptr;
     stringstream ss(data);
@@ -65,7 +62,6 @@ TreeNode* deserialize(string data) {
     return root;
 }
 
-// Utility function to print the tree (for verification)
 void printTree(TreeNode* root) {
     if (root == nullptr) return;
     queue<TreeNode*> q;
@@ -84,7 +80,6 @@ void printTree(TreeNode* root) {
     cout << endl;
 }
 
-// Main function to test serialization and deserialization
 int main() {
     TreeNode* root = new TreeNode(1);
     root->left = new TreeNode(2);

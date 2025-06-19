@@ -3,7 +3,6 @@
 #include <queue>
 using namespace std;
 
-// Definition for a binary tree node.
 struct TreeNode {
     int val;
     TreeNode *left;
@@ -15,7 +14,6 @@ struct TreeNode {
     }
 };
 
-// Function to get the right view of the binary tree
 vector<int> rightView(TreeNode* root) {
     vector<int> result;
     if (!root) {
@@ -32,12 +30,10 @@ vector<int> rightView(TreeNode* root) {
             TreeNode* node = q.front();
             q.pop();
 
-            // Capture the last node value in each level (rightmost node)
             if (i == n - 1) {
                 result.push_back(node->val);
             }
 
-            // Enqueue left and right children if they exist
             if (node->left) {
                 q.push(node->left);
             }
@@ -50,14 +46,12 @@ vector<int> rightView(TreeNode* root) {
     return result;
 }
 
-// Utility function to create a new node
 TreeNode* newNode(int key) {
     TreeNode* node = new TreeNode(key);
     return node;
 }
 
 int main() {
-    // Constructing the binary tree
     TreeNode* root = newNode(1);
     root->left = newNode(2);
     root->right = newNode(3);
@@ -66,10 +60,8 @@ int main() {
     root->right->left = newNode(6);
     root->right->right = newNode(7);
 
-    // Calling the rightView function
     vector<int> result = rightView(root);
 
-    // Print the right view of the binary tree
     cout << "Right view of the binary tree:" << endl;
     for (int val : result) {
         cout << val << " ";

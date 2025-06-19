@@ -1,6 +1,5 @@
 #include <iostream>
 using namespace std;
-// TreeNode structure definition
 struct TreeNode {
     int key;
     TreeNode* left;
@@ -12,7 +11,6 @@ struct TreeNode {
     }
 };
 
-// Function to find the Lowest Common Ancestor (LCA) of two nodes
 TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
     // Base case: if root is null or root is one of p or q, return root
     if (root == nullptr || root == p || root == q) {
@@ -34,7 +32,6 @@ TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
 }
 
 int main() {
-    // Constructing the binary tree
     TreeNode* root = new TreeNode(1);
     root->left = new TreeNode(2);
     root->right = new TreeNode(3);
@@ -42,10 +39,8 @@ int main() {
     root->left->right = new TreeNode(5);
     root->left->left->left = new TreeNode(6);
 
-    // Finding the Lowest Common Ancestor (LCA)
     TreeNode* lca = lowestCommonAncestor(root, root->left->right, root->left->left->left);
 
-    // Output the key of the LCA
     cout << "Lowest Common Ancestor (LCA) key: " << lca->key << endl;
 
     return 0;

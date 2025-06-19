@@ -4,7 +4,6 @@
 
 using namespace std;
 
-// Function to calculate maximum sum of non-adjacent elements
 int maxSumNonAdjacent(vector<int>& nums) {
     int n = nums.size();
     if (n == 0) return 0;
@@ -24,12 +23,8 @@ int maxSumNonAdjacent(vector<int>& nums) {
 }
 
 int main() {
-    // Test case
     vector<int> arr = {5, 10, 10, 100, 5, 6};
-
     int result = maxSumNonAdjacent(arr);
-
     cout << "Maximum sum of non-adjacent elements: " << result << endl;
-
     return 0;
 }

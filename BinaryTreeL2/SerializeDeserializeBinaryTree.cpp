@@ -5,7 +5,6 @@
 #include <string>
 using namespace std;
 
-// TreeNode structure definition
 struct TreeNode {
     int val;
     TreeNode* left;
@@ -17,7 +16,6 @@ struct TreeNode {
     }
 };
 
-// Encodes a tree to a single string.
 string serialize(TreeNode* root) {
     if (root == nullptr) return "null";
     
@@ -42,7 +40,6 @@ string serialize(TreeNode* root) {
     return result.substr(0, result.length() - 1); // Remove last comma
 }
 
-// Decodes your encoded data to tree.
 TreeNode* deserialize(string data) {
     if (data == "null") return nullptr;
     
@@ -79,7 +76,6 @@ TreeNode* deserialize(string data) {
     return root;
 }
 
-// Function to delete the tree to avoid memory leaks
 void deleteTree(TreeNode* root) {
     if (root == nullptr) return;
     deleteTree(root->left);
@@ -87,25 +83,20 @@ void deleteTree(TreeNode* root) {
     delete root;
 }
 
-// Main function
 int main() {
-    // Constructing the binary tree
     TreeNode* root = new TreeNode(1);
     root->left = new TreeNode(2);
     root->right = new TreeNode(3);
     root->right->left = new TreeNode(4);
     root->right->right = new TreeNode(5);
 
-    // Serializing the tree
     string serialized = serialize(root);
     cout << "Serialized: " << serialized << endl;
 
-    // Deserializing the serialized string
     TreeNode* deserialized = deserialize(serialized);
     string reserialized = serialize(deserialized);
     cout << "Deserialized: " << reserialized << endl;
 
-    // Deleting the trees to free allocated memory
     deleteTree(root);
     deleteTree(deserialized);
 

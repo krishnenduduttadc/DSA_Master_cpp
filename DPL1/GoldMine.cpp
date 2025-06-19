@@ -15,10 +15,8 @@ int main() {
     int n = 4; // Number of rows
     int m = 4; // Number of columns
 
-    // Initialize dp array
     vector<vector<int>> dp(n, vector<int>(m, 0));
 
-    // Fill dp array from rightmost column to left
     for (int j = m - 1; j >= 0; j--) {
         for (int i = n - 1; i >= 0; i--) {
             if (j == m - 1) {
@@ -33,7 +31,6 @@ int main() {
         }
     }
 
-    // Find the maximum value in the first column of dp array
     int maxGold = dp[0][0];
     for (int i = 1; i < n; i++) {
         if (dp[i][0] > maxGold) {

@@ -3,7 +3,6 @@
 
 using namespace std;
 
-// Function to calculate max profit with multiple transactions allowed
 int maxProfit(vector<int> prices) {
     if (prices.empty()) return 0;
 
@@ -25,7 +24,6 @@ int maxProfit(vector<int> prices) {
 }
 
 int main() {
-    // Test case
     vector<int> prices = {11, 6, 7, 19, 4, 1, 6, 18, 4};
     int result = maxProfit(prices);
     cout << "Max profit: " << result << endl; // Output: 30

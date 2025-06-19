@@ -18,15 +18,12 @@ void printMaxGoldPath(vector<vector<int>>& arr) {
     int m = arr.size();
     int n = arr[0].size();
 
-    // dp array to store maximum gold collected to reach each cell
     vector<vector<int>> dp(m, vector<int>(n, 0));
 
-    // Initialize dp array for the last column
     for (int i = 0; i < m; i++) {
         dp[i][n - 1] = arr[i][n - 1];
     }
 
-    // Fill dp array using dynamic programming approach
     for (int j = n - 2; j >= 0; j--) {
         for (int i = 0; i < m; i++) {
             int maxGold = dp[i][j + 1]; // Maximum gold by going right from current cell
@@ -40,7 +37,6 @@ void printMaxGoldPath(vector<vector<int>>& arr) {
         }
     }
 
-    // Find the maximum gold collected in the first column
     int maxGold = dp[0][0];
     int maxRow = 0;
     for (int i = 1; i < m; i++) {
@@ -50,14 +46,11 @@ void printMaxGoldPath(vector<vector<int>>& arr) {
         }
     }
 
-    // Print the maximum gold collected
     cout << maxGold << endl;
 
-    // Queue to perform BFS for path tracing
     queue<Pair> q;
     q.push(Pair(maxRow, 0, to_string(maxRow))); // Start from the cell with maximum gold in the first column
 
-    // BFS to print all paths with maximum gold collected
     while (!q.empty()) {
         Pair rem = q.front();
         q.pop();

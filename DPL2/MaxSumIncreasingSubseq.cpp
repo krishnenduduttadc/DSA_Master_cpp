@@ -5,7 +5,6 @@ using namespace std;
 int MaxSumIncreasingSubseq(int arr[], int size) {
     int omax = INT_MIN;
     int* dp = new int[size];
-    //int dp[size];
 
     for (int i = 0; i < size; i++) {
         int maxSum = arr[i];
@@ -18,7 +17,7 @@ int MaxSumIncreasingSubseq(int arr[], int size) {
         omax = max(omax, dp[i]);
     }
 
-    delete[] dp; // Don't forget to free the allocated memory
+    delete[] dp; 
     return omax;
 }
 

@@ -2,16 +2,13 @@
 #include <algorithm>
 using namespace std;
 
-// Define the maximum size for the grid (you can adjust this as needed)
 const int MAX_ROWS = 100;
 const int MAX_COLS = 100;
 
-// Function to find the largest square submatrix
 int largestSquareSubmatrix(const int arr[MAX_ROWS][MAX_COLS], int rows, int cols) {
     int dp[MAX_ROWS][MAX_COLS] = {0}; // DP table
     int largestSide = 0;
 
-    // Fill the dp array
     for (int i = rows - 1; i >= 0; i--) {
         for (int j = cols - 1; j >= 0; j--) {
             if (i == rows - 1 || j == cols - 1) {
@@ -34,7 +31,6 @@ int largestSquareSubmatrix(const int arr[MAX_ROWS][MAX_COLS], int rows, int cols
 }
 
 int main() {
-    // Define the array and its dimensions
     const int arr[MAX_ROWS][MAX_COLS] = {
         {0, 1, 0, 1, 0, 1},
         {1, 0, 1, 0, 1, 0},

@@ -3,27 +3,30 @@
 
 using namespace std;
 
-class UniquePaths {
-public:
-    int uniquePaths(int m, int n) {
-        vector<vector<int>> dp(m, vector<int>(n, 0));
+int uniquePaths(int m, int n)
+{
+    vector<vector<int>> dp(m, vector<int>(n, 0));
 
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                if (i == 0 || j == 0) {
-                    dp[i][j] = 1;
-                } else {
-                    dp[i][j] = dp[i-1][j] + dp[i][j-1];
-                }
+    for (int i = 0; i < m; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            if (i == 0 || j == 0)
+            {
+                dp[i][j] = 1;
+            }
+            else
+            {
+                dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
             }
         }
-
-        return dp[m-1][n-1];
     }
-};
 
-int main() {
-    UniquePaths solution;
+    return dp[m - 1][n - 1];
+}
+
+int main()
+{
 
     // Test cases
     vector<vector<int>> testCases = {
@@ -33,11 +36,12 @@ int main() {
         {1, 1}  // m = 1, n = 1
     };
 
-    for (auto& testCase : testCases) {
+    for (auto &testCase : testCases)
+    {
         int m = testCase[0];
         int n = testCase[1];
-        int uniquePaths = solution.uniquePaths(m, n);
-        cout << "For m = " << m << ", n = " << n << ", unique paths = " << uniquePaths << endl;
+        int uniquePath = uniquePaths(m, n);
+        cout << "For m = " << m << ", n = " << n << ", unique paths = " << uniquePath << endl;
     }
 
     return 0;

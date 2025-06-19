@@ -26,15 +26,12 @@ int MaximumNonOverlappingBridges(int n, vector<int>& nr, vector<int>& s) {
     vector<int> dp(n, 1);
     int omax = 1;
 
-    // Initialize bridges array
     for (int i = 0; i < n; i++) {
         bdgs.push_back(Bridge(nr[i], s[i]));
     }
 
-    // Sort bridges based on north coordinates (and south in case of ties)
     sort(bdgs.begin(), bdgs.end());
 
-    // Calculate LIS using dynamic programming
     for (int i = 1; i < n; i++) {
         for (int j = 0; j < i; j++) {
             if (bdgs[j].south <= bdgs[i].south) {

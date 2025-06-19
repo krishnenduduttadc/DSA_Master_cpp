@@ -25,10 +25,8 @@ void printBinary(int n) {
 int main() {
     int n = 7;
 
-    // Calculate rightmost set bit mask
     int rsbm = n & -n;
 
-    // Print the binary representation of rsbm
     printBinary(rsbm);
 
     return 0;

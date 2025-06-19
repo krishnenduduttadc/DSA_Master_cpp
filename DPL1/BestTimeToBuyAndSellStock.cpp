@@ -4,7 +4,6 @@
 
 using namespace std;
 
-// Function to calculate the maximum profit
 int maxProfit(vector<int>& prices) {
     if (prices.empty()) return 0;
 
@@ -21,7 +20,6 @@ int maxProfit(vector<int>& prices) {
 }
 
 int main() {
-    // Test case
     vector<int> prices = {7, 1, 5, 3, 6, 4};
     int result = maxProfit(prices);
 

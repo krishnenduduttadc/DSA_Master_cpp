@@ -3,7 +3,6 @@
 #include <queue>
 using namespace std;
 
-// TreeNode structure definition
 struct TreeNode {
     int val;
     TreeNode* left;
@@ -15,7 +14,6 @@ struct TreeNode {
     }
 };
 
-// Function to perform diagonal order traversal of a binary tree
 vector<vector<int>> diagonalOrder(TreeNode* root) {
     vector<vector<int>> ans;
     if (root == nullptr) return ans;
@@ -25,7 +23,7 @@ vector<vector<int>> diagonalOrder(TreeNode* root) {
 
     while (!que.empty()) {
         int size = que.size();
-        std::vector<int> smallAns;
+        vector<int> smallAns;
 
         while (size--) {
             TreeNode* node = que.front();
@@ -47,7 +45,6 @@ vector<vector<int>> diagonalOrder(TreeNode* root) {
 }
 
 int main() {
-    // Constructing the binary tree
     TreeNode* root = new TreeNode(1);
     root->left = new TreeNode(2);
     root->right = new TreeNode(3);
@@ -56,7 +53,6 @@ int main() {
     root->right->left = new TreeNode(6);
     root->right->right = new TreeNode(7);
 
-    // Calling diagonalOrder function and printing the result
     vector<vector<int>> ans = diagonalOrder(root);
 
     cout << "Diagonal Order Traversal:\n";
@@ -67,7 +63,6 @@ int main() {
         cout << "\n";
     }
 
-    // Deallocating memory to avoid memory leaks
     delete root->right->right;
     delete root->right->left;
     delete root->left->right;

@@ -8,7 +8,6 @@ struct Node {
     Node* right;
 };
 
-// Function to create a new node
 Node* createNode(int item) {
     Node* newNode = new Node;
     newNode->key = item;
@@ -17,7 +16,6 @@ Node* createNode(int item) {
     return newNode;
 }
 
-// Convert sorted array to balanced BST
 Node* SortedArrayToBST(int arr[], int start, int end) {
     if (start > end) return nullptr;
 
@@ -30,7 +28,6 @@ Node* SortedArrayToBST(int arr[], int start, int end) {
     return root;
 }
 
-// Print tree level-wise
 void printLevelWise(Node* root) {
     if (root == nullptr) return;
 

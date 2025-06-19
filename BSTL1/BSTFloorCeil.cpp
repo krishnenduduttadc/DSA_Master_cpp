@@ -7,7 +7,6 @@ struct Node {
     Node *right;
 };
 
-// Helper function to create a new node
 Node* newNode(int item) {
     Node* temp = new Node;
     temp->data = item;
@@ -15,7 +14,6 @@ Node* newNode(int item) {
     return temp;
 }
 
-// Function to find floor
 Node* findFloor(Node* node, int x) {
     Node* res = nullptr;
     while (node != nullptr) {
@@ -32,7 +30,6 @@ Node* findFloor(Node* node, int x) {
     return res;
 }
 
-// Function to find ceil
 int findCeil(Node* node, int x) {
     if (node == nullptr) {
         return -1;
@@ -48,7 +45,6 @@ int findCeil(Node* node, int x) {
 }
 
 int main() {
-    // Construct the BST
     Node* root = newNode(8);
     root->left = newNode(4);
     root->right = newNode(12);
@@ -57,7 +53,6 @@ int main() {
     root->right->left = newNode(10);
     root->right->right = newNode(14);
 
-    // Find floor and ceiling
     Node* floorNode = findFloor(root, 7);
     int floorValue = (floorNode != nullptr) ? floorNode->data : -1;
     cout << "The floor is: " << floorValue << endl;

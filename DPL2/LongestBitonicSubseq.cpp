@@ -6,7 +6,6 @@ int LongestBitonicSubseq(int arr[], int n) {
     vector<int> lis(n, 1); // lis[i] will store the length of LIS ending at index i
     vector<int> lds(n, 1); // lds[i] will store the length of LDS starting at index i
 
-    // Computing LIS
     for (int i = 1; i < n; i++) {
         for (int j = 0; j < i; j++) {
             if (arr[j] <= arr[i]) {
@@ -15,7 +14,6 @@ int LongestBitonicSubseq(int arr[], int n) {
         }
     }
 
-    // Computing LDS
     for (int i = n - 2; i >= 0; i--) {
         for (int j = n - 1; j > i; j--) {
             if (arr[j] <= arr[i]) {
@@ -24,9 +22,7 @@ int LongestBitonicSubseq(int arr[], int n) {
         }
     }
 
-    int omax = 0; // To store the overall maximum length of LBS
-
-    // Finding the length of the Longest Bitonic Subsequence
+    int omax = 0; 
     for (int i = 0; i < n; i++) {
         omax = max(omax, lis[i] + lds[i] - 1);
     }

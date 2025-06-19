@@ -6,7 +6,6 @@ int totalOfferings(int* height, int n) {
     int* larr = new int[n]; // Left offerings array
     int* rarr = new int[n]; // Right offerings array
 
-    // Calculate left offerings
     larr[0] = 1;
     for (int i = 1; i < n; i++) {
         if (height[i] > height[i - 1]) {
@@ -16,7 +15,6 @@ int totalOfferings(int* height, int n) {
         }
     }
 
-    // Calculate right offerings
     rarr[n - 1] = 1;
     for (int i = n - 2; i >= 0; i--) {
         if (height[i] > height[i + 1]) {
@@ -26,13 +24,11 @@ int totalOfferings(int* height, int n) {
         }
     }
 
-    // Calculate total offerings
     int ans = 0;
     for (int i = 0; i < n; i++) {
         ans += max(larr[i], rarr[i]);
     }
 
-    // Free allocated memory
     delete[] larr;
     delete[] rarr;
 

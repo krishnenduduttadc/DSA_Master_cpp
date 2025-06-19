@@ -2,7 +2,6 @@
 #include <queue>
 using namespace std;
 
-// Definition for a binary tree node.
 struct TreeNode {
     int val;
     TreeNode *left;
@@ -14,7 +13,6 @@ struct TreeNode {
     }
 };
 
-// Function to calculate the maximum width of the binary tree
 int widthOfBinaryTree(TreeNode* root) {
     if (!root) {
         return 0;
@@ -32,10 +30,8 @@ int widthOfBinaryTree(TreeNode* root) {
             TreeNode* node = q.front();
             q.pop();
 
-            // Count current level nodes
             ++currentWidth;
 
-            // Enqueue left and right children if they exist
             if (node->left) {
                 q.push(node->left);
             }
@@ -44,7 +40,6 @@ int widthOfBinaryTree(TreeNode* root) {
             }
         }
 
-        // Update maxWidth if current level width is greater
         if (currentWidth > maxWidth) {
             maxWidth = currentWidth;
         }
@@ -53,14 +48,12 @@ int widthOfBinaryTree(TreeNode* root) {
     return maxWidth;
 }
 
-// Utility function to create a new node
 TreeNode* newNode(int key) {
     TreeNode* node = new TreeNode(key);
     return node;
 }
 
 int main() {
-    // Constructing the example binary tree
     TreeNode* root = newNode(1);
     root->left = newNode(2);
     root->right = newNode(3);
@@ -70,10 +63,8 @@ int main() {
     root->right->right = newNode(7);
     root->right->right->left = newNode(8);
 
-    // Calculate the maximum width of the tree
     int maxWidth = widthOfBinaryTree(root);
 
-    // Print the maximum width of the binary tree
     cout << "Maximum width of the binary tree: " << maxWidth << endl;
 
     return 0;

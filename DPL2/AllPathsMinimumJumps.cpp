@@ -4,7 +4,6 @@
 #include <string>
 using namespace std;
 
-// Struct to replace the Pair class
 struct Pair {
     int i, s, j;
     string psf;

@@ -12,7 +12,6 @@ int findElement(vector<int>& arr) {
 }
 
 int main() {
-    // Example input
     vector<int> arr = {2, 4, 1, 2, 4};
 
     int result = findElement(arr);

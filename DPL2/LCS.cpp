@@ -3,7 +3,6 @@
 #include <algorithm> // For std::max
 using namespace std;
 
-// Define maximum possible sizes for the strings
 const int MAX_M = 100;
 const int MAX_N = 100;
 
@@ -11,7 +10,6 @@ int LCS(const string& s1, const string& s2) {
     int m = s1.length();
     int n = s2.length();
     
-    // Initialize DP table with zeros
     int dp[MAX_M + 1][MAX_N + 1] = {0};
 
     for (int i = m - 1; i >= 0; i--) {

@@ -4,7 +4,6 @@
 #include <vector>
 using namespace std;
 
-// Definition for a binary tree node.
 struct TreeNode {
     int val;
     TreeNode *left;
@@ -22,7 +21,6 @@ vector<int> bottomView(TreeNode* root) {
         return bottomViewNodes;
     }
 
-    // TreeMap equivalent in C++ is std::map
     map<int, int> map;
     queue<pair<TreeNode*, int>> q;
     q.push({root, 0});
@@ -33,29 +31,24 @@ vector<int> bottomView(TreeNode* root) {
         TreeNode* node = front.first;
         int hd = front.second;
 
-        // Update the map with current node's value at its horizontal distance
         map[hd] = node->val;
 
-        // Enqueue left child with horizontal distance hd - 1
         if (node->left) {
             q.push({node->left, hd - 1});
         }
 
-        // Enqueue right child with horizontal distance hd + 1
         if (node->right) {
             q.push({node->right, hd + 1});
         }
     }
 
-    // Populate bottomViewNodes with values from map
-    for (const auto& pair : map) {
+    for (const auto pair : map) {
         bottomViewNodes.push_back(pair.second);
     }
 
     return bottomViewNodes;
 }
 
-// Utility function to create a new node
 TreeNode* newNode(int key) {
     TreeNode* node = new TreeNode(key);
     return node;
@@ -72,13 +65,10 @@ int main() {
 
     vector<int> result = bottomView(root);
 
-    // Print the result
     for (int value : result) {
         cout << value << " ";
     }
     cout << endl;
 
-    // Memory cleanup (optional in this example)
-    // You may need to delete nodes if not using smart pointers
     return 0;
 }

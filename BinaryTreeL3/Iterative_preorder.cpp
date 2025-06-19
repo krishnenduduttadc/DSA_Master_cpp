@@ -1,8 +1,8 @@
 #include <iostream>
 #include <vector>
 #include <stack>
+
 using namespace std;
-// TreeNode structure definition
 struct TreeNode {
     int key;
     TreeNode* left;
@@ -14,7 +14,6 @@ struct TreeNode {
     }
 };
 
-// Function to perform iterative preorder traversal
 vector<int> preOrderTrav(TreeNode* root) {
     vector<int> preOrder;
     if (root == nullptr)
@@ -36,7 +35,6 @@ vector<int> preOrderTrav(TreeNode* root) {
 }
 
 int main() {
-    // Constructing the binary tree
     TreeNode* root = new TreeNode(1);
     root->left = new TreeNode(2);
     root->right = new TreeNode(3);
@@ -48,10 +46,8 @@ int main() {
     root->right->right->left = new TreeNode(9);
     root->right->right->right = new TreeNode(10);
 
-    // Perform iterative preorder traversal
     vector<int> preOrder = preOrderTrav(root);
 
-    // Print the result
     cout << "The preorder traversal is : ";
     for (int i = 0; i < preOrder.size(); i++) {
         cout << preOrder[i] << " ";

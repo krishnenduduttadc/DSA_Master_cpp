@@ -6,7 +6,6 @@ struct Node {
     Node *left, *right;
 };
 
-// Create a new node
 Node* newNode(int item) {
     Node* temp = new Node;
     temp->key = item;
@@ -14,7 +13,6 @@ Node* newNode(int item) {
     return temp;
 }
 
-// Insert a node
 Node* insert(Node* root, int x) {
     if (root == nullptr) {
         return newNode(x);
@@ -29,7 +27,6 @@ Node* insert(Node* root, int x) {
     return root;
 }
 
-// Inorder traversal
 void inorder(Node* root) {
     if (root != nullptr) {
         inorder(root->left);
@@ -38,7 +35,6 @@ void inorder(Node* root) {
     }
 }
 
-// Find the in-order successor (smallest in the right subtree)
 Node* getSuccessor(Node* root) {
     Node* curr = root;
     while (curr != nullptr && curr->left != nullptr) {
@@ -47,7 +43,6 @@ Node* getSuccessor(Node* root) {
     return curr;
 }
 
-// Delete a node
 Node* deleteNode(Node* root, int x) {
     if (root == nullptr) {
         return root;

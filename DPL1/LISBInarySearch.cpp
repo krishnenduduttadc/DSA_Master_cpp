@@ -4,7 +4,6 @@
 
 using namespace std;
 
-// Function to calculate Length of Longest Increasing Subsequence using Binary Search
 int lengthOfLIS(vector<int>& nums) {
     int n = nums.size();
     if (n == 0) return 0;
@@ -30,7 +29,6 @@ int lengthOfLIS(vector<int>& nums) {
 }
 
 int main() {
-    // Test cases
     vector<int> nums1 = {10, 9, 2, 5, 3, 7, 101, 18};
     cout << "Length of LIS for nums1: " << lengthOfLIS(nums1) << endl;
 

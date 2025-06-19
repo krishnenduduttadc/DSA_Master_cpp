@@ -6,9 +6,9 @@ using namespace std;
 
 void printMinSteps(vector<int> arr) {
     int n = arr.size();
-    vector<int> dp(n + 1, INT_MAX); // Use INT_MAX for initialization
+    vector<int> dp(n + 1, INT_MAX); 
 
-    dp[n] = 0; // Base case: 0 steps needed from the end
+    dp[n] = 0; 
 
     for (int i = n - 1; i >= 0; i--) {
         if (arr[i] > 0) {
@@ -24,7 +24,6 @@ void printMinSteps(vector<int> arr) {
         }
     }
 
-    // Printing the dp array
     for (int i = 0; i < dp.size(); i++) {
         cout << " " << dp[i];
     }

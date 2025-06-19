@@ -3,7 +3,6 @@
 #include <vector>
 using namespace std;
 
-// Node structure for the binary tree
 struct Node {
     int key;
     Node* left;
@@ -15,7 +14,6 @@ struct Node {
     }
 };
 
-// Function to perform iterative postorder traversal
 vector<int> postOrderTraversal(Node* root) {
     vector<int> postOrder;
     if (root == nullptr)

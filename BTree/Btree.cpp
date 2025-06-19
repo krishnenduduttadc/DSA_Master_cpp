@@ -9,7 +9,6 @@ struct BTreeNode {
     bool leaf;
 };
 
-// Function prototypes
 BTreeNode* createNode(int t, bool leaf);
 void traverse(BTreeNode* root);
 BTreeNode* search(BTreeNode* root, int k);
@@ -18,7 +17,6 @@ void insertNonFull(BTreeNode* node, int k);
 void splitChild(BTreeNode* parent, int i, BTreeNode* child);
 void splitRoot();
 
-// Global B-tree variables
 BTreeNode* root = nullptr;
 int t_global;
 
@@ -119,7 +117,6 @@ void splitChild(BTreeNode* parent, int i, BTreeNode* y) {
     parent->n++;
 }
 
-// Main function
 int main() {
     t_global = 3; // Set minimum degree
 

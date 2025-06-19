@@ -1,7 +1,6 @@
 #include <iostream>
 using namespace std;
 
-// Define Node structure for BST
 struct Node
 {
     int data;
@@ -15,7 +14,6 @@ struct Node
     }
 };
 
-// Function to calculate size of BST
 int size(Node *node)
 {
     if (node == nullptr)
@@ -27,7 +25,6 @@ int size(Node *node)
     return ls + rs + 1;
 }
 
-// Function to calculate sum of all nodes in BST
 int sum(Node *node)
 {
     if (node == nullptr)
@@ -39,7 +36,6 @@ int sum(Node *node)
     return ls + rs + node->data;
 }
 
-// Function to find maximum value in BST
 int max(Node *node)
 {
     if (node->right != nullptr)
@@ -52,7 +48,6 @@ int max(Node *node)
     }
 }
 
-// Function to find minimum value in BST
 int min(Node *node)
 {
     if (node->left != nullptr)
@@ -65,7 +60,6 @@ int min(Node *node)
     }
 }
 
-// Function to search for a value in BST
 bool find(Node *node, int data)
 {
     if (node == nullptr)
@@ -86,7 +80,6 @@ bool find(Node *node, int data)
     }
 }
 
-// Function to display BST (Pre-order traversal)
 void display(Node *node)
 {
     if (node == nullptr)
@@ -100,7 +93,6 @@ void display(Node *node)
 
 int main()
 {
-    // Hardcode the binary search tree
     Node *node12 = new Node(12);
     Node *node30 = new Node(30);
     Node *node37 = new Node(37, node30);
@@ -110,7 +102,6 @@ int main()
     Node *node75 = new Node(75, node62, node87);
     Node *root = new Node(50, node25, node75);
 
-    // Perform operations on the BST
     int sizeOfTree = size(root);
     int sumOfTree = sum(root);
     int maxValue = max(root);
@@ -118,14 +109,12 @@ int main()
     int dataToFind = 6;
     bool isFound = find(root, dataToFind);
 
-    // Print the results
     cout << "Size of BST: " << sizeOfTree << endl;
     cout << "Sum of BST: " << sumOfTree << endl;
     cout << "Maximum value in BST: " << maxValue << endl;
     cout << "Minimum value in BST: " << minValue << endl;
     cout << "Is " << dataToFind << " found in BST? " << (isFound ? "Yes" : "No") << endl;
 
-    // Display the BST
     cout << "BST Structure:" << endl;
     display(root);
 

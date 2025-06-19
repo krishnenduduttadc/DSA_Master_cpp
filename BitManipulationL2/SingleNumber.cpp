@@ -27,7 +27,6 @@ int singleNumber(vector<int>& nums) {
 }
 
 int main() {
-    // Test case
     vector<int> nums = {2, 2, 3, 2};
     int result = singleNumber(nums);
     cout << "Single number in nums: " << result << endl; // Expected output: 3

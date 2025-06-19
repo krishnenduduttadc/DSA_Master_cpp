@@ -4,7 +4,6 @@
 
 using namespace std;
 
-// TreeNode structure definition
 struct TreeNode {
     int key;
     TreeNode* left;
@@ -12,8 +11,7 @@ struct TreeNode {
     TreeNode(int x) : key(x), left(nullptr), right(nullptr) {}
 };
 
-// Function to perform zigzag level order traversal
-vector<std::vector<int>> zigzagLevelOrder(TreeNode* root) {
+vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
     vector<vector<int>> wrapList;
     if (root == nullptr) return wrapList;
 
@@ -50,17 +48,16 @@ int main() {
     root->right->left = new TreeNode(15);
     root->right->right = new TreeNode(7);
 
-    std::vector<std::vector<int>> ans = zigzagLevelOrder(root);
+    vector<vector<int>> ans = zigzagLevelOrder(root);
 
-    std::cout << "Zig Zag Traversal of Binary Tree: " << std::endl;
+    cout << "Zig Zag Traversal of Binary Tree: " << endl;
     for (size_t i = 0; i < ans.size(); i++) {
         for (size_t j = 0; j < ans[i].size(); j++) {
             cout << ans[i][j] << " ";
         }
-        cout << std::endl;
+        cout << endl;
     }
 
-    // Deallocating memory
     delete root->right->right;
     delete root->right->left;
     delete root->left;

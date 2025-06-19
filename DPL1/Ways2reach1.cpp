@@ -17,9 +17,7 @@ int climb(int n){
 
 
 int main() {
-    /* Enter your code here. Read input from STDIN. Print output to STDOUT */   
-    int n;
-    cin>>n;
+    int n=10;  
     int res=climb(n);
     cout<<res;
     return 0;

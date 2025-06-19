@@ -14,10 +14,8 @@ int main() {
         {7, 2, 2, 4}
     };
 
-    // Initialize dp array
     vector<vector<int>> dp(n, vector<int>(m, 0));
 
-    // Fill dp array from bottom-right to top-left
     for (int i = n - 1; i >= 0; i--) {
         for (int j = m - 1; j >= 0; j--) {
             if (i == n - 1 && j == m - 1) {
@@ -32,7 +30,6 @@ int main() {
         }
     }
 
-    // Print the minimum cost path sum
     cout << dp[0][0] << endl;
 
     return 0;

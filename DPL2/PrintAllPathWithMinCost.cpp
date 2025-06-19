@@ -19,7 +19,6 @@ void printAllPaths(vector<vector<int>>& arr) {
     int m = arr.size();
     int n = arr[0].size();
 
-    // dp array to store minimum cost to reach each cell
     vector<vector<int>> dp(m, vector<int>(n, 0));
 
     // Initialize dp table
@@ -36,10 +35,8 @@ void printAllPaths(vector<vector<int>>& arr) {
         }
     }
 
-    // Minimum cost to reach the top-left corner
     cout << dp[0][0] << endl;
 
-    // Queue to perform BFS
     queue<Pair> q;
     q.push(Pair("", 0, 0));
 

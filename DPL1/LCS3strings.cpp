@@ -4,7 +4,6 @@
 
 using namespace std;
 
-// Recursive function for LCS with memoization
 int LCS(string &s1, int i, string &s2, int j, string &s3, int k, vector<vector<vector<int>>> &dp) {
     if (i == -1 || j == -1 || k == -1)
         return 0;
@@ -25,20 +24,17 @@ int LCS(string &s1, int i, string &s2, int j, string &s3, int k, vector<vector<v
     }
 }
 
-// Wrapper function to prepare DP array and call the recursive LCS function
 int LCSof3(string A, string B, string C) {
     int n1 = A.length();
     int n2 = B.length();
     int n3 = C.length();
 
-    // Create a 3D dp array and initialize it with -1
     vector<vector<vector<int>>> dp(n1, vector<vector<int>>(n2, vector<int>(n3, -1)));
 
     return LCS(A, n1 - 1, B, n2 - 1, C, n3 - 1, dp);
 }
 
 int main() {
-    // Test case
     string A = "geeks";
     string B = "geeksfor";
     string C = "geeksforgeeks";

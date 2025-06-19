@@ -5,13 +5,10 @@ using namespace std;
 int solution(const string& str) {
     int n = str.size();
     
-    // Dynamic programming table
     int dp[n][n];
-    // Arrays to store previous and next occurrences
     int prev[n];
     int next[n];
     
-    // Initialize prev and next arrays
     for (int i = 0; i < n; i++) {
         prev[i] = -1;
         next[i] = -1;
@@ -19,7 +16,6 @@ int solution(const string& str) {
     
     unordered_map<char, int> map;
     
-    // Fill the prev array
     for (int i = 0; i < n; i++) {
         char ch = str[i];
         if (map.find(ch) != map.end()) {
@@ -30,7 +26,6 @@ int solution(const string& str) {
     
     map.clear();
     
-    // Fill the next array
     for (int i = n - 1; i >= 0; i--) {
         char ch = str[i];
         if (map.find(ch) != map.end()) {
@@ -39,7 +34,6 @@ int solution(const string& str) {
         map[ch] = i;
     }
     
-    // Fill the dp array
     for (int g = 0; g < n; g++) {
         for (int i = 0, j = g; j < n; i++, j++) {
             if (g == 0) {

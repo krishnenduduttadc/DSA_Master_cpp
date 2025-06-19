@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 using namespace std;
-// TreeNode structure definition
+
 struct TreeNode {
     int key;
     TreeNode* left;
@@ -13,7 +13,6 @@ struct TreeNode {
     }
 };
 
-// Function to perform Morris preorder traversal
 vector<int> preorderTraversal(TreeNode* root) {
     vector<int> preorder;
     TreeNode* cur = root;
@@ -43,7 +42,6 @@ vector<int> preorderTraversal(TreeNode* root) {
 }
 
 int main() {
-    // Constructing the binary tree
     TreeNode* root = new TreeNode(1);
     root->left = new TreeNode(2);
     root->right = new TreeNode(3);
@@ -51,17 +49,14 @@ int main() {
     root->left->right = new TreeNode(5);
     root->left->right->right = new TreeNode(6);
 
-    // Performing Morris preorder traversal
     vector<int> preorder = preorderTraversal(root);
 
-    // Printing the result
     cout << "The Preorder Traversal is: ";
     for (int i = 0; i < preorder.size(); i++) {
         cout << preorder[i] << " ";
     }
     cout << endl;
 
-    // Deallocating memory
     delete root->left->right->right;
     delete root->left->right;
     delete root->left;

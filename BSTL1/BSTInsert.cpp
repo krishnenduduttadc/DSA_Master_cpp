@@ -13,7 +13,6 @@ struct Node {
     Node(int item) : key(item), left(nullptr), right(nullptr) {}
 };
 
-// BST Operations
 Node* insert(Node* root, int key) {
     if (root == nullptr) return new Node(key);
     if (key < root->key)

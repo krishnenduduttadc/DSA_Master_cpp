@@ -10,7 +10,6 @@ bool sol(string str, string pattern) {
 
     dp[m][n] = true; // Base case: both pattern and string are empty
 
-    // Fill the dp table
     for (int i = m - 1; i >= 0; i--) {
         for (int j = n - 1; j >= 0; j--) {
             if (pattern[i] == '*') {

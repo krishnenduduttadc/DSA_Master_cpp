@@ -4,7 +4,6 @@
 
 using namespace std;
 
-// Definition of a Node in the Binary Tree
 struct Node {
     int val;
     Node* left;
@@ -17,7 +16,6 @@ struct Node {
     }
 };
 
-// Function to calculate the height of the tree using BFS (level-order traversal)
 int getHeight(Node* root) {
     if (root == nullptr) return 0;
     
@@ -39,7 +37,6 @@ int getHeight(Node* root) {
     return height;
 }
 
-// Function to count the number of nodes in the tree using BFS (level-order traversal)
 int getNodeCount(Node* root) {
     if (root == nullptr) return 0;
     
@@ -58,7 +55,6 @@ int getNodeCount(Node* root) {
     return count;
 }
 
-// Function to find the maximum value in the tree using BFS (level-order traversal)
 int getMax(Node* root) {
     if (root == nullptr) throw invalid_argument("Tree is empty");
     
@@ -77,7 +73,6 @@ int getMax(Node* root) {
     return maxValue;
 }
 
-// Function to find the minimum value in the tree using BFS (level-order traversal)
 int getMin(Node* root) {
     if (root == nullptr) throw invalid_argument("Tree is empty");
     
@@ -97,14 +92,12 @@ int getMin(Node* root) {
 }
 
 int main() {
-    // Constructing the example binary tree
     Node* root = new Node(1);
     root->left = new Node(2);
     root->right = new Node(3);
     root->left->left = new Node(4);
     root->left->right = new Node(5);
     
-    // Using the functions to demonstrate the functionality
     cout << "Height of the tree: " << getHeight(root) << endl;
     cout << "Number of nodes in the tree: " << getNodeCount(root) << endl;
     

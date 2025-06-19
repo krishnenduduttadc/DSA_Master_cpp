@@ -8,7 +8,6 @@ void LIS(const vector<int>& arr) {
     vector<int> dp(n, 1); // dp[i] will store the length of LIS ending at index i
     int omax = 1; // To store the overall maximum length of LIS
 
-    // Compute the length of the Longest Increasing Subsequence
     for (int i = 1; i < n; i++) {
         int max_len = 0;
         for (int j = 0; j < i; j++) {
@@ -26,7 +25,6 @@ void LIS(const vector<int>& arr) {
 
     cout << omax << " "; // Print the length of the LIS
 
-    // Printing the LIS length values (optional)
     for (int i = 0; i < n; i++) {
         cout << dp[i] << " ";
     }

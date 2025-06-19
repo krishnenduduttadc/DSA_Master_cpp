@@ -7,12 +7,10 @@ int LongestPalindromicSubstring(string str) {
     bool dp[n][n];
     int len = 0;
 
-    // Initialize dp array
     for (int i = 0; i < n; i++) {
         dp[i][i] = true;
     }
 
-    // Check for substrings of length 2
     for (int i = 0; i < n - 1; i++) {
         if (str[i] == str[i + 1]) {
             dp[i][i + 1] = true;
@@ -22,7 +20,6 @@ int LongestPalindromicSubstring(string str) {
         }
     }
 
-    // Check for substrings of length > 2
     for (int g = 2; g < n; g++) {
         for (int i = 0, j = g; j < n; i++, j++) {
             if (str[i] == str[j] && dp[i + 1][j - 1]) {

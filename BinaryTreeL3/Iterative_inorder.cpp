@@ -2,7 +2,6 @@
 #include <vector>
 #include <stack>
 using namespace std;
-// TreeNode structure definition
 struct TreeNode {
     int key;
     TreeNode* left;
@@ -14,7 +13,6 @@ struct TreeNode {
     }
 };
 
-// Function to perform iterative inorder traversal
 vector<int> inOrderTrav(TreeNode* root) {
     vector<int> inOrder;
     stack<TreeNode*> s;
@@ -36,7 +34,6 @@ vector<int> inOrderTrav(TreeNode* root) {
 }
 
 int main() {
-    // Constructing the binary tree
     TreeNode* root = new TreeNode(1);
     root->left = new TreeNode(2);
     root->right = new TreeNode(3);
@@ -48,10 +45,8 @@ int main() {
     root->right->right->left = new TreeNode(9);
     root->right->right->right = new TreeNode(10);
 
-    // Perform iterative inorder traversal
     vector<int> inOrder = inOrderTrav(root);
 
-    // Print the result
     cout << "The inorder traversal is : ";
     for (int i = 0; i < inOrder.size(); i++) {
         cout << inOrder[i] << " ";

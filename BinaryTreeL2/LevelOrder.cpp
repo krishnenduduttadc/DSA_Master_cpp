@@ -3,7 +3,6 @@
 #include <queue>
 using namespace std;
 
-// Definition for a binary tree node.
 struct TreeNode {
     int val;
     TreeNode *left;
@@ -15,7 +14,6 @@ struct TreeNode {
     }
 };
 
-// Function to perform level order traversal of the binary tree
 vector<vector<int>> levelOrder(TreeNode* root) {
     vector<vector<int>> result;
     if (!root) {
@@ -33,10 +31,8 @@ vector<vector<int>> levelOrder(TreeNode* root) {
             TreeNode* node = q.front();
             q.pop();
 
-            // Add current node's value to the current level
             level.push_back(node->val);
 
-            // Enqueue left and right children if they exist
             if (node->left) {
                 q.push(node->left);
             }
@@ -51,14 +47,12 @@ vector<vector<int>> levelOrder(TreeNode* root) {
     return result;
 }
 
-// Utility function to create a new node
 TreeNode* newNode(int key) {
     TreeNode* node = new TreeNode(key);
     return node;
 }
 
 int main() {
-    // Constructing the example binary tree
     TreeNode* root = newNode(1);
     root->left = newNode(2);
     root->right = newNode(3);
@@ -67,10 +61,8 @@ int main() {
     root->right->left = newNode(6);
     root->right->right = newNode(7);
 
-    // Perform level order traversal
     vector<vector<int>> result = levelOrder(root);
 
-    // Print the level order traversal of the binary tree
     cout << "Level order traversal of the binary tree:" << endl;
     for (const auto& level : result) {
         for (int val : level) {

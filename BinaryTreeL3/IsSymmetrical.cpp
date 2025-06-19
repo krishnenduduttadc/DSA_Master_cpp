@@ -1,7 +1,6 @@
 #include <iostream>
 #include <queue> // for queue
 using namespace std;
-// Node structure definition
 struct TreeNode {
     int key;
     TreeNode* left;
@@ -13,14 +12,12 @@ struct TreeNode {
     }
 };
 
-// Function to check if the tree is symmetric
 bool isSymmetricHelp(TreeNode* left, TreeNode* right);
 
 bool isSymmetric(TreeNode* root) {
     return root == nullptr || isSymmetricHelp(root->left, root->right);
 }
 
-// Helper function to recursively check symmetry
 bool isSymmetricHelp(TreeNode* left, TreeNode* right) {
     if (left == nullptr || right == nullptr)
         return left == right;
@@ -29,13 +26,11 @@ bool isSymmetricHelp(TreeNode* left, TreeNode* right) {
     return isSymmetricHelp(left->left, right->right) && isSymmetricHelp(left->right, right->left);
 }
 
-// Function to create a new node
 TreeNode* newNode(int key) {
     return new TreeNode(key);
 }
 
 int main() {
-    // Constructing the tree
     TreeNode* root = newNode(1);
     root->left = newNode(2);
     root->right = newNode(3);
@@ -43,7 +38,6 @@ int main() {
     root->left->right = newNode(5);
     root->left->left->left = newNode(6);
 
-    // Checking if the tree is symmetric
     bool isSym = isSymmetric(root);
     if (isSym)
         cout << "The tree is symmetric." << endl;

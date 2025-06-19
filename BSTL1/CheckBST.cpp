@@ -8,7 +8,6 @@ struct Node {
     Node* right;
 };
 
-// Create a new node
 Node* createNode(int key) {
     Node* node = new Node;
     node->key = key;
@@ -17,7 +16,6 @@ Node* createNode(int key) {
     return node;
 }
 
-// Efficient BST check using min/max range
 bool isBST(Node* root, int minVal, int maxVal) {
     if (root == nullptr)
         return true;

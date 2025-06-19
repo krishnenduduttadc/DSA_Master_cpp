@@ -2,7 +2,6 @@
 #include <queue>
 using namespace std;
 
-// Definition for a binary tree node.
 struct TreeNode {
     int val;
     TreeNode *left;
@@ -14,7 +13,6 @@ struct TreeNode {
     }
 };
 
-// Function to calculate the maximum depth of the binary tree
 int levelOrder(TreeNode* root) {
     if (!root) {
         return 0;
@@ -44,14 +42,12 @@ int levelOrder(TreeNode* root) {
     return depth;
 }
 
-// Utility function to create a new node
 TreeNode* newNode(int key) {
     TreeNode* node = new TreeNode(key);
     return node;
 }
 
 int main() {
-    // Constructing the example binary tree
     TreeNode* root = newNode(1);
     root->left = newNode(2);
     root->right = newNode(3);
@@ -60,10 +56,8 @@ int main() {
     root->right->left = newNode(6);
     root->right->right = newNode(7);
 
-    // Calculate the maximum depth of the tree
     int depth = levelOrder(root);
 
-    // Print the maximum depth of the binary tree
     cout << "Maximum depth of the binary tree: " << depth << endl;
 
     return 0;

@@ -44,7 +44,6 @@ int findMaxAndPair(vector<int>& arr) {
 }
 
 int main() {
-    // Example input
     vector<int> arr = {2, 4, 5, 7, 9};
 
     int result = findMaxAndPair(arr);

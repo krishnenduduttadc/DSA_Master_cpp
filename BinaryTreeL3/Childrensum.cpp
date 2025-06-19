@@ -55,7 +55,6 @@ int main() {
 
     changeTree(root);
 
-    // Display the modified tree
     cout << "Modified Tree:" << endl;
     cout << "Root: " << root->key << endl;
     cout << "Left: " << root->left->key << ", Left Left: " << root->left->left->key << ", Left Right: " << root->left->right->key << endl;

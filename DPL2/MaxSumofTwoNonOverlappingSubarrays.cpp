@@ -9,7 +9,6 @@ int solution(vector<int>& arr, int x, int y) {
     vector<int> dp2(n);
     int sum = 0;
 
-    // Calculate dp1 array
     for (int i = 0; i < n; i++) {
         if (i < x) {
             sum += arr[i];
@@ -21,7 +20,6 @@ int solution(vector<int>& arr, int x, int y) {
     }
 
     sum = 0;
-    // Calculate dp2 array
     for (int i = n - 1; i >= 0; i--) {
         if (i + y >= n) {
             sum += arr[i];
@@ -33,7 +31,6 @@ int solution(vector<int>& arr, int x, int y) {
     }
 
     int ans = 0;
-    // Calculate maximum sum of two non-overlapping subarrays
     for (int i = x - 1; i < n - y; i++) {
         ans = max(ans, dp1[i] + dp2[i + 1]);
     }
@@ -44,7 +41,6 @@ int solution(vector<int>& arr, int x, int y) {
     dp2.resize(n);
     sum = 0;
 
-    // Calculate dp1 array (for the reverse case)
     for (int i = 0; i < n; i++) {
         if (i < y) {
             sum += arr[i];
@@ -56,7 +52,6 @@ int solution(vector<int>& arr, int x, int y) {
     }
 
     sum = 0;
-    // Calculate dp2 array (for the reverse case)
     for (int i = n - 1; i >= 0; i--) {
         if (i + x >= n) {
             sum += arr[i];
@@ -67,7 +62,6 @@ int solution(vector<int>& arr, int x, int y) {
         }
     }
 
-    // Calculate maximum sum of two non-overlapping subarrays (for the reverse case)
     for (int i = y - 1; i < n - x; i++) {
         ans = max(ans, dp1[i] + dp2[i + 1]);
     }

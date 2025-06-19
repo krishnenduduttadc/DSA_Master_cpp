@@ -5,7 +5,6 @@ using namespace std;
 int sol(int arr[], int n) {
     int dp[n][n];
 
-    // Initialize the dp array with zeros
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
             dp[i][j] = 0;

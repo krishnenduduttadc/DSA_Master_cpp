@@ -3,7 +3,6 @@
 #include <algorithm>
 using namespace std;
 
-// Function to compute the minimum path sum
 int minPathSum(vector<vector<int>>& grid) {
     int m = grid.size();
     int n = grid[0].size();
@@ -26,7 +25,6 @@ int minPathSum(vector<vector<int>>& grid) {
 }
 
 int main() {
-    // Test cases
     vector<vector<int>> grid1 = {
         {1, 3, 1},
         {1, 5, 1},

@@ -1,7 +1,6 @@
 #include <iostream>
 #include <algorithm> // for max function
 
-// TreeNode structure definition
 struct TreeNode {
     int val;
     TreeNode* left;
@@ -13,10 +12,8 @@ struct TreeNode {
     }
 };
 
-// Global variable to count cameras
 int cameras = 0;
 
-// Function to find the minimum number of cameras
 int minCamerasInBT(TreeNode* root) {
     if (root == nullptr) return 1; // No need for camera
 
@@ -33,13 +30,11 @@ int minCamerasInBT(TreeNode* root) {
     return -1; // Not covered
 }
 
-// Wrapper function to start the camera placement
 int minCameras(TreeNode* root) {
     if (minCamerasInBT(root) == -1) cameras++;
     return cameras;
 }
 
-// Main function
 int main() {
     TreeNode* root = new TreeNode(1);
     root->left = new TreeNode(2);
@@ -52,7 +47,6 @@ int main() {
     int ans = minCameras(root);
     std::cout << "Minimum number of cameras needed: " << ans << std::endl;
 
-    // Deallocating memory to avoid memory leaks
     delete root->right->right;
     delete root->right->left;
     delete root->left->right;

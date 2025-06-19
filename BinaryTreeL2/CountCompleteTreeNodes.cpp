@@ -1,7 +1,6 @@
 #include <iostream>
 #include <cmath> // For pow function
-
-// TreeNode structure definition
+using namespace std;
 struct TreeNode {
     int val;
     TreeNode* left;
@@ -13,7 +12,6 @@ struct TreeNode {
     }
 };
 
-// Function to calculate the height of the tree (left or right)
 int getHeight(TreeNode* node, bool isLeft) {
     int height = 0;
     while (node != nullptr) {
@@ -23,7 +21,6 @@ int getHeight(TreeNode* node, bool isLeft) {
     return height;
 }
 
-// Function to count nodes in a complete binary tree
 int countNodes(TreeNode* root) {
     if (root == nullptr) return 0;
 
@@ -31,14 +28,13 @@ int countNodes(TreeNode* root) {
     int rightHeight = getHeight(root, false);
 
     if (leftHeight == rightHeight) {
-        return std::pow(2, leftHeight) - 1;
+        return pow(2, leftHeight) - 1;
     }
 
     return 1 + countNodes(root->left) + countNodes(root->right);
 }
 
 int main() {
-    // Constructing the tree
     TreeNode* root = new TreeNode(1);
     root->left = new TreeNode(2);
     root->right = new TreeNode(3);
@@ -46,10 +42,8 @@ int main() {
     root->left->right = new TreeNode(5);
     root->right->left = new TreeNode(6);
 
-    // Calling countNodes function and printing the result
-    std::cout << "Number of nodes: " << countNodes(root) << std::endl;  // Output: 6
+    cout << "Number of nodes: " << countNodes(root) << endl;  // Output: 6
 
-    // Deallocating memory to avoid memory leaks
     delete root->right->left;
     delete root->left->right;
     delete root->left->left;

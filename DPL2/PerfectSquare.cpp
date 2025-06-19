@@ -18,7 +18,6 @@ int main() {
         }
     }
 
-    // Output the dp array
     for (int i = 0; i <= n; i++) {
         cout << dp[i] << " ";
     }

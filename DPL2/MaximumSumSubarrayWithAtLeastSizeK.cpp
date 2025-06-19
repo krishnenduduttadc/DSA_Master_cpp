@@ -7,7 +7,6 @@ int MaximumSumSubarrayWithAtLeastSizeK(vector<int>& arr, int k) {
     int csum = arr[0];
     vector<int> maxsum(arr.size(), 0);
 
-    // Compute maximum sum subarray ending at each index
     for (int i = 1; i < arr.size(); i++) {
         if (csum > 0) {
             csum += arr[i];
@@ -25,7 +24,6 @@ int MaximumSumSubarrayWithAtLeastSizeK(vector<int>& arr, int k) {
         ans = exactK;
     }
 
-    // Sliding window to find maximum sum subarray of length at least k
     for (int i = k; i < arr.size(); i++) {
         exactK = exactK + arr[i] - arr[i - k];
         if (exactK > ans) {
