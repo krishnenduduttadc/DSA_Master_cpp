@@ -3,39 +3,36 @@
 
 using namespace std;
 
-// Function to find the length of the Longest Common Substring (LCS)
 int lcs(string &s1, string &s2){
     int n = s1.size();
     int m = s2.size();
     
-    // Create a 2D DP table with dimensions (n+1) x (m+1)
 vector<vector<int>> dp(n+1, vector<int>(m+1, 0));
 
-    int ans = 0; // Initialize the answer variable
+    int ans = 0; 
 
     for(int i = 1; i <= n; i++){
         for(int j = 1; j <= m; j++){
             if(s1[i-1] == s2[j-1]){
-                int val = 1 + dp[i-1][j-1]; // Characters match, increment substring length
-                dp[i][j] = val; // Update the DP table
-                ans = max(ans, val); // Update the maximum substring length found so far
+                int val = 1 + dp[i-1][j-1]; 
+                dp[i][j] = val; 
+                ans = max(ans, val); 
             }
             else
-                dp[i][j] = 0; // Characters don't match, substring length becomes 0
+                dp[i][j] = 0;
         }
     }
     
-    return ans; // Return the length of the Longest Common Substring
+    return ans; 
 }
 
 int main() {
     string s1 = "abcjklp";
     string s2 = "acjkp";
 
-    // Call the function to find and output the length of the Longest Common Substring
     cout << "The Length of Longest Common Substring is " << lcs(s1, s2) << endl;
 
-    return 0; // Return 0 to indicate successful program execution
+    return 0; 
 }
 
 

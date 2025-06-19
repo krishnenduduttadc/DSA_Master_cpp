@@ -46,7 +46,6 @@ string shortestSupersequence(string s1, string s2){
     }
   }
   
-  //Adding Remaing Characters - Only one of the below two while loops will run 
   
   while(i>0){
       ans += s1[i-1];
