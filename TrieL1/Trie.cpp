@@ -2,14 +2,12 @@
 #include <string>
 using namespace std;
 
-// Define TrieNode structure
 struct TrieNode {
     char data;
     bool isTerminating;
     TrieNode* children[26];
 };
 
-// Create a new TrieNode
 TrieNode* createNode(char data) {
     TrieNode* node = new TrieNode;
     node->data = data;
@@ -20,7 +18,6 @@ TrieNode* createNode(char data) {
     return node;
 }
 
-// Add a word to the Trie
 void add(TrieNode* root, const string& word) {
     if (word.length() == 0) {
         root->isTerminating = true;
@@ -34,7 +31,6 @@ void add(TrieNode* root, const string& word) {
     add(root->children[childIndex], word.substr(1));
 }
 
-// Search for a word in the Trie
 bool search(TrieNode* root, const string& word) {
     if (word.length() == 0) {
         return root->isTerminating;
@@ -49,14 +45,9 @@ bool search(TrieNode* root, const string& word) {
 }
 
 int main() {
-    // Initialize the Trie root
     TrieNode* root = createNode('\0');
-
-    // Add words
     add(root, "this");
     add(root, "news");
-
-    // Search words
     cout << boolalpha;
     cout << search(root, "news") << endl; // Output: true
     cout << search(root, "test") << endl; // Output: false

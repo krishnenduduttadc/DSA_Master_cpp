@@ -17,7 +17,6 @@ bool isPalindrome(string s) {
 }
 
 void solution(string str) {
-    // Write your code here
     for (int i = 0; i < str.length(); i++) {
         for (int j = i + 1; j <= str.length(); j++) {
             string ss = str.substr(i, j - i);

@@ -34,10 +34,7 @@ void swap(int &a, int &b)
 
 int main()
 {
-    // Hardcoded input vector
     vector<int> arr = {0, 1, 2, 0, 1, 2, 1, 0, 2, 1};
-
-    // Print the original array
     cout << "Original array: ";
     for (int num : arr)
     {
@@ -45,12 +42,7 @@ int main()
     }
     cout << endl;
 
-    // Create an instance of Sort012 class
-
-    // Call sort012 to sort the array
     sort012(arr);
-
-    // Print the sorted array
     cout << "Sorted array: ";
     for (int num : arr)
     {

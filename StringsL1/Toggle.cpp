@@ -14,10 +14,7 @@ void toggle(char ch[]) {
 
 int main() {
     char st[] = "kriSh";
-    
     toggle(st);
-
     cout << st << endl; // Output the modified string
-
     return 0;
 }

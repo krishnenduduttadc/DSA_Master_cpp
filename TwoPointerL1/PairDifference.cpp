@@ -27,14 +27,9 @@ bool findPair(int arr[], int size, int n)
 
 int main()
 {
-    // Hardcoded input array and target difference
     int arr[] = {1, 8, 30, 40, 100};
     int n = 60;
-
-    // Call findPair to check if the pair exists
     bool result = findPair(arr, sizeof(arr) / sizeof(arr[0]), n);
-
-    // Print the result
     cout << "Pair with difference " << n << " exists: " << boolalpha << result << endl;
 
     return 0;

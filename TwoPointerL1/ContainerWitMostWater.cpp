@@ -22,13 +22,8 @@ int maxArea(vector<int> &height)
 int main()
 {
 
-    // Hardcoded input array
     vector<int> height = {1, 8, 6, 2, 5, 4, 8, 3, 7}; // Example input
-
-    // Calling maxArea to find the maximum area of water that can be contained
     int maxWater = maxArea(height);
-
-    // Printing the maximum area
     cout << "Maximum area of water: " << maxWater << endl;
 
     return 0;
