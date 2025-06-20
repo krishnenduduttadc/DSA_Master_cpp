@@ -42,13 +42,11 @@ int b1(vector<vector<int>>& matrix, int target) {
 }
 
 bool search(vector<vector<int>>& matrix, int target) {
-    // Binary search to find the row where target might be present
     int row = b1(matrix, target);
     if (row == -1) {
         return false;
     }
 
-    // Binary search to find the target in the selected row
     return b(matrix, row, target);
 }
 

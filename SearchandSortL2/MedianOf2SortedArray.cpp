@@ -11,7 +11,6 @@ double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
 
     int i = 0, j = 0, k = 0;
 
-    // Merge both arrays into one sorted array
     while (i < m && j < n) {
         if (nums1[i] < nums2[j]) {
             merged[k] = nums1[i];
@@ -23,21 +22,18 @@ double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
         k++;
     }
 
-    // Copy remaining elements from nums1, if any
     while (i < m) {
         merged[k] = nums1[i];
         i++;
         k++;
     }
 
-    // Copy remaining elements from nums2, if any
     while (j < n) {
         merged[k] = nums2[j];
         j++;
         k++;
     }
 
-    // Calculate median based on the length of merged array
     double median = 0.0;
     int mid = totalLength / 2;
     if (totalLength % 2 == 1) {

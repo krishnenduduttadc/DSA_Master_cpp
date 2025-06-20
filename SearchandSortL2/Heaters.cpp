@@ -3,7 +3,6 @@
 #include <algorithm>
 using namespace std;
 
-// Function to find the minimum radius
 int findRadius(vector<int>& houses, vector<int>& heaters) {
     if (houses.empty()) return 0;
 
@@ -40,17 +39,14 @@ int findRadius(vector<int>& houses, vector<int>& heaters) {
     return radius;
 }
 
-// Utility function to test and print the result
 void solve(vector<int>& houses, vector<int>& heaters) {
     cout << findRadius(houses, heaters) << endl;
 }
 
 int main() {
-    // Hardcoded input
     vector<int> houses = {3, 9, 2, 4, 11};
     vector<int> heaters = {1, 8, 5};
 
-    // Call the solve function to find and print the minimum radius
     solve(houses, heaters);
 
     return 0;

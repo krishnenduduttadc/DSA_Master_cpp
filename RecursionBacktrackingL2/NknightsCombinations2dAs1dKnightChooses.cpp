@@ -3,7 +3,6 @@
 using namespace std;
 
 bool IsKnightSafe(vector<vector<bool>>& chess, int i, int j) {
-    // Check all possible knight moves
     if (i - 1 >= 0 && j - 2 >= 0 && chess[i - 1][j - 2])
         return false;
     if (i - 2 >= 0 && j - 1 >= 0 && chess[i - 2][j - 1])
@@ -18,7 +17,6 @@ bool IsKnightSafe(vector<vector<bool>>& chess, int i, int j) {
 void nknights(int kpsf, int tk, vector<vector<bool>>& chess, int lcno) {
     int n = chess.size();
     if (kpsf == tk) {
-        // Print the chessboard configuration
         for (int row = 0; row < n; row++) {
             for (int col = 0; col < n; col++) {
                 cout << (chess[row][col] ? "k\t" : "-\t");
@@ -29,7 +27,6 @@ void nknights(int kpsf, int tk, vector<vector<bool>>& chess, int lcno) {
         return;
     }
 
-    // Place knights recursively
     for (int i = lcno + 1; i < n * n; i++) {
         int row = i / n;
         int col = i % n;

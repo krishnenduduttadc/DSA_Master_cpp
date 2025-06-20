@@ -22,7 +22,6 @@ void permutation(int cb, int nboxes, vector<int> arr, vector<bool> used,
 }
 
 int main() {
-    // Hardcoded test cases
     vector<vector<int>> testCases = {
         {1, 1, 2},
         {2, 2}

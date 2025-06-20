@@ -27,7 +27,6 @@ static int countZeros(vector<vector<int>> &mat)
 
 int main()
 {
-    // Hardcoded input
     int n = 5;
     vector<vector<int>> mat = {
         {0, 0, 0, 1, 1},
@@ -36,10 +35,8 @@ int main()
         {0, 1, 1, 1, 1},
         {0, 1, 1, 1, 1}};
 
-    // Call the countZeros method to count zeros
     int result = countZeros(mat);
 
-    // Print the result
     cout << "Number of zeros in the sorted matrix: " << result << endl;
 
     return 0;

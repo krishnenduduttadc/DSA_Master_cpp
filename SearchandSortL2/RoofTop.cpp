@@ -16,7 +16,6 @@ int find(int arr[], int n) {
         }
     }
 
-    // Check if the last sequence of increasing elements is the longest
     if (currentCount > maxRooftops) {
         maxRooftops = currentCount;
     }

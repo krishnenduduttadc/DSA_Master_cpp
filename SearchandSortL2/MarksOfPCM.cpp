@@ -2,7 +2,6 @@
 
 using namespace std;
 
-// Define a struct-like comparator function
 bool compare(const tuple<int, int, int>& a, const tuple<int, int, int>& b) {
     int phy1 = get<0>(a), chem1 = get<1>(a), math1 = get<2>(a);
     int phy2 = get<0>(b), chem2 = get<1>(b), math2 = get<2>(b);
@@ -16,20 +15,16 @@ bool compare(const tuple<int, int, int>& a, const tuple<int, int, int>& b) {
     }
 }
 
-// Function to custom sort marks
 void customSort(vector<int>& phy, vector<int>& chem, vector<int>& math) {
     int n = phy.size();
     vector<tuple<int, int, int>> arr;
 
-    // Combine all marks into a tuple list
     for (int i = 0; i < n; ++i) {
         arr.emplace_back(phy[i], chem[i], math[i]);
     }
 
-    // Sort using custom comparator
     sort(arr.begin(), arr.end(), compare);
 
-    // Unpack sorted values back into original arrays
     for (int i = 0; i < n; ++i) {
         tie(phy[i], chem[i], math[i]) = arr[i];
     }
@@ -41,10 +36,8 @@ int main() {
     vector<int> chem = {3, 4, 3, 7, 6};
     vector<int> math = {15, 10, 11, 13, 12};
 
-    // Call custom sort function
     customSort(phy, chem, math);
 
-    // Output sorted marks
     for (int i = 0; i < N; ++i) {
         cout << phy[i] << " " << chem[i] << " " << math[i] << endl;
     }

@@ -22,11 +22,9 @@ void findPair(vector<int>& arr, int target) {
 }
 
 int main() {
-    // Hardcoded input
     vector<int> arr = {1, 7, 3, 10, 5, 6};
     int target = 4;
 
-    // Call the findPair function to find the pair with given difference
     findPair(arr, target);
 
     return 0;

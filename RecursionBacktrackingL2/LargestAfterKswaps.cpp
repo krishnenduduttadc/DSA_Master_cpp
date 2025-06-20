@@ -13,19 +13,14 @@ void findMaximum(string str, int k) {
     
     for (int i = 0; i < n - 1; i++) {
         for (int j = i + 1; j < n; j++) {
-            // If digit at position j is greater than digit at position i, swap them
             if (str[j] > str[i]) {
                 swap(str[i], str[j]);
-
-                // Check if current string is larger than previously found max
                 if (str > max_str) {
                     max_str = str;
                 }
 
-                // Recur for k-1 swaps on the modified string
                 findMaximum(str, k - 1);
 
-                // Backtrack: Swap again to revert to original string
                 swap(str[i], str[j]);
             }
         }

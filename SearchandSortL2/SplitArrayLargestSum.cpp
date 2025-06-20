@@ -26,18 +26,15 @@ int splitArray(vector<int>& arr, int m) {
     int maxVal = 0;
     int sum = 0;
 
-    // Calculate max element and total sum
     for (int val : arr) {
         sum += val;
         maxVal = max(val, maxVal);
     }
 
-    // If m is equal to the length of the array, return the maximum element
     if (m == arr.size()) {
         return maxVal;
     }
 
-    // Binary search for the minimum possible maximum sum
     int lo = maxVal;
     int hi = sum;
     int ans = 0;
@@ -59,9 +56,7 @@ int splitArray(vector<int>& arr, int m) {
 int main() {
     vector<int> arr = {7, 2, 5, 10, 8};
     int m = 2;
-
     int ans = splitArray(arr, m);
     cout << ans << endl; // Output should be 18
-
     return 0;
 }

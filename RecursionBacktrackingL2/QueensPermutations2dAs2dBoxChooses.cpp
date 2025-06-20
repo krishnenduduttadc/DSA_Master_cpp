@@ -4,7 +4,6 @@
 using namespace std;
 
 void queensPermutations(int qpsf, int tq, int row, int col, string asf, vector<bool>& queens) {
-    // Base case: all queens placed
     if (row == tq) {
         if (qpsf == tq) {
             cout << asf << endl << endl;
@@ -24,7 +23,6 @@ void queensPermutations(int qpsf, int tq, int row, int col, string asf, vector<b
         sep = "\t";
     }
 
-    // Try placing queens in each column for the current row
     for (int i = 0; i < tq; i++) {
         if (!queens[i]) {
             queens[i] = true;
@@ -33,7 +31,6 @@ void queensPermutations(int qpsf, int tq, int row, int col, string asf, vector<b
         }
     }
 
-    // Place no queen in this position
     queensPermutations(qpsf, tq, nr, nc, asf + "-" + sep, queens);
 }
 

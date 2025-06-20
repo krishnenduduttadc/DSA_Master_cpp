@@ -22,13 +22,10 @@ int findTransition(vector<int>& arr) {
 }
 
 int main() {
-    // Hardcoded input
     vector<int> arr = {0, 0, 0, 0, 1, 1};
 
-    // Call the findTransition function to find the index of the first occurrence of 1
     int ans = findTransition(arr);
 
-    // Print the index of the first occurrence of 1
     cout << ans << endl;
 
     return 0;

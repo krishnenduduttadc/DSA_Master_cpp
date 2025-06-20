@@ -27,7 +27,6 @@ vector<int> unionOfArrays(int a[], int b[], int m, int n) {
         }
     }
 
-    // Remaining elements of a, if any
     while (i < m) {
         if (unionList.empty() || unionList.back() != a[i]) {
             unionList.push_back(a[i]);
@@ -35,7 +34,6 @@ vector<int> unionOfArrays(int a[], int b[], int m, int n) {
         i++;
     }
 
-    // Remaining elements of b, if any
     while (j < n) {
         if (unionList.empty() || unionList.back() != b[j]) {
             unionList.push_back(b[j]);
