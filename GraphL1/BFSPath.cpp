@@ -4,7 +4,6 @@
 
 using namespace std;
 
-// Edge structure representing an edge between two vertices
 struct Edge {
     int src;
     int nbr;
@@ -15,7 +14,6 @@ struct Edge {
     }
 };
 
-// Pair structure to store vertex and path so far
 struct Pair {
     int v;
     string psf;
@@ -23,7 +21,6 @@ struct Pair {
     Pair(int v, string psf) : v(v), psf(psf) {}
 };
 
-// Function to add an edge between two vertices
 void addEdge(vector<Edge>* graph, int v1, int v2) {
     graph[v1].push_back(Edge(v1, v2));
     graph[v2].push_back(Edge(v2, v1));
@@ -33,7 +30,6 @@ int main() {
     int vtces = 7; // Number of vertices
     vector<Edge>* graph = new vector<Edge>[vtces]; // Adjacency list of edges
 
-    // Adding edges to the graph
     addEdge(graph, 0, 1);
     addEdge(graph, 1, 2);
     addEdge(graph, 2, 3);
@@ -61,7 +57,6 @@ int main() {
 
         cout << rem.v << " " << rem.psf << endl; // Printing vertex and path so far
 
-        // Iterating through all adjacent vertices
         for (Edge e : graph[rem.v]) {
             q.push_back(Pair(e.nbr, rem.psf + to_string(e.nbr))); // Adding adjacent vertices to queue
         }

@@ -4,7 +4,6 @@
 
 using namespace std;
 
-// Structure to represent an edge in the graph
 struct Edge {
     int src;
     int nbr;
@@ -17,13 +16,11 @@ struct Edge {
     }
 };
 
-// Function to add an edge to the graph
 void addEdge(vector<Edge>* graph, int src, int nbr, int wt) {
     graph[src].push_back(Edge(src, nbr, wt));
     graph[nbr].push_back(Edge(nbr, src, wt)); // Assuming undirected graph
 }
 
-// Function to perform Hamiltonian path and cycle calculation
 void h(vector<Edge>* graph, int src, unordered_set<int>& visited, string psf, int originalSrc) {
     if (visited.size() == graph->size() - 1) {
         cout << psf;
@@ -56,12 +53,8 @@ void h(vector<Edge>* graph, int src, unordered_set<int>& visited, string psf, in
 
 int main() {
     int vtces = 6; // Number of vertices
-    //int edges = 7; // Number of edges
 
-    // Create the graph using adjacency list representation
     vector<Edge>* graph = new vector<Edge>[vtces];
-
-    // Add edges to the graph
     addEdge(graph, 0, 1, 10);
     addEdge(graph, 0, 3, 40);
     addEdge(graph, 1, 2, 10);
@@ -72,7 +65,6 @@ int main() {
 
     int src = 0; // Source vertex
 
-    // Perform Hamiltonian path and cycle calculation
     unordered_set<int> visited;
     h(graph, src, visited, to_string(src), src);
 

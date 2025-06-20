@@ -1,7 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// Disjoint Set functions and data
 vector<int> parent, size;
 
 void makeSet(int n) {

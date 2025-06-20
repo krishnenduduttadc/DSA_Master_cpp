@@ -6,33 +6,27 @@
 
 using namespace std;
 
-// Structure for a node in the grid
 struct Node {
     int x, y, h;
 };
 
-// Custom comparator for priority queue (min-heap)
 struct Compare {
     bool operator()(const Node& a, const Node& b) {
         return a.h > b.h; // Lower heuristic (h) value has higher priority
     }
 };
 
-// Directions for moving up, down, left, right
 int dx[] = {-1, 1, 0, 0};
 int dy[] = {0, 0, -1, 1};
 
-// Manhattan Distance Heuristic
 int heuristic(int x, int y, int goalX, int goalY) {
     return abs(x - goalX) + abs(y - goalY);
 }
 
-// Check if the new position is valid
 bool isValid(int x, int y, vector<vector<int>>& grid) {
     return x >= 0 && x < 3 && y >= 0 && y < 3 && grid[x][y] == 0;
 }
 
-// Best-First Search Algorithm
 vector<pair<int, int>> bestFirstSearch(vector<vector<int>>& grid, pair<int, int> start, pair<int, int> goal) {
     priority_queue<Node, vector<Node>, Compare> openSet;
     vector<vector<bool>> visited(3, vector<bool>(3, false));
@@ -59,7 +53,6 @@ vector<pair<int, int>> bestFirstSearch(vector<vector<int>>& grid, pair<int, int>
         }
     }
 
-    // Reconstruct the path
     vector<pair<int, int>> path;
     pair<int, int> p = goal;
     while (p != start && parent[p.first][p.second] != make_pair(-1, -1)) {

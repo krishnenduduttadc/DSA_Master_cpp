@@ -1,7 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// Disjoint Set Union-Find Data Structures
 vector<int> parent, size;
 
 void makeSet(int n)

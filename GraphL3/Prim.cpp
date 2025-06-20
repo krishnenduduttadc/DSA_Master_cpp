@@ -1,14 +1,12 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// Function to find sum of weights of edges of the Minimum Spanning Tree.
 int spanningTree(int V, vector<vector<int>> adj[])
 {
 	priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
 
 	vector<int> vis(V, 0);
-	// {wt, node}
-	pq.push({0, 0});
+	pq.push({0, 0}); 	// {wt, node}
 	int sum = 0;
 
 	while (!pq.empty()) {
@@ -18,7 +16,6 @@ int spanningTree(int V, vector<vector<int>> adj[])
 		int wt = it.first;
 
 		if (vis[node] == 1) continue;
-		// add it to the MST
 		vis[node] = 1;
 		sum += wt;
 		for (auto it : adj[node]) {

@@ -5,7 +5,6 @@
 
 using namespace std;
 
-// Node struct definition (default access is public)
 struct Node {
     int data;
     vector<Node*> children;
@@ -15,7 +14,6 @@ struct Node {
     }
 };
 
-// Function to construct the tree from the given array
 Node* construct(vector<int>& arr) {
     Node* root = nullptr;
     stack<Node*> st;
@@ -39,7 +37,6 @@ Node* construct(vector<int>& arr) {
     return root;
 }
 
-// Function to perform mirror operation on the tree
 void mirror(Node* node) {
     if (!node || node->children.empty()) {
         return;
@@ -52,7 +49,6 @@ void mirror(Node* node) {
     reverse(node->children.begin(), node->children.end());
 }
 
-// Function to display the tree
 void display(Node* node) {
     if (!node) return;
 
@@ -67,7 +63,6 @@ void display(Node* node) {
     }
 }
 
-// Main function
 int main() {
     vector<int> arr = {
         24, 10, 20, 50, -1, 60, -1, -1,

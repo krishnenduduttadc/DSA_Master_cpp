@@ -3,7 +3,6 @@
 
 using namespace std;
 
-// Replacing class with struct
 struct UnionFind {
     vector<int> parent;
     vector<int> rank;
@@ -40,7 +39,6 @@ struct UnionFind {
     }
 };
 
-// Same logic for finding redundant connection
 vector<int> findRedundantConnection(vector<vector<int>>& edges) {
     int n = edges.size();
     UnionFind uf(n);

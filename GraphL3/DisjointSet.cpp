@@ -22,7 +22,6 @@ void unionByRank(int u, int v) {
     int ulp_v = findUPar(v); // ultimate parent of v
     if (ulp_u == ulp_v) return; // already in the same set
 
-    // Union by rank
     if (rankVec[ulp_u] < rankVec[ulp_v]) { // Use rankVec here
         parent[ulp_u] = ulp_v;
     }
@@ -45,7 +44,6 @@ int main() {
     unionByRank(6, 7);
     unionByRank(5, 6);
 
-    // Check if 3 and 7 are in the same set
     if (findUPar(3) == findUPar(7)) {
         cout << "Same\n";
     } else {
@@ -54,7 +52,6 @@ int main() {
 
     unionByRank(3, 7);
 
-    // Check again if 3 and 7 are in the same set
     if (findUPar(3) == findUPar(7)) {
         cout << "Same\n";
     } else {

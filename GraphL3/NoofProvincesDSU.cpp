@@ -3,7 +3,6 @@
 
 using namespace std;
 
-// DSU Helper Functions
 int findParent(int node, vector<int>& parent) {
     if (node == parent[node]) return node;
     return parent[node] = findParent(parent[node], parent);  // Path compression
@@ -24,18 +23,15 @@ void unionByRank(int u, int v, vector<int>& parent, vector<int>& rank) {
     }
 }
 
-// Main function to count number of provinces
 int findCircleNum(vector<vector<int>>& isConnected) {
     int n = isConnected.size();
     vector<int> parent(n);
     vector<int> rank(n, 0);
 
-    // Initialize each node as its own parent
     for (int i = 0; i < n; i++) {
         parent[i] = i;
     }
 
-    // Union connected nodes
     for (int i = 0; i < n; i++) {
         for (int j = i + 1; j < n; j++) {
             if (isConnected[i][j] == 1) {
@@ -44,7 +40,6 @@ int findCircleNum(vector<vector<int>>& isConnected) {
         }
     }
 
-    // Count distinct parents (i.e., provinces)
     int count = 0;
     for (int i = 0; i < n; i++) {
         if (parent[i] == i) count++;

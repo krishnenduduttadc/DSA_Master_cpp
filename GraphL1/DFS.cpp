@@ -3,13 +3,11 @@
 
 using namespace std;
 
-// Function to add an edge between two vertices
 void addEdge(vector<vector<int>>& adj, int u, int v) {
     adj[u].push_back(v);
     adj[v].push_back(u);
 }
 
-// Recursive function for DFS traversal
 void DFSR(vector<vector<int>>& adj, int s, vector<bool>& visited) {
     visited[s] = true;
     cout << s << " ";
@@ -21,7 +19,6 @@ void DFSR(vector<vector<int>>& adj, int s, vector<bool>& visited) {
     }
 }
 
-// DFS function to initialize visited array and call recursive DFSR function
 void DFS(vector<vector<int>>& adj, int V, int s) {
     vector<bool> visited(V, false);
     DFSR(adj, s, visited);
@@ -31,7 +28,6 @@ int main() {
     int V = 7; // Number of vertices
     vector<vector<int>> adj(V); // Adjacency list representation of the graph
 
-    // Adding edges to the graph
     addEdge(adj, 0, 1);
     addEdge(adj, 0, 2);
     addEdge(adj, 2, 3);

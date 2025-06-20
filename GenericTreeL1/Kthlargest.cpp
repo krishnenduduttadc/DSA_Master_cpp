@@ -5,7 +5,6 @@
 
 using namespace std;
 
-// Node structure definition
 struct Node {
     int data;
     vector<Node*> children;
@@ -13,7 +12,6 @@ struct Node {
     Node(int val) : data(val) {}
 };
 
-// Function to construct the tree from the given array
 Node* construct(const vector<int>& arr) {
     Node* root = nullptr;
     stack<Node*> st;
@@ -35,7 +33,6 @@ Node* construct(const vector<int>& arr) {
     return root;
 }
 
-// Function to find ceil and floor values of a given data in the tree
 void ceilAndFloor(Node* node, int data, int& ceil, int& floor) {
     if (node->data > data && node->data < ceil) {
         ceil = node->data;
@@ -49,7 +46,6 @@ void ceilAndFloor(Node* node, int data, int& ceil, int& floor) {
     }
 }
 
-// Function to find the kth largest element in the tree
 int kthLargest(Node* node, int k) {
     int factor = INT_MAX;
     int floor;
@@ -63,7 +59,6 @@ int kthLargest(Node* node, int k) {
     return factor;
 }
 
-// Main function
 int main() {
     vector<int> arr = {
         24, 10, 20, -50, -1, 60, -1, -1, 30,

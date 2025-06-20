@@ -4,7 +4,6 @@
 
 using namespace std;
 
-// Struct instead of class
 struct Node {
     int data;
     vector<Node*> children;
@@ -14,7 +13,6 @@ struct Node {
     }
 };
 
-// Function to construct the tree from the given array
 Node* construct(vector<int>& arr) {
     Node* root = nullptr;
     stack<Node*> st;
@@ -38,7 +36,6 @@ Node* construct(vector<int>& arr) {
     return root;
 }
 
-// Function to display the tree
 void display(Node* node) {
     cout << node->data << " -> ";
     for (Node* child : node->children) {
@@ -51,7 +48,6 @@ void display(Node* node) {
     }
 }
 
-// Function to get the tail of a node
 Node* getTail(Node* node) {
     while (node->children.size() == 1) {
         node = node->children[0];
@@ -59,7 +55,6 @@ Node* getTail(Node* node) {
     return node;
 }
 
-// Function to linearize the tree
 void linearize(Node* node) {
     for (Node* child : node->children) {
         linearize(child);
@@ -74,7 +69,6 @@ void linearize(Node* node) {
     }
 }
 
-// Main function
 int main() {
     vector<int> arr = {
         24, 10, 20, 50, -1, 60, -1, -1,

@@ -1,7 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// DFS traversal function
 void dfs(int node, vector<int> adjLs[], int vis[])
 {
     vis[node] = 1;
@@ -14,12 +13,10 @@ void dfs(int node, vector<int> adjLs[], int vis[])
     }
 }
 
-// Function to find number of provinces
 int numProvinces(vector<vector<int>> adj, int V)
 {
     vector<int> adjLs[V];
 
-    // Convert adjacency matrix to adjacency list
     for (int i = 0; i < V; i++)
     {
         for (int j = 0; j < V; j++)

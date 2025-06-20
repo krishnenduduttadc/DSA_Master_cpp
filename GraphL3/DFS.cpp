@@ -7,12 +7,10 @@ vector<int> dfs(int node, vector<int> adj[], vector<int> vis)
     vector<int> ls;
     ls.push_back(node);
 
-    // Traverse all its neighbors
     for (auto it : adj[node])
     {
         if (!vis[it])
         {
-            // Recursively visit unvisited neighbors
             vector<int> subResult = dfs(it, adj, vis);
             ls.insert(ls.end(), subResult.begin(), subResult.end());
         }
@@ -55,7 +53,6 @@ int main()
 
     vector<int> ans = dfsOfGraph(5, adj);
 
-    // Print the DFS traversal result
     printAns(ans);
 
     return 0;

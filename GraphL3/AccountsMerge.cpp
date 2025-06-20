@@ -1,7 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// Disjoint Set Data Structures
 vector<int> rankDSU, parent, sizeDSU;
 
 void initDisjointSet(int n) {
@@ -33,7 +32,6 @@ void unionBySize(int u, int v) {
     }
 }
 
-// Main logic for merging accounts
 vector<vector<string>> accountsMerge(vector<vector<string>> &details) {
     int n = details.size();
     initDisjointSet(n);

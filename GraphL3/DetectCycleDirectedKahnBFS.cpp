@@ -31,7 +31,6 @@ bool isCyclic(int V, vector<int> adj[]) {
         }
     }
 
-    // If all nodes are visited, no cycle
     return count != V;  // True if cycle exists, else False
 }
 

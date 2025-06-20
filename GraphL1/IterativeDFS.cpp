@@ -5,7 +5,6 @@
 
 using namespace std;
 
-// Structure to represent an edge in the graph
 struct Edge {
     int src;
     int nbr;
@@ -16,7 +15,6 @@ struct Edge {
     }
 };
 
-// Structure to represent a pair of vertex and path so far
 struct Pair {
     int v;
     string psf;
@@ -27,21 +25,16 @@ struct Pair {
     }
 };
 
-// Function to add an edge to the graph
 void addEdge(vector<Edge>* graph, int src, int nbr) {
     graph[src].push_back(Edge(src, nbr));
     graph[nbr].push_back(Edge(nbr, src)); // Assuming undirected graph
 }
 
 int main() {
-    // Statically define the graph
     int vtces = 6; // Number of vertices
-    //int edges = 7; // Number of edges
 
-    // Create the graph using adjacency list representation
     vector<Edge>* graph = new vector<Edge>[vtces];
 
-    // Add edges statically
     addEdge(graph, 0, 1);
     addEdge(graph, 0, 3);
     addEdge(graph, 1, 2);
@@ -52,7 +45,6 @@ int main() {
 
     int src = 0; // Source vertex
 
-    // Perform iterative DFS
     bool* visited = new bool[vtces](); // Initialize all elements to false
     stack<Pair> st;
     st.push(Pair(src, to_string(src)));

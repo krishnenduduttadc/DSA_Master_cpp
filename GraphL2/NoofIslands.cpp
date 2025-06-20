@@ -3,7 +3,6 @@
 
 using namespace std;
 
-// Replacing class with struct
 struct UnionFind {
     vector<int> parent;
     vector<int> rank;
@@ -43,7 +42,6 @@ struct UnionFind {
     }
 };
 
-// Island counting logic remains unchanged
 vector<int> numIslands2(int m, int n, vector<vector<int>>& positions) {
     vector<int> ans;
     vector<vector<int>> grid(m, vector<int>(n, 0));
@@ -52,7 +50,7 @@ vector<int> numIslands2(int m, int n, vector<vector<int>>& positions) {
     vector<vector<int>> dirs = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
     vector<bool> visited(m * n, false);
 
-    for (auto& pos : positions) {
+    for (auto pos : positions) {
         int row = pos[0];
         int col = pos[1];
         int idx = row * n + col;
@@ -84,7 +82,6 @@ vector<int> numIslands2(int m, int n, vector<vector<int>>& positions) {
     return ans;
 }
 
-// Main function
 int main() {
     int m = 3, n = 3;
     vector<vector<int>> positions = {

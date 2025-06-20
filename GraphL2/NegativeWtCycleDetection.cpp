@@ -21,8 +21,7 @@ bool isNegativeWeightCycle(int n, vector<Edge>& edges) {
         }
     }
 
-    // Checking for negative weight cycles
-    for (const auto& edge : edges) {
+    for (const auto edge : edges) {
         if (dist[edge.u] != INT_MAX && dist[edge.u] + edge.weight < dist[edge.v]) {
             return true; // Negative weight cycle detected
         }
@@ -32,7 +31,6 @@ bool isNegativeWeightCycle(int n, vector<Edge>& edges) {
 }
 
 int main() {
-    // Hardcoded input
     int n = 3; // Number of vertices
     int m = 3; // Number of edges
     vector<Edge> edges = {{0, 1, -1}, {1, 2, -4}, {2, 0, 3}}; // Edges with (u, v, weight)

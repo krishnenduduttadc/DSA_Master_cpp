@@ -3,7 +3,6 @@
 
 using namespace std;
 
-// DFS helper function to detect cycle in directed graph
 bool dfsCheck(int node, const vector<vector<int>>& adj, vector<int>& vis, vector<int>& pathVis) {
     vis[node] = 1;
     pathVis[node] = 1;
@@ -22,7 +21,6 @@ bool dfsCheck(int node, const vector<vector<int>>& adj, vector<int>& vis, vector
     return false;
 }
 
-// Function to detect cycle in directed graph
 bool isCyclic(int V, const vector<vector<int>>& adj) {
     vector<int> vis(V, 0);
     vector<int> pathVis(V, 0);

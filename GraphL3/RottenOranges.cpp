@@ -7,7 +7,6 @@ int orangesRotting(vector<vector<int>>& grid) {
     vector<vector<int>> vis(n, vector<int>(m, 0));
     int fresh = 0;
 
-    // Initialize queue with rotten oranges and count fresh oranges
     for(int i = 0; i < n; i++) {
         for(int j = 0; j < m; j++) {
             if(grid[i][j] == 2) {

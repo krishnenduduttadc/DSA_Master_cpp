@@ -5,7 +5,6 @@
 
 using namespace std;
 
-// Node structure definition (instead of class)
 struct Node {
     int data;
     vector<Node*> children;
@@ -15,7 +14,6 @@ struct Node {
     }
 };
 
-// Function to construct the tree from the given array
 Node* construct(vector<int>& arr) {
     Node* root = nullptr;
     stack<Node*> st;
@@ -39,11 +37,9 @@ Node* construct(vector<int>& arr) {
     return root;
 }
 
-// Variables to store ceil and floor values
 int ceil_val = INT_MAX;
 int floor_val = INT_MIN;
 
-// Function to find ceil and floor values in the tree
 void ceilAndFloor(Node* node, int data) {
     if (!node) return;
 

@@ -5,13 +5,11 @@
 
 using namespace std;
 
-// Function to add an edge between two vertices u and v
 void addEdge(vector<vector<int>>& adj, int u, int v) {
     adj[u].push_back(v);
     adj[v].push_back(u);
 }
 
-// Function to perform BFS traversal
 void bfs(vector<vector<int>>& adj, int v, int s) {
     deque<int> q;
     vector<bool> visited(v, false);
@@ -39,7 +37,6 @@ int main() {
     int V = 7;
     vector<vector<int>> adj(V);
 
-    // Adding edges to the graph
     addEdge(adj, 0, 1);
     addEdge(adj, 0, 2);
     addEdge(adj, 2, 3);

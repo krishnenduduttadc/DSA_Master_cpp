@@ -58,10 +58,7 @@ bool equationsPossible(vector<string>& equations) {
 }
 
 int main() {
-    // Hardcoded input
     vector<string> equations = {"b==c", "c!=b"};
-
     cout << (equationsPossible(equations) ? "true" : "false") << endl;
-
     return 0;
 }

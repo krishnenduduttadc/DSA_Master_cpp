@@ -37,7 +37,6 @@ set<State> getSuccessors(State state) {
         successors.insert(newState);
     }
 
-    // Pour from one jug to another
     for (int i = 0; i < 3; ++i) {
         for (int j = 0; j < 3; ++j) {
             if (i == j) continue;

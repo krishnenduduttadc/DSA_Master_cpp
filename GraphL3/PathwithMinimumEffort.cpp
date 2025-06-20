@@ -35,7 +35,6 @@ int MinimumEffort(vector<vector<int>> &heights)
             int newr = row + dr[i];
             int newc = col + dc[i];
 
-            // Checking validity of the cell.
             if (newr >= 0 && newc >= 0 && newr < n && newc < m)
             {
 
@@ -54,14 +53,9 @@ int MinimumEffort(vector<vector<int>> &heights)
 
 int main()
 {
-    // Driver Code.
-
     vector<vector<int>> heights = {{1, 2, 2}, {3, 8, 2}, {5, 3, 5}};
-
     int ans = MinimumEffort(heights);
-
     cout << ans;
     cout << endl;
-
     return 0;
 }

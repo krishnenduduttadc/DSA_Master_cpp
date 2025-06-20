@@ -31,7 +31,6 @@ vector<int> dijkstra(int V, vector<vector<int>> adj[], int S)
 
 int main()
 {
-    // Driver code.
     int V = 3, E = 3, S = 2;
     vector<vector<int>> adj[V];
     vector<vector<int>> edges;

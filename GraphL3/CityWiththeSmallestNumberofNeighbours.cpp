@@ -9,7 +9,6 @@ int findCity(int n, int m, vector<vector<int>> edges, int distanceThreshold) {
     }
     for (int i = 0; i < n; i++) dist[i][i] = 0;
 
-    // Floyd-Warshall algorithm
     for (int k = 0; k < n; k++) {
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {

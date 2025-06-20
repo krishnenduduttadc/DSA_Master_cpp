@@ -4,14 +4,12 @@
 
 using namespace std;
 
-// Define Node using struct
 struct Node {
     int data;
     vector<Node*> children;
     Node(int val)  {data=val;}
 };
 
-// Function to construct the tree from the given array
 Node* construct(const vector<int>& arr) {
     Node* root = nullptr;
     stack<Node*> st;
@@ -33,7 +31,6 @@ Node* construct(const vector<int>& arr) {
     return root;
 }
 
-// Function to check if two trees are mirrors of each other
 bool areMirror(Node* n1, Node* n2) {
     if (n1->children.size() != n2->children.size()) {
         return false;
@@ -52,12 +49,10 @@ bool areMirror(Node* n1, Node* n2) {
     return true;
 }
 
-// Function to check if a tree is symmetric
 bool IsSymmetric(Node* node) {
     return areMirror(node, node);
 }
 
-// Main function
 int main() {
     vector<int> arr = {
         10, 20, 50, -1, 60, -1, -1,

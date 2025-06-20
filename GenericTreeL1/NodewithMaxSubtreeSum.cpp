@@ -4,13 +4,11 @@
 #include <climits>
 using namespace std;
 
-// Node structure definition
 struct Node {
     int data;
     vector<Node*> children;
 };
 
-// Function to display the tree structure
 void display(Node* node) {
     cout << node->data << " -> ";
     for (Node* child : node->children) {
@@ -23,7 +21,6 @@ void display(Node* node) {
     }
 }
 
-// Function to construct the tree from an array
 Node* construct(vector<int>& arr) {
     Node* root = nullptr;
     vector<Node*> st;
@@ -48,11 +45,9 @@ Node* construct(vector<int>& arr) {
     return root;
 }
 
-// Global variables to store the maximum subtree sum and its corresponding node value
 int msn = 0;
 int ms = INT_MIN;
 
-// Function to recursively calculate the subtree sum and find the maximum subtree sum node
 int retSumAndCalculateMSST(Node* node) {
     int sum = 0;
 
@@ -76,13 +71,7 @@ int main() {
 
     Node* root = construct(arr);
 
-    // Calculate the maximum subtree sum and corresponding node
     retSumAndCalculateMSST(root);
-
-    // Print the result
     cout << msn << "@" << ms << endl;
-
-    // Clean up memory (not necessary in this simple example but good practice)
-    // You would typically have a function to delete the tree
     return 0;
 }

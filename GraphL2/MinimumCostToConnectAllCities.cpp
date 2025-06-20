@@ -20,12 +20,10 @@ struct CompareEdge {
 };
 
 int main() {
-    // Hardcoded input
     int vtces = 7;
     int edges = 8;
     vector<vector<Edge>> graph(vtces);
 
-    // Hardcoded edges
     vector<vector<int>> hardcoded_edges = {
         {0, 1, 10},
         {1, 2, 10},
@@ -37,7 +35,6 @@ int main() {
         {4, 6, 8}
     };
 
-    // Populating the graph with hardcoded edges
     for (auto& edge : hardcoded_edges) {
         int v1 = edge[0];
         int v2 = edge[1];

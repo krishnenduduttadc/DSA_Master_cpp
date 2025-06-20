@@ -9,7 +9,6 @@ using namespace std;
 int swimInRisingWater(vector<vector<int>>& grid) {
     int n = grid.size();
 
-    // Min-heap priority queue storing (msf, row, col)
     priority_queue<tuple<int, int, int>, vector<tuple<int, int, int>>, greater<tuple<int, int, int>>> pq;
     pq.push(make_tuple(grid[0][0], 0, 0));  // msf, row, col
 

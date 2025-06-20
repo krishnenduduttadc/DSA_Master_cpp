@@ -17,7 +17,6 @@ int maxDistance(vector<vector<int>>& grid) {
     int n = grid.size();
     queue<Pair> q;
 
-    // Enqueue all land cells initially
     for (int i = 0; i < n; ++i) {
         for (int j = 0; j < n; ++j) {
             if (grid[i][j] == 1) {
@@ -60,7 +59,6 @@ int maxDistance(vector<vector<int>>& grid) {
 }
 
 int main() {
-    // Hardcoded input values
     vector<vector<int>> grid = {
         {0, 0, 0},
         {0, 1, 1},

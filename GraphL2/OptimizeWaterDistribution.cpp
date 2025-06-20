@@ -4,7 +4,6 @@
 
 using namespace std;
 
-// Replace class with struct
 struct Pair {
     int vtx;
     int wt;
@@ -14,7 +13,6 @@ struct Pair {
         wt = w;
     }
 
-    // Custom comparator for priority_queue (min-heap)
     bool operator>(const Pair& other) const {
         return this->wt > other.wt;
     }

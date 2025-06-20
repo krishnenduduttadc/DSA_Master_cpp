@@ -60,7 +60,6 @@ bool areSentencesSimilarTwo(vector<string>& Sentence1, vector<string>& Sentence2
 }
 
 int main() {
-    // Hardcoded input
     int n = 3;
     vector<string> sentence1 = {"treat", "fight", "miss"};
     vector<string> sentence2 = {"like", "train", "lost"};

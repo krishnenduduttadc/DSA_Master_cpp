@@ -1,7 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// A comparator function to sort the answer.
 bool comp(vector<string> a, vector<string> b)
 {
     string x = "", y = "";

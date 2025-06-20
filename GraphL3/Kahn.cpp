@@ -1,7 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// Function to return list containing vertices in Topological order.
 vector<int> topoSort(int V, vector<int> adj[])
 {
 	int indegree[V] = {0};
@@ -27,9 +26,6 @@ vector<int> topoSort(int V, vector<int> adj[])
 		int node = q.front();
 		q.pop();
 		topo.push_back(node);
-		// node is in your topo sort
-		// so please remove it from the indegree
-
 		for (auto it : adj[node])
 		{
 			indegree[it]--;
@@ -43,13 +39,10 @@ vector<int> topoSort(int V, vector<int> adj[])
 
 int main()
 {
-
 	// V = 6;
 	vector<int> adj[6] = {{}, {}, {3}, {1}, {0, 1}, {0, 2}};
 	int V = 6;
-
 	vector<int> ans = topoSort(V, adj);
-
 	for (auto node : ans)
 	{
 		cout << node << " ";

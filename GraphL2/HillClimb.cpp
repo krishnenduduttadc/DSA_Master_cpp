@@ -4,12 +4,10 @@
 
 using namespace std;
 
-// Function to be optimized (hill climbing searches for max value)
 double function(double x) {
     return -(x - 3) * (x - 3) + 9;  // A simple parabola with a peak at x=3
 }
 
-// Hill climbing algorithm
 double hillClimb(double start, double stepSize, int maxIterations) {
     double current = start;
     double currentValue = function(current);

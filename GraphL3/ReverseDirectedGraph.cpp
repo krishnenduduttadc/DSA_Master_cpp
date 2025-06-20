@@ -2,11 +2,9 @@
 #include <vector>
 using namespace std;
 
-// Reverse the directed graph adjacency list
 vector<vector<int>> reverseDirectedGraph(const vector<vector<int>>& adj, int V) {
     vector<vector<int>> reversedAdj(V + 1);
 
-    // Note: changed loop from 0..V to 1..V since nodes start at 1
     for (int i = 1; i <= V; ++i) {
         for (int j : adj[i]) {
             reversedAdj[j].push_back(i);
@@ -16,7 +14,6 @@ vector<vector<int>> reverseDirectedGraph(const vector<vector<int>>& adj, int V) 
     return reversedAdj;
 }
 
-// Print graph edges
 void printGraph(const vector<vector<int>>& graph, int V) {
     for (int i = 1; i <= V; ++i) {
         for (int j : graph[i]) {

@@ -12,7 +12,6 @@ int orangesRotting(vector<vector<int>>& grid) {
     queue<pair<int, int>> q;
     int fresh = 0;
 
-    // Initialize the queue with all rotten oranges and count fresh ones
     for (int i = 0; i < m; ++i) {
         for (int j = 0; j < n; ++j) {
             if (grid[i][j] == 2) {
@@ -25,7 +24,6 @@ int orangesRotting(vector<vector<int>>& grid) {
 
     if (fresh == 0) return 0;
 
-    // Directions: up, right, down, left
     vector<vector<int>> dirs = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
     int minutes = -1;
 

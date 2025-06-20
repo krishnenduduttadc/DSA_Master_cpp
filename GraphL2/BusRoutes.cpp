@@ -10,7 +10,6 @@ int numBusesToDestination(vector<vector<int>>& routes, int S, int T) {
     int n = routes.size();
     unordered_map<int, vector<int>> map;
 
-    // Building a map of bus stops to their respective bus routes
     for (int i = 0; i < n; ++i) {
         for (int j = 0; j < routes[i].size(); ++j) {
             int busStopNo = routes[i][j];
@@ -25,7 +24,6 @@ int numBusesToDestination(vector<vector<int>>& routes, int S, int T) {
     q.push(S);
     busStopVisited.insert(S);
 
-    // Performing BFS to find the minimum number of buses
     while (!q.empty()) {
         int size = q.size();
         while (size-- > 0) {
@@ -61,7 +59,6 @@ int numBusesToDestination(vector<vector<int>>& routes, int S, int T) {
 }
 
 int main() {
-    // Hardcoded input values
     vector<vector<int>> routes = {
         {1, 2, 7},
         {3, 6, 7}
@@ -70,6 +67,5 @@ int main() {
     int dest = 6; // destination bus stop
 
     cout << numBusesToDestination(routes, src, dest) << endl;
-
     return 0;
 }

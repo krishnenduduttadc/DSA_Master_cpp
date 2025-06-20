@@ -4,17 +4,14 @@
 
 using namespace std;
 
-// Function prototypes
 void dfs(vector<vector<int>>& arr, int row, int col, string& psf);
 int numDistinctIslands(vector<vector<int>>& arr);
 
-// Depth-first search to mark all connected land cells of an island
 void dfs(vector<vector<int>>& arr, int row, int col, string& psf) {
     arr[row][col] = 0; // Marking current cell as visited
     int n = arr.size();
     int m = arr[0].size();
     
-    // Directions: up, right, down, left
     vector<pair<int, int>> dirs = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
     string dirStr = "urdl"; // Corresponding directions characters
 
@@ -29,7 +26,6 @@ void dfs(vector<vector<int>>& arr, int row, int col, string& psf) {
     psf += "a"; // Append anchor to indicate end of island path
 }
 
-// Function to find number of distinct islands
 int numDistinctIslands(vector<vector<int>>& arr) {
     int n = arr.size();
     if (n == 0) return 0;
@@ -51,15 +47,12 @@ int numDistinctIslands(vector<vector<int>>& arr) {
 }
 
 int main() {
-    // Hardcoded input
     vector<vector<int>> arr = {
         {1, 0, 0},
         {0, 1, 0},
         {1, 1, 1}
     };
 
-    // Calculating number of distinct islands
     cout << numDistinctIslands(arr) << endl;
-
     return 0;
 }

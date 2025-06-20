@@ -4,7 +4,6 @@
 
 using namespace std;
 
-// Helper struct to represent a cell position (row, col)
 struct Pair {
     int first;
     int second;
@@ -15,7 +14,6 @@ struct Pair {
     }
 };
 
-// Breadth-First Search to mark connected land as visited
 void bfs(int i, int j, vector<vector<char>> &grid, vector<vector<bool>> &visited) {
     static const int directions[4][2] = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
     visited[i][j] = true;
@@ -40,7 +38,6 @@ void bfs(int i, int j, vector<vector<char>> &grid, vector<vector<bool>> &visited
     }
 }
 
-// Function to count number of distinct islands
 int numIslands(vector<vector<char>> &grid) {
     if (grid.empty()) return 0;
 

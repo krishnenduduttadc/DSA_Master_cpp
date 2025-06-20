@@ -3,14 +3,12 @@
 #include <stack>
 using namespace std;
 
-// Define node as a simple struct
 struct Node {
     int data;
     vector<Node*> children;
     Node(int val)  {data = val; }
 };
 
-// Construct the tree from array
 Node* constructTree(const vector<int>& arr) {
     Node* root = nullptr;
     stack<Node*> st;
@@ -31,7 +29,6 @@ Node* constructTree(const vector<int>& arr) {
     return root;
 }
 
-// Get path from node to root
 vector<int> nodeToRootPath(Node* node, int data) {
     if (node->data == data) {
         return {node->data};
@@ -47,7 +44,6 @@ vector<int> nodeToRootPath(Node* node, int data) {
     return {};
 }
 
-// Find distance between two nodes
 int distanceBetweenNodes(Node* root, int d1, int d2) {
     vector<int> path1 = nodeToRootPath(root, d1);
     vector<int> path2 = nodeToRootPath(root, d2);
@@ -55,7 +51,6 @@ int distanceBetweenNodes(Node* root, int d1, int d2) {
     int i = path1.size() - 1;
     int j = path2.size() - 1;
 
-    // Walk from root until paths diverge
     while (i >= 0 && j >= 0 && path1[i] == path2[j]) {
         i--;
         j--;

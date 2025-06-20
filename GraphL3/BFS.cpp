@@ -1,7 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// Function to perform BFS traversal from node 0
 vector<int> bfsOfGraph(int V, vector<int> adj[]) {
     vector<int> bfs;
     vector<int> vis(V, 0); // visited array
@@ -26,13 +25,11 @@ vector<int> bfsOfGraph(int V, vector<int> adj[]) {
     return bfs;
 }
 
-// Function to add an undirected edge between u and v
 void addEdge(vector<int> adj[], int u, int v) {
     adj[u].push_back(v);
     adj[v].push_back(u);
 }
 
-// Function to print the BFS traversal result
 void printAns(const vector<int>& ans) {
     for (int val : ans) {
         cout << val << " ";

@@ -4,20 +4,20 @@
 using namespace std;
 
 void dfs(int node, vector<int>& vis, stack<int>& st, vector<vector<int>>& adj) {
-    vis[node] = 1; // Mark node as visited
+    vis[node] = 1; 
 
     for (int it : adj[node]) {
-        if (vis[it] == 0) { // If adjacent node is not visited, perform DFS on it
+        if (vis[it] == 0) { 
             dfs(it, vis, st, adj);
         }
     }
 
-    st.push(node); // Push current node to stack after visiting all its dependencies
+    st.push(node); 
 }
 
 vector<int> topoSort(int V, vector<vector<int>>& adj) {
-    vector<int> vis(V, 0); // Initialize visited array
-    stack<int> st; // Stack to store nodes in topological order
+    vector<int> vis(V, 0); 
+    stack<int> st; 
 
     for (int i = 0; i < V; ++i) {
         if (vis[i] == 0) {

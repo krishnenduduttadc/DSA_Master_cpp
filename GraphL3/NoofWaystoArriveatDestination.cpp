@@ -3,7 +3,6 @@ using namespace std;
 
 int countPaths(int n, vector<vector<int>> &roads)
 {
-    // Creating an adjacency list for the given graph.
     vector<pair<int, int>> adj[n];
     for (auto it : roads)
     {
@@ -11,20 +10,14 @@ int countPaths(int n, vector<vector<int>> &roads)
         adj[it[1]].push_back({it[0], it[2]});
     }
 
-    // Defining a priority queue (min heap).
     priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
-
-    // Initializing the dist array and the ways array
-    // along with their first indices.
     vector<int> dist(n, INT_MAX), ways(n, 0);
     dist[0] = 0;
     ways[0] = 1;
     pq.push({0, 0});
 
-    // Define modulo value
     int mod = (int)(1e9 + 7);
 
-    // Dijkstra’s algorithm loop
     while (!pq.empty())
     {
         int dis = pq.top().first;

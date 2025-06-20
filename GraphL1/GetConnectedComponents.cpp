@@ -3,7 +3,6 @@
 
 using namespace std;
 
-// Structure to represent an edge in the graph
 struct Edge {
     int src;
     int nbr;
@@ -16,7 +15,6 @@ struct Edge {
     }
 };
 
-// Function to perform DFS and find connected components
 void dfs(vector<Edge>* graph, int src, vector<int>& component, vector<bool>& visited) {
     visited[src] = true;
     component.push_back(src);
@@ -31,7 +29,6 @@ int main() {
     int vtces = 6; // Number of vertices
     int edges = 7; // Number of edges
 
-    // Define the edge information statically
     vector<Edge> edgeInfo = {
         Edge(0, 1, 10),
         Edge(0, 2, 10),
@@ -42,10 +39,8 @@ int main() {
         Edge(5, 3, 10)
     };
 
-    // Create the graph using adjacency list representation
     vector<Edge>* graph = new vector<Edge>[vtces];
 
-    // Add edges to the graph
     for (Edge& e : edgeInfo) {
         graph[e.src].push_back(e);
         graph[e.nbr].push_back(Edge(e.nbr, e.src, e.wt)); // Adding reverse edge for undirected graph
@@ -53,10 +48,8 @@ int main() {
 
     vector<vector<int>> connectedComponents;
 
-    // Array to track visited vertices
     vector<bool> visited(vtces, false);
 
-    // Finding all connected components using DFS
     for (int v = 0; v < vtces; ++v) {
         if (!visited[v]) {
             vector<int> component;
@@ -65,7 +58,6 @@ int main() {
         }
     }
 
-    // Outputting the connected components
     cout << "Connected Components:" << endl;
     for (vector<int>& component : connectedComponents) {
         for (int v : component) {

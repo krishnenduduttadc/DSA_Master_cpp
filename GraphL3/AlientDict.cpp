@@ -1,7 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// Topological Sort function (Kahn's algorithm)
 vector<int> topoSort(int V, vector<int> adj[]) {
 	int indegree[V] = {0};
 	for (int i = 0; i < V; i++) {
@@ -31,7 +30,6 @@ vector<int> topoSort(int V, vector<int> adj[]) {
 	return topo;
 }
 
-// Function to find the order of characters in the alien language
 string findOrder(string dict[], int N, int K) {
 	vector<int> adj[K];
 

@@ -17,7 +17,6 @@ vector<int> bellman_ford(int V, vector<vector<int>> edges, int S) {
 		}
 	}
 
-	// Nth relaxation to check negative cycle
 	for (auto it : edges) {
 		int u = it[0];
 		int v = it[1];

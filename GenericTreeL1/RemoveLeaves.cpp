@@ -2,7 +2,6 @@
 #include <vector>
 using namespace std;
 
-// Node struct instead of class
 struct Node {
     int data;
     vector<Node*> children;
@@ -12,7 +11,6 @@ struct Node {
     }
 };
 
-// Display function
 void display(Node* node) {
     cout << node->data << " -> ";
     for (Node* child : node->children) {
@@ -25,7 +23,6 @@ void display(Node* node) {
     }
 }
 
-// Construct tree from array
 Node* construct(int arr[], int n) {
     Node* root = nullptr;
     vector<Node*> st;
@@ -49,7 +46,6 @@ Node* construct(int arr[], int n) {
     return root;
 }
 
-// Remove leaf nodes
 void removeLeaves(Node* node) {
     for (int i = node->children.size() - 1; i >= 0; i--) {
         Node* child = node->children[i];
@@ -64,7 +60,6 @@ void removeLeaves(Node* node) {
     }
 }
 
-// Main function
 int main() {
     int arr[] = {
         10, 20, 50, -1, 60, -1, -1,

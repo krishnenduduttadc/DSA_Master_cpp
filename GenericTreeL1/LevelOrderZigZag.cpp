@@ -4,7 +4,6 @@
 
 using namespace std;
 
-// Node struct definition
 struct Node {
     int data;
     vector<Node*> children;
@@ -12,7 +11,6 @@ struct Node {
     Node(int val)  {data=val;}
 };
 
-// Function to construct the tree from the given array
 Node* construct(const vector<int>& arr) {
     Node* root = nullptr;
     stack<Node*> st;
@@ -36,7 +34,6 @@ Node* construct(const vector<int>& arr) {
     return root;
 }
 
-// Zigzag level order traversal (linewise)
 void levelOrderLinewiseZZ(Node* root) {
     if (!root) return;
 
@@ -68,7 +65,6 @@ void levelOrderLinewiseZZ(Node* root) {
     }
 }
 
-// Main function
 int main() {
     vector<int> arr = {
         24, 10, 20, 50, -1, 60, -1, -1,

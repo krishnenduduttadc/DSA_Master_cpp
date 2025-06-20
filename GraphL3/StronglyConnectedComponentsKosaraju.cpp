@@ -3,7 +3,6 @@
 #include <stack>
 using namespace std;
 
-// Step 1: First DFS to fill stack based on finishing times
 void dfs1(int node, vector<int> &vis, vector<int> adj[], stack<int> &st) {
     vis[node] = 1;
     for (int neighbor : adj[node]) {
@@ -14,7 +13,6 @@ void dfs1(int node, vector<int> &vis, vector<int> adj[], stack<int> &st) {
     st.push(node);
 }
 
-// Step 2: DFS on transposed graph
 void dfs2(int node, vector<int> &vis, vector<int> adjT[]) {
     vis[node] = 1;
     for (int neighbor : adjT[node]) {
@@ -24,19 +22,16 @@ void dfs2(int node, vector<int> &vis, vector<int> adjT[]) {
     }
 }
 
-// Main Kosaraju algorithm function
 int kosaraju(int V, vector<int> adj[]) {
     vector<int> vis(V, 0);
     stack<int> st;
 
-    // Step 1: Fill stack with nodes in order of finishing times
     for (int i = 0; i < V; i++) {
         if (!vis[i]) {
             dfs1(i, vis, adj, st);
         }
     }
 
-    // Step 2: Transpose the graph
     vector<int> adjT[V];
     for (int i = 0; i < V; i++) {
         for (int neighbor : adj[i]) {
@@ -44,7 +39,6 @@ int kosaraju(int V, vector<int> adj[]) {
         }
     }
 
-    // Step 3: Process all nodes in order defined by the stack
     fill(vis.begin(), vis.end(), 0);
     int scc = 0;
     while (!st.empty()) {

@@ -42,7 +42,6 @@ void coloring_border(vector<vector<int>>& grid, int row, int col, int color) {
 }
 
 int main() {
-    // Hardcoded input
     int m = 4;
     int n = 4;
     vector<vector<int>> arr = {
@@ -57,7 +56,6 @@ int main() {
 
     coloring_border(arr, row, col, color);
 
-    // Print the modified grid
     for (int i = 0; i < m; i++) {
         for (int j = 0; j < n; j++) {
             cout << arr[i][j] << "\t";

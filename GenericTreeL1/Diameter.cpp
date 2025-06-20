@@ -4,7 +4,6 @@
 
 using namespace std;
 
-// Node structure definition
 struct Node {
     int data;
     vector<Node*> children;
@@ -14,7 +13,6 @@ struct Node {
     }
 };
 
-// Function to construct the tree from the given array
 Node* construct(vector<int>& arr) {
     Node* root = nullptr;
     stack<Node*> st;
@@ -38,10 +36,8 @@ Node* construct(vector<int>& arr) {
     return root;
 }
 
-// Global variable to store the diameter
 int dia = 0;
 
-// Recursive function to compute diameter and return height
 int calculateDiaReturnHeight(Node* node) {
     int dch = -1;    // deepest child height
     int sdch = -1;   // second deepest child height
@@ -56,13 +52,11 @@ int calculateDiaReturnHeight(Node* node) {
         }
     }
 
-    // Update the diameter
     dia = max(dia, dch + sdch + 2);
 
     return dch + 1; // return height of current node
 }
 
-// Main function
 int main() {
     vector<int> arr = {10, 20, -50, -1, 60, -1, -1, 30, -70, -1, 80, -1, 90, -1, -1, 40, -100, -1, -1, -1};
 

@@ -8,10 +8,8 @@ bool dfsCheck(int node, vector<int> adj[], int vis[],
 	vis[node] = 1;
 	pathVis[node] = 1;
 	check[node] = 0;
-	// traverse for adjacent nodes
 	for (auto it : adj[node])
 	{
-		// when the node is not visited
 		if (!vis[it])
 		{
 			if (dfsCheck(it, adj, vis, pathVis, check) == true)
@@ -20,8 +18,6 @@ bool dfsCheck(int node, vector<int> adj[], int vis[],
 				return true;
 			}
 		}
-		// if the node has been previously visited
-		// but it has to be visited on the same path
 		else if (pathVis[it])
 		{
 			check[node] = 0;

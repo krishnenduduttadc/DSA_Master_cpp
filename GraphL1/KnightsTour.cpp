@@ -3,7 +3,6 @@
 
 using namespace std;
 
-// Function prototypes
 void printKnightsTour(vector<vector<int>>& chess, int r, int c, int move);
 void displayBoard(vector<vector<int>>& chess);
 

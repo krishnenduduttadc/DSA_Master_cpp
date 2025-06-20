@@ -3,7 +3,6 @@ using namespace std;
 
 vector<int> rankArr, parent, sizeArr;
 
-// Initialize Disjoint Set
 void initDisjointSet(int n)
 {
     rankArr.resize(n + 1, 0);
@@ -16,7 +15,6 @@ void initDisjointSet(int n)
     }
 }
 
-// Find with path compression
 int findUPar(int node)
 {
     if (node == parent[node])
@@ -24,7 +22,6 @@ int findUPar(int node)
     return parent[node] = findUPar(parent[node]);
 }
 
-// Union by size
 void unionBySize(int u, int v)
 {
     int ulp_u = findUPar(u);
@@ -43,7 +40,6 @@ void unionBySize(int u, int v)
     }
 }
 
-// Solve function to count extra edges and needed operations
 int Solve(int n, vector<vector<int>> &edge)
 {
     initDisjointSet(n);

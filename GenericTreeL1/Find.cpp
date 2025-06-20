@@ -4,14 +4,12 @@
 
 using namespace std;
 
-// Define Node using struct instead of class
 struct Node {
     int data;
     vector<Node*> children;
     Node(int val)  {data=val;}
 };
 
-// Construct tree from array
 Node* constructTree(const vector<int>& arr) {
     Node* root = nullptr;
     stack<Node*> st;
@@ -32,7 +30,6 @@ Node* constructTree(const vector<int>& arr) {
     return root;
 }
 
-// Function to find if a node with the given data exists
 bool findNode(Node* node, int data) {
     if (node->data == data) return true;
 
@@ -42,7 +39,6 @@ bool findNode(Node* node, int data) {
     return false;
 }
 
-// Main
 int main() {
     vector<int> arr = {
         10, 20, 50, -1, 60, -1, -1,

@@ -1,7 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// Depth-First Search to check for bipartiteness
 bool dfs(int node, int col, int color[], vector<int> adj[]) {
     color[node] = col;
 
@@ -17,7 +16,6 @@ bool dfs(int node, int col, int color[], vector<int> adj[]) {
     return true;
 }
 
-// Main function to check if the graph is bipartite
 bool isBipartite(int V, vector<int> adj[]) {
     int color[V];
     for (int i = 0; i < V; i++) color[i] = -1;
@@ -31,7 +29,6 @@ bool isBipartite(int V, vector<int> adj[]) {
     return true;
 }
 
-// Utility function to add an undirected edge
 void addEdge(vector<int> adj[], int u, int v) {
     adj[u].push_back(v);
     adj[v].push_back(u);

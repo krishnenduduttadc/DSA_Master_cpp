@@ -39,19 +39,16 @@ void unionBySize(int u, int v)
     }
 }
 
-// ---------- Helper ----------
 bool isValid(int newr, int newc, int n)
 {
     return newr >= 0 && newr < n && newc >= 0 && newc < n;
 }
 
-// ---------- Main Function ----------
 int MaxConnection(vector<vector<int>> &grid)
 {
     int n = grid.size();
     makeSet(n * n);
 
-    // Step 1: Join all 1s
     for (int row = 0; row < n; row++)
     {
         for (int col = 0; col < n; col++)
@@ -74,7 +71,6 @@ int MaxConnection(vector<vector<int>> &grid)
         }
     }
 
-    // Step 2: Try flipping each 0 and calculate max connection
     int mx = 0;
     for (int row = 0; row < n; row++)
     {
@@ -106,7 +102,6 @@ int MaxConnection(vector<vector<int>> &grid)
         }
     }
 
-    // Final check: if all are 1s
     for (int cellNo = 0; cellNo < n * n; cellNo++)
     {
         mx = max(mx, sizeArr[findUPar(cellNo)]);
@@ -115,7 +110,6 @@ int MaxConnection(vector<vector<int>> &grid)
     return mx;
 }
 
-// ---------- Driver ----------
 int main()
 {
     vector<vector<int>> grid = {

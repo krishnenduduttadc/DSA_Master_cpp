@@ -4,14 +4,12 @@
 
 using namespace std;
 
-// Define Node using struct instead of class
 struct Node {
     int data;
     vector<Node*> children;
     Node(int val) : data(val) {}
 };
 
-// Function to construct the tree from the given array
 Node* construct(const vector<int>& arr) {
     Node* root = nullptr;
     stack<Node*> st;
@@ -33,7 +31,6 @@ Node* construct(const vector<int>& arr) {
     return root;
 }
 
-// Function to calculate the height of the tree
 int height(Node* node) {
     int maxHeight = -1;
 
@@ -47,7 +44,6 @@ int height(Node* node) {
     return maxHeight + 1;
 }
 
-// Main function
 int main() {
     vector<int> arr = {10, 20, -1, 30, 50, -1, 60, -1, -1, 40, -1, -1};
 
