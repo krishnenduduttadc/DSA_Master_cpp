@@ -5,7 +5,6 @@ int arrayRotateCheck(int arr[], int n) {
     int minIndex = 0;
     int min = arr[0];
     
-    // Finding the minimum element and its index
     for (int i = 1; i < n; i++) {
         if (arr[i] < min) {
             min = arr[i];
