@@ -2,7 +2,6 @@
 #include <stack>
 using namespace std;
 
-// Function to convert a postfix expression to a prefix expression.
 string postToPre(string exp) {
     stack<string> op;
     for (int i = 0; i < exp.length(); i++) {

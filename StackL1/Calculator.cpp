@@ -3,7 +3,6 @@
 #include <string>
 using namespace std;
 
-// Perform the basic operation
 int performOperation(int a, int b, char op) {
     if (op == '+') return a + b;
     else if (op == '-') return a - b;
@@ -12,14 +11,12 @@ int performOperation(int a, int b, char op) {
     return 0;
 }
 
-// Determine precedence of operators
 int precedence(char op) {
     if (op == '*' || op == '/') return 2;
     else if (op == '+' || op == '-') return 1;
     return 0;
 }
 
-// The core calculator logic
 int calculate(const string& s) {
     stack<int> operand;
     stack<char> oper;
@@ -45,7 +42,6 @@ int calculate(const string& s) {
             }
             oper.push(ch);
         }
-        // Ignore whitespace
         i++;
     }
 

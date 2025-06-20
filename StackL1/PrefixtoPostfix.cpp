@@ -3,7 +3,6 @@
 #include <string>
 using namespace std;
 
-// Function to convert a prefix expression to a postfix expression.
 string preToPost(string exp) {
     stack<string> op;
     int n = exp.length();

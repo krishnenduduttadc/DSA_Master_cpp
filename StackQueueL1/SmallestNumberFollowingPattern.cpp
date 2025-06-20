@@ -22,7 +22,6 @@ void smallestNumberFollowingPattern(string str) {
         }
     }
 
-    // Print remaining elements in the stack
     st.push(num);
     while (!st.empty()) {
         cout << st.top();
@@ -32,7 +31,6 @@ void smallestNumberFollowingPattern(string str) {
 }
 
 int main() {
-    // Example usage
     string pattern = "ddddiiii";
     smallestNumberFollowingPattern(pattern);
 

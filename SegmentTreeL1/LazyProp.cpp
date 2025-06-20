@@ -2,18 +2,15 @@
 #include <vector>
 using namespace std;
 
-// Global or passed segment tree variables
 vector<int> st, lazy;
 int n;
 
-// Initialize the segment tree
 void init(int _n) {
     n = _n;
     st.assign(4 * n, 0);
     lazy.assign(4 * n, 0);
 }
 
-// Build the segment tree
 void build(int start, int end, int node, vector<int>& v) {
     if (start == end) {
         st[node] = v[start];
@@ -27,7 +24,6 @@ void build(int start, int end, int node, vector<int>& v) {
     st[node] = st[2 * node + 1] + st[2 * node + 2];
 }
 
-// Query the segment tree with lazy propagation
 int query(int start, int end, int l, int r, int node) {
     if (lazy[node] != 0) {
         st[node] += lazy[node] * (end - start + 1);
@@ -51,7 +47,6 @@ int query(int start, int end, int l, int r, int node) {
     return q1 + q2;
 }
 
-// Update the segment tree with lazy propagation
 void update(int start, int end, int l, int r, int node, int value) {
     if (lazy[node] != 0) {
         st[node] += lazy[node] * (end - start + 1);
@@ -81,7 +76,6 @@ void update(int start, int end, int l, int r, int node, int value) {
     st[node] = st[2 * node + 1] + st[2 * node + 2];
 }
 
-// Helper wrapper functions
 void build(vector<int>& v) {
     build(0, n - 1, 0, v);
 }
@@ -94,15 +88,12 @@ void update(int l, int r, int x) {
     update(0, n - 1, l, r, 0, x);
 }
 
-// Main function
 int main() {
     vector<int> v = {1, 2, 3, 4, 5, 6, 7, 8};
     init(v.size());
     build(v);
-
     cout << query(0, 4) << endl;   // Should print 1+2+3+4+5 = 15
     update(0, 1, 10);              // Add 10 to indices 0 and 1
     cout << query(0, 4) << endl;   // Now 11+12+3+4+5 = 35
-
     return 0;
 }

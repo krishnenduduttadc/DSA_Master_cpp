@@ -8,12 +8,10 @@ struct MinStack {
     long long minVal;
 };
 
-// Initialize the MinStack
 void init(MinStack &ms) {
     ms.minVal = INT_MAX;
 }
 
-// Push value to MinStack
 void push(MinStack &ms, int val) {
     if (ms.st.empty()) {
         ms.minVal = val;
@@ -27,7 +25,6 @@ void push(MinStack &ms, int val) {
     }
 }
 
-// Pop the top value
 void pop(MinStack &ms) {
     if (ms.st.empty()) return;
 
@@ -38,7 +35,6 @@ void pop(MinStack &ms) {
     }
 }
 
-// Return the top value
 int top(MinStack &ms) {
     long long rem = ms.st.top();
     if (rem < 0) {
@@ -48,12 +44,10 @@ int top(MinStack &ms) {
     }
 }
 
-// Return the minimum value
 int getMin(MinStack &ms) {
     return static_cast<int>(ms.minVal);
 }
 
-// Test in main
 int main() {
     MinStack minStack;
     init(minStack);

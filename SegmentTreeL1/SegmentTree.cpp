@@ -6,7 +6,6 @@ const int MAXN = 1e5; // Adjust size as needed
 vector<int> st(4 * MAXN);
 int n;
 
-// Build the segment tree
 void build(int start, int end, int node, const vector<int>& v) {
     if (start == end) {
         st[node] = v[start];
@@ -20,7 +19,6 @@ void build(int start, int end, int node, const vector<int>& v) {
     st[node] = st[2 * node + 1] + st[2 * node + 2];
 }
 
-// Range query: sum from l to r
 int query(int start, int end, int l, int r, int node) {
     if (start > r || end < l)
         return 0;
@@ -35,7 +33,6 @@ int query(int start, int end, int l, int r, int node) {
     return q1 + q2;
 }
 
-// Point update: update index with new value
 void update(int start, int end, int node, int index, int value) {
     if (start == end) {
         st[node] = value;

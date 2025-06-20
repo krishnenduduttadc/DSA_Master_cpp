@@ -28,12 +28,8 @@ vector<int> solve(const vector<int>& arr) {
 }
 
 int main() {
-    // Example input
     vector<int> arr = {100, 80, 60, 70, 60, 75, 85};
-
     vector<int> span = solve(arr);
-
-    // Display the result
     display(span);
 
     return 0;

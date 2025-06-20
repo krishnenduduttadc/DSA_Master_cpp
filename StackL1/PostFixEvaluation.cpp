@@ -2,7 +2,6 @@
 #include <stack>
 using namespace std;
 
-// Function to evaluate a postfix expression.
 int evaluatePostFix(string S) {
     stack<int> op;
     for (int i = 0; i < S.length(); i++) {

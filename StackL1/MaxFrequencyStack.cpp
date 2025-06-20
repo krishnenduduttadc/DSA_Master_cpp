@@ -9,19 +9,16 @@ struct MaxFreqStack {
     int maxfreq;
 };
 
-// Initialize the stack
 void init(MaxFreqStack &mfs) {
     mfs.maxfreq = 0;
 }
 
-// Push value to stack
 void push(MaxFreqStack &mfs, int val) {
     int f = ++mfs.fmap[val];
     mfs.st[f].push(val);
     mfs.maxfreq = max(mfs.maxfreq, f);
 }
 
-// Pop and return the most frequent element
 int pop(MaxFreqStack &mfs) {
     int val = mfs.st[mfs.maxfreq].top();
     mfs.st[mfs.maxfreq].pop();

@@ -2,7 +2,6 @@
 #include <vector>
 using namespace std;
 
-// Function to rearrange the array around the first element as pivot
 void rearrange(vector<int>& arr) {
     int n = arr.size();
     int p1 = 1;
@@ -21,7 +20,6 @@ void rearrange(vector<int>& arr) {
     swap(arr[0], arr[p2]); // Place pivot at correct position
 }
 
-// Function to print the array
 void printArray(const vector<int>& arr) {
     for (int num : arr) {
         cout << num << " ";
@@ -30,14 +28,8 @@ void printArray(const vector<int>& arr) {
 }
 
 int main() {
-    // Hardcoded input array
     vector<int> arr = {10, 7, 8, 9, 1, 5};
-
-    // Rearranging the array
     rearrange(arr);
-
-    // Printing the rearranged array
     printArray(arr);
-
     return 0;
 }

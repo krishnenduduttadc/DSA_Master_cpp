@@ -2,14 +2,12 @@
 #include <vector>
 using namespace std;
 
-// Structure to hold TwoStack state
 struct TwoStack {
     vector<int> data;
     int tos1; // Top of Stack 1
     int tos2; // Top of Stack 2
 };
 
-// Initialize TwoStack with given capacity
 void initTwoStack(TwoStack& st, int cap) {
     st.data.resize(cap);
     st.tos1 = -1;

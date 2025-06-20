@@ -27,7 +27,6 @@ void initKStack(KStack& ks, int k1, int n1) {
     ks.next[n1 - 1] = -1;
 }
 
-// Push val into stack number sn (0-based index)
 void push(KStack& ks, int val, int sn) {
     if (ks.free == -1) {
         cout << "Stack Overflow" << endl;
@@ -42,7 +41,6 @@ void push(KStack& ks, int val, int sn) {
     ks.top[sn] = idx;
 }
 
-// Pop from stack number sn (0-based index)
 int pop(KStack& ks, int sn) {
     if (ks.top[sn] == -1) {
         cout << "Stack Underflow" << endl;
@@ -58,7 +56,6 @@ int pop(KStack& ks, int sn) {
     return ks.arr[idx];
 }
 
-// Free memory
 void destroyKStack(KStack& ks) {
     delete[] ks.arr;
     delete[] ks.top;

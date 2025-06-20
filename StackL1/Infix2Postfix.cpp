@@ -3,7 +3,6 @@
 #include <string>
 using namespace std;
 
-// Function to get precedence of operators
 static int precedence(char c)
 {
     if (c == '^')
@@ -15,7 +14,6 @@ static int precedence(char c)
     else
         return 0;
 }
-// Function to convert infix expression to postfix expression
 static string infixToPostfix(string exp)
 {
     stack<string> operand;
