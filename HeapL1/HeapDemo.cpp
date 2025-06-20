@@ -2,12 +2,10 @@
 #include <vector>
 using namespace std;
 
-// Heap utility functions
 int left(int i) { return 2 * i + 1; }
 int right(int i) { return 2 * i + 2; }
 int parent(int i) { return (i - 1) / 2; }
 
-// Insert into min-heap
 void insertMinHeap(vector<int>& heap, int& size, int capacity, int value) {
     if (size == capacity) return;
 
@@ -21,7 +19,6 @@ void insertMinHeap(vector<int>& heap, int& size, int capacity, int value) {
     }
 }
 
-// Display heap
 void showHeap(const vector<int>& heap, int size) {
     for (int i = 0; i < size; i++) {
         cout << heap[i] << " ";

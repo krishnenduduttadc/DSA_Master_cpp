@@ -7,12 +7,10 @@ using namespace std;
 int sol(string s) {
     unordered_map<char, int> fmap;
 
-    // Build frequency map
     for (char c : s) {
         fmap[c]++;
     }
 
-    // Find first non-repeating character
     for (int i = 0; i < s.length(); i++) {
         char ch = s[i];
         if (fmap[ch] == 1) {

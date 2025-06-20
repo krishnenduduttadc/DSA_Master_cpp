@@ -12,7 +12,6 @@ int main() {
 
     
 
-    // Create a hashmap to mark if a city is a potential source
     unordered_map<string, bool> psrc;
 
     
@@ -40,7 +39,6 @@ int main() {
         }
     }
 
-    // Print the itinerary
     while (true) {
         if (map.find(src) != map.end()) {
             cout << src << " -> ";

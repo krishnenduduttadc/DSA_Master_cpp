@@ -3,7 +3,6 @@
 
 using namespace std;
 
-// Node structure definition
 struct Node {
     int data;
     Node* next;
@@ -14,7 +13,6 @@ struct Node {
     }
 };
 
-// Function to add a node at the end of the list
 void addLast(Node*& head, Node*& tail, int val) {
     Node* temp = new Node(val);
     if (head == nullptr) {
@@ -25,7 +23,6 @@ void addLast(Node*& head, Node*& tail, int val) {
     }
 }
 
-// Function to display the elements of the list
 void display(Node* head) {
     Node* temp = head;
     while (temp != nullptr) {
@@ -35,18 +32,15 @@ void display(Node* head) {
     cout << endl;
 }
 
-// Function to check if the linked list is a palindrome
 bool isPalindrome(Node* head) {
     stack<int> s;
     Node* slow = head;
 
-    // Push all elements to stack
     while (slow != nullptr) {
         s.push(slow->data);
         slow = slow->next;
     }
 
-    // Compare while popping
     slow = head;
     while (slow != nullptr) {
         int top = s.top();
@@ -60,23 +54,19 @@ bool isPalindrome(Node* head) {
     return true;
 }
 
-// Main function to demonstrate linked list operations
 int main() {
     Node* head = nullptr;
     Node* tail = nullptr;
 
-    // Add elements
     addLast(head, tail, 1);
     addLast(head, tail, 2);
     addLast(head, tail, 3);
     addLast(head, tail, 2);
     addLast(head, tail, 1);
 
-    // Display and check palindrome
     display(head);
     cout << boolalpha << isPalindrome(head) << endl; // Output: true
 
-    // Cleanup
     while (head != nullptr) {
         Node* temp = head;
         head = head->next;

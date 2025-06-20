@@ -3,7 +3,6 @@ using namespace std;
 
 
     static void start() {
-        // Hardcoded input array
         int arr[] = {3, 1, 4, 1, 5}; // Example input
         int n = sizeof(arr) / sizeof(arr[0]);
         long long num = 0;

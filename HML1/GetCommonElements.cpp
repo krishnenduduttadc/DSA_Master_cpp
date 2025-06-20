@@ -7,12 +7,10 @@ using namespace std;
 void getCommonElements(int a1[], int a2[], int n1, int n2) {
     unordered_map<int, int> hm; // HashMap to store element frequencies from a1
 
-    // Count frequencies of elements in a1
     for (int i = 0; i < n1; i++) {
         hm[a1[i]]++;
     }
 
-    // Find common elements and print them
     vector<int> commonElements;
     for (int i = 0; i < n2; i++) {
         if (hm.find(a2[i]) != hm.end() && hm[a2[i]] > 0) {
@@ -21,7 +19,6 @@ void getCommonElements(int a1[], int a2[], int n1, int n2) {
         }
     }
 
-    // Print the common elements
     for (int elem : commonElements) {
         cout << elem << " ";
     }

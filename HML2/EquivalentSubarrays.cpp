@@ -10,7 +10,6 @@ int main() {
     vector<int> arr = {2, 1, 3, 2, 3};
     unordered_set<int> set;
 
-    // Insert unique elements into the set
     for (int i = 0; i < arr.size(); i++) {
         set.insert(arr[i]);
     }
@@ -24,7 +23,6 @@ int main() {
         bool f1 = false;
         bool f2 = false;
 
-        // Expand the window until all unique elements are covered
         while (i < arr.size() - 1) {
             f1 = true;
             i++;
@@ -35,7 +33,6 @@ int main() {
             }
         }
 
-        // Slide the window to the right until the uniqueness condition is violated
         while (j < i) {
             f2 = true;
             j++;
@@ -53,13 +50,11 @@ int main() {
             }
         }
 
-        // If both windows cannot be expanded or contracted further, break the loop
         if (!f1 && !f2) {
             break;
         }
     }
 
-    // Print the total number of equivalent subarrays
     cout << ans << endl;
 
     return 0;

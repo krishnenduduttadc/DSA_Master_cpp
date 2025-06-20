@@ -1,7 +1,6 @@
 #include <iostream>
 using namespace std;
 
-// Node structure
 struct Node {
     int data;
     Node* next;
@@ -12,7 +11,6 @@ struct Node {
     }
 };
 
-// Function to add a node at the end of the list
 void addLast(Node*& head, Node*& tail, int val) {
     Node* temp = new Node(val);
     if (head == nullptr) {
@@ -23,7 +21,6 @@ void addLast(Node*& head, Node*& tail, int val) {
     }
 }
 
-// Function to display the linked list
 void display(Node* head) {
     Node* temp = head;
     while (temp != nullptr) {
@@ -33,7 +30,6 @@ void display(Node* head) {
     cout << endl;
 }
 
-// Function to merge two sorted linked lists
 Node* sortedMerge(Node* headA, Node* headB) {
     Node* dummyNode = new Node(0);
     Node* tail = dummyNode;
@@ -63,28 +59,23 @@ Node* sortedMerge(Node* headA, Node* headB) {
     return mergedHead;
 }
 
-// Main function
 int main() {
-    // First linked list
     Node* head1 = nullptr;
     Node* tail1 = nullptr;
     addLast(head1, tail1, 5);
     addLast(head1, tail1, 10);
     addLast(head1, tail1, 15);
 
-    // Second linked list
     Node* head2 = nullptr;
     Node* tail2 = nullptr;
     addLast(head2, tail2, 2);
     addLast(head2, tail2, 3);
     addLast(head2, tail2, 20);
 
-    // Merge and display
     Node* mergedHead = sortedMerge(head1, head2);
     cout << "Merged Linked List:" << endl;
     display(mergedHead);
 
-    // Optional: Free memory
     Node* temp;
     while (mergedHead != nullptr) {
         temp = mergedHead;

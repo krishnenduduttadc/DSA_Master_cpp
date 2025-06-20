@@ -18,7 +18,6 @@ int findEquivalentSubarrays(vector<int> arr) {
     int ans = 0;
     
     while (true) {
-        // Expand the window until we have exactly k unique elements
         while (i < n) {
             map[arr[i]]++;
             if (map.size() < k) {
@@ -31,7 +30,6 @@ int findEquivalentSubarrays(vector<int> arr) {
             }
         }
         
-        // Shrink the window from the left until we no longer have exactly k unique elements
         while (j < i && map.size() >= k) {
             map[arr[j]]--;
             if (map[arr[j]] == 0) {

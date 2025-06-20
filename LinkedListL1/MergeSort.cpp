@@ -2,7 +2,6 @@
 
 using namespace std;
 
-// Definition for a singly-linked list node
 struct ListNode {
     int data;
     ListNode* next;
@@ -13,7 +12,6 @@ struct ListNode {
     }
 };
 
-// Function to merge two sorted linked lists
 ListNode* merge(ListNode* h1, ListNode* h2) {
     if (h1 == nullptr) return h2;
     if (h2 == nullptr) return h1;
@@ -49,7 +47,6 @@ ListNode* merge(ListNode* h1, ListNode* h2) {
     return ans;
 }
 
-// Function to find the middle of the linked list
 ListNode* mid(ListNode* h) {
     ListNode* slow = h;
     ListNode* fast = h;
@@ -62,7 +59,6 @@ ListNode* mid(ListNode* h) {
     return slow;
 }
 
-// Function to perform merge sort on the linked list
 ListNode* mergeSort(ListNode* h1) {
     if (h1 == nullptr || h1->next == nullptr) return h1;
 
@@ -77,7 +73,6 @@ ListNode* mergeSort(ListNode* h1) {
     return t3;
 }
 
-// Function to print the linked list
 void printList(ListNode* head) {
     ListNode* temp = head;
     while (temp != nullptr) {
@@ -88,7 +83,6 @@ void printList(ListNode* head) {
 }
 
 int main() {
-    // Creating an example linked list: 4 -> 2 -> 1 -> 3
     ListNode* head = new ListNode(4);
     head->next = new ListNode(2);
     head->next->next = new ListNode(1);
@@ -102,7 +96,6 @@ int main() {
     cout << "Sorted Linked List:" << endl;
     printList(head);
 
-    // Clean up allocated memory
     ListNode* current = head;
     while (current != nullptr) {
         ListNode* next = current->next;

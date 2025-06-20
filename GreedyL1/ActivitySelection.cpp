@@ -24,8 +24,8 @@ int maxActivity(vector<pair<int, int>>& activities) {
 }
 
 int main() {
-    // Each pair = {start time, finish time}
-    vector<pair<int, int>> activities = {
+    
+    vector<pair<int, int>> activities = { // Each pair = {start time, finish time}
         {12, 25},
         {10, 20},
         {20, 30}

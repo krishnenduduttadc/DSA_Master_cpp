@@ -1,13 +1,11 @@
 #include <iostream>
 using namespace std;
 
-// Node structure
 struct Node {
     int val;
     Node* next;
 };
 
-// Create a new node
 Node* createNode(int val) {
     Node* newNode = new Node;
     newNode->val = val;
@@ -15,7 +13,6 @@ Node* createNode(int val) {
     return newNode;
 }
 
-// Find middle of the linked list
 Node* midNode(Node* head) {
     if (head == nullptr || head->next == nullptr) return head;
 
@@ -30,7 +27,6 @@ Node* midNode(Node* head) {
     return slow;
 }
 
-// Reverse linked list
 Node* reverseOfLL(Node* head) {
     Node* prev = nullptr;
     Node* curr = head;
@@ -46,7 +42,6 @@ Node* reverseOfLL(Node* head) {
     return prev;
 }
 
-// Check if linked list is palindrome
 bool isPalindrome(Node* head) {
     if (head == nullptr || head->next == nullptr) return true;
 
@@ -69,14 +64,12 @@ bool isPalindrome(Node* head) {
         c2 = c2->next;
     }
 
-    // Restore the list
     nHead = reverseOfLL(nHead);
     mid->next = nHead;
 
     return res;
 }
 
-// Create list from array
 Node* createList(int values[], int n) {
     Node dummy;
     dummy.next = nullptr;

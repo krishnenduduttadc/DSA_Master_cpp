@@ -11,7 +11,6 @@ int longestSubstringWithKUniqueChars(const string& str, int k) {
     while (true) {
         bool f1 = false, f2 = false;
 
-        // Acquire characters
         while (i < (int)str.length() - 1) {
             f1 = true;
             i++;
@@ -24,7 +23,6 @@ int longestSubstringWithKUniqueChars(const string& str, int k) {
             }
         }
 
-        // Release characters
         while (j < i) {
             f2 = true;
             j++;

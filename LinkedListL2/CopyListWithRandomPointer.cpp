@@ -1,7 +1,7 @@
 #include <iostream>
 #include <unordered_map>
+using namespace std;
 
-// Definition for a Node.
 struct Node {
     int val;
     Node* next;
@@ -17,16 +17,14 @@ struct Node {
 Node* copyRandomList(Node* head) {
     if (head == nullptr) return nullptr;
 
-    std::unordered_map<Node*, Node*> map;
+    unordered_map<Node*, Node*> map;
     Node* curr = head;
 
-    // First pass: create all nodes and store them in the map.
     while (curr != nullptr) {
         map[curr] = new Node(curr->val);
         curr = curr->next;
     }
 
-    // Second pass: assign next and random pointers.
     curr = head;
     while (curr != nullptr) {
         map[curr]->next = map[curr->next];
@@ -39,14 +37,14 @@ Node* copyRandomList(Node* head) {
 
 void printList(Node* head) {
     while (head != nullptr) {
-        std::cout << "Node(" << head->val << ")";
+        cout << "Node(" << head->val << ")";
         if (head->random != nullptr) {
-            std::cout << " [Random(" << head->random->val << ")]";
+            cout << " [Random(" << head->random->val << ")]";
         }
-        std::cout << " -> ";
+        cout << " -> ";
         head = head->next;
     }
-    std::cout << "null" << std::endl;
+    cout << "null" << endl;
 }
 
 int main() {
@@ -59,7 +57,6 @@ int main() {
     Node* result = copyRandomList(head);
     printList(result);
 
-    // Free the allocated memory
     Node* curr = result;
     while (curr != nullptr) {
         Node* temp = curr;

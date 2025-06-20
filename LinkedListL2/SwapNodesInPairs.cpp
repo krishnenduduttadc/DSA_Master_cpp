@@ -1,5 +1,6 @@
 #include <iostream>
 using namespace std;
+
 struct Node {
     int val;
     Node* next;
@@ -9,46 +10,41 @@ struct Node {
     }
 };
 
-class SwapNodesInPairs {
-public:
-    Node* swapPairs(Node* head) {
-        Node dummy(0);
-        dummy.next = head;
-        Node* current = &dummy;
+Node* swapPairs(Node* head) {
+    Node dummy(0);
+    dummy.next = head;
+    Node* current = &dummy;
 
-        while (current->next != nullptr && current->next->next != nullptr) {
-            Node* first = current->next;
-            Node* second = current->next->next;
+    while (current->next != nullptr && current->next->next != nullptr) {
+        Node* first = current->next;
+        Node* second = current->next->next;
 
-            first->next = second->next;
-            second->next = first;
-            current->next = second;
+        first->next = second->next;
+        second->next = first;
+        current->next = second;
 
-            current = first;
-        }
-
-        return dummy.next;
+        current = first;
     }
 
-    static void printList(Node* head) {
-        while (head != nullptr) {
-            cout << head->val << " -> ";
-            head = head->next;
-        }
-        cout << "null" << endl;
+    return dummy.next;
+}
+
+void printList(Node* head) {
+    while (head != nullptr) {
+        cout << head->val << " -> ";
+        head = head->next;
     }
-};
+    cout << "null" << endl;
+}
 
 int main() {
-    SwapNodesInPairs solution;
-
     Node* head = new Node(1);
     head->next = new Node(2);
     head->next->next = new Node(3);
     head->next->next->next = new Node(4);
 
-    Node* result = solution.swapPairs(head);
-    SwapNodesInPairs::printList(result);
+    Node* result = swapPairs(head);
+    printList(result);
 
     // Free the allocated memory
     Node* curr = result;

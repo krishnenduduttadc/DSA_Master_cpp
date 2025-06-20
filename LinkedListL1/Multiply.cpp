@@ -1,7 +1,6 @@
 #include <iostream>
 using namespace std;
 
-// Node structure
 struct Node {
     int val;
     Node* next;
@@ -11,7 +10,6 @@ struct Node {
     }
 };
 
-// Function to reverse a linked list
 Node* reverse(Node* head) {
     Node* prev = nullptr;
     Node* curr = head;
@@ -26,7 +24,6 @@ Node* reverse(Node* head) {
     return prev;
 }
 
-// Function to add two linked lists
 Node* addTwoLinkedList(Node* l1, Node* l2) {
     Node* dummy = new Node(-1);
     Node* curr = dummy;
@@ -51,7 +48,6 @@ Node* addTwoLinkedList(Node* l1, Node* l2) {
     return dummy->next;
 }
 
-// Multiply a linked list by a single digit
 Node* multiplyLLWithDigit(Node* head, int digit) {
     Node* dummy = new Node(-1);
     Node* curr = dummy;
@@ -70,7 +66,6 @@ Node* multiplyLLWithDigit(Node* head, int digit) {
     return dummy->next;
 }
 
-// Multiply two linked lists
 Node* multiplyTwoLL(Node* l1, Node* l2) {
     l1 = reverse(l1);
     l2 = reverse(l2);
@@ -82,7 +77,6 @@ Node* multiplyTwoLL(Node* l1, Node* l2) {
     while (l2_curr != nullptr) {
         Node* partial = multiplyLLWithDigit(l1, l2_curr->val);
 
-        // Apply shift (equivalent to multiplying by 10^shift)
         for (int i = 0; i < shift; i++) {
             Node* zero = new Node(0);
             zero->next = partial;
@@ -97,7 +91,6 @@ Node* multiplyTwoLL(Node* l1, Node* l2) {
     return reverse(result);
 }
 
-// Create linked list from array
 Node* createList(int arr[], int n) {
     Node* dummy = new Node(-1);
     Node* curr = dummy;
@@ -108,7 +101,6 @@ Node* createList(int arr[], int n) {
     return dummy->next;
 }
 
-// Print the linked list
 void printList(Node* head) {
     while (head != nullptr) {
         cout << head->val;
@@ -118,20 +110,16 @@ void printList(Node* head) {
 }
 
 int main() {
-    // First number: 243
     int arr1[] = {3, 4, 2};
     int n1 = sizeof(arr1) / sizeof(arr1[0]);
     Node* l1 = createList(arr1, n1);
 
-    // Second number: 564
     int arr2[] = {4, 6, 5};
     int n2 = sizeof(arr2) / sizeof(arr2[0]);
     Node* l2 = createList(arr2, n2);
 
-    // Multiply
     Node* result = multiplyTwoLL(l1, l2);
 
-    // Print result: 137052
     printList(result);
 
     return 0;

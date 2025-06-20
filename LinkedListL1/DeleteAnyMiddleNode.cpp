@@ -29,13 +29,12 @@ bool deleteNode(Node* givenNode) {
     givenNode->data = next->data;
     givenNode->next = next->next;
 
-    delete next; // Free memory of the node we deleted
+    delete next; 
 
     return true;
 }
 
 int main() {
-    // Create a linked list with 7 hard-coded nodes
     Node* head = new Node(1);
     head->next = new Node(2);
     head->next->next = new Node(2);
@@ -46,12 +45,10 @@ int main() {
 
     printList(head);
 
-    // Delete the third node
     deleteNode(head->next->next);
 
     printList(head);
 
-    // Clean up memory
     Node* current = head;
     while (current != nullptr) {
         Node* next = current->next;

@@ -6,12 +6,10 @@ using namespace std;
 int lastStoneWeight(vector<int>& stones) {
     priority_queue<int> pq;
 
-    // Push all stones into max heap
     for (int stone : stones) {
         pq.push(stone);
     }
 
-    // Smash stones until only one or none remains
     while (pq.size() > 1) {
         int first = pq.top(); pq.pop();
         int second = pq.top(); pq.pop();
@@ -26,10 +24,7 @@ int lastStoneWeight(vector<int>& stones) {
 
 int main() {
     vector<int> stones = {2, 7, 4, 1, 8, 1};
-
     int result = lastStoneWeight(stones);
-
     cout << "The last stone weight is " << result << endl;
-
     return 0;
 }

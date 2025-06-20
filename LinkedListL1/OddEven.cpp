@@ -1,13 +1,11 @@
 #include <iostream>
 using namespace std;
 
-// Node structure
 struct Node {
     int data;
     Node* next;
 };
 
-// Function to create a new node
 Node* createNode(int val) {
     Node* newNode = new Node;
     newNode->data = val;
@@ -15,7 +13,6 @@ Node* createNode(int val) {
     return newNode;
 }
 
-// Function to add a node at the end of the list
 void addLast(Node*& head, Node*& tail, int& size, int val) {
     Node* newNode = createNode(val);
     if (size == 0) {
@@ -27,7 +24,6 @@ void addLast(Node*& head, Node*& tail, int& size, int val) {
     size++;
 }
 
-// Function to add a node at the beginning of the list
 void addFirst(Node*& head, Node*& tail, int& size, int val) {
     Node* newNode = createNode(val);
     newNode->next = head;
@@ -38,7 +34,6 @@ void addFirst(Node*& head, Node*& tail, int& size, int val) {
     size++;
 }
 
-// Function to display the list
 void display(Node* head) {
     Node* temp = head;
     while (temp != nullptr) {
@@ -48,7 +43,6 @@ void display(Node* head) {
     cout << endl;
 }
 
-// Function to get the first element
 int getFirst(Node* head, int size) {
     if (size == 0) {
         cout << "List is empty" << endl;
@@ -57,7 +51,6 @@ int getFirst(Node* head, int size) {
     return head->data;
 }
 
-// Function to remove the first node
 void removeFirst(Node*& head, Node*& tail, int& size) {
     if (size == 0) {
         cout << "List is empty" << endl;
@@ -73,7 +66,6 @@ void removeFirst(Node*& head, Node*& tail, int& size) {
     size--;
 }
 
-// Function to segregate odd and even nodes
 void oddEven(Node*& head, Node*& tail, int& size) {
     Node* oddHead = nullptr;
     Node* oddTail = nullptr;
@@ -110,13 +102,11 @@ void oddEven(Node*& head, Node*& tail, int& size) {
     }
 }
 
-// MAIN
 int main() {
     Node* head = nullptr;
     Node* tail = nullptr;
     int size = 0;
 
-    // Add elements to list
     addLast(head, tail, size, 2);
     addLast(head, tail, size, 8);
     addLast(head, tail, size, 9);
@@ -132,7 +122,6 @@ int main() {
     cout << "List after Odd-Even Segregation: ";
     display(head);
 
-    // Add to beginning and end
     int a = 10, b = 100;
     addFirst(head, tail, size, a);
     addLast(head, tail, size, b);

@@ -12,7 +12,6 @@ vector<int> getMinimums(vector<int> nums, int k)
 
     deque<int> deque;
 
-    // Process the first window of size k
     for (int i = 0; i < k; i++)
     {
         while (!deque.empty() && deque.back() > nums[i])
@@ -23,7 +22,6 @@ vector<int> getMinimums(vector<int> nums, int k)
     }
     ans.push_back(deque.front()); // Store the minimum for the first window
 
-    // Process the rest of the elements
     for (int i = k; i < n; i++)
     {
         if (deque.front() == nums[i - k])
@@ -44,7 +42,6 @@ vector<int> getMinimums(vector<int> nums, int k)
 int main()
 {
 
-    // Test case 1
     vector<int> nums1 = {1, 3, -1, -3, 5, 3, 6, 7};
     int k1 = 3;
     vector<int> result1 = getMinimums(nums1, k1);

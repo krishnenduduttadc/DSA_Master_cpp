@@ -22,10 +22,8 @@ struct Pair {
 vector<int> mergeKSortedLists(vector<vector<int>>& lists) {
     vector<int> rv;
 
-    // Min-heap priority queue
     priority_queue<Pair, vector<Pair>, greater<Pair>> pq;
     
-    // Initialize the priority queue with the first element from each list
     for (int i = 0; i < lists.size(); ++i) {
         if (!lists[i].empty()) {
             pq.push(Pair(i, 0, lists[i][0]));
@@ -36,10 +34,8 @@ vector<int> mergeKSortedLists(vector<vector<int>>& lists) {
         Pair p = pq.top();
         pq.pop();
 
-        // Add the current value to result vector
         rv.push_back(p.val);
 
-        // Move to the next element in the same list
         p.di++;
         if (p.di < lists[p.li].size()) {
             p.val = lists[p.li][p.di];

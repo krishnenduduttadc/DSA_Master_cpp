@@ -5,12 +5,10 @@ using namespace std;
 bool solution(string s1, string s2) {
     unordered_map<char, int> map;
     
-    // Count frequencies of characters in s1
     for (char ch : s1) {
         map[ch]++;
     }
 
-    // Check characters in s2 against the frequency map
     for (char ch : s2) {
         if (map.find(ch) == map.end()) {
             return false; // Character not found in s1
@@ -21,7 +19,6 @@ bool solution(string s1, string s2) {
         }
     }
 
-    // If map is empty, all characters from s1 and s2 match in frequency
     return map.empty();
 }
 

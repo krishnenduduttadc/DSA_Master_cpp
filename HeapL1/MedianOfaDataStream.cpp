@@ -2,10 +2,7 @@
 #include <queue>
 using namespace std;
 
-// Global max heap for smaller half
 priority_queue<int> small;
-
-// Global min heap for larger half
 priority_queue<int, vector<int>, greater<int>> large;
 
 void addNum(int num) {

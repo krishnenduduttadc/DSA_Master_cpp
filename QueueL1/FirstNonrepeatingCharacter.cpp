@@ -32,16 +32,8 @@ string FirstNonRepeating(string A)
 
 int main()
 {
-    // Hardcoded input string
     string A = "aabc";
-
-    // Create an instance of the FirstNonRepeatingCharacter class
-
-    // Call the FirstNonRepeating method and store the result
     string result = FirstNonRepeating(A);
-
-    // Print the result
     cout << result << endl;
-
     return 0;
 }

@@ -1,7 +1,6 @@
 #include <iostream>
 using namespace std;
 
-// Node structure
 struct Node {
     int data;
     Node* next;
@@ -12,12 +11,10 @@ struct Node {
     }
 };
 
-// Global pointers for the linked list
 Node* head = nullptr;
 Node* tail = nullptr;
 int size = 0;
 
-// Function to add a node at the end of the list
 void addLast(int val) {
     Node* temp = new Node(val);
     if (size == 0) {
@@ -29,7 +26,6 @@ void addLast(int val) {
     size++;
 }
 
-// Function to display the elements of the list
 void display() {
     Node* temp = head;
     while (temp != nullptr) {
@@ -39,12 +35,10 @@ void display() {
     cout << endl;
 }
 
-// Function to get the k-th node from the end
 int kthFromLast(int k) {
     Node* slow = head;
     Node* fast = head;
 
-    // Move fast pointer k steps ahead
     for (int i = 0; i < k; i++) {
         if (fast == nullptr) {
             cout << "List size is less than k" << endl;
@@ -53,7 +47,6 @@ int kthFromLast(int k) {
         fast = fast->next;
     }
 
-    // Move both pointers until fast reaches the end
     while (fast != nullptr) {
         slow = slow->next;
         fast = fast->next;
@@ -62,7 +55,6 @@ int kthFromLast(int k) {
     return slow->data;
 }
 
-// Function to free memory (destructor equivalent)
 void deleteList() {
     Node* curr = head;
     while (curr != nullptr) {
@@ -74,7 +66,6 @@ void deleteList() {
     size = 0;
 }
 
-// Main function
 int main() {
     addLast(10);
     addLast(20);

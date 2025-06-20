@@ -1,13 +1,11 @@
 #include <iostream>
 using namespace std;
 
-// Node structure
 struct Node {
     int val;
     Node* next;
 };
 
-// Function to create a new node
 Node* createNode(int val) {
     Node* newNode = new Node;
     newNode->val = val;
@@ -15,7 +13,6 @@ Node* createNode(int val) {
     return newNode;
 }
 
-// Function to reverse a linked list
 Node* reverse(Node* head) {
     if (head == nullptr || head->next == nullptr) return head;
 
@@ -32,7 +29,6 @@ Node* reverse(Node* head) {
     return prev;
 }
 
-// Function to unfold a folded linked list
 void unfold(Node* head) {
     if (head == nullptr || head->next == nullptr) return;
 
@@ -57,7 +53,6 @@ void unfold(Node* head) {
     fp->next = sh;
 }
 
-// Function to print a linked list
 void printList(Node* head) {
     while (head != nullptr) {
         cout << head->val << " ";
@@ -67,7 +62,6 @@ void printList(Node* head) {
 }
 
 int main() {
-    // Hardcoded input: folded list like 1 -> 6 -> 2 -> 5 -> 3 -> 4
     Node* head = createNode(1);
     head->next = createNode(6);
     head->next->next = createNode(2);
@@ -78,13 +72,10 @@ int main() {
     cout << "Original folded list:\n";
     printList(head);
 
-    // Unfold the list
     unfold(head);
 
     cout << "Unfolded list:\n";
     printList(head);
-
-    // Clean up memory
     Node* curr = head;
     while (curr != nullptr) {
         Node* next = curr->next;

@@ -1,7 +1,6 @@
 #include <iostream>
 using namespace std;
 
-// Node structure
 struct Node {
     int data;
     Node* left;
@@ -14,7 +13,6 @@ struct Node {
     }
 };
 
-// Function to concatenate two circular doubly linked lists
 Node* concatenate(Node* H1, Node* H2) {
     if (H1 == nullptr) return H2;
     if (H2 == nullptr) return H1;
@@ -31,7 +29,6 @@ Node* concatenate(Node* H1, Node* H2) {
     return H1;
 }
 
-// Function to convert binary tree into circular doubly linked list
 Node* bTreeToClist(Node* root) {
     if (root == nullptr) return nullptr;
 
@@ -45,7 +42,6 @@ Node* bTreeToClist(Node* root) {
     return result;
 }
 
-// Function to print the circular doubly linked list
 void printCList(Node* head) {
     if (head == nullptr) return;
 
@@ -57,7 +53,6 @@ void printCList(Node* head) {
     cout << endl;
 }
 
-// Main function to test the bTreeToClist function
 int main() {
     // Creating a sample binary tree:
     //     1

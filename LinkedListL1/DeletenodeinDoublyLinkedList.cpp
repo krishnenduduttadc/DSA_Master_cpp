@@ -13,34 +13,28 @@ struct Node {
     }
 };
 
-// Function to delete the node at position x and return the head of the linked list
 Node* deleteNode(Node* head, int x) {
     if (head == nullptr || x <= 0) return head; // If list is empty or position is invalid
 
     Node* d = head;
 
-    // Traverse to the node at position x
     for (int i = 1; i < x; i++) {
         d = d->next;
         if (d == nullptr) return head; // If position x is out of bounds
     }
 
-    // If the node to be deleted is the head node
     if (d->prev == nullptr) {
         head = d->next;
         if (head != nullptr) head->prev = nullptr;
     }
-    // If the node to be deleted is the tail node
     else if (d->next == nullptr) {
         d->prev->next = nullptr;
     }
-    // If the node to be deleted is in the middle
     else {
         d->prev->next = d->next;
         d->next->prev = d->prev;
     }
 
-    // Disconnect and delete the node
     d->next = nullptr;
     d->prev = nullptr;
     delete d;
@@ -48,7 +42,6 @@ Node* deleteNode(Node* head, int x) {
     return head;
 }
 
-// Utility function to print the list from head to tail
 void printList(Node* head) {
     Node* temp = head;
     while (temp != nullptr) {
@@ -59,7 +52,6 @@ void printList(Node* head) {
 }
 
 int main() {
-    // Creating a doubly linked list: 1 <-> 2 <-> 3 <-> 4 <-> 5
     Node* head = new Node(1);
     head->next = new Node(2);
     head->next->prev = head;
@@ -73,22 +65,18 @@ int main() {
     cout << "Original List:" << endl;
     printList(head);
 
-    // Delete node at position 3 (1-based index)
     head = deleteNode(head, 3);
     cout << "List after deleting node at position 3:" << endl;
     printList(head);
 
-    // Delete node at position 1 (head)
     head = deleteNode(head, 1);
     cout << "List after deleting node at position 1:" << endl;
     printList(head);
 
-    // Delete node at position 3 (tail)
     head = deleteNode(head, 3); // Note: current length is 3 after deletions
     cout << "List after deleting node at position 3:" << endl;
     printList(head);
 
-    // Clean up memory
     Node* current = head;
     while (current != nullptr) {
         Node* next = current->next;

@@ -11,7 +11,6 @@ int solution(vector<int> arr) {
     int sum = 0;
     
     for (int val : arr) {
-        // Treat 0 as -1 for sum calculation
         if (val == 0) {
             sum += -1;
         } else {

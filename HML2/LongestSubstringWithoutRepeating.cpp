@@ -11,15 +11,12 @@ int lengthOfLongestSubstring(string s) {
     for (int start = 0, end = 0; end < s.length(); end++) {
         char currentChar = s[end];
 
-        // If the current character is already in the substring, adjust the start pointer
         if (map.find(currentChar) != map.end()) {
             start = max(map[currentChar] + 1, start);
         }
 
-        // Update the maximum length
         maxLength = max(maxLength, end - start + 1);
 
-        // Store the index of the current character in the map
         map[currentChar] = end;
     }
 

@@ -9,7 +9,6 @@ vector<int> maxSlidingWindow(vector<int> nums, int k)
     vector<int> ans;
     deque<int> deque;
 
-    // Process the first window of size k separately
     for (int i = 0; i < k; i++)
     {
         while (!deque.empty() && nums[deque.back()] <= nums[i])
@@ -20,7 +19,6 @@ vector<int> maxSlidingWindow(vector<int> nums, int k)
     }
     ans.push_back(nums[deque.front()]);
 
-    // Process the rest of the elements
     for (int i = k; i < n; i++)
     {
         if (!deque.empty() && deque.front() == i - k)
@@ -41,7 +39,6 @@ vector<int> maxSlidingWindow(vector<int> nums, int k)
 int main()
 {
 
-    // Example 1
     vector<int> nums1 = {1, 3, -1, -3, 5, 3, 6, 7};
     int k1 = 3;
     vector<int> result1 = maxSlidingWindow(nums1, k1);

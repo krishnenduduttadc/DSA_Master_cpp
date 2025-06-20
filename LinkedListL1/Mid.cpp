@@ -1,7 +1,6 @@
 #include <iostream>
 using namespace std;
 
-// Node structure
 struct Node {
     int data;
     Node* next;
@@ -11,12 +10,10 @@ struct Node {
     }
 };
 
-// Linked list helpers
 Node* head = nullptr;
 Node* tail = nullptr;
 int size = 0;
 
-// Add node at end
 void addLast(int val) {
     Node* newNode = new Node(val);
     if (size == 0) {
@@ -28,7 +25,6 @@ void addLast(int val) {
     size++;
 }
 
-// Display list
 void display() {
     Node* temp = head;
     while (temp != nullptr) {
@@ -38,7 +34,6 @@ void display() {
     cout << endl;
 }
 
-// Get first element
 int getFirst() {
     if (size == 0) {
         cout << "List is empty" << endl;
@@ -47,7 +42,6 @@ int getFirst() {
     return head->data;
 }
 
-// Get last element
 int getLast() {
     if (size == 0) {
         cout << "List is empty" << endl;
@@ -56,7 +50,6 @@ int getLast() {
     return tail->data;
 }
 
-// Get element at index
 int getAt(int idx) {
     if (size == 0 || idx < 0 || idx >= size) {
         cout << "Invalid index or list is empty" << endl;
@@ -69,7 +62,6 @@ int getAt(int idx) {
     return temp->data;
 }
 
-// Get middle element
 int mid() {
     if (size == 0) {
         cout << "List is empty" << endl;
@@ -84,7 +76,6 @@ int mid() {
     return slow->data;
 }
 
-// Remove first node
 void removeFirst() {
     if (size == 0) {
         cout << "List is empty" << endl;
@@ -99,7 +90,6 @@ void removeFirst() {
     }
 }
 
-// Free entire list memory
 void freeList() {
     Node* temp = head;
     while (temp != nullptr) {
@@ -136,7 +126,6 @@ int main() {
     removeFirst();                      // remove 50
     cout << getFirst() << endl;         // List is empty
 
-    // Free memory
     freeList();
 
     return 0;

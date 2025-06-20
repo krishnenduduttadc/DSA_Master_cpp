@@ -6,7 +6,6 @@ using namespace std;
 void countFreq(int arr[], int n) {
     unordered_map<int, int> hmp; // Declaration of unordered_map to store element frequencies
     
-    // Count frequencies of each element in the array
     for (int i = 0; i < n; i++) {
         int key = arr[i];
         if (hmp.find(arr[i]) != hmp.end()) {
@@ -16,7 +15,6 @@ void countFreq(int arr[], int n) {
         }
     }
     
-    // Print the frequencies
     for (auto itr = hmp.begin(); itr != hmp.end(); itr++) {
         cout << itr->first << " " << itr->second << endl;
     }

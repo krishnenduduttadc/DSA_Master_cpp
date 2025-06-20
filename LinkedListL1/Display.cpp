@@ -17,14 +17,12 @@ struct LinkedList {
     int size;
 };
 
-// Initialize the linked list
 void initList(LinkedList& list) {
     list.head = nullptr;
     list.tail = nullptr;
     list.size = 0;
 }
 
-// Add a node to the end
 void addLast(LinkedList& list, int val) {
     Node* newNode = new Node(val);
     if (list.size == 0) {
@@ -36,12 +34,10 @@ void addLast(LinkedList& list, int val) {
     list.size++;
 }
 
-// Get the size of the list
 int getSize(const LinkedList& list) {
     return list.size;
 }
 
-// Display the elements
 void display(const LinkedList& list) {
     Node* temp = list.head;
     while (temp != nullptr) {
@@ -51,7 +47,6 @@ void display(const LinkedList& list) {
     cout << endl;
 }
 
-// Free the memory
 void deleteList(LinkedList& list) {
     Node* temp = list.head;
     while (temp != nullptr) {
@@ -67,7 +62,6 @@ int main() {
     LinkedList list;
     initList(list);
 
-    // Hardcoded sequence of operations
     addLast(list, 10);
     addLast(list, 20);
     addLast(list, 30);
@@ -79,7 +73,6 @@ int main() {
     display(list); // Should display: 10 20 30 40 50
     cout << getSize(list) << endl; // Should display: 5
 
-    // Cleanup
     deleteList(list);
 
     return 0;

@@ -1,7 +1,6 @@
 #include <iostream>
 using namespace std;
 
-// TreeNode structure
 struct TreeNode {
     int val;
     TreeNode* left;
@@ -14,7 +13,6 @@ struct TreeNode {
     }
 };
 
-// Helper function to flatten the binary tree
 TreeNode* flattenHelper(TreeNode* root) {
     if (root == nullptr) return nullptr;
 
@@ -27,7 +25,6 @@ TreeNode* flattenHelper(TreeNode* root) {
         root->left = nullptr;           // Nullify the left pointer
     }
 
-    // Return the last node in the flattened tree
     if (rightTail != nullptr) {
         return rightTail;
     } else if (leftTail != nullptr) {
@@ -37,12 +34,10 @@ TreeNode* flattenHelper(TreeNode* root) {
     }
 }
 
-// Function to flatten the binary tree
 void flatten(TreeNode* root) {
     flattenHelper(root);
 }
 
-// Function to print the flattened tree
 void printFlattenedTree(TreeNode* root) {
     while (root != nullptr) {
         cout << root->val << " ";
@@ -51,7 +46,6 @@ void printFlattenedTree(TreeNode* root) {
     cout << endl;
 }
 
-// Function to delete a binary tree to free memory
 void deleteTree(TreeNode* root) {
     if (root == nullptr) return;
     deleteTree(root->left);
@@ -59,7 +53,6 @@ void deleteTree(TreeNode* root) {
     delete root;
 }
 
-// Main function to test flattening
 int main() {
     // Creating a sample binary tree:
     //     1
@@ -82,7 +75,6 @@ int main() {
     cout << "Flattened Tree:" << endl;
     printFlattenedTree(root);
 
-    // Clean up memory
     deleteTree(root);
 
     return 0;

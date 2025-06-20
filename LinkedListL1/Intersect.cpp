@@ -1,7 +1,6 @@
 #include <iostream>
 using namespace std;
 
-// Define Node structure for the linked list
 struct Node {
     int data;
     Node* next;
@@ -12,13 +11,11 @@ struct Node {
     }
 };
 
-// Function to find intersection point of two linked lists
 int intersectPoint(Node* head1, Node* head2) {
     Node* p1 = head1;
     Node* p2 = head2;
     int s1 = 0, s2 = 0;
 
-    // Calculate lengths of both linked lists
     while (p1 != nullptr) {
         s1++;
         p1 = p1->next;
@@ -28,11 +25,9 @@ int intersectPoint(Node* head1, Node* head2) {
         p2 = p2->next;
     }
 
-    // Reset pointers to the head of each linked list
     p1 = head1;
     p2 = head2;
 
-    // Adjust pointer of longer list
     if (s1 > s2) {
         int diff = s1 - s2;
         while (diff-- > 0) p1 = p1->next;
@@ -41,20 +36,16 @@ int intersectPoint(Node* head1, Node* head2) {
         while (diff-- > 0) p2 = p2->next;
     }
 
-    // Move both pointers together until they meet
     while (p1 != nullptr && p2 != nullptr && p1 != p2) {
         p1 = p1->next;
         p2 = p2->next;
     }
 
-    // If no intersection found, return -1
     if (p1 == nullptr) return -1;
 
-    // Return data at intersection point
     return p1->data;
 }
 
-// Function to print the linked list
 void printList(Node* head) {
     Node* current = head;
     while (current != nullptr) {
@@ -65,7 +56,6 @@ void printList(Node* head) {
 }
 
 int main() {
-    // Creating two linked lists with an intersection point
     Node* common = new Node(8);
     common->next = new Node(10);
 
@@ -81,7 +71,6 @@ int main() {
     int result = intersectPoint(head1, head2);
     cout << "The intersection point data is: " << result << endl;
 
-    // Clean up memory
     delete common->next;
     delete common;
     delete head1->next->next;

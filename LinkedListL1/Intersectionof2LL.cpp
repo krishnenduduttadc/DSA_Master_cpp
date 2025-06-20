@@ -1,7 +1,6 @@
 #include <iostream>
 using namespace std;
 
-// Node structure definition
 struct Node {
     int data;
     Node* next;
@@ -12,7 +11,6 @@ struct Node {
     }
 };
 
-// Function to count the number of nodes in a linked list
 int getCount(Node* node) {
     int count = 0;
     Node* current = node;
@@ -23,7 +21,6 @@ int getCount(Node* node) {
     return count;
 }
 
-// Function to get the intersection node's data
 int getIntersectionNode(int d, Node* node1, Node* node2) {
     Node* current1 = node1;
     Node* current2 = node2;
@@ -42,7 +39,6 @@ int getIntersectionNode(int d, Node* node1, Node* node2) {
     return -1;
 }
 
-// Function to find the intersection point between two linked lists
 int getNode(Node* head1, Node* head2) {
     int c1 = getCount(head1);
     int c2 = getCount(head2);
@@ -55,7 +51,6 @@ int getNode(Node* head1, Node* head2) {
 }
 
 int main() {
-    // Creating first linked list
     Node* head1 = new Node(3);
     head1->next = new Node(6);
     head1->next->next = new Node(9);
@@ -63,14 +58,11 @@ int main() {
     head1->next->next->next = intersection;
     intersection->next = new Node(30);
 
-    // Creating second linked list
     Node* head2 = new Node(10);
     head2->next = intersection;
 
-    // Finding the intersection node
     cout << "The node of intersection is " << getNode(head1, head2) << endl;
 
-    // Clean up memory
     delete intersection->next;
     delete intersection;
     delete head1->next->next;

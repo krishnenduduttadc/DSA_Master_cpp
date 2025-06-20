@@ -1,7 +1,6 @@
 #include <iostream>
 using namespace std;
 
-// Node structure
 struct Node {
     int data;
     Node* next;
@@ -12,12 +11,10 @@ struct Node {
     }
 };
 
-// Global pointers for the linked list
 Node* head = nullptr;
 Node* tail = nullptr;
 int size = 0;
 
-// Function to add a node at the beginning
 void addFirst(int val) {
     Node* temp = new Node(val);
     temp->next = head;
@@ -28,7 +25,6 @@ void addFirst(int val) {
     size++;
 }
 
-// Function to add a node at the end
 void addLast(int val) {
     Node* temp = new Node(val);
     if (size == 0) {
@@ -40,7 +36,6 @@ void addLast(int val) {
     size++;
 }
 
-// Function to display the linked list
 void display() {
     Node* temp = head;
     while (temp != nullptr) {
@@ -50,7 +45,6 @@ void display() {
     cout << endl;
 }
 
-// Function to remove the first node
 void removeFirst() {
     if (size == 0) {
         cout << "List is empty" << endl;
@@ -65,7 +59,6 @@ void removeFirst() {
     }
 }
 
-// Function to get the first element's data
 int getFirst() {
     if (size == 0) {
         cout << "List is empty" << endl;
@@ -74,7 +67,6 @@ int getFirst() {
     return head->data;
 }
 
-// Helper function to reverse k nodes (used internally)
 void kReverse(int k) {
     Node* newHead = nullptr;
     Node* newTail = nullptr;
@@ -85,7 +77,6 @@ void kReverse(int k) {
         Node* prev = nullptr;
         Node* curr = head;
 
-        // Reverse 'groupSize' nodes
         for (int i = 0; i < groupSize; i++) {
             Node* forw = curr->next;
             curr->next = prev;
@@ -93,12 +84,10 @@ void kReverse(int k) {
             curr = forw;
         }
 
-        // Move head forward
         for (int i = 0; i < groupSize; i++) {
             removeFirst();
         }
 
-        // Attach reversed group
         if (newHead == nullptr) {
             newHead = prev;
             newTail = newHead;
@@ -109,13 +98,11 @@ void kReverse(int k) {
         }
     }
 
-    // Restore new head, tail, size
     head = newHead;
     tail = newTail;
     size = originalSize;
 }
 
-// Main function
 int main() {
     addLast(1);
     addLast(2);

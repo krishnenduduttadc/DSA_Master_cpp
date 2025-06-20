@@ -11,7 +11,6 @@ int longestSubstringWithoutRepeatingChars(const string& str) {
     while (true) {
         bool f1 = false, f2 = false;
 
-        // Expand window
         while (i < (int)str.length() - 1) {
             f1 = true;
             i++;
@@ -25,7 +24,6 @@ int longestSubstringWithoutRepeatingChars(const string& str) {
             }
         }
 
-        // Shrink window
         while (j < i) {
             f2 = true;
             j++;

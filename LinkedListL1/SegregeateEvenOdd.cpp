@@ -1,13 +1,11 @@
 #include <iostream>
 using namespace std;
 
-// Node structure
 struct Node {
     int val;
     Node* next;
 };
 
-// Function to create a new node
 Node* createNode(int value) {
     Node* newNode = new Node;
     newNode->val = value;
@@ -15,14 +13,12 @@ Node* createNode(int value) {
     return newNode;
 }
 
-// Function to push a new node at the beginning
 void push(Node*& head, int value) {
     Node* newNode = createNode(value);
     newNode->next = head;
     head = newNode;
 }
 
-// Function to print the linked list
 void printList(Node* head) {
     while (head != nullptr) {
         cout << head->val << " ";
@@ -31,7 +27,6 @@ void printList(Node* head) {
     cout << endl;
 }
 
-// Function to segregate even and odd nodes
 Node* segregateEvenOdd(Node* head) {
     if (head == nullptr || head->next == nullptr) return head;
 
@@ -61,7 +56,6 @@ Node* segregateEvenOdd(Node* head) {
     return result;
 }
 
-// Clean up memory
 void deleteList(Node* head) {
     while (head != nullptr) {
         Node* next = head->next;
@@ -73,7 +67,6 @@ void deleteList(Node* head) {
 int main() {
     Node* head = nullptr;
 
-    // Linked list: 6 -> 9 -> 10 -> 11
     push(head, 11);
     push(head, 10);
     push(head, 9);
@@ -84,7 +77,6 @@ int main() {
     cout << "List after segregating even and odd values:\n";
     printList(result);
 
-    // Clean up memory
     deleteList(result);
 
     return 0;

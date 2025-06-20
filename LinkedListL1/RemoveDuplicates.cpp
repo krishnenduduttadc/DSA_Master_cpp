@@ -2,13 +2,11 @@
 #include <unordered_set>
 using namespace std;
 
-// Define a node structure
 struct Node {
     int data;
     Node* next;
 };
 
-// Function to create a new node
 Node* createNode(int val) {
     Node* newNode = new Node;
     newNode->data = val;
@@ -16,7 +14,6 @@ Node* createNode(int val) {
     return newNode;
 }
 
-// Function to add a node at the end of the list
 void addLast(Node*& head, Node*& tail, int& size, int val) {
     Node* newNode = createNode(val);
     if (head == nullptr) {
@@ -28,7 +25,6 @@ void addLast(Node*& head, Node*& tail, int& size, int val) {
     size++;
 }
 
-// Function to display the linked list
 void display(Node* head) {
     Node* temp = head;
     while (temp != nullptr) {
@@ -38,7 +34,6 @@ void display(Node* head) {
     cout << endl;
 }
 
-// Function to remove duplicates from an unsorted linked list
 void removeDuplicates(Node*& head, Node*& tail, int& size) {
     if (head == nullptr) return;
 
@@ -48,7 +43,6 @@ void removeDuplicates(Node*& head, Node*& tail, int& size) {
 
     while (curr != nullptr) {
         if (seen.find(curr->data) != seen.end()) {
-            // Duplicate found, remove current node
             prev->next = curr->next;
             delete curr;
             curr = prev->next;
@@ -62,7 +56,6 @@ void removeDuplicates(Node*& head, Node*& tail, int& size) {
     tail = prev;
 }
 
-// Function to clean up the list and free memory
 void deleteList(Node* head) {
     while (head != nullptr) {
         Node* next = head->next;
@@ -72,11 +65,9 @@ void deleteList(Node* head) {
 }
 
 int main() {
-    // Hardcoded input
     int elements[] = {2, 2, 2, 3, 3, 5, 5, 5, 5, 5};
     int n = sizeof(elements) / sizeof(elements[0]);
 
-    // Create linked list using struct-based approach
     Node* head = nullptr;
     Node* tail = nullptr;
     int size = 0;

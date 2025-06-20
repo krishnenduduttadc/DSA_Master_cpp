@@ -11,10 +11,8 @@ int lengthOfLongestSubstringTwoDistinct(string s) {
     for (int j = 0, i = 0; i < s.length(); i++) {
         char currentChar = s[i];
         
-        // Acquire: Add current character to the window
         map[currentChar]++;
         
-        // Release: If window contains more than two distinct characters, move the start pointer forward until the window contains at most two distinct characters
         while (map.size() > 2) {
             char charToRemove = s[j];
             map[charToRemove]--;

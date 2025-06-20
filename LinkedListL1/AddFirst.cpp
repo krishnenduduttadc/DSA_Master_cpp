@@ -2,18 +2,15 @@
 
 using namespace std;
 
-// Node structure definition
 struct Node {
     int data;
     Node* next;
 };
 
-// Global linked list variables
 Node* head = nullptr;
 Node* tail = nullptr;
 int size = 0;
 
-// Function to create a new node
 Node* createNode(int d) {
     Node* newNode = new Node;
     newNode->data = d;
@@ -101,9 +98,7 @@ void addFirst(int val) {
     size++;
 }
 
-// Main function to demonstrate LinkedList operations
 int main() {
-    // Hardcoded sequence of operations
     addFirst(10);
     cout << getFirst() << endl; // Should display: 10
 

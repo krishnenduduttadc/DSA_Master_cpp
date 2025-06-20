@@ -12,27 +12,22 @@ bool cmp(const tuple<char, int, int> a, const tuple<char, int, int> b) {
 }
 
 void printJobScheduling(vector<tuple<char, int, int>>& jobs) {
-    // Sort jobs by decreasing profit
     sort(jobs.begin(), jobs.end(), cmp);
 
-    // Find maximum deadline to allocate time slots
     int maxDeadline = 0;
     for (const auto job : jobs) {
         maxDeadline = max(maxDeadline, get<1>(job));
     }
 
-    // Create a set of available slots
     set<int> slots;
     for (int i = 0; i < maxDeadline; ++i) {
         slots.insert(i);
     }
 
-    // Schedule jobs
     for (const auto job : jobs) {
         char id = get<0>(job);
         int deadline = get<1>(job);
 
-        // Find latest available time slot before deadline
         auto it = slots.upper_bound(deadline - 1);
         if (it != slots.begin()) {
             --it;

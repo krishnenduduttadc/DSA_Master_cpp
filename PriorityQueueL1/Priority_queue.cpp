@@ -3,20 +3,16 @@
 #include <stdexcept>
 using namespace std;
 
-// Use a global vector to represent the min-heap
 vector<int> heap;
 
-// Check if the heap is empty
 bool isEmpty() {
     return heap.empty();
 }
 
-// Get the size of the heap
 int size() {
     return heap.size();
 }
 
-// Return the minimum element (root of the heap)
 int getMin() {
     if (isEmpty()) {
         throw runtime_error("Queue is empty");
@@ -24,7 +20,6 @@ int getMin() {
     return heap[0];
 }
 
-// Insert an element into the heap
 void insert(int element) {
     heap.push_back(element);
     int childIndex = heap.size() - 1;
@@ -37,7 +32,6 @@ void insert(int element) {
     }
 }
 
-// Remove and return the minimum element
 int removeMin() {
     if (isEmpty()) {
         throw runtime_error("Queue is empty");
@@ -77,14 +71,12 @@ int removeMin() {
 }
 
 int main() {
-    // Insert elements into the priority queue
     insert(4);
     insert(2);
     insert(7);
     insert(1);
     insert(5);
 
-    // Remove and print the minimum element until the queue is empty
     while (!isEmpty()) {
         cout << removeMin() << " ";
     }
