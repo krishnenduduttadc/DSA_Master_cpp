@@ -1,25 +1,25 @@
 #include <iostream>
 using namespace std;
-struct TreeNode {
+struct Node {
     int key;
-    TreeNode* left;
-    TreeNode* right;
-    TreeNode(int x) {
+    Node* left;
+    Node* right;
+    Node(int x) {
         key = x;
         left = nullptr;
         right = nullptr;
     }
 };
 
-TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+Node* lowestCommonAncestor(Node* root, Node* p, Node* q) {
     // Base case: if root is null or root is one of p or q, return root
     if (root == nullptr || root == p || root == q) {
         return root;
     }
     
     // Recursively search left and right subtrees
-    TreeNode* left = lowestCommonAncestor(root->left, p, q);
-    TreeNode* right = lowestCommonAncestor(root->right, p, q);
+    Node* left = lowestCommonAncestor(root->left, p, q);
+    Node* right = lowestCommonAncestor(root->right, p, q);
 
     // Result conditions
     if (left == nullptr) {
@@ -32,14 +32,14 @@ TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
 }
 
 int main() {
-    TreeNode* root = new TreeNode(1);
-    root->left = new TreeNode(2);
-    root->right = new TreeNode(3);
-    root->left->left = new TreeNode(4);
-    root->left->right = new TreeNode(5);
-    root->left->left->left = new TreeNode(6);
+    Node* root = new Node(1);
+    root->left = new Node(2);
+    root->right = new Node(3);
+    root->left->left = new Node(4);
+    root->left->right = new Node(5);
+    root->left->left->left = new Node(6);
 
-    TreeNode* lca = lowestCommonAncestor(root, root->left->right, root->left->left->left);
+    Node* lca = lowestCommonAncestor(root, root->left->right, root->left->left->left);
 
     cout << "Lowest Common Ancestor (LCA) key: " << lca->key << endl;
 

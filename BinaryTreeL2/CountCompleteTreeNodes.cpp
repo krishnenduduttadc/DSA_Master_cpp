@@ -1,18 +1,18 @@
 #include <iostream>
 #include <cmath> // For pow function
 using namespace std;
-struct TreeNode {
+struct Node {
     int val;
-    TreeNode* left;
-    TreeNode* right;
-    TreeNode(int x) {
+    Node* left;
+    Node* right;
+    Node(int x) {
         val = x;
         left = nullptr;
         right = nullptr;
     }
 };
 
-int getHeight(TreeNode* node, bool isLeft) {
+int getHeight(Node* node, bool isLeft) {
     int height = 0;
     while (node != nullptr) {
         height++;
@@ -21,7 +21,7 @@ int getHeight(TreeNode* node, bool isLeft) {
     return height;
 }
 
-int countNodes(TreeNode* root) {
+int countNodes(Node* root) {
     if (root == nullptr) return 0;
 
     int leftHeight = getHeight(root, true);
@@ -35,12 +35,12 @@ int countNodes(TreeNode* root) {
 }
 
 int main() {
-    TreeNode* root = new TreeNode(1);
-    root->left = new TreeNode(2);
-    root->right = new TreeNode(3);
-    root->left->left = new TreeNode(4);
-    root->left->right = new TreeNode(5);
-    root->right->left = new TreeNode(6);
+    Node* root = new Node(1);
+    root->left = new Node(2);
+    root->right = new Node(3);
+    root->left->left = new Node(4);
+    root->left->right = new Node(5);
+    root->right->left = new Node(6);
 
     cout << "Number of nodes: " << countNodes(root) << endl;  // Output: 6
 

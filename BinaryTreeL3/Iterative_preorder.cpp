@@ -3,27 +3,27 @@
 #include <stack>
 
 using namespace std;
-struct TreeNode {
+struct Node {
     int key;
-    TreeNode* left;
-    TreeNode* right;
-    TreeNode(int x) {
+    Node* left;
+    Node* right;
+    Node(int x) {
         key = x;
         left = nullptr;
         right = nullptr;
     }
 };
 
-vector<int> preOrderTrav(TreeNode* root) {
+vector<int> preOrderTrav(Node* root) {
     vector<int> preOrder;
     if (root == nullptr)
         return preOrder;
 
-    stack<TreeNode*> s;
+    stack<Node*> s;
     s.push(root);
 
     while (!s.empty()) {
-        TreeNode* topNode = s.top();
+        Node* topNode = s.top();
         preOrder.push_back(topNode->key);
         s.pop();
         if (topNode->right != nullptr)
@@ -35,16 +35,16 @@ vector<int> preOrderTrav(TreeNode* root) {
 }
 
 int main() {
-    TreeNode* root = new TreeNode(1);
-    root->left = new TreeNode(2);
-    root->right = new TreeNode(3);
-    root->left->left = new TreeNode(4);
-    root->left->right = new TreeNode(5);
-    root->left->right->left = new TreeNode(8);
-    root->right->left = new TreeNode(6);
-    root->right->right = new TreeNode(7);
-    root->right->right->left = new TreeNode(9);
-    root->right->right->right = new TreeNode(10);
+    Node* root = new Node(1);
+    root->left = new Node(2);
+    root->right = new Node(3);
+    root->left->left = new Node(4);
+    root->left->right = new Node(5);
+    root->left->right->left = new Node(8);
+    root->right->left = new Node(6);
+    root->right->right = new Node(7);
+    root->right->right->left = new Node(9);
+    root->right->right->right = new Node(10);
 
     vector<int> preOrder = preOrderTrav(root);
 

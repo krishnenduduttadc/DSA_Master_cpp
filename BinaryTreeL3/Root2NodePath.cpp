@@ -3,12 +3,12 @@
 using namespace std;
 
 
-struct TreeNode
+struct Node
 {
     int key;
-    TreeNode *left;
-    TreeNode *right;
-    TreeNode(int x)
+    Node *left;
+    Node *right;
+    Node(int x)
     {
         key = x;
         left = nullptr;
@@ -16,7 +16,7 @@ struct TreeNode
     }
 };
 
-bool getPath(TreeNode *root, vector<int> &arr, int x)
+bool getPath(Node *root, vector<int> &arr, int x)
 {
     if (root == nullptr)
         return false;
@@ -35,13 +35,13 @@ bool getPath(TreeNode *root, vector<int> &arr, int x)
 
 int main()
 {
-    TreeNode *root = new TreeNode(1);
-    root->left = new TreeNode(2);
-    root->left->left = new TreeNode(4);
-    root->left->right = new TreeNode(5);
-    root->left->right->left = new TreeNode(6);
-    root->left->right->right = new TreeNode(7);
-    root->right = new TreeNode(3);
+    Node *root = new Node(1);
+    root->left = new Node(2);
+    root->left->left = new Node(4);
+    root->left->right = new Node(5);
+    root->left->right->left = new Node(6);
+    root->left->right->right = new Node(7);
+    root->right = new Node(3);
 
     vector<int> arr;
 

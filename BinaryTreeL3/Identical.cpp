@@ -2,21 +2,21 @@
 
 using namespace std;
 
-struct TreeNode {
+struct Node {
     int val;
-    TreeNode* left;
-    TreeNode* right;
+    Node* left;
+    Node* right;
 };
 
-TreeNode* createTreeNode(int x) {
-    TreeNode* node = new TreeNode;
+Node* createNode(int x) {
+    Node* node = new Node;
     node->val = x;
     node->left = nullptr;
     node->right = nullptr;
     return node;
 }
 
-bool isIdentical(TreeNode* node1, TreeNode* node2) {
+bool isIdentical(Node* node1, Node* node2) {
     if (node1 == nullptr && node2 == nullptr)
         return true;
     else if (node1 == nullptr || node2 == nullptr)
@@ -28,16 +28,16 @@ bool isIdentical(TreeNode* node1, TreeNode* node2) {
 }
 
 int main() {
-    TreeNode* root1 = createTreeNode(1);
-    root1->left = createTreeNode(2);
-    root1->right = createTreeNode(3);
-    root1->right->left = createTreeNode(4);
-    root1->right->right = createTreeNode(5);
+    Node* root1 = createNode(1);
+    root1->left = createNode(2);
+    root1->right = createNode(3);
+    root1->right->left = createNode(4);
+    root1->right->right = createNode(5);
 
-    TreeNode* root2 = createTreeNode(1);
-    root2->left = createTreeNode(2);
-    root2->right = createTreeNode(3);
-    root2->right->left = createTreeNode(4);
+    Node* root2 = createNode(1);
+    root2->left = createNode(2);
+    root2->right = createNode(3);
+    root2->right->left = createNode(4);
 
     if (isIdentical(root1, root2))
         cout << "Two Trees are identical" << endl;

@@ -2,27 +2,27 @@
 #include <vector>
 using namespace std;
 
-struct TreeNode {
+struct Node {
     int key;
-    TreeNode* left;
-    TreeNode* right;
-    TreeNode(int x) {
+    Node* left;
+    Node* right;
+    Node(int x) {
         key = x;
         left = nullptr;
         right = nullptr;
     }
 };
 
-vector<int> preorderTraversal(TreeNode* root) {
+vector<int> preorderTraversal(Node* root) {
     vector<int> preorder;
-    TreeNode* cur = root;
+    Node* cur = root;
     
     while (cur != nullptr) {
         if (cur->left == nullptr) {
             preorder.push_back(cur->key);
             cur = cur->right;
         } else {
-            TreeNode* prev = cur->left;
+            Node* prev = cur->left;
             while (prev->right != nullptr && prev->right != cur) {
                 prev = prev->right;
             }
@@ -42,12 +42,12 @@ vector<int> preorderTraversal(TreeNode* root) {
 }
 
 int main() {
-    TreeNode* root = new TreeNode(1);
-    root->left = new TreeNode(2);
-    root->right = new TreeNode(3);
-    root->left->left = new TreeNode(4);
-    root->left->right = new TreeNode(5);
-    root->left->right->right = new TreeNode(6);
+    Node* root = new Node(1);
+    root->left = new Node(2);
+    root->right = new Node(3);
+    root->left->left = new Node(4);
+    root->left->right = new Node(5);
+    root->left->right->right = new Node(6);
 
     vector<int> preorder = preorderTraversal(root);
 

@@ -3,18 +3,18 @@
 #include <algorithm> // For max
 using namespace std;
 
-struct TreeNode {
+struct Node {
     int key;
-    TreeNode* left;
-    TreeNode* right;
-    TreeNode(int x) {
+    Node* left;
+    Node* right;
+    Node(int x) {
         key = x;
         left = nullptr;
         right = nullptr;
     }
 };
 
-int maxPathDown(TreeNode* node, int& maxValue) {
+int maxPathDown(Node* node, int& maxValue) {
     if (node == nullptr) return 0;
     
     int left = max(0, maxPathDown(node->left, maxValue)); // Ignore negative sums
@@ -25,18 +25,18 @@ int maxPathDown(TreeNode* node, int& maxValue) {
     return max(left, right) + node->key;
 }
 
-int maxPathSum(TreeNode* root) {
+int maxPathSum(Node* root) {
     int maxValue = INT_MIN; // Initialize with minimum possible integer value
     maxPathDown(root, maxValue);
     return maxValue;
 }
 
 int main() {
-    TreeNode* root = new TreeNode(-10);
-    root->left = new TreeNode(9);
-    root->right = new TreeNode(20);
-    root->right->left = new TreeNode(15);
-    root->right->right = new TreeNode(7);
+    Node* root = new Node(-10);
+    root->left = new Node(9);
+    root->right = new Node(20);
+    root->right->left = new Node(15);
+    root->right->right = new Node(7);
 
     int answer = maxPathSum(root);
     cout << "The Max Path Sum for this tree is " << answer << endl;

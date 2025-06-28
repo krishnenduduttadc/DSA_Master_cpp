@@ -2,18 +2,18 @@
 #include <vector>
 using namespace std;
 
-struct TreeNode {
+struct Node {
     int key;
-    TreeNode* left;
-    TreeNode* right;
-   TreeNode(int x) {
+    Node* left;
+    Node* right;
+   Node(int x) {
         key = x;
         left = nullptr;
         right = nullptr;
     }
 };
 
-void leftSideView(TreeNode* root, vector<int>& result, int currDepth) {
+void leftSideView(Node* root, vector<int>& result, int currDepth) {
     if (root == nullptr) {
         return;
     }
@@ -26,19 +26,19 @@ void leftSideView(TreeNode* root, vector<int>& result, int currDepth) {
     leftSideView(root->right, result, currDepth + 1);
 }
 
-vector<int> lightSideView(TreeNode* root) {
+vector<int> lightSideView(Node* root) {
     vector<int> result;
     leftSideView(root, result, 0);
     return result;
 }
 
 int main() {
-    TreeNode* root = new TreeNode(1);
-    root->left = new TreeNode(2);
-    root->right = new TreeNode(3);
-    root->left->left = new TreeNode(4);
-    root->left->right = new TreeNode(5);
-    root->left->left->left = new TreeNode(6);
+    Node* root = new Node(1);
+    root->left = new Node(2);
+    root->right = new Node(3);
+    root->left->left = new Node(4);
+    root->left->right = new Node(5);
+    root->left->left->left = new Node(6);
 
     // Finding the left view of the binary tree
     vector<int> res = lightSideView(root);
