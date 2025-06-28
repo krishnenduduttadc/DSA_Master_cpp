@@ -8,10 +8,10 @@ struct Node {
     Node* left;
     Node* right;
 
-    Node(int data, Node* left = nullptr, Node* right = nullptr) {
+    Node(int data) {
         this->data = data;
-        this->left = left;
-        this->right = right;
+        this->left = nullptr;
+        this->right = nullptr;
     }
 };
 

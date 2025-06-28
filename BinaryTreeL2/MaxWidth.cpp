@@ -2,23 +2,23 @@
 #include <queue>
 using namespace std;
 
-struct TreeNode {
+struct Node {
     int val;
-    TreeNode *left;
-    TreeNode *right;
-    TreeNode(int x) {
+    Node *left;
+    Node *right;
+    Node(int x) {
         val = x;
         left = nullptr;
         right = nullptr;
     }
 };
 
-int widthOfBinaryTree(TreeNode* root) {
+int widthOfBinaryTree(Node* root) {
     if (!root) {
         return 0;
     }
 
-    queue<TreeNode*> q;
+    queue<Node*> q;
     q.push(root);
     int maxWidth = 0;
 
@@ -27,7 +27,7 @@ int widthOfBinaryTree(TreeNode* root) {
         int currentWidth = 0;
 
         for (int i = 0; i < n; ++i) {
-            TreeNode* node = q.front();
+            Node* node = q.front();
             q.pop();
 
             ++currentWidth;
@@ -48,13 +48,13 @@ int widthOfBinaryTree(TreeNode* root) {
     return maxWidth;
 }
 
-TreeNode* newNode(int key) {
-    TreeNode* node = new TreeNode(key);
+Node* newNode(int key) {
+    Node* node = new Node(key);
     return node;
 }
 
 int main() {
-    TreeNode* root = newNode(1);
+    Node* root = newNode(1);
     root->left = newNode(2);
     root->right = newNode(3);
     root->left->left = newNode(4);

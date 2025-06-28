@@ -18,7 +18,10 @@ struct QueueObj {
     Node* node;
     int hd;
 
-    QueueObj(Node* n, int h) : node(n), hd(h) {}
+    QueueObj(Node* n, int h)  {
+        node=n;
+        hd=h;
+    }
 };
 
 void bottomView(Node* root) {
